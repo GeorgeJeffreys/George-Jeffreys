@@ -18,7 +18,7 @@ export interface LibraryCard {
   isNew?: boolean;
 }
 
-const CARDS: LibraryCard[] = [
+export const LIBRARY_CARDS: LibraryCard[] = [
   { id: 'fb-wh',      type: 'Fill in the blank', tone: 'pink',  skill: 'Wh-questions',     level: 'A1',  preview: 'What ___ your name?\nMy ___ is Layla.\nHow ___ are you?', minutes: 8, isNew: true },
   { id: 'match-fam',  type: 'Matching',           tone: 'amber', skill: 'Vocab · family',   level: 'A1',  preview: 'mother · father · sister · brother → 4 family photographs', minutes: 10 },
   { id: 'dialogue',   type: 'Dialogue',            tone: 'teal',  skill: 'Speaking · intros', level: 'A1', preview: "A: Hello! What's your name?\nB: ___\nA: How old are you?", minutes: 6 },
@@ -265,7 +265,7 @@ export function LibraryPanel({ draggingId, activeTab, onTabChange, onInsertCard 
           display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10,
           overflow: 'auto', flex: 1, paddingRight: 2, alignContent: 'start',
         }}>
-          {CARDS.map((c) => (
+          {LIBRARY_CARDS.map((c) => (
             <DraggableCard
               key={c.id}
               card={c}

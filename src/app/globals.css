@@ -41,3 +41,39 @@ html, body {
 
 button { cursor: pointer; font-family: inherit; }
 input, textarea { font-family: inherit; }
+
+/* ── Print stylesheet ───────────────────────────────────────────── */
+@media print {
+  /* Hide UI chrome */
+  .no-print,
+  [data-print="hide"] {
+    display: none !important;
+  }
+
+  html, body {
+    background: #fff;
+    font-size: 11pt;
+  }
+
+  /* Force white backgrounds */
+  * {
+    background: #fff !important;
+    box-shadow: none !important;
+  }
+
+  /* A4 page breaks between sections */
+  .print-section {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .print-page-break {
+    break-before: page;
+    page-break-before: always;
+  }
+
+  /* Clean borders */
+  [style*="border"] {
+    border-color: #ccc !important;
+  }
+}

@@ -1,6 +1,8 @@
 'use client';
 
 import { useState, useRef, useCallback } from 'react';
+import { useBreakpoint } from '@/hooks/useBreakpoint';
+import { MobilePlanEditor } from '@/components/plan/mobile/MobilePlanEditor';
 import { DndContext, DragEndEvent, DragStartEvent, DragOverlay, useSensor, useSensors, PointerSensor } from '@dnd-kit/core';
 import { C, SANS, SECTION_CONFIG } from '@/lib/tokens';
 import { Icon } from '@/components/icon';
@@ -38,6 +40,20 @@ const DEFAULT_RIGHT_WIDTH = 420;
 const COLLAPSED_WIDTH = 48;
 
 export function PlanEditor({ uuid, initialPlan, initialLesson }: PlanEditorProps) {
+  const { isPhone, isTablet } = useBreakpoint();
+
+  if (isPhone) {
+    return (
+      <MobilePlanEditor uuid={uuid} initialPlan={initialPlan} initialLesson={initialLesson} />
+    );
+  }
+
+  return (
+    <DesktopPlanEditor uuid={uuid} initialPlan={initialPlan} initialLesson={initialLesson} isTablet={isTablet} />
+  );
+}
+
+function DesktopPlanEditor({ uuid, initialPlan, initialLesson, isTablet }: PlanEditorProps & { isTablet: boolean }) {
   const [plan, setPlan] = useState<LessonPlan | null>(initialPlan);
   const [lesson, setLesson] = useState<CurriculumLesson | null>(initialLesson);
   const [activeView, setActiveView] = useState<'plan' | 'worksheet'>('plan');
@@ -178,7 +194,8 @@ export function PlanEditor({ uuid, initialPlan, initialLesson }: PlanEditorProps
 
   const totalMin = sections.reduce((sum, s) => sum + (s.timing_minutes || 0), 0);
   const sectionName = sections[focusedSection]?.title ?? 'Section';
-  const effectiveWidth = panelCollapsed ? COLLAPSED_WIDTH : rightWidth;
+  // On tablet, left panel always takes full width (right panel overlays as fixed)
+  const effectiveWidth = isTablet ? 0 : (panelCollapsed ? COLLAPSED_WIDTH : rightWidth);
 
   const ICON_TABS: Array<{ id: RightTab; icon: 'book' | 'sparkle' | 'copy'; label: string }> = [
     { id: 'library', icon: 'book', label: 'Library' },
@@ -333,7 +350,41 @@ export function PlanEditor({ uuid, initialPlan, initialLesson }: PlanEditorProps
           </div>
 
           {/* ── Right panel ── */}
-          <div style={{
+          {/* Tablet: backdrop to close overlay panel */}
+          {isTablet && !panelCollapsed && (
+            <div
+              onClick={() => setPanelCollapsed(true)}
+              style={{ position: 'fixed', inset: 0, zIndex: 99, background: 'rgba(26,26,26,0.25)' }}
+            />
+          )}
+          {/* Tablet: floating open-panel button when collapsed */}
+          {isTablet && panelCollapsed && (
+            <button
+              onClick={() => setPanelCollapsed(false)}
+              title="Open panel"
+              style={{
+                position: 'fixed', right: 0, top: '50%', transform: 'translateY(-50%)',
+                zIndex: 101, width: 28, height: 56,
+                background: C.surface, border: `1px solid ${C.border}`,
+                borderRight: 'none',
+                borderTopLeftRadius: 8, borderBottomLeftRadius: 8,
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                cursor: 'pointer', boxShadow: '-2px 0 8px rgba(56,30,30,0.08)',
+              }}
+            >
+              <Icon name="chevronLeft" size={14} color={C.faint} />
+            </button>
+          )}
+          <div style={isTablet ? {
+            position: 'fixed', top: 60, right: 0, bottom: 0, zIndex: 100,
+            width: rightWidth, flexShrink: 0,
+            borderLeft: `1px solid ${C.border}`,
+            background: C.surface, overflow: 'hidden',
+            display: 'flex', flexDirection: 'column',
+            transform: panelCollapsed ? 'translateX(100%)' : 'translateX(0)',
+            transition: 'transform 0.25s cubic-bezier(0.32, 0.72, 0, 1)',
+            boxShadow: '-8px 0 32px rgba(56,30,30,0.12)',
+          } : {
             width: effectiveWidth, flexShrink: 0,
             borderLeft: `1px solid ${C.border}`,
             background: C.surface, overflow: 'hidden',
@@ -341,8 +392,8 @@ export function PlanEditor({ uuid, initialPlan, initialLesson }: PlanEditorProps
             position: 'relative',
             transition: 'width 0.15s ease',
           }}>
-            {panelCollapsed ? (
-              /* Fix 5: collapsed icon bar */
+            {!isTablet && panelCollapsed ? (
+              /* Fix 5: collapsed icon bar — desktop only */
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '12px 0', gap: 4 }}>
                 <button
                   onClick={() => setPanelCollapsed(false)} title="Expand"
