@@ -8,6 +8,8 @@ interface TopBarProps {
   lesson: CurriculumLesson | null;
   saveStatus: 'saved' | 'saving' | 'idle';
   onOpenSelector: () => void;
+  onExport: () => void;
+  exporting?: boolean;
 }
 
 function AlsamaMark() {
@@ -28,7 +30,7 @@ function AlsamaMark() {
   );
 }
 
-export function TopBar({ lesson, saveStatus, onOpenSelector }: TopBarProps) {
+export function TopBar({ lesson, saveStatus, onOpenSelector, onExport, exporting }: TopBarProps) {
   const saveIndicator = saveStatus === 'saving'
     ? { bg: C.amberSoft, border: '#EFD9A5', color: '#7A5A11', icon: 'refresh' as const, label: 'Saving…' }
     : { bg: C.tealSoft, border: '#BCDED6', color: C.teal, icon: 'cloudCheck' as const, label: 'Autosaved · just now' };
@@ -89,14 +91,21 @@ export function TopBar({ lesson, saveStatus, onOpenSelector }: TopBarProps) {
         </span>
       </div>
 
-      <button style={{
-        display: 'inline-flex', alignItems: 'center', gap: 6,
-        height: 34, padding: '0 14px',
-        fontFamily: SANS, fontSize: 13, fontWeight: 500,
-        background: 'transparent', color: C.ink,
-        border: `1px solid ${C.border}`, borderRadius: 8,
-      }}>
-        <Icon name="download" size={14} />Export PDF
+      <button
+        onClick={onExport}
+        disabled={exporting}
+        style={{
+          display: 'inline-flex', alignItems: 'center', gap: 6,
+          height: 34, padding: '0 14px',
+          fontFamily: SANS, fontSize: 13, fontWeight: 500,
+          background: 'transparent', color: exporting ? C.faint2 : C.ink,
+          border: `1px solid ${C.border}`, borderRadius: 8,
+          cursor: exporting ? 'default' : 'pointer',
+          transition: 'color 0.15s',
+        }}
+      >
+        <Icon name="download" size={14} color={exporting ? C.faint2 : C.ink} />
+        {exporting ? 'Generating…' : 'Export PDF'}
       </button>
 
       <button style={{

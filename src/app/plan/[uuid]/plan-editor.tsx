@@ -41,6 +41,7 @@ export function PlanEditor({ uuid, initialPlan, initialLesson }: PlanEditorProps
   const [draggingCardId, setDraggingCardId] = useState<string | null>(null);
   const [dropTarget, setDropTarget] = useState<number | null>(null);
 
+  const [exporting, setExporting] = useState(false);
   const saveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Ensure sections always have design-matching titles when plan has blank ones
@@ -92,6 +93,18 @@ export function PlanEditor({ uuid, initialPlan, initialLesson }: PlanEditorProps
       teacher_instructions: data.teacherInstructions,
       student_instructions: data.studentInstructions,
     });
+  }
+
+  // ── Export ──────────────────────────────────────────────────────────────────
+  async function handleExport() {
+    if (!plan || exporting) return;
+    setExporting(true);
+    try {
+      const { exportLessonZip } = await import('@/lib/pdf/export');
+      await exportLessonZip(plan, lesson);
+    } finally {
+      setExporting(false);
+    }
   }
 
   // ── DnD ─────────────────────────────────────────────────────────────────────
@@ -151,6 +164,8 @@ export function PlanEditor({ uuid, initialPlan, initialLesson }: PlanEditorProps
           lesson={lesson}
           saveStatus={saveStatus === 'idle' ? 'saved' : saveStatus}
           onOpenSelector={() => setShowSelector(true)}
+          onExport={handleExport}
+          exporting={exporting}
         />
 
         {/* Two-panel content */}
