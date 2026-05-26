@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import { C, SANS } from '@/lib/tokens';
 import { Icon } from '@/components/icon';
 import { RightTabs } from './library-panel';
+import type { RightTab } from './library-panel';
 import type { LessonSection } from '@/types/lesson';
 
 interface Message {
@@ -17,8 +18,8 @@ interface AiPanelProps {
   lessonId: string;
   focusedSection: number;
   sectionName: string;
-  activeTab: 'library' | 'ai';
-  onTabChange: (tab: 'library' | 'ai') => void;
+  activeTab: RightTab;
+  onTabChange: (tab: RightTab) => void;
   onInsert: (sectionIndex: number, data: { teacherInstructions: string; studentInstructions: string }) => void;
 }
 

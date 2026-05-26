@@ -90,8 +90,7 @@ export function LessonSelector({ onClose }: LessonSelectorProps) {
         position: 'fixed', inset: 0, zIndex: 50,
         background: 'rgba(245, 237, 229, 0.55)',
         backdropFilter: 'blur(2px)',
-        display: 'flex', alignItems: 'flex-start', justifyContent: 'center',
-        paddingTop: 74,
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
       }}
       onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
     >

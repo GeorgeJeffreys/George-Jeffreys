@@ -5,7 +5,9 @@ export type IconName =
   | 'plus' | 'grip' | 'share' | 'download' | 'save' | 'book' | 'chat'
   | 'check' | 'clock' | 'user' | 'users' | 'edit' | 'paperclip' | 'send'
   | 'arrowUp' | 'arrowRight' | 'settings' | 'moreH' | 'target' | 'lock'
-  | 'calendar' | 'refresh' | 'copy' | 'image' | 'cloudCheck';
+  | 'calendar' | 'refresh' | 'copy' | 'image' | 'cloudCheck' | 'eye' | 'x'
+  | 'panelRight' | 'bold' | 'italic' | 'underline' | 'alignLeft' | 'alignCenter'
+  | 'listBullet' | 'listOrdered' | 'heading1' | 'heading2';
 
 interface IconProps {
   name: IconName;
@@ -51,6 +53,18 @@ export function Icon({ name, size = 16, color = 'currentColor', strokeWidth = 1.
     copy: <><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></>,
     image: <><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></>,
     cloudCheck: <><path d="M17.5 19a4.5 4.5 0 1 0-1.4-8.78A7 7 0 1 0 4 16.5"/><path d="m9 14 2 2 4-4"/></>,
+    eye: <><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></>,
+    x: <><path d="M18 6 6 18M6 6l12 12"/></>,
+    panelRight: <><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M15 3v18"/></>,
+    bold: <path d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z" />,
+    italic: <><path d="M19 4h-9M14 20H5M15 4 9 20"/></>,
+    underline: <><path d="M6 4v6a6 6 0 0 0 12 0V4"/><path d="M4 20h16"/></>,
+    alignLeft: <><path d="M15 12H3M17 6H3M13 18H3"/></>,
+    alignCenter: <><path d="M17 12H7M19 6H5M15 18H9"/></>,
+    listBullet: <><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></>,
+    listOrdered: <><path d="M10 6h11M10 12h11M10 18h11M4 6h1v4M4 10h2M6 18H4c0-1 2-2 2-3s-1-1.5-2-1"/></>,
+    heading1: <><path d="M4 12h8M4 6v12M12 6v12M21 6l-3 2v10"/></>,
+    heading2: <><path d="M4 12h8M4 6v12M12 6v12M21 18H17l3.5-5A2 2 0 0 0 18 10"/></>,
   };
   return <svg {...p}>{paths[name]}</svg>;
 }

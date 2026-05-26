@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { C, SANS } from '@/lib/tokens';
 import { Icon } from '@/components/icon';
 import type { LessonSection } from '@/types/lesson';
@@ -18,9 +18,12 @@ interface SectionCardProps {
   onUpdate: (changes: Partial<LessonSection>) => void;
 }
 
-function Chip({ children, tone = 'neutral' }: { children: React.ReactNode; tone?: 'neutral' | 'pink' | 'ghost' }) {
+function Chip({ children, tone = 'neutral' }: {
+  children: React.ReactNode;
+  tone?: 'neutral' | 'pink' | 'ghost';
+}) {
   const tones = {
-    neutral: { bg: C.cream,    fg: C.ink,  br: C.borderSoft },
+    neutral: { bg: C.cream, fg: C.ink, br: C.borderSoft },
     pink:    { bg: C.pinkSoft, fg: C.pink, br: C.pinkBorder },
     ghost:   { bg: 'transparent', fg: C.faint, br: C.border },
   };
@@ -32,9 +35,7 @@ function Chip({ children, tone = 'neutral' }: { children: React.ReactNode; tone?
       fontFamily: SANS, fontSize: 10.5, fontWeight: 500,
       color: t.fg, background: t.bg, border: `1px solid ${t.br}`,
       borderRadius: 999, whiteSpace: 'nowrap',
-    }}>
-      {children}
-    </span>
+    }}>{children}</span>
   );
 }
 
@@ -47,71 +48,239 @@ function AiBtn({ onClick }: { onClick: () => void }) {
       color: C.pink, background: C.pinkSoft,
       border: `1px solid ${C.pinkBorder}`,
       borderRadius: 999, whiteSpace: 'nowrap',
+      cursor: 'pointer',
     }}>
       <Icon name="sparkle" size={13} color={C.pink} />Ask AI
     </button>
   );
 }
 
-function EditableField({
-  value, placeholder, multiline, onSave,
-}: {
+function InlineText({ value, placeholder, onSave }: {
   value: string;
   placeholder: string;
-  multiline?: boolean;
   onSave: (v: string) => void;
 }) {
-  const [editing, setEditing] = useState(false);
   const [draft, setDraft] = useState(value);
+  const [isFocused, setIsFocused] = useState(false);
 
-  if (editing) {
-    const Tag = multiline ? 'textarea' : 'input';
+  useEffect(() => {
+    if (!isFocused) setDraft(value);
+  }, [value, isFocused]);
+
+  return (
+    <input
+      value={draft}
+      onChange={(e) => setDraft(e.target.value)}
+      onFocus={() => setIsFocused(true)}
+      onBlur={() => { setIsFocused(false); onSave(draft); }}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter') { e.preventDefault(); (e.target as HTMLInputElement).blur(); }
+        if (e.key === 'Escape') { setDraft(value); (e.target as HTMLInputElement).blur(); }
+      }}
+      placeholder={placeholder}
+      style={{
+        width: '100%', boxSizing: 'border-box',
+        fontFamily: SANS, fontSize: 13.5, color: C.ink,
+        background: isFocused ? `${C.pinkSoft}88` : 'transparent',
+        border: isFocused ? `1px solid ${C.pink}` : '1px solid transparent',
+        borderRadius: 6, padding: '5px 8px', outline: 'none', lineHeight: 1.5,
+        transition: 'background 0.1s, border-color 0.1s',
+      }}
+    />
+  );
+}
+
+function BulletEditor({ value, color, placeholder, onSave }: {
+  value: string;
+  color: string;
+  placeholder: string;
+  onSave: (v: string) => void;
+}) {
+  const [lines, setLines] = useState<string[]>(() =>
+    value ? value.split('\n').filter(Boolean) : []
+  );
+  const lineRefs = useRef<(HTMLInputElement | null)[]>([]);
+  const lastExternal = useRef(value);
+
+  // Sync when parent value changes (e.g., AI insert) without overwriting local edits
+  if (lastExternal.current !== value) {
+    lastExternal.current = value;
+    setLines(value ? value.split('\n').filter(Boolean) : []);
+  }
+
+  const doSave = useCallback((ls: string[]) => {
+    const result = ls.filter(Boolean).join('\n');
+    lastExternal.current = result;
+    onSave(result);
+  }, [onSave]);
+
+  function updateLine(i: number, v: string) {
+    setLines((prev) => {
+      const next = [...prev];
+      next[i] = v;
+      return next;
+    });
+  }
+
+  function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>, i: number) {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      setLines((prev) => {
+        const next = [...prev.slice(0, i + 1), '', ...prev.slice(i + 1)];
+        setTimeout(() => lineRefs.current[i + 1]?.focus(), 0);
+        return next;
+      });
+    } else if (e.key === 'Backspace' && lines[i] === '' && lines.length > 1) {
+      e.preventDefault();
+      const next = lines.filter((_, j) => j !== i);
+      setLines(next);
+      doSave(next);
+      setTimeout(() => lineRefs.current[Math.max(0, i - 1)]?.focus(), 0);
+    }
+  }
+
+  function addLine() {
+    setLines((prev) => {
+      const next = [...prev, ''];
+      setTimeout(() => lineRefs.current[next.length - 1]?.focus(), 0);
+      return next;
+    });
+  }
+
+  if (lines.length === 0) {
     return (
-      <Tag
-        autoFocus
-        value={draft}
-        onChange={(e) => setDraft(e.target.value)}
-        onBlur={() => { setEditing(false); onSave(draft); }}
-        onKeyDown={(e) => {
-          if (!multiline && e.key === 'Enter') { e.preventDefault(); setEditing(false); onSave(draft); }
-          if (e.key === 'Escape') { setEditing(false); setDraft(value); }
-        }}
-        style={{
-          width: '100%', fontFamily: SANS, fontSize: 13.5,
-          color: C.ink, lineHeight: 1.5,
-          border: `1px solid ${C.pink}`, borderRadius: 6,
-          padding: '4px 8px', outline: 'none',
-          background: C.pinkSoft + '55',
-          resize: 'vertical',
-          minHeight: multiline ? 60 : 'auto',
-        }}
-        rows={multiline ? 3 : undefined}
-      />
+      <div
+        style={{ fontFamily: SANS, fontSize: 12, color: C.faint2, padding: '4px 2px', cursor: 'text' }}
+        onClick={addLine}
+      >{placeholder}</div>
     );
   }
 
   return (
-    <div
-      onClick={() => { setDraft(value); setEditing(true); }}
-      style={{
-        fontFamily: SANS, fontSize: 13.5, color: value ? C.ink : C.faint2,
-        padding: '2px 4px', borderRadius: 4, cursor: 'text',
-        lineHeight: 1.5, minHeight: 20,
-        border: '1px solid transparent',
-      }}
-    >
-      {value || placeholder}
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+      {lines.map((line, i) => (
+        <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+          <span style={{ color, fontSize: 14, lineHeight: 1, flexShrink: 0, userSelect: 'none' }}>•</span>
+          <input
+            ref={(el) => { lineRefs.current[i] = el; }}
+            value={line}
+            onChange={(e) => updateLine(i, e.target.value)}
+            onBlur={() => doSave(lines)}
+            onKeyDown={(e) => handleKeyDown(e, i)}
+            placeholder="Add step…"
+            style={{
+              flex: 1, fontFamily: SANS, fontSize: 13, color: C.ink,
+              background: 'transparent', border: 'none', outline: 'none',
+              padding: '2px 0', lineHeight: 1.6,
+            }}
+          />
+        </div>
+      ))}
+      <button
+        onClick={addLine}
+        style={{
+          background: 'none', border: 'none', cursor: 'pointer',
+          fontFamily: SANS, fontSize: 11, color: C.faint,
+          textAlign: 'left', padding: '3px 2px',
+        }}
+      >+ Add step</button>
     </div>
   );
 }
 
-function BulletList({ text, color }: { text: string; color: string }) {
-  const lines = text.split('\n').filter(Boolean);
-  if (!lines.length) return <span style={{ fontFamily: SANS, fontSize: 13, color: C.faint2 }}>—</span>;
+function MaterialEditor({ value, onSave }: {
+  value: string;
+  onSave: (v: string) => void;
+}) {
+  const [materials, setMaterials] = useState<string[]>(() =>
+    value ? value.split(',').map((m) => m.trim()).filter(Boolean) : []
+  );
+  const [adding, setAdding] = useState(false);
+  const [draft, setDraft] = useState('');
+  const addRef = useRef<HTMLInputElement>(null);
+  const lastExternal = useRef(value);
+
+  if (lastExternal.current !== value) {
+    lastExternal.current = value;
+    setMaterials(value ? value.split(',').map((m) => m.trim()).filter(Boolean) : []);
+  }
+
+  useEffect(() => {
+    if (adding) addRef.current?.focus();
+  }, [adding]);
+
+  function remove(i: number) {
+    const next = materials.filter((_, j) => j !== i);
+    setMaterials(next);
+    lastExternal.current = next.join(', ');
+    onSave(next.join(', '));
+  }
+
+  function confirm() {
+    const trimmed = draft.trim();
+    const next = trimmed ? [...materials, trimmed] : materials;
+    if (trimmed) {
+      setMaterials(next);
+      lastExternal.current = next.join(', ');
+      onSave(next.join(', '));
+    }
+    setAdding(false);
+    setDraft('');
+  }
+
   return (
-    <ul style={{ margin: 0, paddingLeft: 16, fontFamily: SANS, fontSize: 13, lineHeight: 1.6, color: C.ink }}>
-      {lines.map((l, i) => <li key={i} style={{ marginBottom: 3, color }}>{l}</li>)}
-    </ul>
+    <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'center' }}>
+      {materials.map((m, i) => (
+        <span key={i} style={{
+          display: 'inline-flex', alignItems: 'center', gap: 3,
+          height: 22, padding: '0 8px 0 9px',
+          fontFamily: SANS, fontSize: 11, fontWeight: 500,
+          color: C.ink, background: C.cream,
+          border: `1px solid ${C.borderSoft}`, borderRadius: 999,
+        }}>
+          {m}
+          <button
+            onClick={() => remove(i)}
+            style={{
+              display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+              background: 'none', border: 'none', cursor: 'pointer',
+              padding: '0 0 0 2px', color: C.faint, fontSize: 14, lineHeight: 1,
+            }}
+          >×</button>
+        </span>
+      ))}
+      {adding ? (
+        <input
+          ref={addRef}
+          value={draft}
+          onChange={(e) => setDraft(e.target.value)}
+          onBlur={confirm}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') confirm();
+            if (e.key === 'Escape') { setAdding(false); setDraft(''); }
+          }}
+          placeholder="Material…"
+          style={{
+            height: 22, padding: '0 8px',
+            fontFamily: SANS, fontSize: 11, color: C.ink,
+            background: `${C.pinkSoft}88`, border: `1px solid ${C.pink}`,
+            borderRadius: 999, outline: 'none', width: 130,
+          }}
+        />
+      ) : (
+        <button
+          onClick={() => setAdding(true)}
+          style={{
+            display: 'inline-flex', alignItems: 'center', gap: 4,
+            height: 22, padding: '0 8px',
+            fontFamily: SANS, fontSize: 11, fontWeight: 500,
+            color: C.faint, background: 'transparent',
+            border: `1px dashed ${C.border}`, borderRadius: 999,
+            cursor: 'pointer',
+          }}
+        >+ Add</button>
+      )}
+    </div>
   );
 }
 
@@ -125,7 +294,6 @@ export function SectionCard({
   onToggle, onAiClick, onUpdate,
 }: SectionCardProps) {
   const { setNodeRef, isOver } = useDroppable({ id: `section-${index}` });
-  const materials = section.materials ? section.materials.split(',').map(m => m.trim()).filter(Boolean) : [];
 
   return (
     <div
@@ -140,19 +308,21 @@ export function SectionCard({
         transition: 'border-color 0.15s, box-shadow 0.15s, opacity 0.15s',
       }}
     >
-      {/* Header row */}
-      <div style={{
-        display: 'flex', alignItems: 'center', gap: 12,
-        padding: '14px 16px',
-        borderBottom: expanded ? `1px solid ${C.border}` : 'none',
-        cursor: 'pointer',
-      }} onClick={onToggle}>
+      {/* Header */}
+      <div
+        style={{
+          display: 'flex', alignItems: 'center', gap: 12,
+          padding: '14px 16px',
+          borderBottom: expanded ? `1px solid ${C.border}` : 'none',
+          cursor: 'pointer',
+        }}
+        onClick={onToggle}
+      >
         <div style={{
           width: 26, height: 26, borderRadius: 8,
           background: C.cream, color: C.faint,
           display: 'flex', alignItems: 'center', justifyContent: 'center',
-          fontFamily: SANS, fontSize: 11, fontWeight: 600,
-          flexShrink: 0,
+          fontFamily: SANS, fontSize: 11, fontWeight: 600, flexShrink: 0,
         }}>
           {String(index + 1).padStart(2, '0')}
         </div>
@@ -178,10 +348,11 @@ export function SectionCard({
         <div style={{ padding: '14px 16px 16px', display: 'flex', flexDirection: 'column', gap: 14 }}>
           {/* Task */}
           <div>
-            <div style={{ fontFamily: SANS, fontSize: 10.5, fontWeight: 600, color: C.faint, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 4 }}>
-              Task
-            </div>
-            <EditableField
+            <div style={{
+              fontFamily: SANS, fontSize: 10.5, fontWeight: 600,
+              color: C.faint, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 4,
+            }}>Task</div>
+            <InlineText
               value={section.task}
               placeholder="Describe the activity…"
               onSave={(v) => onUpdate({ task: v })}
@@ -190,94 +361,50 @@ export function SectionCard({
 
           {/* Materials */}
           <div>
-            <div style={{ fontFamily: SANS, fontSize: 10.5, fontWeight: 600, color: C.faint, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 6 }}>
-              Materials
-            </div>
-            <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'center' }}>
-              {materials.map((m) => <Chip key={m} tone="neutral">{m}</Chip>)}
-              <button
-                onClick={() => {
-                  const added = prompt('Add material:');
-                  if (added?.trim()) {
-                    const updated = materials.concat(added.trim()).join(', ');
-                    onUpdate({ materials: updated });
-                  }
-                }}
-                style={{
-                  display: 'inline-flex', alignItems: 'center', gap: 4,
-                  height: 20, padding: '0 7px',
-                  fontFamily: SANS, fontSize: 10.5, fontWeight: 500,
-                  color: C.faint, background: 'transparent',
-                  border: `1px dashed ${C.border}`, borderRadius: 999,
-                }}
-              >
-                + Add
-              </button>
-            </div>
+            <div style={{
+              fontFamily: SANS, fontSize: 10.5, fontWeight: 600,
+              color: C.faint, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 6,
+            }}>Materials</div>
+            <MaterialEditor
+              value={section.materials}
+              onSave={(v) => onUpdate({ materials: v })}
+            />
           </div>
 
-          {/* Teacher / Students columns */}
+          {/* Teacher / Students */}
           <div style={{
             display: 'grid', gridTemplateColumns: '1.7fr 1fr', gap: 0,
             border: `1px solid ${C.border}`, borderRadius: 10, overflow: 'hidden',
           }}>
-            {/* Teacher */}
             <div style={{ padding: 12, borderRight: `1px solid ${C.border}`, background: C.creamDeep + '40' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 8 }}>
                 <Icon name="user" size={12} color={C.pink} />
-                <span style={{ fontFamily: SANS, fontSize: 10.5, fontWeight: 600, color: C.pink, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Teacher does</span>
+                <span style={{
+                  fontFamily: SANS, fontSize: 10.5, fontWeight: 600,
+                  color: C.pink, textTransform: 'uppercase', letterSpacing: '0.08em',
+                }}>Teacher does</span>
               </div>
-              {section.teacher_instructions ? (
-                <BulletList text={section.teacher_instructions} color={C.ink} />
-              ) : (
-                <div
-                  style={{ fontFamily: SANS, fontSize: 12, color: C.faint2, cursor: 'text', padding: '2px 4px' }}
-                  onClick={() => {
-                    const v = prompt('Teacher instructions (one per line):', section.teacher_instructions);
-                    if (v !== null) onUpdate({ teacher_instructions: v });
-                  }}
-                >Click to add teacher steps…</div>
-              )}
-              {section.teacher_instructions && (
-                <button
-                  onClick={() => {
-                    const v = prompt('Teacher instructions (one per line):', section.teacher_instructions);
-                    if (v !== null) onUpdate({ teacher_instructions: v });
-                  }}
-                  style={{ marginTop: 8, fontFamily: SANS, fontSize: 10.5, color: C.faint, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
-                >
-                  Edit…
-                </button>
-              )}
+              <BulletEditor
+                value={section.teacher_instructions}
+                color={C.ink}
+                placeholder="Click to add teacher steps…"
+                onSave={(v) => onUpdate({ teacher_instructions: v })}
+              />
             </div>
-            {/* Students */}
             <div style={{ padding: 12, background: C.tealSoft + '50' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 8 }}>
                 <Icon name="users" size={12} color={C.teal} />
-                <span style={{ fontFamily: SANS, fontSize: 10.5, fontWeight: 600, color: C.teal, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Students do</span>
+                <span style={{
+                  fontFamily: SANS, fontSize: 10.5, fontWeight: 600,
+                  color: C.teal, textTransform: 'uppercase', letterSpacing: '0.08em',
+                }}>Students do</span>
               </div>
-              {section.student_instructions ? (
-                <BulletList text={section.student_instructions} color={C.ink} />
-              ) : (
-                <div
-                  style={{ fontFamily: SANS, fontSize: 12, color: C.faint2, cursor: 'text', padding: '2px 4px' }}
-                  onClick={() => {
-                    const v = prompt('Student instructions (one per line):', section.student_instructions);
-                    if (v !== null) onUpdate({ student_instructions: v });
-                  }}
-                >Click to add student steps…</div>
-              )}
-              {section.student_instructions && (
-                <button
-                  onClick={() => {
-                    const v = prompt('Student instructions (one per line):', section.student_instructions);
-                    if (v !== null) onUpdate({ student_instructions: v });
-                  }}
-                  style={{ marginTop: 8, fontFamily: SANS, fontSize: 10.5, color: C.faint, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
-                >
-                  Edit…
-                </button>
-              )}
+              <BulletEditor
+                value={section.student_instructions}
+                color={C.ink}
+                placeholder="Click to add student steps…"
+                onSave={(v) => onUpdate({ student_instructions: v })}
+              />
             </div>
           </div>
         </div>
@@ -295,13 +422,12 @@ export function SectionCard({
   );
 }
 
-/* Drop indicator shown between sections during drag */
 export function DropIndicator({ label }: { label: string }) {
   return (
     <div style={{
       padding: 16,
       border: `2px dashed ${C.pink}`,
-      background: C.pinkSoft + 'AA',
+      background: `${C.pinkSoft}AA`,
       borderRadius: 12,
       display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
     }}>
