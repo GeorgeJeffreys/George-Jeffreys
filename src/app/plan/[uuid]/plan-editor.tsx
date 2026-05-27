@@ -114,11 +114,21 @@ function DesktopPlanEditor({ uuid, initialPlan, initialLesson, isTablet }: PlanE
     });
   }
 
-  // Fix 6: insert library card preview into focused section materials
   function insertLibraryCard(card: LibraryCard) {
     if (!plan) return;
-    const current = sections[focusedSection].materials;
-    updateSection(focusedSection, { materials: current ? `${current}, ${card.type}` : card.type });
+    const s = sections[focusedSection];
+    const materials = s.materials ? `${s.materials}, ${card.type}` : card.type;
+    const teacher = s.teacher_instructions
+      ? `${s.teacher_instructions}\n${card.teacherInstructions}`
+      : card.teacherInstructions;
+    const student = s.student_instructions
+      ? `${s.student_instructions}\n${card.studentInstructions}`
+      : card.studentInstructions;
+    updateSection(focusedSection, {
+      materials,
+      teacher_instructions: teacher,
+      student_instructions: student,
+    });
   }
 
   // Fix 8: load example plan sections
@@ -171,8 +181,15 @@ function DesktopPlanEditor({ uuid, initialPlan, initialLesson, isTablet }: PlanE
       const sectionIdx = Number(String(over.id).replace('section-', ''));
       const card = event.active.data.current as LibraryCard | undefined;
       if (card && !isNaN(sectionIdx)) {
-        const current = sections[sectionIdx].materials;
-        updateSection(sectionIdx, { materials: current ? `${current}, ${card.type}` : card.type });
+        const s = sections[sectionIdx];
+        const materials = s.materials ? `${s.materials}, ${card.type}` : card.type;
+        const teacher = s.teacher_instructions
+          ? `${s.teacher_instructions}\n${card.teacherInstructions}`
+          : card.teacherInstructions;
+        const student = s.student_instructions
+          ? `${s.student_instructions}\n${card.studentInstructions}`
+          : card.studentInstructions;
+        updateSection(sectionIdx, { materials, teacher_instructions: teacher, student_instructions: student });
       }
     }
     setDraggingCardId(null);
@@ -453,6 +470,7 @@ function DesktopPlanEditor({ uuid, initialPlan, initialLesson, isTablet }: PlanE
                     activeTab={rightTab}
                     onTabChange={setRightTab}
                     onInsertCard={insertLibraryCard}
+                    focusedSectionTitle={sectionName}
                   />
                 ) : rightTab === 'ai' ? (
                   <AiPanel

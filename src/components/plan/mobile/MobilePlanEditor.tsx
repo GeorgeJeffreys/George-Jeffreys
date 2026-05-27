@@ -86,8 +86,15 @@ export function MobilePlanEditor({ uuid, initialPlan, initialLesson }: MobilePla
 
   function insertLibraryCard(card: LibraryCard, sectionIndex: number) {
     if (!plan) return;
-    const current = sections[sectionIndex].materials;
-    updateSection(sectionIndex, { materials: current ? `${current}, ${card.type}` : card.type });
+    const s = sections[sectionIndex];
+    const materials = s.materials ? `${s.materials}, ${card.type}` : card.type;
+    const teacher = s.teacher_instructions
+      ? `${s.teacher_instructions}\n${card.teacherInstructions}`
+      : card.teacherInstructions;
+    const student = s.student_instructions
+      ? `${s.student_instructions}\n${card.studentInstructions}`
+      : card.studentInstructions;
+    updateSection(sectionIndex, { materials, teacher_instructions: teacher, student_instructions: student });
   }
 
   async function handleExport() {

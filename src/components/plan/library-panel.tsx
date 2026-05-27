@@ -16,15 +16,85 @@ export interface LibraryCard {
   preview: string;
   minutes: number;
   isNew?: boolean;
+  teacherInstructions: string;
+  studentInstructions: string;
+  suitableSections: string[];
 }
 
 export const LIBRARY_CARDS: LibraryCard[] = [
-  { id: 'fb-wh',      type: 'Fill in the blank', tone: 'pink',  skill: 'Wh-questions',     level: 'A1',  preview: 'What ___ your name?\nMy ___ is Layla.\nHow ___ are you?', minutes: 8, isNew: true },
-  { id: 'match-fam',  type: 'Matching',           tone: 'amber', skill: 'Vocab · family',   level: 'A1',  preview: 'mother · father · sister · brother → 4 family photographs', minutes: 10 },
-  { id: 'dialogue',   type: 'Dialogue',            tone: 'teal',  skill: 'Speaking · intros', level: 'A1', preview: "A: Hello! What's your name?\nB: ___\nA: How old are you?", minutes: 6 },
-  { id: 'wordsearch', type: 'Word search',         tone: 'pink',  skill: 'Greetings vocab',  level: 'A1',  preview: '8×8 grid: hello · hi · bye · name · age · meet', minutes: 5 },
-  { id: 'sentord',    type: 'Sentence order',      tone: 'amber', skill: 'Syntax',           level: 'A1',  preview: 'name / is / What / your / ? → ____________?', minutes: 4 },
-  { id: 'picture',    type: 'Picture prompt',      tone: 'teal',  skill: 'Production',       level: 'A1+', preview: '4 family scenes. Write 2 sentences for each.', minutes: 12 },
+  {
+    id: 'fb-wh',
+    type: 'Fill in the blank',
+    tone: 'pink',
+    skill: 'Wh-questions',
+    level: 'A1',
+    preview: 'What ___ your name?\nMy ___ is Layla.\nHow ___ are you?',
+    minutes: 8,
+    isNew: true,
+    teacherInstructions: 'Write 3–5 sentences with blanks on the board.\nExplain the task clearly and model the first example together as a class.\nPoint out the word bank and drill the key words chorally.\nWalk around to check students are writing in the blank, not choosing randomly.',
+    studentInstructions: 'Read each sentence carefully.\nChoose the correct word from the word bank to fill each blank.\nWrite the word neatly in the space.\nRead your completed sentence aloud to check it makes sense.',
+    suitableSections: ['Check for Understanding', 'Independent Practice'],
+  },
+  {
+    id: 'match-fam',
+    type: 'Matching',
+    tone: 'amber',
+    skill: 'Vocab · family',
+    level: 'A1',
+    preview: 'mother · father · sister · brother → 4 family photographs',
+    minutes: 10,
+    teacherInstructions: 'Distribute the matching activity sheet.\nModel the first match by thinking aloud: "Mother — I see a woman with children, so it goes here."\nAsk students to work independently, then compare with a partner.\nReview answers as a class — elicit reasons, not just answers.',
+    studentInstructions: 'Look at column A and column B.\nDraw a line from each word in column A to the matching picture or word in column B.\nWork quietly first, then check with your partner.',
+    suitableSections: ['Warm-up & Recap', 'Check for Understanding', 'Independent Practice'],
+  },
+  {
+    id: 'dialogue',
+    type: 'Dialogue',
+    tone: 'teal',
+    skill: 'Speaking · intros',
+    level: 'A1',
+    preview: "A: Hello! What's your name?\nB: ___\nA: How old are you?",
+    minutes: 6,
+    teacherInstructions: 'Model the dialogue once with a confident student in front of the class.\nAssign pairs and give them 3 minutes to practise.\nMonitor and correct pronunciation — focus on intonation of questions.\nAsk 2–3 pairs to perform in front of the class.',
+    studentInstructions: 'Practise the dialogue with your partner.\nTake turns being Student A and Student B.\nTry to speak without looking at the text — use the prompt card only if you need it.\nChange partners and try again with someone new.',
+    suitableSections: ['Independent Practice', 'Exit Ticket'],
+  },
+  {
+    id: 'wordsearch',
+    type: 'Word search',
+    tone: 'pink',
+    skill: 'Greetings vocab',
+    level: 'A1',
+    preview: '8×8 grid: hello · hi · bye · name · age · meet',
+    minutes: 5,
+    teacherInstructions: 'Distribute the word search sheet.\nShow students how to circle words — they can go across, down, or diagonally.\nSet a time limit (3–4 minutes) to keep energy high.\nAfter time is up, check as a class and say each word chorally.',
+    studentInstructions: 'Find and circle all the words hidden in the grid.\nWords can go across (→), down (↓), or diagonal (↘).\nCross each word off the list as you find it.\nIf you finish early, write a sentence using three of the words.',
+    suitableSections: ['Warm-up & Recap', 'Independent Practice'],
+  },
+  {
+    id: 'sentord',
+    type: 'Sentence order',
+    tone: 'amber',
+    skill: 'Syntax',
+    level: 'A1',
+    preview: 'name / is / What / your / ? → ____________?',
+    minutes: 4,
+    teacherInstructions: 'Write the first jumbled sentence on the board and model rearranging it.\nThink aloud: "Questions start with a question word, then the verb…"\nStudents work individually, then compare with a partner.\nHighlight the pattern — question word → auxiliary → subject → main verb.',
+    studentInstructions: 'Put the words in the correct order to make a sentence.\nWrite the complete sentence on the line below.\nRead it back to yourself — does it sound right?\nCheck: does each question end with a question mark?',
+    suitableSections: ['Check for Understanding', 'Independent Practice'],
+  },
+  {
+    id: 'picture',
+    type: 'Picture prompt',
+    tone: 'teal',
+    skill: 'Production',
+    level: 'A1+',
+    preview: '4 family scenes. Write 2 sentences for each.',
+    minutes: 12,
+    teacherInstructions: 'Show the picture to the class and elicit vocabulary.\nModel the first sentence together: "In this picture I can see…"\nGive students 8 minutes to write.\nShare 3–4 responses with the class — praise specificity and variety.',
+    studentInstructions: 'Look at each picture carefully.\nWrite 2 sentences about what you see.\nUse the sentence starters if you need help: "I can see…" / "There is/are…"\nTry to use at least one adjective in each sentence.',
+    suitableSections: ['Independent Practice', 'Exit Ticket'],
+  },
 ];
 
 const CATS = ['All 124', 'Speaking 32', 'Writing 41', 'Reading 28', 'Vocab 23'];
@@ -168,8 +238,8 @@ function CardPreviewModal({ card, onClose, onInsert }: {
         </div>
 
         {/* Body */}
-        <div style={{ padding: '16px 18px' }}>
-          <div style={{ marginBottom: 6 }}>
+        <div style={{ padding: '14px 18px', display: 'flex', flexDirection: 'column', gap: 12 }}>
+          <div>
             <span style={{ fontFamily: SANS, fontSize: 15, fontWeight: 700, color: C.ink }}>{card.skill}</span>
             <span style={{ fontFamily: SANS, fontSize: 12, color: C.faint, marginLeft: 8 }}>
               Level {card.level} · ~{card.minutes} min
@@ -177,10 +247,18 @@ function CardPreviewModal({ card, onClose, onInsert }: {
           </div>
           <div style={{
             background: C.cream, border: `1px solid ${C.borderSoft}`,
-            borderRadius: 10, padding: '12px 14px',
-            fontFamily: SANS, fontSize: 13, color: C.faint,
+            borderRadius: 10, padding: '10px 12px',
+            fontFamily: SANS, fontSize: 12.5, color: C.faint,
             lineHeight: 1.6, whiteSpace: 'pre-line',
           }}>{card.preview}</div>
+          <div>
+            <div style={{ fontFamily: SANS, fontSize: 10, fontWeight: 600, color: C.pink, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 4 }}>Teacher does</div>
+            <p style={{ fontFamily: SANS, fontSize: 12, color: C.ink, margin: 0, lineHeight: 1.55, whiteSpace: 'pre-line' }}>{card.teacherInstructions}</p>
+          </div>
+          <div>
+            <div style={{ fontFamily: SANS, fontSize: 10, fontWeight: 600, color: C.teal, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 4 }}>Students do</div>
+            <p style={{ fontFamily: SANS, fontSize: 12, color: C.ink, margin: 0, lineHeight: 1.55, whiteSpace: 'pre-line' }}>{card.studentInstructions}</p>
+          </div>
         </div>
 
         {/* Footer */}
@@ -214,21 +292,44 @@ function CardPreviewModal({ card, onClose, onInsert }: {
   );
 }
 
+const SECTION_FILTERS = [
+  'All Sections',
+  'Warm-up & Recap',
+  'New Content',
+  'Check for Understanding',
+  'Independent Practice',
+  'Exit Ticket',
+] as const;
+
 interface LibraryPanelProps {
   draggingId: string | null;
   activeTab: RightTab;
   onTabChange: (tab: RightTab) => void;
   onInsertCard?: (card: LibraryCard) => void;
+  focusedSectionTitle?: string;
 }
 
-export function LibraryPanel({ draggingId, activeTab, onTabChange, onInsertCard }: LibraryPanelProps) {
+export function LibraryPanel({ draggingId, activeTab, onTabChange, onInsertCard, focusedSectionTitle }: LibraryPanelProps) {
   const [activeCat, setActiveCat] = useState(0);
   const [query, setQuery] = useState('');
   const [previewCard, setPreviewCard] = useState<LibraryCard | null>(null);
+  const [sectionFilter, setSectionFilter] = useState<string>('All Sections');
+
+  // Auto-filter to focused section when it changes
+  const prevFocused = useState(focusedSectionTitle)[0];
+  if (focusedSectionTitle && focusedSectionTitle !== prevFocused && SECTION_FILTERS.includes(focusedSectionTitle as (typeof SECTION_FILTERS)[number])) {
+    setSectionFilter(focusedSectionTitle);
+  }
+
+  const visibleCards = LIBRARY_CARDS.filter((c) => {
+    const matchesSection = sectionFilter === 'All Sections' || c.suitableSections.includes(sectionFilter);
+    const matchesQuery = !query.trim() || c.type.toLowerCase().includes(query.toLowerCase()) || c.skill.toLowerCase().includes(query.toLowerCase());
+    return matchesSection && matchesQuery;
+  });
 
   return (
     <>
-      <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 14, padding: '16px 18px' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 12, padding: '16px 18px' }}>
         {/* Tab switcher */}
         <RightTabs active={activeTab} onChange={onTabChange} />
 
@@ -251,7 +352,7 @@ export function LibraryPanel({ draggingId, activeTab, onTabChange, onInsertCard 
           }}>⌘K</span>
         </div>
 
-        {/* Filter chips */}
+        {/* Skill filter chips */}
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {CATS.map((c, i) => (
             <div key={c} onClick={() => setActiveCat(i)} style={{ cursor: 'pointer' }}>
@@ -260,12 +361,45 @@ export function LibraryPanel({ draggingId, activeTab, onTabChange, onInsertCard 
           ))}
         </div>
 
+        {/* Section filter chips */}
+        <div>
+          <div style={{ fontFamily: SANS, fontSize: 10, fontWeight: 600, color: C.faint, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 5 }}>
+            Filter by section
+          </div>
+          <div style={{ display: 'flex', gap: 5, flexWrap: 'wrap' }}>
+            {SECTION_FILTERS.map((s) => {
+              const active = sectionFilter === s;
+              return (
+                <button
+                  key={s}
+                  onClick={() => setSectionFilter(s)}
+                  style={{
+                    display: 'inline-flex', alignItems: 'center',
+                    height: 20, padding: '0 7px',
+                    fontFamily: SANS, fontSize: 10, fontWeight: 500,
+                    color: active ? C.pink : C.faint,
+                    background: active ? C.pinkSoft : 'transparent',
+                    border: `1px solid ${active ? C.pinkBorder : C.borderSoft}`,
+                    borderRadius: 999, cursor: 'pointer', whiteSpace: 'nowrap',
+                  }}
+                >{s}</button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Card count */}
+        <div style={{ fontFamily: SANS, fontSize: 10.5, color: C.faint2 }}>
+          {visibleCards.length} card{visibleCards.length !== 1 ? 's' : ''}
+          {sectionFilter !== 'All Sections' && ` for ${sectionFilter}`}
+        </div>
+
         {/* Card grid */}
         <div style={{
           display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10,
           overflow: 'auto', flex: 1, paddingRight: 2, alignContent: 'start',
         }}>
-          {LIBRARY_CARDS.map((c) => (
+          {visibleCards.map((c) => (
             <DraggableCard
               key={c.id}
               card={c}
@@ -273,6 +407,13 @@ export function LibraryPanel({ draggingId, activeTab, onTabChange, onInsertCard 
               onPreview={() => setPreviewCard(c)}
             />
           ))}
+          {visibleCards.length === 0 && (
+            <div style={{ gridColumn: '1 / -1', padding: '24px 0', textAlign: 'center' }}>
+              <span style={{ fontFamily: SANS, fontSize: 12, color: C.faint2 }}>
+                No cards match this filter
+              </span>
+            </div>
+          )}
         </div>
 
         {/* Bottom bar */}
