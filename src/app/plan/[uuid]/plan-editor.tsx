@@ -43,41 +43,11 @@ const COLLAPSED_WIDTH = 48;
 export function PlanEditor({ uuid, initialPlan, initialLesson }: PlanEditorProps) {
   const { isPhone, isTablet } = useBreakpoint();
 
-  if (isPhone) {
-    return (
-      <MobilePlanEditor uuid={uuid} initialPlan={initialPlan} initialLesson={initialLesson} />
-    );
-  }
-
-  return (
-    <DesktopPlanEditor uuid={uuid} initialPlan={initialPlan} initialLesson={initialLesson} isTablet={isTablet} />
-  );
-}
-
-function DesktopPlanEditor({ uuid, initialPlan, initialLesson, isTablet }: PlanEditorProps & { isTablet: boolean }) {
-  const [plan, setPlan] = useState<LessonPlan | null>(initialPlan);
-  const [lesson, setLesson] = useState<CurriculumLesson | null>(initialLesson);
-
-  // DIAGNOSTIC — remove after debugging
-  console.log('RENDER: plan.lesson_id=', plan?.lesson_id, 'lesson=', lesson?.id ?? null);
-  const [activeView, setActiveView] = useState<'plan' | 'worksheet'>('plan');
-  const [rightTab, setRightTab] = useState<RightTab>('library');
-  const [expandedSet, setExpandedSet] = useState<Set<number>>(new Set([0]));
-  const [focusedSection, setFocusedSection] = useState(0);
-  const [showSelector, setShowSelector] = useState(uuid === 'new');
-  const [saveStatus, setSaveStatus] = useState<'saved' | 'saving' | 'idle'>('idle');
-  const [draggingCardId, setDraggingCardId] = useState<string | null>(null);
-  const [dropTarget, setDropTarget] = useState<number | null>(null);
-  const [exporting, setExporting] = useState(false);
-  const [exportError, setExportError] = useState<string | null>(null);
-  // Fix 5: resize + collapse
-  const [rightWidth, setRightWidth] = useState(DEFAULT_RIGHT_WIDTH);
-  const [panelCollapsed, setPanelCollapsed] = useState(false);
-  // Fix 7: timing popover
-  const [timingOpen, setTimingOpen] = useState(false);
-  const [timingAnchorRect, setTimingAnchorRect] = useState<DOMRect | null>(null);
-
-  const saveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  // Hold resolved plan/lesson HERE so loading survives the isPhone desktop→mobile switch.
+  // useBreakpoint starts with isPhone=false (SSR), mounts DesktopPlanEditor, then flips to
+  // true on mobile — if loading effects live inside DesktopPlanEditor they get thrown away.
+  const [resolvedPlan, setResolvedPlan] = useState<LessonPlan | null>(initialPlan);
+  const [resolvedLesson, setResolvedLesson] = useState<CurriculumLesson | null>(initialLesson);
 
   // Hydrate from sessionStorage when Supabase was unavailable during plan creation
   useEffect(() => {
@@ -89,20 +59,55 @@ function DesktopPlanEditor({ uuid, initialPlan, initialLesson, isTablet }: PlanE
         id: string; lesson_id: string;
         lesson: CurriculumLesson; sections: LessonSection[]; worksheet: null;
       };
-      setPlan({
+      setResolvedPlan({
         id: draft.id, lesson_id: draft.lesson_id,
         sections: draft.sections, worksheet: draft.worksheet,
         created_at: new Date().toISOString(), updated_at: new Date().toISOString(),
       });
-      if (draft.lesson) setLesson(draft.lesson);
+      if (draft.lesson) setResolvedLesson(draft.lesson);
     } catch { /* ignore parse errors */ }
   }, [uuid, initialPlan]);
 
-  // Safety net: if plan is set but lesson is still null, fetch from curriculum
+  // Safety net: fetch lesson when plan has a lesson_id but lesson is still null
   useEffect(() => {
-    if (lesson || !plan?.lesson_id) return;
-    fetchLessonById(plan.lesson_id).then((l) => { if (l) setLesson(l); });
-  }, [plan?.lesson_id, lesson]);
+    if (resolvedLesson || !resolvedPlan?.lesson_id) return;
+    fetchLessonById(resolvedPlan.lesson_id).then((l) => { if (l) setResolvedLesson(l); });
+  }, [resolvedPlan?.lesson_id, resolvedLesson]);
+
+  if (isPhone) {
+    return (
+      <MobilePlanEditor uuid={uuid} initialPlan={resolvedPlan} initialLesson={resolvedLesson} />
+    );
+  }
+
+  return (
+    <DesktopPlanEditor uuid={uuid} initialPlan={resolvedPlan} initialLesson={resolvedLesson} isTablet={isTablet} />
+  );
+}
+
+function DesktopPlanEditor({ uuid, initialPlan, initialLesson, isTablet }: PlanEditorProps & { isTablet: boolean }) {
+  const [plan, setPlan] = useState<LessonPlan | null>(initialPlan);
+  const [lesson, setLesson] = useState<CurriculumLesson | null>(initialLesson);
+  const [activeView, setActiveView] = useState<'plan' | 'worksheet'>('plan');
+  const [rightTab, setRightTab] = useState<RightTab>('library');
+  const [expandedSet, setExpandedSet] = useState<Set<number>>(new Set([0]));
+  const [focusedSection, setFocusedSection] = useState(0);
+  const [showSelector, setShowSelector] = useState(uuid === 'new');
+  const [saveStatus, setSaveStatus] = useState<'saved' | 'saving' | 'idle'>('idle');
+  const [draggingCardId, setDraggingCardId] = useState<string | null>(null);
+  const [dropTarget, setDropTarget] = useState<number | null>(null);
+  const [exporting, setExporting] = useState(false);
+  const [exportError, setExportError] = useState<string | null>(null);
+  const [rightWidth, setRightWidth] = useState(DEFAULT_RIGHT_WIDTH);
+  const [panelCollapsed, setPanelCollapsed] = useState(false);
+  const [timingOpen, setTimingOpen] = useState(false);
+  const [timingAnchorRect, setTimingAnchorRect] = useState<DOMRect | null>(null);
+
+  const saveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Sync when parent PlanEditor resolves plan/lesson after sessionStorage hydration
+  useEffect(() => { if (initialPlan && !plan) setPlan(initialPlan); }, [initialPlan]);
+  useEffect(() => { if (initialLesson && !lesson) setLesson(initialLesson); }, [initialLesson]);
 
   const sections: LessonSection[] = plan?.sections?.length === 6
     ? plan.sections.map((s, i) => ({ ...s, title: s.title || SECTION_CONFIG[i].title }))

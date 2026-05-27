@@ -15,8 +15,7 @@ export async function fetchLessonsForWeek(
 }
 
 export async function fetchLessonById(id: string): Promise<CurriculumLesson | null> {
-  const result = getLessonById(id);
-  console.log('fetchLessonById called with:', id, 'result:', result ? (Array.isArray(result) ? result[0]?.id : result.id) : null);
-  if (!result) return null;
-  return Array.isArray(result) ? result[0] : result;
+  const raw = getLessonById(id);
+  if (!raw) return null;
+  return Array.isArray(raw) ? raw[0] : raw;
 }
