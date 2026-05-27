@@ -16,16 +16,22 @@ export async function GET(
     return NextResponse.json({ data: null, error: "Invalid plan ID." }, { status: 400 });
   }
 
-  const supabase = createServerClient();
-  const { data, error } = await supabase
-    .from("lesson_plans")
-    .select("*")
-    .eq("id", id)
-    .maybeSingle();
-
-  if (error) {
-    console.error("[GET /api/lesson]", error);
-    return NextResponse.json({ data: null, error: error.message }, { status: 500 });
+  let data: unknown = null;
+  try {
+    const supabase = createServerClient();
+    const result = await supabase
+      .from("lesson_plans")
+      .select("*")
+      .eq("id", id)
+      .maybeSingle();
+    if (result.error) {
+      console.error("[GET /api/lesson]", result.error);
+      return NextResponse.json({ data: null, error: result.error.message }, { status: 500 });
+    }
+    data = result.data;
+  } catch (err) {
+    console.error("[GET /api/lesson] Supabase unavailable:", err);
+    return NextResponse.json({ data: null, error: "Database unavailable" }, { status: 503 });
   }
 
   if (!data) {
@@ -64,8 +70,6 @@ export async function POST(
     return NextResponse.json({ data: null, error: validationError }, { status: 422 });
   }
 
-  const supabase = createServerClient();
-
   const payload: Record<string, unknown> = {
     lesson_id: body.lesson_id,
     sections:  body.sections,
@@ -73,18 +77,24 @@ export async function POST(
   };
   if (!isNew) payload.id = id;
 
-  const { data, error } = await supabase
-    .from("lesson_plans")
-    .upsert(payload, { onConflict: "id" })
-    .select()
-    .single();
+  try {
+    const supabase = createServerClient();
+    const { data, error } = await supabase
+      .from("lesson_plans")
+      .upsert(payload, { onConflict: "id" })
+      .select()
+      .single();
 
-  if (error) {
-    console.error("[POST /api/lesson]", error);
-    return NextResponse.json({ data: null, error: error.message }, { status: 500 });
+    if (error) {
+      console.error("[POST /api/lesson]", error);
+      return NextResponse.json({ data: null, error: error.message }, { status: 500 });
+    }
+
+    return NextResponse.json({ data: data as LessonPlan }, { status: isNew ? 201 : 200 });
+  } catch (err) {
+    console.error("[POST /api/lesson] Supabase unavailable:", err);
+    return NextResponse.json({ data: null, error: "Database unavailable" }, { status: 503 });
   }
-
-  return NextResponse.json({ data: data as LessonPlan }, { status: isNew ? 201 : 200 });
 }
 
 // ── Helpers ───────────────────────────────────────────────────────────────────

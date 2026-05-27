@@ -19,15 +19,19 @@ export default async function PlanPage({
   let initialLesson: CurriculumLesson | null = null;
 
   if (uuid !== 'new' && isUUID(uuid)) {
-    const supabase = createServerClient();
-    const { data } = await supabase
-      .from('lesson_plans')
-      .select('*')
-      .eq('id', uuid)
-      .maybeSingle();
+    try {
+      const supabase = createServerClient();
+      const { data, error } = await supabase
+        .from('lesson_plans')
+        .select('*')
+        .eq('id', uuid)
+        .maybeSingle();
 
-    if (data) {
-      initialPlan = data as LessonPlan;
+      if (!error && data) {
+        initialPlan = data as LessonPlan;
+      }
+    } catch {
+      // Supabase unavailable — client will hydrate from sessionStorage
     }
   }
 
