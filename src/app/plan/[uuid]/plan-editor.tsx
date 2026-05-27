@@ -425,24 +425,34 @@ function DesktopPlanEditor({ uuid, initialPlan, initialLesson, isTablet }: PlanE
           } : {
             width: effectiveWidth, flexShrink: 0,
             borderLeft: `1px solid ${C.border}`,
-            background: C.surface, overflow: 'hidden',
+            background: C.surface,
+            /* overflow must be visible so the collapse tab can protrude left */
+            overflow: 'visible',
             display: 'flex', flexDirection: 'column',
             position: 'relative',
             transition: 'width 0.15s ease',
           }}>
+            {/* Collapse/expand tab — always rendered so it survives conditional content changes */}
+            {!isTablet && (
+              <button
+                onClick={() => setPanelCollapsed((v) => !v)}
+                title={panelCollapsed ? 'Expand panel' : 'Collapse panel'}
+                style={{
+                  position: 'absolute', left: -28, top: '50%', transform: 'translateY(-50%)',
+                  zIndex: 20, width: 28, height: 28,
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  background: '#F5EDE5', border: '1px solid #E5DDD3',
+                  borderRight: 'none', borderRadius: '6px 0 0 6px',
+                  cursor: 'pointer',
+                }}
+              >
+                <Icon name={panelCollapsed ? 'chevronLeft' : 'chevronRight'} size={14} color={C.faint} />
+              </button>
+            )}
+
             {!isTablet && panelCollapsed ? (
-              /* Fix 5: collapsed icon bar — desktop only */
+              /* Collapsed icon bar — desktop only */
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '12px 0', gap: 4 }}>
-                <button
-                  onClick={() => setPanelCollapsed(false)} title="Expand"
-                  style={{
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    width: 34, height: 34, borderRadius: 8,
-                    background: 'transparent', border: 'none', cursor: 'pointer', marginBottom: 4,
-                  }}
-                >
-                  <Icon name="panelRight" size={18} color={C.faint} />
-                </button>
                 {ICON_TABS.map((t) => (
                   <button
                     key={t.id}
@@ -461,8 +471,9 @@ function DesktopPlanEditor({ uuid, initialPlan, initialLesson, isTablet }: PlanE
                 ))}
               </div>
             ) : (
-              <>
-                {/* Fix 5: resize handle */}
+              /* Expanded panel content — wrapped to restore overflow clipping for inner content */
+              <div style={{ flex: 1, overflow: 'hidden', display: 'flex', flexDirection: 'column', position: 'relative' }}>
+                {/* Resize handle */}
                 <div
                   onMouseDown={startResize}
                   style={{
@@ -472,23 +483,6 @@ function DesktopPlanEditor({ uuid, initialPlan, initialLesson, isTablet }: PlanE
                   onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.background = `${C.pink}28`; }}
                   onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.background = 'transparent'; }}
                 />
-                {/* Collapse button — flat 28×28 tab flush to panel left edge */}
-                <button
-                  onClick={() => setPanelCollapsed(true)} title="Collapse panel"
-                  style={{
-                    position: 'absolute', left: -28, top: '50%', transform: 'translateY(-50%)',
-                    zIndex: 10,
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    width: 28, height: 28,
-                    borderRadius: '6px 0 0 6px',
-                    background: C.cream, border: `1px solid ${C.border}`,
-                    borderRight: 'none',
-                    cursor: 'pointer',
-                  }}
-                >
-                  <Icon name="chevronRight" size={14} color={C.faint} />
-                </button>
-
                 {rightTab === 'library' ? (
                   <LibraryPanel
                     draggingId={draggingCardId}
@@ -513,7 +507,7 @@ function DesktopPlanEditor({ uuid, initialPlan, initialLesson, isTablet }: PlanE
                     onLoadPlan={loadExamplePlan}
                   />
                 )}
-              </>
+              </div>
             )}
           </div>
         </div>

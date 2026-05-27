@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { C, SANS } from '@/lib/tokens';
 import { Icon } from '@/components/icon';
 import { useDraggable } from '@dnd-kit/core';
@@ -315,11 +315,18 @@ export function LibraryPanel({ draggingId, activeTab, onTabChange, onInsertCard,
   const [previewCard, setPreviewCard] = useState<LibraryCard | null>(null);
   const [sectionFilter, setSectionFilter] = useState<string>('All Sections');
 
-  // Auto-filter to focused section when it changes
-  const prevFocused = useState(focusedSectionTitle)[0];
-  if (focusedSectionTitle && focusedSectionTitle !== prevFocused && SECTION_FILTERS.includes(focusedSectionTitle as (typeof SECTION_FILTERS)[number])) {
-    setSectionFilter(focusedSectionTitle);
-  }
+  // Auto-filter to focused section when it changes (useEffect prevents setState-during-render crash)
+  const prevFocused = useRef(focusedSectionTitle);
+  useEffect(() => {
+    if (
+      focusedSectionTitle &&
+      focusedSectionTitle !== prevFocused.current &&
+      SECTION_FILTERS.includes(focusedSectionTitle as (typeof SECTION_FILTERS)[number])
+    ) {
+      setSectionFilter(focusedSectionTitle);
+    }
+    prevFocused.current = focusedSectionTitle;
+  }, [focusedSectionTitle]);
 
   const visibleCards = LIBRARY_CARDS.filter((c) => {
     const matchesSection = sectionFilter === 'All Sections' || c.suitableSections.includes(sectionFilter);

@@ -50,7 +50,7 @@ function Label({ children, style }: { children: React.ReactNode; style?: React.C
 }
 
 export function MetaHeader({ lesson }: MetaHeaderProps) {
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(true);
 
   if (!lesson) return null;
 

@@ -65,7 +65,7 @@ function ExampleCard({ plan, onClick }: { plan: ExamplePlan; onClick: () => void
 function SectionPreview({ section, index }: { section: LessonSection; index: number }) {
   const [open, setOpen] = useState(false);
   return (
-    <div style={{ border: `1px solid ${C.border}`, borderRadius: 10, overflow: 'hidden' }}>
+    <div style={{ border: `1px solid ${C.border}`, borderRadius: 10 }}>
       <button
         onClick={() => setOpen((v) => !v)}
         style={{
@@ -73,6 +73,7 @@ function SectionPreview({ section, index }: { section: LessonSection; index: num
           padding: '9px 12px', background: '#FAFAFA',
           borderBottom: open ? `1px solid ${C.border}` : 'none',
           border: 'none', cursor: 'pointer', textAlign: 'left',
+          borderRadius: open ? '9px 9px 0 0' : 9,
         }}
       >
         <div style={{

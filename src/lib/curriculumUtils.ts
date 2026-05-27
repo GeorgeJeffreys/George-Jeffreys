@@ -2,6 +2,7 @@ import type { CurriculumLesson, CurriculumLookup } from "@/types/curriculum";
 
 /** Strip the leading ". " prefix that curriculum.json uses on all LO fields. */
 export function cleanLO(raw: string): string {
+  if (!raw) return '';
   return raw.replace(/^(\.\s*)+/, '').trim();
 }
 
