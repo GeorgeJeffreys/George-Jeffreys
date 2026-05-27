@@ -41,6 +41,8 @@ const DEFAULT_RIGHT_WIDTH = 420;
 const COLLAPSED_WIDTH = 48;
 
 export function PlanEditor({ uuid, initialPlan, initialLesson }: PlanEditorProps) {
+  console.log('PLANEDITOR MOUNT', { initialPlan, initialLesson, uuid });
+
   const { isPhone, isTablet } = useBreakpoint();
 
   const [resolvedPlan, setResolvedPlan] = useState<LessonPlan | null>(initialPlan);
@@ -67,12 +69,11 @@ export function PlanEditor({ uuid, initialPlan, initialLesson }: PlanEditorProps
 
   // Effect 2: fetch lesson from curriculum.json if lesson is null but plan has a lesson_id
   useEffect(() => {
+    console.log('PlanEditor Effect2 fired: lesson_id=', resolvedPlan?.lesson_id, 'resolvedLesson=', resolvedLesson?.id ?? null);
     if (resolvedPlan?.lesson_id && !resolvedLesson) {
       fetchLessonById(resolvedPlan.lesson_id).then((result) => {
-        if (result) {
-          console.log('PlanEditor resolved lesson:', result);
-          setResolvedLesson(result);
-        }
+        console.log('PlanEditor resolved lesson:', result?.id ?? null);
+        if (result) setResolvedLesson(result);
       });
     }
   }, [resolvedPlan?.lesson_id]);
