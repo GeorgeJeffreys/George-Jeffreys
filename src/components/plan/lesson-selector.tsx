@@ -32,6 +32,8 @@ export function LessonSelector({ onClose }: LessonSelectorProps) {
   const [lessons, setLessons] = useState<CurriculumLesson[]>([]);
   const [query, setQuery] = useState('');
   const [loading, setLoading] = useState(false);
+  const [opening, setOpening] = useState(false);
+  const [openError, setOpenError] = useState<string | null>(null);
 
   useEffect(() => {
     fetchWeeksForYear(selectedYear).then(setWeeks);
@@ -50,29 +52,46 @@ export function LessonSelector({ onClose }: LessonSelectorProps) {
   }, [selectedYear]);
 
   async function openLesson() {
-    if (!selectedLesson) return;
+    if (!selectedLesson || opening) return;
+    setOpening(true);
+    setOpenError(null);
+
+    const sections = SECTION_CONFIG.map((cfg, i) => ({
+      ...emptySection(i),
+      title: cfg.title,
+      timing_minutes: cfg.timing_minutes,
+    }));
+
+    let planId: string | null = null;
+
     try {
-      const sections = SECTION_CONFIG.map((cfg, i) => ({
-        ...emptySection(i),
-        title: cfg.title,
-        timing_minutes: cfg.timing_minutes,
-      }));
       const res = await fetch('/api/lesson/new', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          lesson_id: selectedLesson.id,
-          sections,
-          worksheet: null,
-        }),
+        body: JSON.stringify({ lesson_id: selectedLesson.id, sections, worksheet: null }),
       });
       const json = await res.json();
-      if (json.data?.id) {
-        router.push(`/plan/${json.data.id}`);
+      if (res.ok && json.data?.id) {
+        planId = json.data.id;
       }
     } catch (err) {
-      console.error('Failed to create lesson plan:', err);
+      console.error('Failed to reach lesson API:', err);
     }
+
+    if (!planId) {
+      // Supabase unavailable — persist plan locally and continue
+      planId = crypto.randomUUID();
+      sessionStorage.setItem(`plan_local_${planId}`, JSON.stringify({
+        id: planId,
+        lesson_id: selectedLesson.id,
+        lesson: selectedLesson,
+        sections,
+        worksheet: null,
+      }));
+    }
+
+    setOpening(false);
+    router.push(`/plan/${planId}`);
   }
 
   const filteredLessons = query.trim()
@@ -206,7 +225,7 @@ export function LessonSelector({ onClose }: LessonSelectorProps) {
                   return (
                     <div
                       key={l.id}
-                      onClick={() => setSelectedLesson(l)}
+                      onClick={() => { setSelectedLesson(l); setOpenError(null); }}
                       style={{
                         display: 'flex', alignItems: 'center', gap: 12,
                         padding: '12px 12px',
@@ -253,6 +272,11 @@ export function LessonSelector({ onClose }: LessonSelectorProps) {
             <kbd style={{ fontFamily: SANS, fontSize: 10, padding: '2px 6px', background: C.surface, border: `1px solid ${C.border}`, borderRadius: 4 }}>↵</kbd> open
           </span>
           <div style={{ flex: 1 }} />
+          {openError && (
+            <span style={{ fontFamily: SANS, fontSize: 12, color: C.pink, maxWidth: 280, textAlign: 'right', lineHeight: 1.3 }}>
+              {openError}
+            </span>
+          )}
           <button
             onClick={onClose}
             style={{
@@ -261,21 +285,24 @@ export function LessonSelector({ onClose }: LessonSelectorProps) {
               fontFamily: SANS, fontSize: 13, fontWeight: 500,
               background: 'transparent', color: C.ink,
               border: `1px solid ${C.border}`, borderRadius: 8,
+              cursor: 'pointer',
             }}
           >Cancel</button>
           <button
             onClick={openLesson}
-            disabled={!selectedLesson}
+            disabled={!selectedLesson || opening}
             style={{
               display: 'inline-flex', alignItems: 'center', gap: 6,
               height: 34, padding: '0 14px',
               fontFamily: SANS, fontSize: 13, fontWeight: 500,
-              background: selectedLesson ? C.pink : C.faint2, color: '#fff',
+              background: !selectedLesson || opening ? C.faint2 : C.pink, color: '#fff',
               border: 'none', borderRadius: 8,
+              cursor: !selectedLesson || opening ? 'default' : 'pointer',
               transition: 'background 0.15s',
             }}
           >
-            <Icon name="arrowRight" size={12} color="#fff" />Open lesson
+            <Icon name="arrowRight" size={12} color="#fff" />
+            {opening ? 'Opening…' : 'Open lesson'}
           </button>
         </div>
       </div>

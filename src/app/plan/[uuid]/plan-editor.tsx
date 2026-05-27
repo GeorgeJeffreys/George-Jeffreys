@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, useEffect } from 'react';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 import { MobilePlanEditor } from '@/components/plan/mobile/MobilePlanEditor';
 import { DndContext, DragEndEvent, DragStartEvent, DragOverlay, useSensor, useSensors, PointerSensor } from '@dnd-kit/core';
@@ -75,6 +75,25 @@ function DesktopPlanEditor({ uuid, initialPlan, initialLesson, isTablet }: PlanE
 
   const saveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  // Hydrate from sessionStorage when Supabase was unavailable during plan creation
+  useEffect(() => {
+    if (initialPlan) return;
+    const raw = sessionStorage.getItem(`plan_local_${uuid}`);
+    if (!raw) return;
+    try {
+      const draft = JSON.parse(raw) as {
+        id: string; lesson_id: string;
+        lesson: CurriculumLesson; sections: LessonSection[]; worksheet: null;
+      };
+      setPlan({
+        id: draft.id, lesson_id: draft.lesson_id,
+        sections: draft.sections, worksheet: draft.worksheet,
+        created_at: new Date().toISOString(), updated_at: new Date().toISOString(),
+      });
+      if (draft.lesson) setLesson(draft.lesson);
+    } catch { /* ignore parse errors */ }
+  }, [uuid, initialPlan]);
+
   const sections: LessonSection[] = plan?.sections?.length === 6
     ? plan.sections.map((s, i) => ({ ...s, title: s.title || SECTION_CONFIG[i].title }))
     : buildDefaultSections();
@@ -84,6 +103,20 @@ function DesktopPlanEditor({ uuid, initialPlan, initialLesson, isTablet }: PlanE
     setSaveStatus('saving');
     if (saveTimer.current) clearTimeout(saveTimer.current);
     saveTimer.current = setTimeout(async () => {
+      // Mirror edits to sessionStorage for local plans
+      const localKey = `plan_local_${updatedPlan.id}`;
+      try {
+        const existing = sessionStorage.getItem(localKey);
+        if (existing) {
+          const draft = JSON.parse(existing);
+          sessionStorage.setItem(localKey, JSON.stringify({
+            ...draft,
+            sections: updatedPlan.sections,
+            worksheet: updatedPlan.worksheet,
+          }));
+        }
+      } catch { /* ignore */ }
+
       try {
         const res = await fetch(`/api/lesson/${updatedPlan.id}`, {
           method: 'POST',
@@ -95,8 +128,9 @@ function DesktopPlanEditor({ uuid, initialPlan, initialLesson, isTablet }: PlanE
           }),
         });
         const json = await res.json();
-        if (json.data) { setPlan(json.data as LessonPlan); setSaveStatus('saved'); }
-      } catch { setSaveStatus('idle'); }
+        if (res.ok && json.data) { setPlan(json.data as LessonPlan); }
+      } catch { /* Supabase unavailable — sessionStorage already up to date */ }
+      setSaveStatus('saved');
     }, 2000);
   }, []);
 
