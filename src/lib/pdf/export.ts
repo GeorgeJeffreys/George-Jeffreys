@@ -29,25 +29,29 @@ export async function exportLessonZip(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const toDoc = (el: unknown) => el as Parameters<typeof pdf>[0];
 
-  const [planBlob, wsBlob] = await Promise.all([
-    pdf(toDoc(createElement(LessonPlanPDF, { plan, lesson, date: today }))).toBlob(),
-    pdf(toDoc(createElement(WorksheetPDF,  { plan, lesson, date: today }))).toBlob(),
-  ]);
+  try {
+    const [planBlob, wsBlob] = await Promise.all([
+      pdf(toDoc(createElement(LessonPlanPDF, { plan, lesson, date: today }))).toBlob(),
+      pdf(toDoc(createElement(WorksheetPDF,  { plan, lesson, date: today }))).toBlob(),
+    ]);
 
-  const zip = new JSZip();
-  const slug = (lesson?.id ?? plan.lesson_id).replace(/\./g, '-');
-  zip.file(`alsama-lesson-plan-${slug}.pdf`,  planBlob);
-  zip.file(`alsama-worksheet-${slug}.pdf`, wsBlob);
+    const zip = new JSZip();
+    const slug = (lesson?.id ?? plan.lesson_id).replace(/\./g, '-');
+    zip.file(`alsama-lesson-plan-${slug}.pdf`,  planBlob);
+    zip.file(`alsama-worksheet-${slug}.pdf`, wsBlob);
 
-  const zipBlob = await zip.generateAsync({ type: 'blob' });
+    const zipBlob = await zip.generateAsync({ type: 'blob' });
 
-  // Trigger browser download.
-  const url = URL.createObjectURL(zipBlob);
-  const anchor = document.createElement('a');
-  anchor.href = url;
-  anchor.download = `alsama-${slug}.zip`;
-  document.body.appendChild(anchor);
-  anchor.click();
-  document.body.removeChild(anchor);
-  URL.revokeObjectURL(url);
+    const url = URL.createObjectURL(zipBlob);
+    const anchor = document.createElement('a');
+    anchor.href = url;
+    anchor.download = `alsama-${slug}.zip`;
+    document.body.appendChild(anchor);
+    anchor.click();
+    document.body.removeChild(anchor);
+    URL.revokeObjectURL(url);
+  } catch (err) {
+    console.error('[exportLessonZip]', err);
+    throw new Error(err instanceof Error ? err.message : 'Failed to generate PDF export.');
+  }
 }

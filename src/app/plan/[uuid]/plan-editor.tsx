@@ -65,6 +65,7 @@ function DesktopPlanEditor({ uuid, initialPlan, initialLesson, isTablet }: PlanE
   const [draggingCardId, setDraggingCardId] = useState<string | null>(null);
   const [dropTarget, setDropTarget] = useState<number | null>(null);
   const [exporting, setExporting] = useState(false);
+  const [exportError, setExportError] = useState<string | null>(null);
   // Fix 5: resize + collapse
   const [rightWidth, setRightWidth] = useState(DEFAULT_RIGHT_WIDTH);
   const [panelCollapsed, setPanelCollapsed] = useState(false);
@@ -144,10 +145,15 @@ function DesktopPlanEditor({ uuid, initialPlan, initialLesson, isTablet }: PlanE
   async function handleExport() {
     if (!plan || exporting) return;
     setExporting(true);
+    setExportError(null);
     try {
       const { exportLessonZip } = await import('@/lib/pdf/export');
       await exportLessonZip(plan, lesson);
-    } finally { setExporting(false); }
+    } catch (err) {
+      setExportError(err instanceof Error ? err.message : 'Export failed. Check console for details.');
+    } finally {
+      setExporting(false);
+    }
   }
 
   // ── Fix 5: resize handle ──────────────────────────────────────────────────
@@ -282,6 +288,19 @@ function DesktopPlanEditor({ uuid, initialPlan, initialLesson, isTablet }: PlanE
             {/* Content */}
             {activeView === 'plan' ? (
               <div style={{ flex: 1, overflow: 'auto', padding: '20px 24px 32px', display: 'flex', flexDirection: 'column', gap: 16 }}>
+                {exportError && (
+                  <div style={{
+                    display: 'flex', alignItems: 'center', gap: 10, padding: '10px 14px',
+                    background: '#FEF2F2', border: '1px solid #FECACA', borderRadius: 8,
+                    fontFamily: SANS, fontSize: 13, color: '#991B1B',
+                  }}>
+                    <Icon name="x" size={14} color="#EF4444" />
+                    <span style={{ flex: 1 }}>Export failed: {exportError}</span>
+                    <button onClick={() => setExportError(null)} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
+                      <Icon name="x" size={13} color="#991B1B" />
+                    </button>
+                  </div>
+                )}
                 {plan ? (
                   <>
                     <MetaHeader lesson={lesson} />

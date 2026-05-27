@@ -95,7 +95,7 @@ export function LessonSelector({ onClose }: LessonSelectorProps) {
       onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
     >
       <div style={{
-        width: 820, maxHeight: '86vh',
+        width: 820, maxWidth: 'calc(100vw - 32px)', maxHeight: '86vh',
         background: C.surface,
         border: `1px solid ${C.border}`,
         borderRadius: 16,

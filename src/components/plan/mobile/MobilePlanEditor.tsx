@@ -42,6 +42,7 @@ export function MobilePlanEditor({ uuid, initialPlan, initialLesson }: MobilePla
   const [showSelector, setShowSelector] = useState(uuid === 'new');
   const [saveStatus, setSaveStatus] = useState<'saved' | 'saving' | 'idle'>('idle');
   const [exporting, setExporting] = useState(false);
+  const [exportError, setExportError] = useState<string | null>(null);
 
   const saveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -100,10 +101,15 @@ export function MobilePlanEditor({ uuid, initialPlan, initialLesson }: MobilePla
   async function handleExport() {
     if (!plan || exporting) return;
     setExporting(true);
+    setExportError(null);
     try {
       const { exportLessonZip } = await import('@/lib/pdf/export');
       await exportLessonZip(plan, lesson);
-    } finally { setExporting(false); }
+    } catch (err) {
+      setExportError(err instanceof Error ? err.message : 'Export failed.');
+    } finally {
+      setExporting(false);
+    }
   }
 
   const sectionName = sections[focusedSection]?.title ?? 'Section';
@@ -139,6 +145,18 @@ export function MobilePlanEditor({ uuid, initialPlan, initialLesson }: MobilePla
         {/* Plan tab */}
         {mobileTab === 'plan' && (
           <>
+            {exportError && (
+              <div style={{
+                display: 'flex', alignItems: 'center', gap: 8, margin: '8px 12px 0',
+                padding: '10px 12px', background: '#FEF2F2', border: '1px solid #FECACA',
+                borderRadius: 8, fontFamily: SANS, fontSize: 12, color: '#991B1B',
+              }}>
+                <span style={{ flex: 1 }}>Export failed: {exportError}</span>
+                <button onClick={() => setExportError(null)} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
+                  <Icon name="x" size={12} color="#991B1B" />
+                </button>
+              </div>
+            )}
             {/* Collapsed meta banner */}
             <button
               onClick={() => setMetaOpen(true)}

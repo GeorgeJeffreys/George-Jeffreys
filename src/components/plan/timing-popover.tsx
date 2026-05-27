@@ -27,18 +27,27 @@ export function TimingPopover({ sections, onUpdate, onClose, anchorRect }: Timin
     return () => document.removeEventListener('mousedown', handleClick);
   }, [onClose]);
 
-  const top = anchorRect ? anchorRect.bottom + 8 : 200;
-  const left = anchorRect ? Math.max(8, anchorRect.left - 180) : 100;
+  const POPOVER_W = 320;
+  const vw = typeof window !== 'undefined' ? window.innerWidth : 1200;
+  const vh = typeof window !== 'undefined' ? window.innerHeight : 800;
+  const rawTop = anchorRect ? anchorRect.bottom + 8 : 200;
+  const rawLeft = anchorRect ? anchorRect.left - 180 : 100;
+  const left = Math.min(Math.max(8, rawLeft), vw - POPOVER_W - 8);
+  const maxH = vh - rawTop - 16;
+  const top = maxH < 200 && anchorRect
+    ? Math.max(8, anchorRect.top - Math.min(480, vh - 32) - 8)
+    : rawTop;
 
   return (
     <div
       ref={ref}
       style={{
         position: 'fixed', top, left, zIndex: 200,
-        width: 320, background: C.surface,
+        width: POPOVER_W, background: C.surface,
         border: `1px solid ${C.border}`, borderRadius: 12,
         boxShadow: '0 8px 24px rgba(56,30,30,0.12), 0 2px 6px rgba(56,30,30,0.06)',
         padding: '14px 16px',
+        maxHeight: vh - top - 16, overflowY: 'auto',
       }}
     >
       {/* Header */}
