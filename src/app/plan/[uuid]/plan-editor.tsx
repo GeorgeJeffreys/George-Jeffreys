@@ -115,7 +115,9 @@ function DesktopPlanEditor({ uuid, initialPlan, initialLesson, isTablet }: PlanE
 
   // Sync when parent PlanEditor resolves plan/lesson after sessionStorage hydration
   useEffect(() => { if (initialPlan && !plan) setPlan(initialPlan); }, [initialPlan]);
-  useEffect(() => { if (initialLesson && !lesson) setLesson(initialLesson); }, [initialLesson]);
+  useEffect(() => {
+    if (initialLesson) setLesson(initialLesson);
+  }, [initialLesson]);
 
   const sections: LessonSection[] = plan?.sections?.length === 6
     ? plan.sections.map((s, i) => ({ ...s, title: s.title || SECTION_CONFIG[i].title }))
