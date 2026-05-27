@@ -118,6 +118,141 @@ export function getLessonsByYear(year: number | string): CurriculumLesson[] {
   return [...lessons].sort(byWeekThenPeriod).map(withCleanLOs);
 }
 
+/** Alias for getAllWeeks — returns sorted week numbers for a year. */
+export function getWeeksForYear(year: number | string): number[] {
+  return getAllWeeks(year);
+}
+
+/** Alias for getLessonsByWeek. */
+export function getLessonsForWeek(year: number | string, week: number): CurriculumLesson[] {
+  return getLessonsByWeek(year, week);
+}
+
+/**
+ * Return months (in order) with their week numbers for the given year.
+ * E.g. [{ month: 'February', weeks: [1,2,3,4] }, ...]
+ */
+export function getMonthsWithWeeks(year: number | string): { month: string; weeks: number[] }[] {
+  buildIndexes();
+  const yn = resolveYearNum(year);
+  if (yn === null) return [];
+  const lessons = _byYear!.get(yn) ?? [];
+
+  const monthOrder: string[] = [];
+  const monthWeeks: Map<string, Set<number>> = new Map();
+
+  for (const l of lessons) {
+    if (!l.month || l.week === null) continue;
+    if (!monthWeeks.has(l.month)) {
+      monthWeeks.set(l.month, new Set());
+      monthOrder.push(l.month);
+    }
+    monthWeeks.get(l.month)!.add(l.week);
+  }
+
+  return monthOrder.map(month => ({
+    month,
+    weeks: [...monthWeeks.get(month)!].sort((a, b) => a - b),
+  }));
+}
+
+/**
+ * Return unique themes for a year with lesson counts, sorted by count desc.
+ */
+export function getThemesForYear(year: number | string): { theme: string; count: number }[] {
+  buildIndexes();
+  const yn = resolveYearNum(year);
+  if (yn === null) return [];
+  const lessons = _byYear!.get(yn) ?? [];
+
+  const counts = new Map<string, number>();
+  for (const l of lessons) {
+    if (!l.theme) continue;
+    counts.set(l.theme, (counts.get(l.theme) ?? 0) + 1);
+  }
+  return [...counts.entries()]
+    .map(([theme, count]) => ({ theme, count }))
+    .sort((a, b) => b.count - a.count);
+}
+
+/** Return all lessons for a given year+theme. */
+export function getLessonsByTheme(year: number | string, theme: string): CurriculumLesson[] {
+  buildIndexes();
+  const yn = resolveYearNum(year);
+  if (yn === null) return [];
+  const lessons = _byYear!.get(yn) ?? [];
+  return lessons.filter(l => l.theme === theme).sort(byWeekThenPeriod).map(withCleanLOs);
+}
+
+/**
+ * Return skill (linguistic skill) breakdown for a year.
+ * skillKey is a normalised key: 'read'|'write'|'listen'|'speak'|'basic'.
+ */
+export function getSkillBreakdown(year: number | string): { skill: string; skillKey: string; count: number; pct: number }[] {
+  buildIndexes();
+  const yn = resolveYearNum(year);
+  if (yn === null) return [];
+  const lessons = (_byYear!.get(yn) ?? []).filter(l => l.linguisticSkill && l.linguisticSkill.length > 1);
+  const total = lessons.length || 1;
+
+  const counts = new Map<string, number>();
+  for (const l of lessons) {
+    counts.set(l.linguisticSkill, (counts.get(l.linguisticSkill) ?? 0) + 1);
+  }
+  return [...counts.entries()]
+    .map(([skill, count]) => ({ skill, skillKey: skillToKey(skill), count, pct: Math.round((count / total) * 100) }))
+    .sort((a, b) => b.count - a.count);
+}
+
+/**
+ * Return skill LOs (skillLORef → skillLO text) with lesson counts, sorted by ref.
+ */
+export function getSkillLOs(year: number | string): { ref: string; lo: string; skill: string; count: number }[] {
+  buildIndexes();
+  const yn = resolveYearNum(year);
+  if (yn === null) return [];
+  const lessons = _byYear!.get(yn) ?? [];
+
+  const map = new Map<string, { lo: string; skill: string; count: number }>();
+  for (const l of lessons) {
+    if (!l.skillLORef) continue;
+    if (!map.has(l.skillLORef)) {
+      map.set(l.skillLORef, { lo: cleanLO(l.skillLO), skill: l.linguisticSkill, count: 0 });
+    }
+    map.get(l.skillLORef)!.count++;
+  }
+  return [...map.entries()]
+    .map(([ref, v]) => ({ ref, ...v }))
+    .sort((a, b) => a.ref.localeCompare(b.ref, undefined, { numeric: true }));
+}
+
+/**
+ * Return knowledge LOs under a given skillLORef, with lesson counts and week lists.
+ */
+export function getKnowledgeLOsForSkill(
+  year: number | string,
+  skillRef: string,
+): { ref: string; lo: string; count: number; weeks: number[] }[] {
+  buildIndexes();
+  const yn = resolveYearNum(year);
+  if (yn === null) return [];
+  const lessons = (_byYear!.get(yn) ?? []).filter(l => l.skillLORef === skillRef);
+
+  const map = new Map<string, { lo: string; weeks: Set<number>; count: number }>();
+  for (const l of lessons) {
+    if (!l.knowledgeLORef) continue;
+    if (!map.has(l.knowledgeLORef)) {
+      map.set(l.knowledgeLORef, { lo: cleanLO(l.knowledgeLO), weeks: new Set(), count: 0 });
+    }
+    const entry = map.get(l.knowledgeLORef)!;
+    entry.count++;
+    if (l.week !== null) entry.weeks.add(l.week);
+  }
+  return [...map.entries()]
+    .map(([ref, v]) => ({ ref, lo: v.lo, count: v.count, weeks: [...v.weeks].sort((a, b) => a - b) }))
+    .sort((a, b) => a.ref.localeCompare(b.ref, undefined, { numeric: true }));
+}
+
 // ── Internal helpers ──────────────────────────────────────────────────────────
 
 function resolveYearNum(year: number | string): number | null {
@@ -133,4 +268,13 @@ function byPeriod(a: CurriculumLesson, b: CurriculumLesson): number {
 function byWeekThenPeriod(a: CurriculumLesson, b: CurriculumLesson): number {
   const wDiff = (a.week ?? 0) - (b.week ?? 0);
   return wDiff !== 0 ? wDiff : byPeriod(a, b);
+}
+
+function skillToKey(skill: string): string {
+  const s = skill.toLowerCase();
+  if (s.includes('read')) return 'read';
+  if (s.includes('writ')) return 'write';
+  if (s.includes('listen')) return 'listen';
+  if (s.includes('speak')) return 'speak';
+  return 'basic';
 }

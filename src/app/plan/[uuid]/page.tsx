@@ -10,10 +10,13 @@ function isUUID(value: string): boolean {
 
 export default async function PlanPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ uuid: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
-  const { uuid } = await params;
+  const [{ uuid }, sp] = await Promise.all([params, searchParams]);
+  const lessonIdParam = typeof sp.lessonId === 'string' ? sp.lessonId : null;
 
   let initialPlan: LessonPlan | null = null;
   let initialLesson: CurriculumLesson | null = null;
@@ -35,8 +38,10 @@ export default async function PlanPage({
     }
   }
 
-  if (initialPlan?.lesson_id) {
-    const raw = getLessonById(initialPlan.lesson_id);
+  // Pre-load lesson from ?lessonId= (navigating from Curriculum Explorer)
+  const lessonId = initialPlan?.lesson_id ?? lessonIdParam;
+  if (lessonId) {
+    const raw = getLessonById(lessonId);
     initialLesson = raw ? (Array.isArray(raw) ? raw[0] : raw) : null;
   }
 

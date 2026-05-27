@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { C, SANS, SCRIPT } from '@/lib/tokens';
 import { Icon } from '@/components/icon';
 import type { CurriculumLesson } from '@/types/curriculum';
@@ -53,6 +54,18 @@ export function TopBar({ lesson, saveStatus, onOpenSelector, onExport, exporting
       <AlsamaMark />
       <div style={{ width: 1, height: 24, background: C.border, margin: '0 4px' }} />
       <span style={{ fontFamily: SANS, fontSize: 12, fontWeight: 500, color: C.faint }}>Lesson Planner</span>
+      <Link href="/curriculum" style={{
+        fontFamily: SANS, fontSize: 12, fontWeight: 500,
+        color: C.faint, textDecoration: 'none',
+        padding: '3px 8px', borderRadius: 6,
+        border: `1px solid transparent`,
+        transition: 'color 0.12s',
+      }}
+        onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = C.pink; (e.currentTarget as HTMLAnchorElement).style.borderColor = C.pinkBorder; }}
+        onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = C.faint; (e.currentTarget as HTMLAnchorElement).style.borderColor = 'transparent'; }}
+      >
+        Curriculum
+      </Link>
 
       <div style={{ width: 16 }} />
 
