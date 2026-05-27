@@ -43,36 +43,39 @@ const COLLAPSED_WIDTH = 48;
 export function PlanEditor({ uuid, initialPlan, initialLesson }: PlanEditorProps) {
   const { isPhone, isTablet } = useBreakpoint();
 
-  // Hold resolved plan/lesson HERE so loading survives the isPhone desktop→mobile switch.
-  // useBreakpoint starts with isPhone=false (SSR), mounts DesktopPlanEditor, then flips to
-  // true on mobile — if loading effects live inside DesktopPlanEditor they get thrown away.
   const [resolvedPlan, setResolvedPlan] = useState<LessonPlan | null>(initialPlan);
   const [resolvedLesson, setResolvedLesson] = useState<CurriculumLesson | null>(initialLesson);
 
-  // Hydrate from sessionStorage when Supabase was unavailable during plan creation
+  // Effect 1: hydrate plan from sessionStorage if initialPlan is null
   useEffect(() => {
-    if (initialPlan) return;
-    const raw = sessionStorage.getItem(`plan_local_${uuid}`);
-    if (!raw) return;
-    try {
-      const draft = JSON.parse(raw) as {
-        id: string; lesson_id: string;
-        lesson: CurriculumLesson; sections: LessonSection[]; worksheet: null;
-      };
-      setResolvedPlan({
-        id: draft.id, lesson_id: draft.lesson_id,
-        sections: draft.sections, worksheet: draft.worksheet,
-        created_at: new Date().toISOString(), updated_at: new Date().toISOString(),
-      });
-      if (draft.lesson) setResolvedLesson(draft.lesson);
-    } catch { /* ignore parse errors */ }
-  }, [uuid, initialPlan]);
+    if (!resolvedPlan) {
+      const stored = sessionStorage.getItem(`plan_local_${uuid}`);
+      if (stored) {
+        try {
+          const draft = JSON.parse(stored);
+          setResolvedPlan({
+            id: draft.id, lesson_id: draft.lesson_id,
+            sections: draft.sections, worksheet: draft.worksheet ?? null,
+            created_at: draft.created_at ?? new Date().toISOString(),
+            updated_at: draft.updated_at ?? new Date().toISOString(),
+          });
+        } catch { /* ignore */ }
+      }
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  // Safety net: fetch lesson when plan has a lesson_id but lesson is still null
+  // Effect 2: fetch lesson from curriculum.json if lesson is null but plan has a lesson_id
   useEffect(() => {
-    if (resolvedLesson || !resolvedPlan?.lesson_id) return;
-    fetchLessonById(resolvedPlan.lesson_id).then((l) => { if (l) setResolvedLesson(l); });
-  }, [resolvedPlan?.lesson_id, resolvedLesson]);
+    if (resolvedPlan?.lesson_id && !resolvedLesson) {
+      fetchLessonById(resolvedPlan.lesson_id).then((result) => {
+        if (result) {
+          console.log('PlanEditor resolved lesson:', result);
+          setResolvedLesson(result);
+        }
+      });
+    }
+  }, [resolvedPlan?.lesson_id]);
 
   if (isPhone) {
     return (

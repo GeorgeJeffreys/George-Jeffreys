@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback, useRef } from 'react';
+import { useState, useCallback, useRef, useEffect } from 'react';
 import { C, SANS, SECTION_CONFIG } from '@/lib/tokens';
 import { Icon } from '@/components/icon';
 import { MobileTopBar } from './MobileTopBar';
@@ -45,6 +45,10 @@ export function MobilePlanEditor({ uuid, initialPlan, initialLesson }: MobilePla
   const [exportError, setExportError] = useState<string | null>(null);
 
   const saveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Sync when parent PlanEditor resolves plan/lesson after sessionStorage hydration or lesson fetch
+  useEffect(() => { if (initialPlan && !plan) setPlan(initialPlan); }, [initialPlan]);
+  useEffect(() => { if (initialLesson && !lesson) setLesson(initialLesson); }, [initialLesson]);
 
   const sections: LessonSection[] = plan?.sections?.length === 6
     ? plan.sections.map((s, i) => ({ ...s, title: s.title || SECTION_CONFIG[i].title }))
