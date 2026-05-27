@@ -45,8 +45,10 @@ export function PlanEditor({ uuid, initialPlan, initialLesson }: PlanEditorProps
 
   const { isPhone, isTablet } = useBreakpoint();
 
+  const lessonCache = useRef<CurriculumLesson | null>(null);
+
   const [resolvedPlan, setResolvedPlan] = useState<LessonPlan | null>(initialPlan);
-  const [resolvedLesson, setResolvedLesson] = useState<CurriculumLesson | null>(initialLesson);
+  const [resolvedLesson, setResolvedLesson] = useState<CurriculumLesson | null>(lessonCache.current ?? initialLesson);
 
   // Effect 1: hydrate plan from sessionStorage if initialPlan is null
   useEffect(() => {
@@ -69,13 +71,15 @@ export function PlanEditor({ uuid, initialPlan, initialLesson }: PlanEditorProps
 
   // Effect 2: fetch lesson from curriculum.json if lesson is null but plan has a lesson_id
   useEffect(() => {
-    console.log('PlanEditor Effect2 fired: lesson_id=', resolvedPlan?.lesson_id, 'resolvedLesson=', resolvedLesson?.id ?? null);
-    if (resolvedPlan?.lesson_id && !resolvedLesson) {
-      fetchLessonById(resolvedPlan.lesson_id).then((result) => {
-        console.log('PlanEditor resolved lesson:', result?.id ?? null);
-        if (result) setResolvedLesson(result);
-      });
-    }
+    console.log('Effect2 fired: lesson_id=', resolvedPlan?.lesson_id, 'resolvedLesson=', resolvedLesson?.id ?? null);
+    if (!resolvedPlan?.lesson_id || resolvedLesson) return;
+    fetchLessonById(resolvedPlan.lesson_id).then((result) => {
+      if (result) {
+        console.log('PlanEditor resolved lesson:', result.id);
+        lessonCache.current = result;
+        setResolvedLesson(result);
+      }
+    });
   }, [resolvedPlan?.lesson_id]);
 
   if (isPhone) {
