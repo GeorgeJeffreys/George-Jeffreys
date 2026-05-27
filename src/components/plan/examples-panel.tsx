@@ -35,7 +35,7 @@ function ExampleCard({ plan, onClick }: { plan: ExamplePlan; onClick: () => void
       style={{
         background: C.surface, border: `1px solid ${C.border}`,
         borderRadius: 12, padding: 12,
-        display: 'flex', flexDirection: 'column', gap: 8,
+        display: 'flex', flexDirection: 'column', gap: 6,
         cursor: 'pointer', transition: 'border-color 0.15s, box-shadow 0.15s',
       }}
       onMouseEnter={(e) => {
@@ -52,19 +52,11 @@ function ExampleCard({ plan, onClick }: { plan: ExamplePlan; onClick: () => void
         <div style={{ flex: 1 }} />
         <span style={{ fontFamily: SANS, fontSize: 10, color: C.faint2 }}>Year {plan.year}</span>
       </div>
-      <div style={{ fontFamily: SANS, fontSize: 12.5, fontWeight: 700, color: C.ink, lineHeight: 1.3 }}>
-        {plan.title}
+      <div style={{ fontFamily: SANS, fontSize: 13, fontWeight: 700, color: C.pink, lineHeight: 1.3 }}>
+        {plan.approach}
       </div>
       <div style={{ fontFamily: SANS, fontSize: 11, color: C.faint, lineHeight: 1.4 }}>
-        {plan.description.length > 70 ? plan.description.slice(0, 70) + '…' : plan.description}
-      </div>
-      <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
-        <span style={{
-          height: 18, padding: '0 6px',
-          fontFamily: SANS, fontSize: 10, color: C.faint,
-          background: C.cream, border: `1px solid ${C.borderSoft}`, borderRadius: 999,
-          display: 'inline-flex', alignItems: 'center',
-        }}>{plan.theme}</span>
+        {plan.description.length > 65 ? plan.description.slice(0, 65) + '…' : plan.description}
       </div>
     </div>
   );
@@ -107,13 +99,13 @@ function ExamplePreviewModal({ plan, onClose, onLoad }: {
         }}>
           <div style={{ flex: 1 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 2 }}>
-              <span style={{ fontFamily: SANS, fontSize: 15, fontWeight: 700, color: C.ink }}>
-                {plan.title}
+              <span style={{ fontFamily: SANS, fontSize: 15, fontWeight: 700, color: C.pink }}>
+                {plan.approach}
               </span>
               <LevelBadge level={plan.level} />
             </div>
             <span style={{ fontFamily: SANS, fontSize: 12, color: C.faint }}>
-              Year {plan.year} · {plan.theme}
+              {plan.title}
             </span>
           </div>
           <button
@@ -217,11 +209,14 @@ export function ExamplesPanel({ activeTab, onTabChange, onLoadPlan }: ExamplesPa
   const [query, setQuery] = useState('');
 
   const filtered = query.trim()
-    ? EXAMPLE_PLANS.filter((p) =>
-        p.title.toLowerCase().includes(query.toLowerCase()) ||
-        p.theme.toLowerCase().includes(query.toLowerCase()) ||
-        p.level.toLowerCase().includes(query.toLowerCase())
-      )
+    ? EXAMPLE_PLANS.filter((p) => {
+        const q = query.toLowerCase();
+        return p.approach.toLowerCase().includes(q) ||
+          p.title.toLowerCase().includes(q) ||
+          p.theme.toLowerCase().includes(q) ||
+          p.level.toLowerCase().includes(q) ||
+          p.description.toLowerCase().includes(q);
+      })
     : EXAMPLE_PLANS;
 
   return (
@@ -248,7 +243,7 @@ export function ExamplesPanel({ activeTab, onTabChange, onLoadPlan }: ExamplesPa
           display: 'flex', alignItems: 'center', gap: 6, marginBottom: -6,
         }}>
           <span style={{ fontFamily: SANS, fontSize: 11, fontWeight: 600, color: C.faint, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
-            {filtered.length} plans
+            {filtered.length} approach{filtered.length !== 1 ? 'es' : ''}
           </span>
         </div>
 

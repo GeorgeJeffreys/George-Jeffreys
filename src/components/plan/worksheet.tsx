@@ -331,11 +331,9 @@ export function WorksheetView({ lesson, initialContent, onSave }: WorksheetProps
 
   return (
     <div style={{
-      flex: 1, overflow: 'auto',
+      flex: 1, overflow: 'auto', display: 'flex', flexDirection: 'column',
       backgroundColor: C.creamDeep,
       backgroundImage: 'repeating-linear-gradient(45deg, rgba(0,0,0,0.018) 0 1px, transparent 1px 14px)',
-      display: 'flex', justifyContent: 'center', alignItems: 'flex-start',
-      padding: '28px 0 40px',
     }}>
       <input
         ref={fileInputRef}
@@ -345,10 +343,19 @@ export function WorksheetView({ lesson, initialContent, onSave }: WorksheetProps
         onChange={onFileChange}
       />
 
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14 }}>
-        {/* Floating toolbar */}
-        {editor && <Toolbar editor={editor} onImageUpload={handleImageUpload} />}
+      {/* Sticky toolbar */}
+      {editor && (
+        <div style={{
+          position: 'sticky', top: 0, zIndex: 10,
+          background: C.surface, borderBottom: `1px solid ${C.border}`,
+          padding: '8px 16px', display: 'flex', justifyContent: 'center',
+        }}>
+          <Toolbar editor={editor} onImageUpload={handleImageUpload} />
+        </div>
+      )}
 
+      {/* Scrollable content */}
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-start', padding: '28px 0 40px' }}>
         {/* A4 Paper */}
         <div style={{
           width: 560, minHeight: 800,

@@ -125,6 +125,34 @@ export function MetaHeader({ lesson }: MetaHeaderProps) {
           </div>
         </div>
       </div>
+
+      {/* LO hierarchy */}
+      {(lesson.skillLO || lesson.knowledgeLO) && (
+        <div style={{
+          marginTop: 14, paddingTop: 14,
+          borderTop: `1px solid ${C.border}`,
+          display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 12,
+        }}>
+          {[
+            { label: 'Monthly LO', value: lesson.skillLO },
+            { label: 'Weekly LO', value: lesson.knowledgeLO },
+            { label: 'Daily LO', value: lesson.dailyLO },
+          ].map(({ label, value }) => (
+            <div key={label} style={{
+              background: C.pinkSoft, border: `1px solid ${C.pinkBorder}`,
+              borderRadius: 8, padding: '8px 10px',
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 5, marginBottom: 4 }}>
+                <Icon name="lock" size={9} color={C.pink} />
+                <Label style={{ color: C.pink, margin: 0 }}>{label}</Label>
+              </div>
+              <span style={{ fontFamily: SANS, fontSize: 12, color: C.ink, lineHeight: 1.4, display: 'block' }}>
+                {value || '—'}
+              </span>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

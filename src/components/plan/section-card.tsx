@@ -188,98 +188,116 @@ function BulletEditor({ value, color, placeholder, onSave }: {
   );
 }
 
+interface MaterialItem {
+  label: string;
+  url?: string;
+  fileType?: 'pdf' | 'image' | 'doc';
+}
+
+function getFileType(name: string, mime: string): 'pdf' | 'image' | 'doc' {
+  if (mime === 'application/pdf' || name.toLowerCase().endsWith('.pdf')) return 'pdf';
+  if (mime.startsWith('image/')) return 'image';
+  return 'doc';
+}
+
 function MaterialEditor({ value, onSave }: {
   value: string;
   onSave: (v: string) => void;
 }) {
-  const [materials, setMaterials] = useState<string[]>(() =>
-    value ? value.split(',').map((m) => m.trim()).filter(Boolean) : []
+  const [items, setItems] = useState<MaterialItem[]>(() =>
+    value ? value.split(',').map((m) => ({ label: m.trim() })).filter((m) => m.label) : []
   );
-  const [adding, setAdding] = useState(false);
-  const [draft, setDraft] = useState('');
-  const addRef = useRef<HTMLInputElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const lastExternal = useRef(value);
 
   if (lastExternal.current !== value) {
     lastExternal.current = value;
-    setMaterials(value ? value.split(',').map((m) => m.trim()).filter(Boolean) : []);
+    setItems(value ? value.split(',').map((m) => ({ label: m.trim() })).filter((m) => m.label) : []);
   }
 
-  useEffect(() => {
-    if (adding) addRef.current?.focus();
-  }, [adding]);
+  function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
+    const additions: MaterialItem[] = Array.from(files).map((file) => ({
+      label: file.name,
+      url: URL.createObjectURL(file),
+      fileType: getFileType(file.name, file.type),
+    }));
+    const newItems = [...items, ...additions];
+    setItems(newItems);
+    const str = newItems.map((m) => m.label).join(', ');
+    lastExternal.current = str;
+    onSave(str);
+    e.target.value = '';
+  }
 
   function remove(i: number) {
-    const next = materials.filter((_, j) => j !== i);
-    setMaterials(next);
-    lastExternal.current = next.join(', ');
-    onSave(next.join(', '));
-  }
-
-  function confirm() {
-    const trimmed = draft.trim();
-    const next = trimmed ? [...materials, trimmed] : materials;
-    if (trimmed) {
-      setMaterials(next);
-      lastExternal.current = next.join(', ');
-      onSave(next.join(', '));
-    }
-    setAdding(false);
-    setDraft('');
+    const item = items[i];
+    if (item.url) URL.revokeObjectURL(item.url);
+    const next = items.filter((_, j) => j !== i);
+    setItems(next);
+    const str = next.map((m) => m.label).join(', ');
+    lastExternal.current = str;
+    onSave(str);
   }
 
   return (
     <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'center' }}>
-      {materials.map((m, i) => (
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".pdf,.doc,.docx,.png,.jpg,.jpeg,.gif,.webp"
+        multiple
+        onChange={handleFileChange}
+        style={{ display: 'none' }}
+      />
+      {items.map((item, i) => (
         <span key={i} style={{
           display: 'inline-flex', alignItems: 'center', gap: 3,
-          height: 22, padding: '0 8px 0 9px',
+          height: 22, padding: '0 8px 0 7px',
           fontFamily: SANS, fontSize: 11, fontWeight: 500,
           color: C.ink, background: C.cream,
           border: `1px solid ${C.borderSoft}`, borderRadius: 999,
+          maxWidth: 220,
         }}>
-          {m}
+          {item.url ? (
+            <a href={item.url} target="_blank" rel="noopener noreferrer" style={{
+              display: 'inline-flex', alignItems: 'center', gap: 4,
+              color: C.ink, textDecoration: 'none', flex: 1, minWidth: 0,
+            }}>
+              <Icon name={item.fileType === 'image' ? 'image' : 'paperclip'} size={11} color={C.faint} />
+              <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                {item.label}
+              </span>
+            </a>
+          ) : (
+            <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+              {item.label}
+            </span>
+          )}
           <button
             onClick={() => remove(i)}
             style={{
               display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
               background: 'none', border: 'none', cursor: 'pointer',
-              padding: '0 0 0 2px', color: C.faint, fontSize: 14, lineHeight: 1,
+              padding: '0 0 0 3px', color: C.faint, fontSize: 14, lineHeight: 1, flexShrink: 0,
             }}
           >×</button>
         </span>
       ))}
-      {adding ? (
-        <input
-          ref={addRef}
-          value={draft}
-          onChange={(e) => setDraft(e.target.value)}
-          onBlur={confirm}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter') confirm();
-            if (e.key === 'Escape') { setAdding(false); setDraft(''); }
-          }}
-          placeholder="Material…"
-          style={{
-            height: 22, padding: '0 8px',
-            fontFamily: SANS, fontSize: 11, color: C.ink,
-            background: `${C.pinkSoft}88`, border: `1px solid ${C.pink}`,
-            borderRadius: 999, outline: 'none', width: 130,
-          }}
-        />
-      ) : (
-        <button
-          onClick={() => setAdding(true)}
-          style={{
-            display: 'inline-flex', alignItems: 'center', gap: 4,
-            height: 22, padding: '0 8px',
-            fontFamily: SANS, fontSize: 11, fontWeight: 500,
-            color: C.faint, background: 'transparent',
-            border: `1px dashed ${C.border}`, borderRadius: 999,
-            cursor: 'pointer',
-          }}
-        >+ Add</button>
-      )}
+      <button
+        onClick={() => fileInputRef.current?.click()}
+        style={{
+          display: 'inline-flex', alignItems: 'center', gap: 4,
+          height: 22, padding: '0 8px',
+          fontFamily: SANS, fontSize: 11, fontWeight: 500,
+          color: C.faint, background: 'transparent',
+          border: `1px dashed ${C.border}`, borderRadius: 999,
+          cursor: 'pointer',
+        }}
+      >
+        <Icon name="plus" size={11} color={C.faint} />Add file
+      </button>
     </div>
   );
 }

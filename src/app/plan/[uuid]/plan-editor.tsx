@@ -470,17 +470,20 @@ function DesktopPlanEditor({ uuid, initialPlan, initialLesson, isTablet }: PlanE
                   onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.background = `${C.pink}28`; }}
                   onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.background = 'transparent'; }}
                 />
-                {/* Collapse button */}
+                {/* Fix 7: Collapse button — left edge of panel, obvious chevron */}
                 <button
-                  onClick={() => setPanelCollapsed(true)} title="Collapse"
+                  onClick={() => setPanelCollapsed(true)} title="Collapse panel"
                   style={{
-                    position: 'absolute', top: 10, right: 10, zIndex: 10,
+                    position: 'absolute', left: -16, top: '50%', transform: 'translateY(-50%)',
+                    zIndex: 10,
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    width: 22, height: 22, borderRadius: 6,
-                    background: C.cream, border: `1px solid ${C.border}`, cursor: 'pointer',
+                    width: 32, height: 32, borderRadius: 999,
+                    background: C.surface, border: `1px solid ${C.border}`,
+                    boxShadow: '-2px 0 8px rgba(56,30,30,0.08)',
+                    cursor: 'pointer', flexShrink: 0,
                   }}
                 >
-                  <Icon name="chevronRight" size={13} color={C.faint2} />
+                  <Icon name="chevronRight" size={15} color={C.faint} />
                 </button>
 
                 {rightTab === 'library' ? (
