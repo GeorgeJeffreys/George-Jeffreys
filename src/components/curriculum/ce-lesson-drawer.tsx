@@ -3,17 +3,9 @@
 import { useRouter } from 'next/navigation';
 import { C, SANS } from '@/lib/tokens';
 import { Icon } from '@/components/icon';
-import { SKILL_COLOR } from './ce-calendar';
+import { SKILL_COLOR, skillKey } from './ce-shell';
 import type { CurriculumLesson } from '@/types/curriculum';
 
-function skillKey(skill: string): string {
-  const s = (skill ?? '').toLowerCase();
-  if (s.includes('read')) return 'read';
-  if (s.includes('writ')) return 'write';
-  if (s.includes('listen')) return 'listen';
-  if (s.includes('speak')) return 'speak';
-  return 'basic';
-}
 
 interface CeLessonDrawerProps {
   lesson: CurriculumLesson | null;

@@ -2,19 +2,18 @@
 
 import { useState, useEffect, useMemo } from 'react';
 import {
-  CeShell, CeTopBar, CeModeTabs, CeLeftPanel, CeRightSidebar,
+  CeShell, CeTopBar, CeModeTabs, CeRightSidebar,
   type CeMode,
 } from '@/components/curriculum/ce-shell';
-import { CalendarLeft, WeekGrid, MonthOverview } from '@/components/curriculum/ce-calendar';
+import { CalendarLeft, MonthView, WeekView, YearOverview } from '@/components/curriculum/ce-calendar';
 import {
-  JourneyLeft, JourneyCascade,
+  JourneyLeft, JourneyCascadeCollapsed, JourneyCascadeExpanded,
   type SkillLO, type KnowledgeLO,
 } from '@/components/curriculum/ce-journey';
 import {
-  ContentLeft, ContentGrid,
+  ContentLeft, ContentCascadeCollapsed, ContentCascadeExpanded,
   type SkillData, type ThemeData,
 } from '@/components/curriculum/ce-content';
-import { CeSidebar } from '@/components/curriculum/ce-sidebar';
 import { CeLessonDrawer } from '@/components/curriculum/ce-lesson-drawer';
 import type { CurriculumLesson } from '@/types/curriculum';
 import type { CurriculumYearData } from '@/lib/curriculum-actions';
@@ -22,9 +21,8 @@ import {
   fetchCurriculumYearData,
   fetchLessonsForWeek,
   fetchKnowledgeLOs,
-  fetchLessonById,
 } from '@/lib/curriculum-actions';
-import { getLessonsByYear } from '@/lib/curriculumUtils';
+import { getLessonsByYear, getLessonsByTheme } from '@/lib/curriculumUtils';
 
 interface Props {
   initialYear: number;
@@ -32,195 +30,236 @@ interface Props {
 }
 
 export function CurriculumExplorer({ initialYear, initialYearData }: Props) {
-  const [year, setYear] = useState(initialYear);
-  const [yearData, setYearData] = useState(initialYearData);
-  const [mode, setMode] = useState<CeMode>('calendar');
-  const [search, setSearch] = useState('');
-  const [selectedWeek, setSelectedWeek] = useState<number | null>(null);
+  const [year, setYear]           = useState(initialYear);
+  const [yearData, setYearData]   = useState(initialYearData);
+  const [mode, setMode]           = useState<CeMode>('calendar');
+  const [search, setSearch]       = useState('');
 
-  // Calendar: cache of week → lessons
-  const [weekLessons, setWeekLessons] = useState<Map<number, CurriculumLesson[]>>(new Map());
+  // Calendar state
+  const [selectedMonth, setSelectedMonth] = useState<string | null>(null);
+  const [selectedWeek, setSelectedWeek]   = useState<number | null>(null);
+  const [weekLessons, setWeekLessons]     = useState<Map<number, CurriculumLesson[]>>(new Map());
 
   // Journey state
-  const [expandedSkillRef, setExpandedSkillRef] = useState<string | null>(null);
-  const [focusedSkillRef, setFocusedSkillRef] = useState<string | null>(null);
-  const [focusedKRef, setFocusedKRef] = useState<string | null>(null);
-  const [knowledgeLOsBySkill, setKnowledgeLOsBySkill] = useState<Map<string, KnowledgeLO[]>>(new Map());
+  const [focusedSkillRef, setFocusedSkillRef]     = useState<string | null>(null);
+  const [focusedKRef, setFocusedKRef]             = useState<string | null>(null);
+  const [klosBySkill, setKlosBySkill]             = useState<Map<string, KnowledgeLO[]>>(new Map());
 
   // Content state
-  const [focusedTheme, setFocusedTheme] = useState<string | null>(null);
-  const [focusedContentSkill, setFocusedContentSkill] = useState<string | null>(null);
+  const [focusedSkill, setFocusedSkill]   = useState<string | null>(null);
+  const [focusedTheme, setFocusedTheme]   = useState<string | null>(null);
 
   // Lesson drawer
   const [drawerLesson, setDrawerLesson] = useState<CurriculumLesson | null>(null);
 
-  // All lessons for current year (client-side, cached in module scope)
-  const allYearLessons = useMemo<CurriculumLesson[]>(() => getLessonsByYear(year), [year]);
+  // All lessons for the year (client-side)
+  const allLessons = useMemo(() => getLessonsByYear(year), [year]);
 
-  // Lesson lookup for journey mode (knowledgeLORef → lessons)
-  const lessonsByKRef = useMemo(() => {
-    const m = new Map<string, CurriculumLesson[]>();
-    for (const l of allYearLessons) {
-      if (!l.knowledgeLORef) continue;
-      const arr = m.get(l.knowledgeLORef) ?? [];
-      arr.push(l);
-      m.set(l.knowledgeLORef, arr);
-    }
+  // Lessons for focused KRef (journey daily tier)
+  const kRefLessons = useMemo(() => {
+    if (!focusedKRef) return [];
+    return allLessons.filter(l => l.knowledgeLORef === focusedKRef);
+  }, [focusedKRef, allLessons]);
+
+  // Themes for focused skill (content mode)
+  const themesForSkill = useMemo(() => {
+    if (!focusedSkill) return yearData.themes as ThemeData[];
+    const skillLessons = allLessons.filter(l => l.linguisticSkill === focusedSkill);
+    const counts = new Map<string, number>();
+    skillLessons.forEach(l => { if (l.theme) counts.set(l.theme, (counts.get(l.theme) ?? 0) + 1); });
+    return [...counts.entries()].map(([theme, count]) => ({ theme, count })).sort((a, b) => b.count - a.count);
+  }, [focusedSkill, allLessons, yearData.themes]);
+
+  // Lessons for focused theme (content lesson tier)
+  const themeLessons = useMemo(() => {
+    if (!focusedTheme) return [];
+    const filtered = allLessons.filter(l => l.theme === focusedTheme && (!focusedSkill || l.linguisticSkill === focusedSkill));
+    return filtered;
+  }, [focusedTheme, focusedSkill, allLessons]);
+
+  // Themes-by-skill map for left nav
+  const themesBySkill = useMemo(() => {
+    const m = new Map<string, ThemeData[]>();
+    const skills = [...new Set(allLessons.map(l => l.linguisticSkill).filter(Boolean))];
+    skills.forEach(sk => {
+      const skLessons = allLessons.filter(l => l.linguisticSkill === sk);
+      const counts = new Map<string, number>();
+      skLessons.forEach(l => { if (l.theme) counts.set(l.theme, (counts.get(l.theme) ?? 0) + 1); });
+      m.set(sk, [...counts.entries()].map(([theme, count]) => ({ theme, count })).sort((a, b) => b.count - a.count));
+    });
     return m;
-  }, [allYearLessons]);
+  }, [allLessons]);
 
-  // Reload year data when year changes
+  // Reset on year change
   useEffect(() => {
     if (year === initialYear) return;
     let cancelled = false;
     fetchCurriculumYearData(year).then(data => {
       if (!cancelled) {
         setYearData(data);
-        setSelectedWeek(null);
-        setWeekLessons(new Map());
-        setExpandedSkillRef(null);
-        setFocusedSkillRef(null);
-        setFocusedKRef(null);
-        setKnowledgeLOsBySkill(new Map());
-        setFocusedTheme(null);
-        setFocusedContentSkill(null);
+        setSelectedMonth(null); setSelectedWeek(null); setWeekLessons(new Map());
+        setFocusedSkillRef(null); setFocusedKRef(null); setKlosBySkill(new Map());
+        setFocusedSkill(null); setFocusedTheme(null);
       }
     });
     return () => { cancelled = true; };
   }, [year, initialYear]);
 
-  // Load lessons for selected week
+  // Load week lessons
   useEffect(() => {
-    if (selectedWeek === null) return;
-    if (weekLessons.has(selectedWeek)) return;
+    if (selectedWeek === null || weekLessons.has(selectedWeek)) return;
     fetchLessonsForWeek(year, selectedWeek).then(lessons => {
-      setWeekLessons(prev => {
-        const next = new Map(prev);
-        next.set(selectedWeek, lessons);
-        return next;
-      });
+      setWeekLessons(prev => { const next = new Map(prev); next.set(selectedWeek, lessons); return next; });
     });
   }, [selectedWeek, year, weekLessons]);
 
-  // Load knowledge LOs when a skill ref is expanded
+  // Pre-load all weeks for month overview
   useEffect(() => {
-    if (!expandedSkillRef) return;
-    if (knowledgeLOsBySkill.has(expandedSkillRef)) return;
-    fetchKnowledgeLOs(year, expandedSkillRef).then(klos => {
-      setKnowledgeLOsBySkill(prev => {
-        const next = new Map(prev);
-        next.set(expandedSkillRef, klos);
-        return next;
-      });
+    if (!selectedMonth) return;
+    const monthData = yearData.months.find(m => m.month === selectedMonth);
+    if (!monthData) return;
+    monthData.weeks.forEach(w => {
+      if (!weekLessons.has(w)) {
+        fetchLessonsForWeek(year, w).then(lessons => {
+          setWeekLessons(prev => { const next = new Map(prev); next.set(w, lessons); return next; });
+        });
+      }
     });
-  }, [expandedSkillRef, year, knowledgeLOsBySkill]);
+  }, [selectedMonth, year, yearData.months, weekLessons]);
 
-  // Handlers
-  function handleYearChange(y: number) {
-    setYear(y);
+  // Load KLOs when skill is focused in journey mode
+  useEffect(() => {
+    if (!focusedSkillRef || klosBySkill.has(focusedSkillRef)) return;
+    fetchKnowledgeLOs(year, focusedSkillRef).then(klos => {
+      setKlosBySkill(prev => { const next = new Map(prev); next.set(focusedSkillRef, klos); return next; });
+    });
+  }, [focusedSkillRef, year, klosBySkill]);
+
+  function handleFocusSkill(ref: string | null) {
+    setFocusedSkillRef(ref);
+    setFocusedKRef(null);
   }
 
-  function handleSelectWeek(w: number) {
-    setSelectedWeek(w);
-  }
-
-  function handleLessonClick(lesson: CurriculumLesson) {
-    setDrawerLesson(lesson);
-  }
-
-  // Render mode-specific panels
   function renderLeft() {
     if (mode === 'calendar') {
       return (
         <CalendarLeft
           months={yearData.months}
+          selectedMonth={selectedMonth}
           selectedWeek={selectedWeek}
-          onSelectWeek={handleSelectWeek}
+          onSelectMonth={m => { setSelectedMonth(m); setSelectedWeek(null); }}
+          onSelectWeek={w => setSelectedWeek(w)}
         />
       );
     }
     if (mode === 'journey') {
       return (
         <JourneyLeft
+          year={year}
+          totalLessons={yearData.totalLessons}
           skillLOs={yearData.skillLOs as SkillLO[]}
           focusedSkillRef={focusedSkillRef}
-          onFocusSkill={ref => { setFocusedSkillRef(ref); setFocusedKRef(null); }}
+          expandedSkillRef={focusedSkillRef}
+          focusedKRef={focusedKRef}
+          klosBySkill={klosBySkill}
+          onFocusSkill={handleFocusSkill}
+          onFocusKRef={setFocusedKRef}
         />
       );
     }
-    // content
     return (
       <ContentLeft
-        themes={yearData.themes as ThemeData[]}
-        focusedTheme={focusedTheme}
-        onFocusTheme={setFocusedTheme}
+        year={year}
+        totalLessons={yearData.totalLessons}
         skillBreakdown={yearData.skillBreakdown as SkillData[]}
-        focusedSkill={focusedContentSkill}
-        onFocusSkill={setFocusedContentSkill}
+        themes={yearData.themes as ThemeData[]}
+        focusedSkill={focusedSkill}
+        focusedTheme={focusedTheme}
+        themesBySkill={themesBySkill}
+        onFocusSkill={s => { setFocusedSkill(s); setFocusedTheme(null); }}
+        onFocusTheme={setFocusedTheme}
       />
     );
   }
 
   function renderMain() {
     if (mode === 'calendar') {
-      if (selectedWeek !== null) {
+      if (selectedWeek !== null && selectedMonth) {
+        const month = yearData.months.find(m => m.weeks.includes(selectedWeek))?.month ?? selectedMonth;
         return (
-          <WeekGrid
+          <WeekView
             week={selectedWeek}
+            month={month}
             lessons={weekLessons.get(selectedWeek) ?? []}
-            onLessonClick={handleLessonClick}
+            onBack={() => setSelectedWeek(null)}
+            onLessonClick={setDrawerLesson}
+          />
+        );
+      }
+      if (selectedMonth) {
+        const monthData = yearData.months.find(m => m.month === selectedMonth);
+        return (
+          <MonthView
+            month={selectedMonth}
+            weeks={monthData?.weeks ?? []}
+            weekLessons={weekLessons}
+            onSelectWeek={w => setSelectedWeek(w)}
+          />
+        );
+      }
+      return <YearOverview months={yearData.months} onSelectMonth={m => setSelectedMonth(m)} />;
+    }
+
+    if (mode === 'journey') {
+      if (focusedSkillRef) {
+        return (
+          <JourneyCascadeExpanded
+            skillLOs={yearData.skillLOs as SkillLO[]}
+            klos={klosBySkill.get(focusedSkillRef) ?? []}
+            dailyLessons={kRefLessons}
+            focusedSkillRef={focusedSkillRef}
+            focusedKRef={focusedKRef}
+            totalLessons={yearData.totalLessons}
+            year={year}
+            onFocusSkill={handleFocusSkill}
+            onFocusKRef={setFocusedKRef}
+            onLessonClick={setDrawerLesson}
           />
         );
       }
       return (
-        <MonthOverview
-          months={yearData.months}
-          allLessons={weekLessons}
-          onSelectWeek={w => {
-            handleSelectWeek(w);
-            // Trigger a load for overview — fetch all if not loaded
-            for (const m of yearData.months) {
-              for (const wk of m.weeks) {
-                if (!weekLessons.has(wk)) {
-                  fetchLessonsForWeek(year, wk).then(lessons => {
-                    setWeekLessons(prev => {
-                      const next = new Map(prev);
-                      next.set(wk, lessons);
-                      return next;
-                    });
-                  });
-                }
-              }
-            }
-          }}
-        />
-      );
-    }
-
-    if (mode === 'journey') {
-      return (
-        <JourneyCascade
+        <JourneyCascadeCollapsed
           skillLOs={yearData.skillLOs as SkillLO[]}
-          focusedSkillRef={focusedSkillRef}
-          expandedSkillRef={expandedSkillRef}
-          onExpandSkill={setExpandedSkillRef}
-          focusedKRef={focusedKRef}
-          onFocusKRef={setFocusedKRef}
-          knowledgeLOsBySkill={knowledgeLOsBySkill}
-          lessonsByKRef={lessonsByKRef}
-          onLessonClick={handleLessonClick}
+          totalLessons={yearData.totalLessons}
+          year={year}
+          onFocusSkill={ref => handleFocusSkill(ref)}
         />
       );
     }
 
     // content
+    if (focusedSkill) {
+      return (
+        <ContentCascadeExpanded
+          skillBreakdown={yearData.skillBreakdown as SkillData[]}
+          themes={themesForSkill}
+          lessons={themeLessons}
+          focusedSkill={focusedSkill}
+          focusedTheme={focusedTheme}
+          totalLessons={yearData.totalLessons}
+          year={year}
+          onFocusSkill={s => { setFocusedSkill(s); setFocusedTheme(null); }}
+          onFocusTheme={setFocusedTheme}
+          onLessonClick={setDrawerLesson}
+        />
+      );
+    }
     return (
-      <ContentGrid
-        lessons={allYearLessons}
-        focusedSkill={focusedContentSkill}
-        focusedTheme={focusedTheme}
-        search={search}
-        onLessonClick={handleLessonClick}
+      <ContentCascadeCollapsed
+        skillBreakdown={yearData.skillBreakdown as SkillData[]}
+        totalLessons={yearData.totalLessons}
+        year={year}
+        onFocusSkill={s => setFocusedSkill(s)}
       />
     );
   }
@@ -228,28 +267,18 @@ export function CurriculumExplorer({ initialYear, initialYearData }: Props) {
   return (
     <>
       <CeShell
-        topBar={
-          <CeTopBar
-            year={year}
-            search={search}
-            onYearChange={handleYearChange}
-            onSearchChange={setSearch}
-          />
-        }
-        modeTabs={
-          <CeModeTabs mode={mode} onModeChange={m => { setMode(m); setSearch(''); }} />
-        }
-        leftPanel={<CeLeftPanel>{renderLeft()}</CeLeftPanel>}
+        topBar={<CeTopBar year={year} search={search} onYearChange={setYear} onSearchChange={setSearch} />}
+        modeTabs={<CeModeTabs mode={mode} onModeChange={m => { setMode(m); setSearch(''); }} totalLessons={yearData.totalLessons} />}
+        leftPanel={renderLeft()}
         main={renderMain()}
         rightSidebar={
-          <CeRightSidebar>
-            <CeSidebar
-              totalLessons={yearData.totalLessons}
-              totalWeeks={yearData.totalWeeks}
-              skillBreakdown={yearData.skillBreakdown as SkillData[]}
-              themes={yearData.themes as ThemeData[]}
-            />
-          </CeRightSidebar>
+          <CeRightSidebar
+            year={year}
+            totalLessons={yearData.totalLessons}
+            totalWeeks={yearData.totalWeeks}
+            skillBreakdown={yearData.skillBreakdown as SkillData[]}
+            themes={yearData.themes as ThemeData[]}
+          />
         }
       />
       <CeLessonDrawer lesson={drawerLesson} onClose={() => setDrawerLesson(null)} />

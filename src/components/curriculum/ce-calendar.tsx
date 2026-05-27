@@ -1,272 +1,403 @@
 'use client';
 
+import { useState } from 'react';
 import { C, SANS } from '@/lib/tokens';
+import { Icon } from '@/components/icon';
+import { CeLeftPanel, NavRow, HiBtn, Chip, Label, SKILL_COLOR, skillKey } from './ce-shell';
 import type { CurriculumLesson } from '@/types/curriculum';
 
-export const SKILL_COLOR: Record<string, { fg: string; bg: string; label: string }> = {
-  read:    { fg: '#1F7A6C', bg: '#E0F0EC', label: 'Reading' },
-  write:   { fg: '#2952A3', bg: '#E3EBFB', label: 'Writing' },
-  listen:  { fg: '#7A5A11', bg: '#FBF1DD', label: 'Listening' },
-  speak:   { fg: '#6B2DA3', bg: '#F0E8FB', label: 'Speaking' },
-  basic:   { fg: C.pink,   bg: C.pinkSoft, label: 'Basic Literacy' },
-};
-
-function skillKey(skill: string): string {
-  const s = (skill ?? '').toLowerCase();
-  if (s.includes('read')) return 'read';
-  if (s.includes('writ')) return 'write';
-  if (s.includes('listen')) return 'listen';
-  if (s.includes('speak')) return 'speak';
-  return 'basic';
-}
-
-// ── Left panel nav ────────────────────────────────────────────────────────────
+// ── Left navigator ────────────────────────────────────────────────────────────
 
 interface CalendarLeftProps {
   months: { month: string; weeks: number[] }[];
+  selectedMonth: string | null;
   selectedWeek: number | null;
+  onSelectMonth: (m: string) => void;
   onSelectWeek: (w: number) => void;
 }
 
-export function CalendarLeft({ months, selectedWeek, onSelectWeek }: CalendarLeftProps) {
+export function CalendarLeft({ months, selectedMonth, selectedWeek, onSelectMonth, onSelectWeek }: CalendarLeftProps) {
   return (
-    <div style={{ padding: '16px 0' }}>
-      <div style={{
-        fontFamily: SANS, fontSize: 10, fontWeight: 700,
-        color: C.faint2, textTransform: 'uppercase', letterSpacing: '0.1em',
-        padding: '0 16px', marginBottom: 8,
-      }}>
-        Months & Weeks
-      </div>
-      {months.map(({ month, weeks }) => (
-        <div key={month} style={{ marginBottom: 4 }}>
-          <div style={{
-            fontFamily: SANS, fontSize: 11.5, fontWeight: 600,
-            color: C.ink, padding: '6px 16px 4px',
-          }}>
-            {month}
+    <CeLeftPanel
+      title="Browse term"
+      sublabel="Month › Week"
+      footerHint="Click a week to drill into its 5 periods."
+    >
+      {months.map(m => {
+        const isMonthActive = m.month === selectedMonth;
+        return (
+          <div key={m.month}>
+            <NavRow
+              depth={0}
+              label={m.month}
+              count={m.weeks.length * 5}
+              expanded={isMonthActive}
+              active={isMonthActive && !selectedWeek}
+              onClick={() => onSelectMonth(m.month)}
+            />
+            {isMonthActive && m.weeks.map(w => (
+              <NavRow
+                key={w}
+                depth={1}
+                label={`Week ${w}`}
+                leaf
+                active={selectedWeek === w}
+                dot={selectedWeek === w ? C.pink : C.faint2}
+                onClick={() => onSelectWeek(w)}
+              />
+            ))}
           </div>
-          {weeks.map(w => (
-            <button
-              key={w}
-              onClick={() => onSelectWeek(w)}
-              style={{
-                display: 'flex', alignItems: 'center', width: '100%',
-                padding: '5px 16px 5px 28px',
-                fontFamily: SANS, fontSize: 12,
-                color: selectedWeek === w ? C.pink : C.faint,
-                fontWeight: selectedWeek === w ? 600 : 400,
-                background: selectedWeek === w ? C.pinkSoft : 'none',
-                border: 'none', cursor: 'pointer',
-                textAlign: 'left',
-              }}
-            >
-              Week {w}
-            </button>
-          ))}
-        </div>
-      ))}
-    </div>
+        );
+      })}
+    </CeLeftPanel>
   );
 }
 
-// ── Week grid ────────────────────────────────────────────────────────────────
+// ── Skill bar at bottom of cell ───────────────────────────────────────────────
 
-interface WeekGridProps {
-  week: number;
-  lessons: CurriculumLesson[];
-  onLessonClick: (lesson: CurriculumLesson) => void;
-}
-
-export function WeekGrid({ week, lessons, onLessonClick }: WeekGridProps) {
-  const month = lessons[0]?.month ?? '';
-  const periods = [1, 2, 3, 4, 5];
-
+function SkillBar({ skill }: { skill: string }) {
+  const col = SKILL_COLOR[skillKey(skill)];
   return (
-    <div style={{ padding: '28px 32px' }}>
-      <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, marginBottom: 20 }}>
-        <span style={{ fontFamily: SANS, fontSize: 22, fontWeight: 700, color: C.ink }}>
-          Week {week}
-        </span>
-        <span style={{ fontFamily: SANS, fontSize: 14, color: C.faint }}>{month}</span>
-      </div>
-
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(5, 1fr)',
-        gap: 12,
-      }}>
-        {periods.map(p => {
-          const lesson = lessons.find(l => l.periodNum === p);
-          return (
-            <div key={p} style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
-              <div style={{
-                fontFamily: SANS, fontSize: 10.5, fontWeight: 600,
-                color: C.faint2, textTransform: 'uppercase', letterSpacing: '0.08em',
-                marginBottom: 6, textAlign: 'center',
-              }}>
-                Period {p}
-              </div>
-              {lesson ? (
-                <LessonCell lesson={lesson} onClick={() => onLessonClick(lesson)} />
-              ) : (
-                <div style={{
-                  minHeight: 140, borderRadius: 10,
-                  background: C.cream, border: `1px dashed ${C.borderSoft}`,
-                }} />
-              )}
-            </div>
-          );
-        })}
-      </div>
-    </div>
+    <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: 4, background: col.line }} />
   );
 }
 
-function LessonCell({ lesson, onClick }: { lesson: CurriculumLesson; onClick: () => void }) {
+// ── Calendar cell ─────────────────────────────────────────────────────────────
+
+function CalCell({ lesson, onLessonClick }: { lesson: CurriculumLesson | undefined; onLessonClick: (l: CurriculumLesson) => void }) {
+  const [hover, setHover] = useState(false);
+  if (!lesson) return <div style={{ minHeight: 116, borderRadius: 8, background: 'rgba(255,255,255,0.4)', border: `1px dashed ${C.borderSoft}` }} />;
+
   const sk = skillKey(lesson.linguisticSkill);
   const col = SKILL_COLOR[sk];
 
   return (
-    <button
-      onClick={onClick}
+    <div
+      onClick={() => onLessonClick(lesson)}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
       style={{
-        display: 'flex', flexDirection: 'column', alignItems: 'flex-start',
-        gap: 6, padding: '10px 12px',
-        background: C.surface,
-        border: `1px solid ${C.borderSoft}`,
-        borderTop: `3px solid ${col.fg}`,
-        borderRadius: 10,
-        cursor: 'pointer', textAlign: 'left',
-        minHeight: 140,
-        boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
-        transition: 'box-shadow 0.12s, transform 0.1s',
-      }}
-      onMouseEnter={e => {
-        (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 3px 10px rgba(0,0,0,0.08)';
-        (e.currentTarget as HTMLButtonElement).style.transform = 'translateY(-1px)';
-      }}
-      onMouseLeave={e => {
-        (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 1px 3px rgba(0,0,0,0.04)';
-        (e.currentTarget as HTMLButtonElement).style.transform = 'translateY(0)';
+        position: 'relative',
+        background: hover ? C.pinkSoft : C.surface,
+        border: `1px solid ${hover ? C.pink : C.border}`,
+        borderLeft: hover ? `3px solid ${C.pink}` : `1px solid ${C.border}`,
+        borderRadius: 8,
+        padding: '10px 12px 12px',
+        display: 'flex', flexDirection: 'column', gap: 6,
+        minHeight: 116, cursor: 'pointer',
+        boxShadow: hover ? '0 8px 24px rgba(56,30,30,0.12),0 2px 6px rgba(56,30,30,0.06)' : '0 1px 0 rgba(56,30,30,0.02)',
+        transform: hover ? 'translateY(-1px)' : 'none',
+        transition: 'transform 0.15s, box-shadow 0.15s',
+        overflow: 'hidden',
       }}
     >
-      {/* Lesson ID + skill chip */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
-        <span style={{
-          fontFamily: SANS, fontSize: 10, fontWeight: 700,
-          color: C.faint2, letterSpacing: '0.04em',
-        }}>
+      {/* Top row: ID + plan badge */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+        <span style={{ fontFamily: SANS, fontSize: 10.5, fontWeight: 600, color: C.faint, fontVariantNumeric: 'tabular-nums', letterSpacing: '0.02em' }}>
           {lesson.id}
         </span>
-        <span style={{
-          fontFamily: SANS, fontSize: 9.5, fontWeight: 600,
-          color: col.fg, background: col.bg,
-          padding: '1px 5px', borderRadius: 4,
-        }}>
-          {col.label}
-        </span>
+        <div style={{ flex: 1 }} />
+        {/* Plan badge placeholder — false for now */}
       </div>
 
-      {/* Daily LO */}
+      {/* LO — 2-line clamp */}
       <span style={{
-        fontFamily: SANS, fontSize: 11.5, fontWeight: 500,
-        color: C.ink, lineHeight: 1.4,
-        display: '-webkit-box',
-        WebkitLineClamp: 4,
-        WebkitBoxOrient: 'vertical',
-        overflow: 'hidden',
+        fontFamily: SANS, fontSize: 12.5, fontWeight: 500, color: C.ink, lineHeight: 1.35,
+        display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden',
       }}>
         {lesson.dailyLO}
       </span>
 
-      {/* Theme */}
-      {lesson.theme && (
+      <div style={{ flex: 1 }} />
+
+      {/* Skill chip + theme */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
         <span style={{
-          fontFamily: SANS, fontSize: 10, color: '#7A5A11',
-          background: '#FBF1DD', border: '1px solid #EFD9A5',
-          padding: '1px 6px', borderRadius: 4, marginTop: 'auto',
-        }}>
-          {lesson.theme}
-        </span>
-      )}
-    </button>
+          display: 'inline-flex', alignItems: 'center',
+          padding: '1px 7px', background: col.bg, color: col.fg,
+          border: `1px solid ${col.bg}`, borderRadius: 999,
+          fontFamily: SANS, fontSize: 10, fontWeight: 600,
+        }}>{col.label}</span>
+        {lesson.theme && (
+          <span style={{ fontFamily: SANS, fontSize: 10.5, color: C.faint, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+            {lesson.theme}
+          </span>
+        )}
+      </div>
+
+      <SkillBar skill={lesson.linguisticSkill} />
+    </div>
   );
 }
 
-// ── Month overview ────────────────────────────────────────────────────────────
+// ── CalendarLegend ────────────────────────────────────────────────────────────
 
-interface MonthOverviewProps {
-  months: { month: string; weeks: number[] }[];
-  allLessons: Map<number, CurriculumLesson[]>;
+function CalendarLegend() {
+  return (
+    <div style={{
+      padding: '10px 24px', borderTop: `1px solid ${C.border}`,
+      background: C.surface, display: 'flex', alignItems: 'center', gap: 12, flexShrink: 0,
+    }}>
+      <Label>Skill key</Label>
+      {Object.entries(SKILL_COLOR).map(([id, meta]) => (
+        <div key={id} style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+          <div style={{ width: 14, height: 4, borderRadius: 2, background: meta.line }} />
+          <span style={{ fontFamily: SANS, fontSize: 11, color: C.faint }}>{meta.label}</span>
+        </div>
+      ))}
+      <div style={{ width: 1, height: 16, background: C.border, margin: '0 8px' }} />
+      <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+        <div style={{ padding: '1px 6px', borderRadius: 999, background: C.tealSoft, border: '1px solid #BCDED6', display: 'flex', alignItems: 'center', gap: 3 }}>
+          <div style={{ width: 5, height: 5, borderRadius: 999, background: C.teal }} />
+          <span style={{ fontFamily: SANS, fontSize: 10, fontWeight: 600, color: C.teal }}>Plan</span>
+        </div>
+        <span style={{ fontFamily: SANS, fontSize: 11, color: C.faint }}>= lesson plan saved</span>
+      </div>
+    </div>
+  );
+}
+
+// ── Month view ────────────────────────────────────────────────────────────────
+
+interface MonthViewProps {
+  month: string;
+  weeks: number[];
+  weekLessons: Map<number, CurriculumLesson[]>;
   onSelectWeek: (w: number) => void;
 }
 
-export function MonthOverview({ months, allLessons, onSelectWeek }: MonthOverviewProps) {
+export function MonthView({ month, weeks, weekLessons, onSelectWeek }: MonthViewProps) {
   return (
-    <div style={{ padding: '28px 32px' }}>
-      <div style={{ fontFamily: SANS, fontSize: 22, fontWeight: 700, color: C.ink, marginBottom: 24 }}>
-        Full Year Overview
+    <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0, overflow: 'hidden' }}>
+      {/* Header */}
+      <div style={{
+        padding: '14px 24px', background: C.surface, borderBottom: `1px solid ${C.border}`,
+        display: 'flex', alignItems: 'center', gap: 12, flexShrink: 0,
+      }}>
+        <span style={{ fontFamily: SANS, fontSize: 20, fontWeight: 700, color: C.ink }}>{month}</span>
+        <Chip tone="neutral" size="sm">{weeks.length} weeks · {weeks.length * 5} lessons</Chip>
+        <div style={{ flex: 1 }} />
       </div>
-      {months.map(({ month, weeks }) => (
-        <div key={month} style={{ marginBottom: 32 }}>
-          <div style={{
-            fontFamily: SANS, fontSize: 14, fontWeight: 700,
-            color: C.ink, marginBottom: 12,
-            paddingBottom: 8, borderBottom: `1px solid ${C.borderSoft}`,
-          }}>
-            {month}
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 10 }}>
-            {weeks.map(w => {
-              const wLessons = allLessons.get(w) ?? [];
-              const skillCounts: Record<string, number> = {};
-              wLessons.forEach(l => {
-                const k = skillKey(l.linguisticSkill);
-                skillCounts[k] = (skillCounts[k] ?? 0) + 1;
-              });
 
-              return (
-                <button
-                  key={w}
-                  onClick={() => onSelectWeek(w)}
-                  style={{
-                    display: 'flex', flexDirection: 'column', gap: 6,
-                    padding: '10px 12px',
-                    background: C.surface,
-                    border: `1px solid ${C.borderSoft}`,
-                    borderRadius: 8, cursor: 'pointer',
-                    textAlign: 'left',
-                    transition: 'border-color 0.12s',
-                  }}
-                  onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = C.pink; }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = C.borderSoft; }}
-                >
-                  <span style={{ fontFamily: SANS, fontSize: 12, fontWeight: 600, color: C.ink }}>
-                    Week {w}
-                  </span>
-                  <span style={{ fontFamily: SANS, fontSize: 11, color: C.faint }}>
-                    {wLessons.length} lessons
-                  </span>
-                  {/* skill bar */}
-                  <div style={{ display: 'flex', height: 4, borderRadius: 2, overflow: 'hidden', gap: 1 }}>
-                    {Object.entries(skillCounts).map(([sk, cnt]) => (
-                      <div
-                        key={sk}
-                        style={{
-                          flex: cnt,
-                          background: SKILL_COLOR[sk]?.fg ?? C.faint2,
-                          borderRadius: 2,
-                        }}
-                      />
-                    ))}
-                  </div>
-                </button>
-              );
-            })}
+      {/* Week summary cards */}
+      <div style={{ flex: 1, overflowY: 'auto', padding: '16px 24px', background: C.cream }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 12 }}>
+          {weeks.map(w => {
+            const lessons = weekLessons.get(w) ?? [];
+            const skillCounts: Record<string, number> = {};
+            lessons.forEach(l => {
+              const k = skillKey(l.linguisticSkill);
+              skillCounts[k] = (skillCounts[k] ?? 0) + 1;
+            });
+            return (
+              <button
+                key={w}
+                onClick={() => onSelectWeek(w)}
+                style={{
+                  display: 'flex', flexDirection: 'column', gap: 8,
+                  padding: '12px 14px', background: C.surface,
+                  border: `1px solid ${C.border}`, borderRadius: 10,
+                  cursor: 'pointer', textAlign: 'left',
+                  transition: 'border-color 0.12s, box-shadow 0.12s',
+                }}
+                onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = C.pink; (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 4px 12px rgba(56,30,30,0.08)'; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = C.border; (e.currentTarget as HTMLButtonElement).style.boxShadow = 'none'; }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                  <span style={{ fontFamily: SANS, fontSize: 14, fontWeight: 700, color: C.ink }}>Week {w}</span>
+                  <Icon name="arrowRight" size={13} color={C.faint2} />
+                </div>
+                <span style={{ fontFamily: SANS, fontSize: 11.5, color: C.faint }}>{lessons.length} lessons</span>
+                <div style={{ display: 'flex', height: 4, borderRadius: 2, overflow: 'hidden', gap: 1 }}>
+                  {Object.entries(skillCounts).map(([sk, cnt]) => (
+                    <div key={sk} style={{ flex: cnt, background: SKILL_COLOR[sk]?.line ?? C.faint2, borderRadius: 2 }} />
+                  ))}
+                  {lessons.length === 0 && <div style={{ flex: 1, background: C.borderSoft, borderRadius: 2 }} />}
+                </div>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      <CalendarLegend />
+    </div>
+  );
+}
+
+// ── Week view (period grid) ───────────────────────────────────────────────────
+
+interface WeekViewProps {
+  week: number;
+  month: string;
+  lessons: CurriculumLesson[];
+  onBack: () => void;
+  onLessonClick: (l: CurriculumLesson) => void;
+}
+
+export function WeekView({ week, month, lessons, onBack, onLessonClick }: WeekViewProps) {
+  const weeks = [week]; // Single week, 4 lessons per period shown in rows
+
+  // For a week drill-in, show period rows × (just this week's lessons)
+  // Following handoff: period rows down the left, week cols across
+  // Since we only have 1 week, show 5 period rows vertically as cards
+
+  const weekLO = lessons[0]?.knowledgeLO ?? '';
+
+  return (
+    <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0, overflow: 'hidden' }}>
+      {/* Header */}
+      <div style={{ padding: '14px 24px', background: C.surface, borderBottom: `1px solid ${C.border}`, display: 'flex', alignItems: 'center', gap: 12, flexShrink: 0 }}>
+        <HiBtn variant="ghost" size="sm" icon={<Icon name="chevronLeft" size={13} color={C.ink} />} onClick={onBack}>
+          Back to {month}
+        </HiBtn>
+        <div style={{ width: 1, height: 18, background: C.border }} />
+        <span style={{ fontFamily: SANS, fontSize: 11.5, color: C.faint }}>{month}</span>
+        <Icon name="chevronRight" size={12} color={C.faint2} />
+        <span style={{ fontFamily: SANS, fontSize: 20, fontWeight: 700, color: C.ink }}>Week {week}</span>
+        {weekLO && <Chip tone="pink" size="sm">{weekLO.slice(0, 50)}{weekLO.length > 50 ? '…' : ''}</Chip>}
+        <div style={{ flex: 1 }} />
+      </div>
+
+      {/* Weekly / Monthly LO context */}
+      {lessons[0] && (
+        <div style={{
+          padding: '14px 24px', background: C.surface, borderBottom: `1px solid ${C.border}`,
+          display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24, flexShrink: 0,
+        }}>
+          <div>
+            <Label style={{ display: 'block', marginBottom: 4 }}>Weekly LO</Label>
+            <span style={{ fontFamily: SANS, fontSize: 13, fontWeight: 500, color: C.ink, lineHeight: 1.4 }}>
+              {lessons[0].knowledgeLO || '—'}
+            </span>
+          </div>
+          <div>
+            <Label style={{ display: 'block', marginBottom: 4 }}>Skill LO</Label>
+            <span style={{ fontFamily: SANS, fontSize: 13, color: C.ink, lineHeight: 1.4 }}>
+              {lessons[0].skillLO || '—'}
+            </span>
           </div>
         </div>
-      ))}
+      )}
+
+      {/* 5 period cards */}
+      <div style={{ flex: 1, overflowY: 'auto', padding: '16px 24px', display: 'flex', flexDirection: 'column', gap: 12, background: C.cream }}>
+        {[1, 2, 3, 4, 5].map(p => {
+          const lesson = lessons.find(l => l.periodNum === p);
+          const sk = lesson ? skillKey(lesson.linguisticSkill) : 'basic';
+          const col = SKILL_COLOR[sk];
+
+          return (
+            <div
+              key={p}
+              onClick={() => lesson && onLessonClick(lesson)}
+              style={{
+                background: C.surface, border: `1px solid ${lesson ? C.border : C.borderSoft}`,
+                borderRadius: 12, padding: 16, display: 'flex', gap: 16,
+                cursor: lesson ? 'pointer' : 'default',
+                position: 'relative', overflow: 'hidden',
+                boxShadow: '0 1px 0 rgba(56,30,30,0.02)',
+                opacity: lesson ? 1 : 0.5,
+              }}
+            >
+              {/* Period block */}
+              <div style={{
+                width: 72, flexShrink: 0, background: C.cream, border: `1px solid ${C.borderSoft}`,
+                borderRadius: 10, padding: '10px 4px',
+                display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 2,
+              }}>
+                <span style={{ fontFamily: SANS, fontSize: 10, fontWeight: 600, color: C.faint, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Period</span>
+                <span style={{ fontFamily: SANS, fontSize: 32, fontWeight: 700, color: C.ink, lineHeight: 1 }}>{p}</span>
+                <span style={{ fontFamily: SANS, fontSize: 10.5, color: C.faint2 }}>50 min</span>
+              </div>
+
+              {/* Lesson detail */}
+              {lesson ? (
+                <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 10 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
+                    <span style={{ fontFamily: SANS, fontSize: 11.5, fontWeight: 700, color: C.faint, fontVariantNumeric: 'tabular-nums' }}>{lesson.id}</span>
+                    <span style={{ display: 'inline-flex', alignItems: 'center', padding: '1px 7px', background: col.bg, color: col.fg, border: `1px solid ${col.bg}`, borderRadius: 999, fontFamily: SANS, fontSize: 10, fontWeight: 600 }}>{col.label}</span>
+                    {lesson.theme && <Chip tone="amber" size="sm">{lesson.theme}</Chip>}
+                  </div>
+                  <div>
+                    <Label style={{ display: 'block', marginBottom: 3 }}>Daily LO</Label>
+                    <span style={{ fontFamily: SANS, fontSize: 15, fontWeight: 500, color: C.ink, lineHeight: 1.4 }}>{lesson.dailyLO}</span>
+                  </div>
+                  {(lesson.grammarFocus || lesson.vocabFocus) && (
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, padding: 10, background: C.cream, borderRadius: 8 }}>
+                      {lesson.grammarFocus && <div><Label style={{ display: 'block', marginBottom: 2 }}>Grammar</Label><span style={{ fontFamily: SANS, fontSize: 11.5 }}>{lesson.grammarFocus}</span></div>}
+                      {lesson.vocabFocus && <div><Label style={{ display: 'block', marginBottom: 2 }}>Vocab focus</Label><span style={{ fontFamily: SANS, fontSize: 11.5, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', display: 'block' }}>{lesson.vocabFocus}</span></div>}
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div style={{ flex: 1, display: 'flex', alignItems: 'center' }}>
+                  <span style={{ fontFamily: SANS, fontSize: 12, color: C.faint2 }}>No lesson scheduled</span>
+                </div>
+              )}
+
+              {lesson && (
+                <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', gap: 6 }}>
+                  <HiBtn variant="ghost" size="sm" icon={<Icon name="book" size={12} color={C.ink} />}>Preview</HiBtn>
+                  <HiBtn variant="primary" size="sm" icon={<Icon name="arrowRight" size={12} color="#fff" />}>Open lesson</HiBtn>
+                </div>
+              )}
+
+              {lesson && <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: 3, background: col.line }} />}
+            </div>
+          );
+        })}
+      </div>
+
+      <CalendarLegend />
+    </div>
+  );
+}
+
+// ── Full-year overview (no month selected) ────────────────────────────────────
+
+interface YearOverviewProps {
+  months: { month: string; weeks: number[] }[];
+  onSelectMonth: (m: string) => void;
+}
+
+export function YearOverview({ months, onSelectMonth }: YearOverviewProps) {
+  return (
+    <div style={{ flex: 1, overflowY: 'auto', padding: '28px 32px', background: C.cream }}>
+      <span style={{ fontFamily: SANS, fontSize: 22, fontWeight: 700, color: C.ink, display: 'block', marginBottom: 20 }}>
+        Full Year Overview
+      </span>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+        {months.map(m => (
+          <button
+            key={m.month}
+            onClick={() => onSelectMonth(m.month)}
+            style={{
+              display: 'flex', alignItems: 'center', gap: 12,
+              padding: '14px 16px', background: C.surface,
+              border: `1px solid ${C.border}`, borderRadius: 10,
+              cursor: 'pointer', textAlign: 'left',
+              transition: 'border-color 0.12s',
+            }}
+            onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = C.pink; }}
+            onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = C.border; }}
+          >
+            <span style={{ fontFamily: SANS, fontSize: 15, fontWeight: 700, color: C.ink, width: 80 }}>{m.month}</span>
+            <span style={{ fontFamily: SANS, fontSize: 12, color: C.faint }}>{m.weeks.length} weeks · {m.weeks.length * 5} lessons</span>
+            <div style={{ display: 'flex', gap: 4 }}>
+              {m.weeks.map(w => (
+                <span key={w} style={{
+                  fontFamily: SANS, fontSize: 10.5, color: C.faint2,
+                  background: C.cream, border: `1px solid ${C.borderSoft}`,
+                  padding: '1px 6px', borderRadius: 4,
+                }}>Wk {w}</span>
+              ))}
+            </div>
+            <div style={{ flex: 1 }} />
+            <Icon name="arrowRight" size={13} color={C.faint2} />
+          </button>
+        ))}
+      </div>
     </div>
   );
 }
