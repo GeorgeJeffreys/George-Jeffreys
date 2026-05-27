@@ -364,9 +364,6 @@ function DesktopPlanEditor({ uuid, initialPlan, initialLesson, isTablet }: PlanE
                 )}
                 {plan ? (
                   <>
-                    <div style={{ background: 'red', color: 'white', padding: 8, fontSize: 12 }}>
-                      DEBUG: lesson={lesson ? JSON.stringify(lesson.id) : 'NULL'} | initialLesson={initialLesson ? JSON.stringify(initialLesson.id) : 'NULL'}
-                    </div>
                     <MetaHeader lesson={lesson} />
                     <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 4 }}>
                       <h2 style={{ fontFamily: SANS, fontSize: 14, fontWeight: 600, color: C.ink, margin: 0 }}>
