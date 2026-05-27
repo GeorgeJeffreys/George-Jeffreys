@@ -57,6 +57,9 @@ export function PlanEditor({ uuid, initialPlan, initialLesson }: PlanEditorProps
 function DesktopPlanEditor({ uuid, initialPlan, initialLesson, isTablet }: PlanEditorProps & { isTablet: boolean }) {
   const [plan, setPlan] = useState<LessonPlan | null>(initialPlan);
   const [lesson, setLesson] = useState<CurriculumLesson | null>(initialLesson);
+
+  // DIAGNOSTIC — remove after debugging
+  console.log('RENDER: plan.lesson_id=', plan?.lesson_id, 'lesson=', lesson?.id ?? null);
   const [activeView, setActiveView] = useState<'plan' | 'worksheet'>('plan');
   const [rightTab, setRightTab] = useState<RightTab>('library');
   const [expandedSet, setExpandedSet] = useState<Set<number>>(new Set([0]));
