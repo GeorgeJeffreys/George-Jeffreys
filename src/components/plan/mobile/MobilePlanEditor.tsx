@@ -48,7 +48,11 @@ export function MobilePlanEditor({ uuid, initialPlan, initialLesson }: MobilePla
 
   // Sync when parent PlanEditor resolves plan/lesson after sessionStorage hydration or lesson fetch
   useEffect(() => { if (initialPlan && !plan) setPlan(initialPlan); }, [initialPlan]);
-  useEffect(() => { if (initialLesson && !lesson) setLesson(initialLesson); }, [initialLesson]);
+  useEffect(() => {
+    if (initialLesson && !lesson) {
+      setLesson(initialLesson)
+    }
+  }, [initialLesson]);
 
   const sections: LessonSection[] = plan?.sections?.length === 6
     ? plan.sections.map((s, i) => ({ ...s, title: s.title || SECTION_CONFIG[i].title }))
