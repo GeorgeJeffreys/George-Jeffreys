@@ -16,6 +16,7 @@ import { ExamplesPanel } from '@/components/plan/examples-panel';
 import { WorksheetView } from '@/components/plan/worksheet';
 import { LessonSelector } from '@/components/plan/lesson-selector';
 import { TimingPopover } from '@/components/plan/timing-popover';
+import { fetchLessonById } from '@/lib/curriculum-actions';
 import type { LessonPlan, LessonSection } from '@/types/lesson';
 import type { CurriculumLesson } from '@/types/curriculum';
 import { emptySection } from '@/types/lesson';
@@ -93,6 +94,12 @@ function DesktopPlanEditor({ uuid, initialPlan, initialLesson, isTablet }: PlanE
       if (draft.lesson) setLesson(draft.lesson);
     } catch { /* ignore parse errors */ }
   }, [uuid, initialPlan]);
+
+  // Safety net: if plan is set but lesson is still null, fetch from curriculum
+  useEffect(() => {
+    if (lesson || !plan?.lesson_id) return;
+    fetchLessonById(plan.lesson_id).then((l) => { if (l) setLesson(l); });
+  }, [plan?.lesson_id, lesson]);
 
   const sections: LessonSection[] = plan?.sections?.length === 6
     ? plan.sections.map((s, i) => ({ ...s, title: s.title || SECTION_CONFIG[i].title }))
