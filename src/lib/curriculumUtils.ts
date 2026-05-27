@@ -1,5 +1,19 @@
 import type { CurriculumLesson, CurriculumLookup } from "@/types/curriculum";
 
+/** Strip the leading ". " prefix that curriculum.json uses on all LO fields. */
+export function cleanLO(raw: string): string {
+  return raw.replace(/^(\.\s*)+/, '').trim();
+}
+
+function withCleanLOs(lesson: CurriculumLesson): CurriculumLesson {
+  return {
+    ...lesson,
+    dailyLO: cleanLO(lesson.dailyLO),
+    skillLO: cleanLO(lesson.skillLO),
+    knowledgeLO: cleanLO(lesson.knowledgeLO),
+  };
+}
+
 // Import the JSON with an explicit cast to avoid TypeScript inferring
 // the full shape of ~950 KB of nested data (which slows type-checking).
 // eslint-disable-next-line @typescript-eslint/no-require-imports
@@ -48,7 +62,9 @@ function buildIndexes(): void {
  * Returns `null` when the ID is not found.
  */
 export function getLessonById(id: string): CurriculumLesson | CurriculumLesson[] | null {
-  return rawData[id] ?? null;
+  const entry = rawData[id] ?? null;
+  if (!entry) return null;
+  return Array.isArray(entry) ? entry.map(withCleanLOs) : withCleanLOs(entry);
 }
 
 /**
@@ -66,7 +82,7 @@ export function getLessonsByWeek(
   if (yn === null) return [];
   const key = `${yn}_${week}` as WeekKey;
   const lessons = _byWeek!.get(key) ?? [];
-  return [...lessons].sort(byPeriod);
+  return [...lessons].sort(byPeriod).map(withCleanLOs);
 }
 
 /**
@@ -98,7 +114,7 @@ export function getLessonsByYear(year: number | string): CurriculumLesson[] {
   const yn = resolveYearNum(year);
   if (yn === null) return [];
   const lessons = _byYear!.get(yn) ?? [];
-  return [...lessons].sort(byWeekThenPeriod);
+  return [...lessons].sort(byWeekThenPeriod).map(withCleanLOs);
 }
 
 // ── Internal helpers ──────────────────────────────────────────────────────────

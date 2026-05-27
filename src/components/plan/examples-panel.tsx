@@ -62,6 +62,64 @@ function ExampleCard({ plan, onClick }: { plan: ExamplePlan; onClick: () => void
   );
 }
 
+function SectionPreview({ section, index }: { section: LessonSection; index: number }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div style={{ border: `1px solid ${C.border}`, borderRadius: 10, overflow: 'hidden' }}>
+      <button
+        onClick={() => setOpen((v) => !v)}
+        style={{
+          width: '100%', display: 'flex', alignItems: 'center', gap: 8,
+          padding: '9px 12px', background: '#FAFAFA',
+          borderBottom: open ? `1px solid ${C.border}` : 'none',
+          border: 'none', cursor: 'pointer', textAlign: 'left',
+        }}
+      >
+        <div style={{
+          width: 22, height: 22, borderRadius: 6, background: C.cream,
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          fontFamily: SANS, fontSize: 10.5, fontWeight: 600, color: C.faint, flexShrink: 0,
+        }}>
+          {String(index + 1).padStart(2, '0')}
+        </div>
+        <span style={{ fontFamily: SANS, fontSize: 13, fontWeight: 600, color: C.ink, flex: 1 }}>
+          {section.title}
+        </span>
+        <span style={{
+          fontFamily: SANS, fontSize: 11, color: C.faint,
+          padding: '2px 7px', borderRadius: 999,
+          background: C.cream, border: `1px solid ${C.borderSoft}`,
+        }}>
+          {section.timing_minutes === 0 ? 'Take-home' : `${section.timing_minutes} min`}
+        </span>
+        <Icon name={open ? 'chevronDown' : 'chevronRight'} size={13} color={C.faint} />
+      </button>
+      {open && (
+        <div style={{ padding: '10px 12px', display: 'flex', flexDirection: 'column', gap: 10 }}>
+          {section.task && (
+            <div>
+              <div style={{ fontFamily: SANS, fontSize: 10, fontWeight: 600, color: C.faint, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 3 }}>Task</div>
+              <p style={{ fontFamily: SANS, fontSize: 12, color: C.ink, margin: 0, lineHeight: 1.5 }}>{section.task}</p>
+            </div>
+          )}
+          {section.teacher_instructions && (
+            <div>
+              <div style={{ fontFamily: SANS, fontSize: 10, fontWeight: 600, color: C.pink, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 3 }}>Teacher does</div>
+              <p style={{ fontFamily: SANS, fontSize: 12, color: C.ink, margin: 0, lineHeight: 1.5, whiteSpace: 'pre-line' }}>{section.teacher_instructions}</p>
+            </div>
+          )}
+          {section.student_instructions && (
+            <div>
+              <div style={{ fontFamily: SANS, fontSize: 10, fontWeight: 600, color: C.teal, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 3 }}>Students do</div>
+              <p style={{ fontFamily: SANS, fontSize: 12, color: C.ink, margin: 0, lineHeight: 1.5, whiteSpace: 'pre-line' }}>{section.student_instructions}</p>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
 function ExamplePreviewModal({ plan, onClose, onLoad }: {
   plan: ExamplePlan;
   onClose: () => void;
@@ -86,7 +144,7 @@ function ExamplePreviewModal({ plan, onClose, onLoad }: {
       onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
     >
       <div style={{
-        width: 580, maxHeight: '85vh',
+        width: 600, maxHeight: '85vh',
         background: C.surface, border: `1px solid ${C.border}`,
         borderRadius: 16,
         boxShadow: '0 24px 60px rgba(56,30,30,0.2)',
@@ -126,38 +184,10 @@ function ExamplePreviewModal({ plan, onClose, onLoad }: {
           <p style={{ fontFamily: SANS, fontSize: 12.5, color: C.faint, margin: 0 }}>{plan.description}</p>
         </div>
 
-        {/* Section list */}
+        {/* Section list — expandable */}
         <div style={{ flex: 1, overflowY: 'auto', padding: '12px 18px', display: 'flex', flexDirection: 'column', gap: 8 }}>
           {plan.sections.map((s, i) => (
-            <div key={i} style={{
-              border: `1px solid ${C.border}`, borderRadius: 10, overflow: 'hidden',
-            }}>
-              <div style={{
-                display: 'flex', alignItems: 'center', gap: 8,
-                padding: '9px 12px', background: '#FAFAFA', borderBottom: `1px solid ${C.border}`,
-              }}>
-                <div style={{
-                  width: 22, height: 22, borderRadius: 6, background: C.cream,
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  fontFamily: SANS, fontSize: 10.5, fontWeight: 600, color: C.faint, flexShrink: 0,
-                }}>
-                  {String(i + 1).padStart(2, '0')}
-                </div>
-                <span style={{ fontFamily: SANS, fontSize: 13, fontWeight: 600, color: C.ink, flex: 1 }}>
-                  {s.title}
-                </span>
-                <span style={{
-                  fontFamily: SANS, fontSize: 11, color: C.faint,
-                  padding: '2px 7px', borderRadius: 999,
-                  background: C.cream, border: `1px solid ${C.borderSoft}`,
-                }}>
-                  {s.timing_minutes === 0 ? 'Take-home' : `${s.timing_minutes} min`}
-                </span>
-              </div>
-              <div style={{ padding: '8px 12px' }}>
-                <p style={{ fontFamily: SANS, fontSize: 12, color: C.faint, margin: 0 }}>{s.task}</p>
-              </div>
-            </div>
+            <SectionPreview key={i} section={s} index={i} />
           ))}
         </div>
 

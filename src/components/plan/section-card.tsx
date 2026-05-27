@@ -102,11 +102,13 @@ function BulletEditor({ value, color, placeholder, onSave }: {
   const lineRefs = useRef<(HTMLInputElement | null)[]>([]);
   const lastExternal = useRef(value);
 
-  // Sync when parent value changes (e.g., AI insert) without overwriting local edits
-  if (lastExternal.current !== value) {
-    lastExternal.current = value;
-    setLines(value ? value.split('\n').filter(Boolean) : []);
-  }
+  // Sync external value changes without causing setState during render
+  useEffect(() => {
+    if (lastExternal.current !== value) {
+      lastExternal.current = value;
+      setLines(value ? value.split('\n').filter(Boolean) : []);
+    }
+  }, [value]);
 
   const doSave = useCallback((ls: string[]) => {
     const result = ls.filter(Boolean).join('\n');
@@ -158,24 +160,36 @@ function BulletEditor({ value, color, placeholder, onSave }: {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-      {lines.map((line, i) => (
-        <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-          <span style={{ color, fontSize: 14, lineHeight: 1, flexShrink: 0, userSelect: 'none' }}>•</span>
-          <input
-            ref={(el) => { lineRefs.current[i] = el; }}
-            value={line}
-            onChange={(e) => updateLine(i, e.target.value)}
-            onBlur={() => doSave(lines)}
-            onKeyDown={(e) => handleKeyDown(e, i)}
-            placeholder="Add step…"
-            style={{
-              flex: 1, fontFamily: SANS, fontSize: 13, color: C.ink,
-              background: 'transparent', border: 'none', outline: 'none',
-              padding: '2px 0', lineHeight: 1.6,
-            }}
-          />
-        </div>
-      ))}
+      {lines.map((line, i) => {
+        const isHeader = line.startsWith('**');
+        return (
+          <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+            {!isHeader && (
+              <span style={{ color, fontSize: 14, lineHeight: 1, flexShrink: 0, userSelect: 'none' }}>•</span>
+            )}
+            <input
+              ref={(el) => { lineRefs.current[i] = el; }}
+              value={line}
+              onChange={(e) => updateLine(i, e.target.value)}
+              onBlur={() => doSave(lines)}
+              onKeyDown={(e) => handleKeyDown(e, i)}
+              placeholder={isHeader ? '' : 'Add step…'}
+              style={{
+                flex: 1, minWidth: 0, fontFamily: SANS,
+                fontSize: isHeader ? 11.5 : 13,
+                fontWeight: isHeader ? 700 : 400,
+                color: C.ink,
+                background: isHeader ? C.cream : 'transparent',
+                border: 'none', outline: 'none',
+                padding: isHeader ? '2px 6px' : '2px 0',
+                lineHeight: 1.6,
+                borderRadius: isHeader ? 4 : 0,
+                marginTop: isHeader ? 2 : 0,
+              }}
+            />
+          </div>
+        );
+      })}
       <button
         onClick={addLine}
         style={{
@@ -210,10 +224,12 @@ function MaterialEditor({ value, onSave }: {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const lastExternal = useRef(value);
 
-  if (lastExternal.current !== value) {
-    lastExternal.current = value;
-    setItems(value ? value.split(',').map((m) => ({ label: m.trim() })).filter((m) => m.label) : []);
-  }
+  useEffect(() => {
+    if (lastExternal.current !== value) {
+      lastExternal.current = value;
+      setItems(value ? value.split(',').map((m) => ({ label: m.trim() })).filter((m) => m.label) : []);
+    }
+  }, [value]);
 
   function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
     const files = e.target.files;
@@ -394,7 +410,7 @@ export function SectionCard({
             display: 'grid', gridTemplateColumns: '1.7fr 1fr', gap: 0,
             border: `1px solid ${C.border}`, borderRadius: 10, overflow: 'hidden',
           }}>
-            <div style={{ padding: 12, borderRight: `1px solid ${C.border}`, background: C.creamDeep + '40' }}>
+            <div style={{ padding: 12, borderRight: `1px solid ${C.border}`, background: C.creamDeep + '40', minWidth: 0 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 8 }}>
                 <Icon name="user" size={12} color={C.pink} />
                 <span style={{
@@ -409,7 +425,7 @@ export function SectionCard({
                 onSave={(v) => onUpdate({ teacher_instructions: v })}
               />
             </div>
-            <div style={{ padding: 12, background: C.tealSoft + '50' }}>
+            <div style={{ padding: 12, background: C.tealSoft + '50', minWidth: 0 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 8 }}>
                 <Icon name="users" size={12} color={C.teal} />
                 <span style={{

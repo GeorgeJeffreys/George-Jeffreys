@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { C, SANS } from '@/lib/tokens';
 import { Icon } from '@/components/icon';
 import type { CurriculumLesson } from '@/types/curriculum';
@@ -49,10 +50,13 @@ function Label({ children, style }: { children: React.ReactNode; style?: React.C
 }
 
 export function MetaHeader({ lesson }: MetaHeaderProps) {
+  const [expanded, setExpanded] = useState(false);
+
   if (!lesson) return null;
 
-  // Highlight key phrases in the daily LO
-  const loText = lesson.dailyLO;
+  const truncatedLO = lesson.dailyLO.length > 80
+    ? lesson.dailyLO.slice(0, 80) + '…'
+    : lesson.dailyLO;
 
   return (
     <div style={{
@@ -60,97 +64,99 @@ export function MetaHeader({ lesson }: MetaHeaderProps) {
       border: `1px solid ${C.border}`,
       borderLeft: `3px solid ${C.pink}`,
       borderRadius: 12,
-      padding: 18,
       boxShadow: '0 1px 0 rgba(56, 30, 30, 0.02)',
+      overflow: 'hidden',
     }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 14 }}>
+      {/* Collapsed bar — always visible */}
+      <button
+        onClick={() => setExpanded((v) => !v)}
+        style={{
+          width: '100%', display: 'flex', alignItems: 'center', gap: 10,
+          padding: '10px 14px',
+          background: 'transparent', border: 'none', cursor: 'pointer', textAlign: 'left',
+        }}
+      >
         <Chip tone="pink" size="sm">
           <Icon name="lock" size={10} /> From curriculum
         </Chip>
-        <Label>Lesson overview</Label>
-        <div style={{ flex: 1 }} />
-        <span style={{ fontFamily: SANS, fontSize: 11, color: C.faint }}>
-          Auto-populated · edits happen at the curriculum level
+        <span style={{ fontFamily: SANS, fontSize: 12.5, fontWeight: 600, color: C.ink }}>
+          {lesson.id}
         </span>
-      </div>
+        <span style={{ fontFamily: SANS, fontSize: 12, color: C.faint, flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+          {truncatedLO}
+        </span>
+        <Icon name={expanded ? 'chevronDown' : 'chevronRight'} size={14} color={C.faint} />
+      </button>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '160px 1fr 240px', gap: 24 }}>
-        {/* Lesson ID */}
-        <div>
-          <Label style={{ marginBottom: 4 }}>Lesson ID</Label>
-          <div style={{
-            fontFamily: SANS, fontSize: 20, fontWeight: 700, color: C.ink,
-            fontFeatureSettings: '"tnum"', letterSpacing: '0.01em',
-          }}>{lesson.id}</div>
-          <div style={{ display: 'flex', gap: 6, marginTop: 8, flexWrap: 'wrap' }}>
-            <Chip tone="pink" size="sm">{lesson.year}</Chip>
-            {lesson.week !== null && <Chip tone="neutral" size="sm">Week {lesson.week}</Chip>}
-            <Chip tone="neutral" size="sm">{lesson.period}</Chip>
-          </div>
-        </div>
-
-        {/* Daily LO */}
-        <div>
-          <Label style={{ marginBottom: 6 }}>Daily Learning Objective</Label>
-          <div style={{
-            fontFamily: SANS, fontSize: 14, fontWeight: 500,
-            lineHeight: 1.45, color: C.ink,
-          }}>
-            {loText}
-          </div>
-        </div>
-
-        {/* Focus & Theme */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-          <div>
-            <Label style={{ marginBottom: 4 }}>Grammar / Vocab</Label>
-            <span style={{ fontFamily: SANS, fontSize: 13, color: C.ink }}>
-              {lesson.grammarFocus || lesson.vocabFocus || '—'}
-            </span>
-          </div>
-          <div>
-            <Label style={{ marginBottom: 4 }}>Theme</Label>
-            <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-              {lesson.theme
-                ? <Chip tone="amber" size="sm">{lesson.theme}</Chip>
-                : <span style={{ fontFamily: SANS, fontSize: 12, color: C.faint2 }}>—</span>
-              }
-            </div>
-          </div>
-          <div>
-            <Label style={{ marginBottom: 4 }}>Linguistic Skill</Label>
-            <span style={{ fontFamily: SANS, fontSize: 12, color: C.faint }}>
-              {lesson.linguisticSkill || '—'}
-            </span>
-          </div>
-        </div>
-      </div>
-
-      {/* LO hierarchy */}
-      {(lesson.skillLO || lesson.knowledgeLO) && (
-        <div style={{
-          marginTop: 14, paddingTop: 14,
-          borderTop: `1px solid ${C.border}`,
-          display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 12,
-        }}>
-          {[
-            { label: 'Monthly LO', value: lesson.skillLO },
-            { label: 'Weekly LO', value: lesson.knowledgeLO },
-            { label: 'Daily LO', value: lesson.dailyLO },
-          ].map(({ label, value }) => (
-            <div key={label} style={{
-              background: C.pinkSoft, border: `1px solid ${C.pinkBorder}`,
-              borderRadius: 8, padding: '8px 10px',
-            }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 5, marginBottom: 4 }}>
-                <Icon name="lock" size={9} color={C.pink} />
-                <Label style={{ color: C.pink, margin: 0 }}>{label}</Label>
+      {/* Expanded detail */}
+      {expanded && (
+        <div style={{ padding: '0 18px 18px', borderTop: `1px solid ${C.border}` }}>
+          <div style={{ paddingTop: 14, display: 'grid', gridTemplateColumns: '160px 240px', gap: 24, marginBottom: 14 }}>
+            {/* Lesson ID */}
+            <div>
+              <Label style={{ marginBottom: 4 }}>Lesson ID</Label>
+              <div style={{
+                fontFamily: SANS, fontSize: 20, fontWeight: 700, color: C.ink,
+                fontFeatureSettings: '"tnum"', letterSpacing: '0.01em',
+              }}>{lesson.id}</div>
+              <div style={{ display: 'flex', gap: 6, marginTop: 8, flexWrap: 'wrap' }}>
+                <Chip tone="pink" size="sm">{lesson.year}</Chip>
+                {lesson.week !== null && <Chip tone="neutral" size="sm">Week {lesson.week}</Chip>}
+                <Chip tone="neutral" size="sm">{lesson.period}</Chip>
               </div>
-              <span style={{ fontFamily: SANS, fontSize: 12, color: C.ink, lineHeight: 1.4, display: 'block' }}>
-                {value || '—'}
-              </span>
             </div>
-          ))}
+
+            {/* Focus & Theme */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+              <div>
+                <Label style={{ marginBottom: 4 }}>Grammar / Vocab</Label>
+                <span style={{ fontFamily: SANS, fontSize: 13, color: C.ink }}>
+                  {lesson.grammarFocus || lesson.vocabFocus || '—'}
+                </span>
+              </div>
+              <div>
+                <Label style={{ marginBottom: 4 }}>Theme</Label>
+                <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+                  {lesson.theme
+                    ? <Chip tone="amber" size="sm">{lesson.theme}</Chip>
+                    : <span style={{ fontFamily: SANS, fontSize: 12, color: C.faint2 }}>—</span>
+                  }
+                </div>
+              </div>
+              <div>
+                <Label style={{ marginBottom: 4 }}>Linguistic Skill</Label>
+                <span style={{ fontFamily: SANS, fontSize: 12, color: C.faint }}>
+                  {lesson.linguisticSkill || '—'}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* LO hierarchy */}
+          <div style={{
+            paddingTop: 14,
+            borderTop: `1px solid ${C.border}`,
+            display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 12,
+          }}>
+            {[
+              { label: 'Monthly LO', value: lesson.skillLO },
+              { label: 'Weekly LO', value: lesson.knowledgeLO },
+              { label: 'Daily LO', value: lesson.dailyLO },
+            ].map(({ label, value }) => (
+              <div key={label} style={{
+                background: C.pinkSoft, border: `1px solid ${C.pinkBorder}`,
+                borderRadius: 8, padding: '8px 10px',
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 5, marginBottom: 4 }}>
+                  <Icon name="lock" size={9} color={C.pink} />
+                  <Label style={{ color: C.pink, margin: 0 }}>{label}</Label>
+                </div>
+                <span style={{ fontFamily: SANS, fontSize: 12, color: C.ink, lineHeight: 1.4, display: 'block' }}>
+                  {value || '—'}
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
       )}
     </div>

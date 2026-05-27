@@ -119,12 +119,13 @@ function DesktopPlanEditor({ uuid, initialPlan, initialLesson, isTablet }: PlanE
     if (!plan) return;
     const s = sections[focusedSection];
     const materials = s.materials ? `${s.materials}, ${card.type}` : card.type;
+    const header = `**${card.type}:**`;
     const teacher = s.teacher_instructions
-      ? `${s.teacher_instructions}\n${card.teacherInstructions}`
-      : card.teacherInstructions;
+      ? `${s.teacher_instructions}\n${header}\n${card.teacherInstructions}`
+      : `${header}\n${card.teacherInstructions}`;
     const student = s.student_instructions
-      ? `${s.student_instructions}\n${card.studentInstructions}`
-      : card.studentInstructions;
+      ? `${s.student_instructions}\n${header}\n${card.studentInstructions}`
+      : `${header}\n${card.studentInstructions}`;
     updateSection(focusedSection, {
       materials,
       teacher_instructions: teacher,
@@ -189,12 +190,13 @@ function DesktopPlanEditor({ uuid, initialPlan, initialLesson, isTablet }: PlanE
       if (card && !isNaN(sectionIdx)) {
         const s = sections[sectionIdx];
         const materials = s.materials ? `${s.materials}, ${card.type}` : card.type;
+        const header = `**${card.type}:**`;
         const teacher = s.teacher_instructions
-          ? `${s.teacher_instructions}\n${card.teacherInstructions}`
-          : card.teacherInstructions;
+          ? `${s.teacher_instructions}\n${header}\n${card.teacherInstructions}`
+          : `${header}\n${card.teacherInstructions}`;
         const student = s.student_instructions
-          ? `${s.student_instructions}\n${card.studentInstructions}`
-          : card.studentInstructions;
+          ? `${s.student_instructions}\n${header}\n${card.studentInstructions}`
+          : `${header}\n${card.studentInstructions}`;
         updateSection(sectionIdx, { materials, teacher_instructions: teacher, student_instructions: student });
       }
     }
@@ -221,9 +223,9 @@ function DesktopPlanEditor({ uuid, initialPlan, initialLesson, isTablet }: PlanE
   const effectiveWidth = isTablet ? 0 : (panelCollapsed ? COLLAPSED_WIDTH : rightWidth);
 
   const ICON_TABS: Array<{ id: RightTab; icon: 'book' | 'sparkle' | 'copy'; label: string }> = [
-    { id: 'library', icon: 'book', label: 'Library' },
+    { id: 'library', icon: 'book', label: 'Exercises' },
     { id: 'ai', icon: 'sparkle', label: 'AI' },
-    { id: 'examples', icon: 'copy', label: 'Examples' },
+    { id: 'examples', icon: 'copy', label: 'Lessons' },
   ];
 
   return (
@@ -470,20 +472,21 @@ function DesktopPlanEditor({ uuid, initialPlan, initialLesson, isTablet }: PlanE
                   onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.background = `${C.pink}28`; }}
                   onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.background = 'transparent'; }}
                 />
-                {/* Fix 7: Collapse button — left edge of panel, obvious chevron */}
+                {/* Collapse button — flat 28×28 tab flush to panel left edge */}
                 <button
                   onClick={() => setPanelCollapsed(true)} title="Collapse panel"
                   style={{
-                    position: 'absolute', left: -16, top: '50%', transform: 'translateY(-50%)',
+                    position: 'absolute', left: -28, top: '50%', transform: 'translateY(-50%)',
                     zIndex: 10,
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    width: 32, height: 32, borderRadius: 999,
-                    background: C.surface, border: `1px solid ${C.border}`,
-                    boxShadow: '-2px 0 8px rgba(56,30,30,0.08)',
-                    cursor: 'pointer', flexShrink: 0,
+                    width: 28, height: 28,
+                    borderRadius: '6px 0 0 6px',
+                    background: C.cream, border: `1px solid ${C.border}`,
+                    borderRight: 'none',
+                    cursor: 'pointer',
                   }}
                 >
-                  <Icon name="chevronRight" size={15} color={C.faint} />
+                  <Icon name="chevronRight" size={14} color={C.faint} />
                 </button>
 
                 {rightTab === 'library' ? (

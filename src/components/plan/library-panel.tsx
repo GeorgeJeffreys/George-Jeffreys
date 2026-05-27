@@ -451,9 +451,9 @@ export function LibraryPanel({ draggingId, activeTab, onTabChange, onInsertCard,
 
 export function RightTabs({ active, onChange }: { active: RightTab; onChange: (t: RightTab) => void }) {
   const tabs: Array<{ id: RightTab; label: string; icon: 'book'|'sparkle'|'copy' }> = [
-    { id: 'library',  label: 'Library',   icon: 'book'    },
+    { id: 'library',  label: 'Exercises', icon: 'book'    },
     { id: 'ai',       label: 'AI',        icon: 'sparkle' },
-    { id: 'examples', label: 'Examples',  icon: 'copy'    },
+    { id: 'examples', label: 'Lessons',   icon: 'copy'    },
   ];
   return (
     <div style={{ display: 'flex', padding: 4, background: C.cream, borderRadius: 10, gap: 2 }}>
