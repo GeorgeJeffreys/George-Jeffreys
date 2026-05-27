@@ -5,7 +5,7 @@ import type { CurriculumLesson } from "@/types/curriculum";
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
-const MODEL = "claude-sonnet-4-20250514";
+const MODEL = "claude-sonnet-4-5";
 
 const SYSTEM_PROMPT = `You are an expert lesson plan writer for the Alsama Project, a refugee education NGO based in Lebanon that teaches English to displaced communities. Students range from absolute beginners (CEFR pre-A1) to upper-intermediate (CEFR B2), with most learners at A1–A2. Classes are delivered by volunteer teachers in informal settings. Lessons must be practical, low-resource, trauma-informed, and immediately usable in a classroom with minimal materials.
 
