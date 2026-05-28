@@ -249,7 +249,6 @@ export function CurriculumExplorer({ initialYear, initialYearData }: Props) {
           year={year}
           onFocusSkill={s => { setFocusedSkill(s); setFocusedTheme(null); }}
           onFocusTheme={setFocusedTheme}
-          onLessonClick={setDrawerLesson}
         />
       );
     }

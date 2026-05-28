@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { C, SANS } from '@/lib/tokens';
 import { Icon } from '@/components/icon';
 import {
@@ -121,18 +122,24 @@ function ThemeCardC({ theme, count, focused, faded, w, onClick }: { theme: strin
   );
 }
 
-function LessonCardC({ lesson, hover, w, onClick }: { lesson: CurriculumLesson; hover?: boolean; w: number; onClick: () => void }) {
+function LessonCardC({ lesson, hover, w }: { lesson: CurriculumLesson; hover?: boolean; w: number }) {
+  const router = useRouter();
   const col = SKILL_COLOR[skillKey(lesson.linguisticSkill)];
+  const planUrl = `/plan/new?lessonId=${encodeURIComponent(lesson.id)}`;
+
   return (
-    <div onClick={onClick} style={{
-      width: w, height: LESSON_CARD_H, background: C.surface,
-      border: `1px solid ${hover ? C.pinkBorder : C.border}`,
-      borderRadius: 12, padding: 12,
-      boxShadow: hover ? `0 0 0 3px ${C.pinkSoft},0 8px 24px rgba(56,30,30,0.08)` : '0 1px 0 rgba(56,30,30,0.02)',
-      position: 'relative', overflow: 'hidden',
-      display: 'flex', flexDirection: 'column', gap: 6,
-      zIndex: hover ? 5 : 2, cursor: 'pointer',
-    }}>
+    <div
+      onClick={() => router.push(planUrl)}
+      style={{
+        width: w, height: LESSON_CARD_H, background: C.surface,
+        border: `1px solid ${hover ? C.pinkBorder : C.border}`,
+        borderRadius: 12, padding: 12,
+        boxShadow: hover ? `0 0 0 3px ${C.pinkSoft},0 8px 24px rgba(56,30,30,0.08)` : '0 1px 0 rgba(56,30,30,0.02)',
+        position: 'relative', overflow: 'hidden',
+        display: 'flex', flexDirection: 'column', gap: 6,
+        zIndex: hover ? 5 : 2, cursor: 'pointer',
+      }}
+    >
       <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
         <span style={{ fontFamily: SANS, fontSize: 10.5, fontWeight: 700, color: C.faint, fontVariantNumeric: 'tabular-nums' }}>{lesson.id}</span>
         <Chip tone="neutral" size="sm">{lesson.month} · Wk{lesson.week} · P{lesson.periodNum}</Chip>
@@ -149,9 +156,11 @@ function LessonCardC({ lesson, hover, w, onClick }: { lesson: CurriculumLesson; 
         </span>
       )}
       <div style={{ paddingTop: 8, borderTop: `1px solid ${C.border}`, display: 'flex', alignItems: 'center', gap: 6 }}>
-        <HiBtn variant="ghost" size="sm">Preview</HiBtn>
         <div style={{ flex: 1 }} />
-        <HiBtn variant="primary" size="sm" icon={<Icon name="arrowRight" size={12} color="#fff" />} onClick={onClick}>Open</HiBtn>
+        <HiBtn variant="primary" size="sm" icon={<Icon name="arrowRight" size={12} color="#fff" />}
+          onClick={() => router.push(planUrl)}>
+          Plan this lesson
+        </HiBtn>
       </div>
       <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: 3, background: col.line }} />
     </div>
@@ -305,7 +314,7 @@ export function ContentCascadeCollapsed({ skillBreakdown, totalLessons, year, on
 
 // ── Expanded cascade (Content B) ─────────────────────────────────────────────
 
-export function ContentCascadeExpanded({ skillBreakdown, themes, lessons, focusedSkill, focusedTheme, totalLessons, year, onFocusSkill, onFocusTheme, onLessonClick }: {
+export function ContentCascadeExpanded({ skillBreakdown, themes, lessons, focusedSkill, focusedTheme, totalLessons, year, onFocusSkill, onFocusTheme }: {
   skillBreakdown: SkillData[];
   themes: ThemeData[];
   lessons: CurriculumLesson[];
@@ -315,7 +324,6 @@ export function ContentCascadeExpanded({ skillBreakdown, themes, lessons, focuse
   year: number;
   onFocusSkill: (s: string | null) => void;
   onFocusTheme: (t: string | null) => void;
-  onLessonClick: (l: CurriculumLesson) => void;
 }) {
   const h = BAND_EXPANDED;
   const ns = skillBreakdown.length;
@@ -406,7 +414,7 @@ export function ContentCascadeExpanded({ skillBreakdown, themes, lessons, focuse
           {focusedTheme ? (
             <div style={{ display: 'flex', gap: LESSON_GAP, alignItems: 'flex-start', flexWrap: 'wrap' }}>
               {lessons.map(l => (
-                <LessonCardC key={l.id} lesson={l} w={LESSON_W} onClick={() => onLessonClick(l)} />
+                <LessonCardC key={l.id} lesson={l} w={LESSON_W} />
               ))}
             </div>
           ) : (
