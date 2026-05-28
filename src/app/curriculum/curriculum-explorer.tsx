@@ -7,14 +7,13 @@ import {
 } from '@/components/curriculum/ce-shell';
 import { CalendarLeft, MonthView, WeekView, YearOverview } from '@/components/curriculum/ce-calendar';
 import {
-  JourneyLeft, JourneyCascadeCollapsed, JourneyCascadeExpanded,
+  JourneyLeft, JourneyOrgChart,
   type SkillLO, type KnowledgeLO,
 } from '@/components/curriculum/ce-journey';
 import {
   ContentLeft, ContentCascadeCollapsed, ContentCascadeExpanded,
   type SkillData, type ThemeData,
 } from '@/components/curriculum/ce-content';
-import { CeLessonDrawer } from '@/components/curriculum/ce-lesson-drawer';
 import type { CurriculumLesson } from '@/types/curriculum';
 import type { CurriculumYearData } from '@/lib/curriculum-actions';
 import {
@@ -22,7 +21,7 @@ import {
   fetchLessonsForWeek,
   fetchKnowledgeLOs,
 } from '@/lib/curriculum-actions';
-import { getLessonsByYear, getLessonsByTheme } from '@/lib/curriculumUtils';
+import { getLessonsByYear } from '@/lib/curriculumUtils';
 
 interface Props {
   initialYear: number;
@@ -48,9 +47,6 @@ export function CurriculumExplorer({ initialYear, initialYearData }: Props) {
   // Content state
   const [focusedSkill, setFocusedSkill]   = useState<string | null>(null);
   const [focusedTheme, setFocusedTheme]   = useState<string | null>(null);
-
-  // Lesson drawer
-  const [drawerLesson, setDrawerLesson] = useState<CurriculumLesson | null>(null);
 
   // All lessons for the year (client-side)
   const allLessons = useMemo(() => getLessonsByYear(year), [year]);
@@ -210,28 +206,17 @@ export function CurriculumExplorer({ initialYear, initialYearData }: Props) {
     }
 
     if (mode === 'journey') {
-      if (focusedSkillRef) {
-        return (
-          <JourneyCascadeExpanded
-            skillLOs={yearData.skillLOs as SkillLO[]}
-            klos={klosBySkill.get(focusedSkillRef) ?? []}
-            dailyLessons={kRefLessons}
-            focusedSkillRef={focusedSkillRef}
-            focusedKRef={focusedKRef}
-            totalLessons={yearData.totalLessons}
-            year={year}
-            onFocusSkill={handleFocusSkill}
-            onFocusKRef={setFocusedKRef}
-            onLessonClick={setDrawerLesson}
-          />
-        );
-      }
       return (
-        <JourneyCascadeCollapsed
+        <JourneyOrgChart
           skillLOs={yearData.skillLOs as SkillLO[]}
+          klos={focusedSkillRef ? (klosBySkill.get(focusedSkillRef) ?? []) : []}
+          dailyLessons={kRefLessons}
+          focusedSkillRef={focusedSkillRef}
+          focusedKRef={focusedKRef}
           totalLessons={yearData.totalLessons}
           year={year}
-          onFocusSkill={ref => handleFocusSkill(ref)}
+          onFocusSkill={handleFocusSkill}
+          onFocusKRef={setFocusedKRef}
         />
       );
     }
@@ -263,23 +248,20 @@ export function CurriculumExplorer({ initialYear, initialYearData }: Props) {
   }
 
   return (
-    <>
-      <CeShell
-        topBar={<CeTopBar year={year} search={search} onYearChange={setYear} onSearchChange={setSearch} />}
-        modeTabs={<CeModeTabs mode={mode} onModeChange={m => { setMode(m); setSearch(''); }} totalLessons={yearData.totalLessons} />}
-        leftPanel={renderLeft()}
-        main={renderMain()}
-        rightSidebar={
-          <CeRightSidebar
-            year={year}
-            totalLessons={yearData.totalLessons}
-            totalWeeks={yearData.totalWeeks}
-            skillBreakdown={yearData.skillBreakdown as SkillData[]}
-            themes={yearData.themes as ThemeData[]}
-          />
-        }
-      />
-      <CeLessonDrawer lesson={drawerLesson} onClose={() => setDrawerLesson(null)} />
-    </>
+    <CeShell
+      topBar={<CeTopBar year={year} search={search} onYearChange={setYear} onSearchChange={setSearch} />}
+      modeTabs={<CeModeTabs mode={mode} onModeChange={m => { setMode(m); setSearch(''); }} totalLessons={yearData.totalLessons} />}
+      leftPanel={renderLeft()}
+      main={renderMain()}
+      rightSidebar={
+        <CeRightSidebar
+          year={year}
+          totalLessons={yearData.totalLessons}
+          totalWeeks={yearData.totalWeeks}
+          skillBreakdown={yearData.skillBreakdown as SkillData[]}
+          themes={yearData.themes as ThemeData[]}
+        />
+      }
+    />
   );
 }
