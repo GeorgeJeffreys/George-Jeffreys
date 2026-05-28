@@ -538,16 +538,25 @@ export function CascadeCanvas({ children, connectors, totalHeight }: {
   );
 }
 
-export function ZoomControls() {
+export function ZoomControls({ zoom = 1, onZoomIn, onZoomOut, onFit, onFocus }: {
+  zoom?: number;
+  onZoomIn?: () => void;
+  onZoomOut?: () => void;
+  onFit?: () => void;
+  onFocus?: () => void;
+}) {
   return (
     <div style={{
       position: 'absolute', right: 16, bottom: 16, zIndex: 10,
-      display: 'flex', padding: 4, gap: 2,
+      display: 'flex', flexDirection: 'column', padding: 4, gap: 2,
       background: C.surface, border: `1px solid ${C.border}`,
       borderRadius: 10, boxShadow: '0 4px 12px rgba(56,30,30,0.08)',
     }}>
       {(['plus', 'minus', 'fit', 'focus'] as const).map((k, i) => (
-        <button key={i} style={{ width: 32, height: 32, borderRadius: 7, border: 'none', background: 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: C.faint }}>
+        <button key={i}
+          onClick={k === 'plus' ? onZoomIn : k === 'minus' ? onZoomOut : k === 'fit' ? onFit : onFocus}
+          title={k === 'plus' ? 'Zoom in' : k === 'minus' ? 'Zoom out' : k === 'fit' ? `Fit (${zoom.toFixed(1)}×)` : 'Focus (1.2×)'}
+          style={{ width: 32, height: 32, borderRadius: 7, border: 'none', background: 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           {k === 'plus'  && <Icon name="plus" size={14} color={C.faint} />}
           {k === 'minus' && <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={C.faint} strokeWidth="1.8" strokeLinecap="round"><path d="M5 12h14"/></svg>}
           {k === 'fit'   && <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={C.faint} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M4 8V4h4M16 4h4v4M20 16v4h-4M8 20H4v-4"/></svg>}

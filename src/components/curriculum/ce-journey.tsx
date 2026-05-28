@@ -1,10 +1,11 @@
 'use client';
 
+import { useState, useRef, useEffect } from 'react';
 import { C, SANS } from '@/lib/tokens';
 import { Icon } from '@/components/icon';
 import {
-  CeLeftPanel, NavRow, HiBtn, Chip, Label,
-  TierBand, CascadeCanvas, ZoomControls, Minimap, TopChrome,
+  CeLeftPanel, NavRow, Chip, Label,
+  TierBand, ZoomControls, TopChrome,
   SKILL_COLOR, skillKey, TIER_RAIL_W,
   type TierDef,
 } from './ce-shell';
@@ -14,45 +15,38 @@ export interface SkillLO { ref: string; lo: string; skill: string; count: number
 export interface KnowledgeLO { ref: string; lo: string; count: number; weeks: number[] }
 
 const J_TIERS: TierDef[] = [
-  { id: 'total',    label: 'Total LO',    sub: 'The whole-year outcome',   accent: '#8E1F49' },
-  { id: 'skill',    label: 'Skill LO',    sub: 'Major skill outcomes',      accent: C.pink },
-  { id: 'knowledge',label: 'Knowledge LO',sub: '~4 per skill',             accent: C.amber },
-  { id: 'daily',    label: 'Daily LO',    sub: '5 per week · the lesson',  accent: C.faint },
+  { id: 'total',     label: 'Total LO',     sub: 'The whole-year outcome',   accent: '#8E1F49' },
+  { id: 'skill',     label: 'Skill LO',     sub: 'Major skill outcomes',     accent: C.pink },
+  { id: 'knowledge', label: 'Knowledge LO', sub: '~4 per skill',             accent: C.amber },
+  { id: 'daily',     label: 'Daily LO',     sub: '5 per week · the lesson',  accent: C.faint },
 ];
 
-// Band heights
 const BAND_COLLAPSED = { total: 140, skill: 180, knowledge: 120, daily: 120 };
 const BAND_EXPANDED  = { total: 120, skill: 180, knowledge: 140, daily: 180 };
 
-// Card dimensions
 const SKILL_CARD_H = 130;
 const KLO_CARD_H   = 92;
-const DAILY_CHIP_H = 32;
 
-// Canvas content width (excluding rail)
-const CW = 840;
-
-// Card layout
-const SKILL_W = 142;
+const SKILL_W  = 142;
 const SKILL_GAP = 12;
-const KLO_W = 168;
-const KLO_GAP = 12;
-const DAILY_W = 155;
+const KLO_W    = 168;
+const KLO_GAP  = 12;
+const DAILY_W  = 155;
 const DAILY_GAP = 12;
 
-function rowX(rowW: number, cardW: number, gap: number, i: number) {
-  const startX = TIER_RAIL_W + (CW - rowW) / 2;
-  return startX + i * (cardW + gap) + cardW / 2;
-}
+type ConnLine = { x1: number; y1: number; x2: number; y2: number; color?: string; opacity?: number };
 
-function bandTop(id: string, heights: Record<string, number>) {
-  const order = ['total', 'skill', 'knowledge', 'daily'];
-  let y = 0;
-  for (const k of order) { if (k === id) return y; y += heights[k]; }
-  return y;
+function relPos(el: HTMLDivElement | null, container: HTMLDivElement): { top: number; bot: number; cx: number } | null {
+  if (!el) return null;
+  const r = el.getBoundingClientRect();
+  const cr = container.getBoundingClientRect();
+  const st = container.scrollTop;
+  return {
+    top: r.top - cr.top + st,
+    bot: r.top - cr.top + st + r.height,
+    cx: r.left - cr.left + r.width / 2,
+  };
 }
-function cardTop(id: string, heights: Record<string, number>, h: number) { return bandTop(id, heights) + (heights[id] - h) / 2; }
-function cardBottom(id: string, heights: Record<string, number>, h: number) { return cardTop(id, heights, h) + h; }
 
 // ── Cards ─────────────────────────────────────────────────────────────────────
 
@@ -65,7 +59,7 @@ function RootCard({ small, totalLessons, year }: { small?: boolean; totalLessons
       color: '#fff', borderRadius: 14,
       padding: small ? '12px 18px' : '14px 22px',
       boxShadow: '0 12px 28px rgba(182,42,92,0.24),0 4px 8px rgba(182,42,92,0.14)',
-      position: 'relative', overflow: 'hidden',
+      position: 'relative', overflow: 'hidden', zIndex: 2,
     }}>
       <div style={{ position: 'absolute', right: -20, top: -20, width: 120, height: 120, borderRadius: '50%', background: 'rgba(255,255,255,0.06)' }} />
       <div style={{
@@ -90,15 +84,15 @@ function SkillCard({ s, focused, faded, w, onClick }: { s: SkillLO; focused?: bo
     <div
       onClick={onClick}
       style={{
-        width: w, height: SKILL_CARD_H, background: C.surface,
-        border: `1px solid ${focused ? C.pinkBorder : C.border}`,
-        borderRadius: 10, padding: 10, opacity: faded ? 0.5 : 1,
+        width: w, height: SKILL_CARD_H, background: '#FFFFFF',
+        border: `1px solid ${focused ? C.pinkBorder : '#E5DDD3'}`,
+        borderRadius: 12, padding: 10, opacity: faded ? 0.5 : 1,
         boxShadow: focused ? `0 0 0 3px ${C.pinkSoft},0 6px 18px rgba(56,30,30,0.06)` : '0 1px 0 rgba(56,30,30,0.02)',
-        display: 'flex', flexDirection: 'column', position: 'relative', zIndex: 3,
+        display: 'flex', flexDirection: 'column', position: 'relative', zIndex: 2,
         cursor: 'pointer',
       }}
     >
-      <span style={{ fontFamily: SANS, fontSize: 9, fontWeight: 700, color: C.faint, textTransform: 'uppercase', letterSpacing: '0.08em', display: 'block' }}>
+      <span style={{ fontFamily: SANS, fontSize: 9, fontWeight: 700, color: '#6E6863', textTransform: 'uppercase', letterSpacing: '0.08em', display: 'block' }}>
         {s.skill || col.label}
       </span>
       <span style={{ fontFamily: SANS, fontSize: 10, fontWeight: 700, color: col.fg, background: col.bg, padding: '1px 5px', borderRadius: 4, alignSelf: 'flex-start', marginTop: 2 }}>
@@ -108,7 +102,7 @@ function SkillCard({ s, focused, faded, w, onClick }: { s: SkillLO; focused?: bo
         {s.lo}
       </span>
       <div style={{ marginTop: 4, paddingTop: 6, borderTop: `1px dashed ${C.border}`, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <span style={{ fontFamily: SANS, fontSize: 10, color: C.faint }}>{s.count} lessons</span>
+        <span style={{ fontFamily: SANS, fontSize: 10, color: '#6E6863' }}>{s.count} lessons</span>
         {focused
           ? <Chip tone="pink" size="sm" style={{ height: 16, fontSize: 9.5 }}>Focus</Chip>
           : <Icon name="chevronDown" size={11} color={C.faint2} />
@@ -125,10 +119,10 @@ function KloCard({ k, focused, faded, w, onClick }: { k: KnowledgeLO; focused?: 
       style={{
         width: w, height: KLO_CARD_H,
         background: C.amberSoft, border: `1px solid ${focused ? '#E8A636' : '#EFD9A5'}`,
-        borderRadius: 10, padding: '8px 10px', opacity: faded ? 0.45 : 1,
+        borderRadius: 12, padding: '8px 10px', opacity: faded ? 0.45 : 1,
         boxShadow: focused ? '0 0 0 3px rgba(232,166,54,0.18)' : 'none',
         display: 'flex', flexDirection: 'column', gap: 3,
-        position: 'relative', zIndex: 3, cursor: 'pointer',
+        position: 'relative', zIndex: 2, cursor: 'pointer',
       }}
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
@@ -145,21 +139,24 @@ function KloCard({ k, focused, faded, w, onClick }: { k: KnowledgeLO; focused?: 
   );
 }
 
-function DailyChip({ lesson, hover, w, onClick }: { lesson: CurriculumLesson; hover?: boolean; w: number; onClick: () => void }) {
+function DailyChip({ lesson, w, onClick }: { lesson: CurriculumLesson; w: number; onClick: () => void }) {
+  const [hover, setHover] = useState(false);
   return (
     <div
       onClick={onClick}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
       style={{
-        width: w, height: DAILY_CHIP_H, background: C.surface,
-        border: `1px solid ${hover ? C.pink : C.border}`,
+        width: w, background: '#FFFFFF',
+        border: `1px solid ${hover ? C.pink : '#E5DDD3'}`,
         borderRadius: 8, padding: '6px 9px',
         display: 'flex', alignItems: 'center', gap: 6,
         boxShadow: hover ? '0 8px 24px rgba(56,30,30,0.12)' : '0 1px 0 rgba(56,30,30,0.02)',
-        position: 'relative', cursor: 'pointer', zIndex: hover ? 6 : 3, transition: 'all 0.15s',
+        position: 'relative', cursor: 'pointer', zIndex: hover ? 5 : 2, transition: 'all 0.15s',
       }}
     >
       <div style={{ width: 4, height: 4, borderRadius: 999, background: C.faint, flexShrink: 0 }} />
-      <span style={{ fontFamily: SANS, fontSize: 9.5, fontWeight: 700, color: C.faint, fontVariantNumeric: 'tabular-nums', flexShrink: 0 }}>{lesson.id}</span>
+      <span style={{ fontFamily: SANS, fontSize: 9.5, fontWeight: 700, color: '#6E6863', fontVariantNumeric: 'tabular-nums', flexShrink: 0 }}>{lesson.id}</span>
       <span style={{ fontFamily: SANS, fontSize: 11, flex: 1, lineHeight: 1.25, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{lesson.dailyLO}</span>
     </div>
   );
@@ -273,60 +270,87 @@ export function JourneyLeft({
 export function JourneyCascadeCollapsed({ skillLOs, totalLessons, year, onFocusSkill }: {
   skillLOs: SkillLO[]; totalLessons: number; year: number; onFocusSkill: (ref: string) => void;
 }) {
-  const heights = BAND_COLLAPSED;
-  const n = skillLOs.length;
-  const skillRowW = n * SKILL_W + Math.max(0, n - 1) * SKILL_GAP;
-  const totalHeight = Object.values(heights).reduce((a, b) => a + b, 0);
+  const [zoom, setZoom] = useState(1.0);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const rootRef      = useRef<HTMLDivElement>(null);
+  const skillRefs    = useRef<(HTMLDivElement | null)[]>([]);
+  const [lines, setLines] = useState<ConnLine[]>([]);
 
-  const totalCx = TIER_RAIL_W + CW / 2;
-  const totalBot = cardBottom('total', heights, 100);
-  const skillCardTop = cardTop('skill', heights, SKILL_CARD_H);
-  const skillCardBot = cardBottom('skill', heights, SKILL_CARD_H);
-  const sCx = (i: number) => rowX(skillRowW, SKILL_W, SKILL_GAP, i);
-  const spineY = skillCardTop - 18;
-  const kloStubTop = bandTop('knowledge', heights) + 16;
-  const kloStubBot = bandTop('knowledge', heights) + heights.knowledge - 16;
-  const dailyStubTop = bandTop('daily', heights) + 16;
+  skillRefs.current.length = skillLOs.length;
 
-  const connectors = [
-    { d: `M ${totalCx} ${totalBot} L ${totalCx} ${spineY}`, weight: 2, opacity: 0.5 },
-    n > 1 ? { d: `M ${sCx(0)} ${spineY} L ${sCx(n - 1)} ${spineY}`, weight: 1.5, opacity: 0.4 } : null,
-    ...skillLOs.map((_, i) => ({ d: `M ${sCx(i)} ${spineY} L ${sCx(i)} ${skillCardTop}`, weight: 1.5, opacity: 0.5 })),
-    ...skillLOs.map((_, i) => ({ d: `M ${sCx(i)} ${skillCardBot} L ${sCx(i)} ${kloStubTop}`, weight: 1, opacity: 0.3, dashed: true })),
-    ...skillLOs.map((_, i) => ({ d: `M ${sCx(i)} ${kloStubBot} L ${sCx(i)} ${dailyStubTop}`, weight: 1, opacity: 0.25, dashed: true })),
-  ].filter(Boolean) as { d: string; weight: number; opacity: number; dashed?: boolean }[];
+  const totalH = Object.values(BAND_COLLAPSED).reduce((a, b) => a + b, 0);
+
+  useEffect(() => {
+    function compute() {
+      const c = containerRef.current;
+      if (!c) return;
+      const nl: ConnLine[] = [];
+      const root = relPos(rootRef.current, c);
+      if (root) {
+        skillRefs.current.forEach(ref => {
+          const sk = relPos(ref, c);
+          if (sk) nl.push({ x1: root.cx, y1: root.bot, x2: sk.cx, y2: sk.top, opacity: 0.4 });
+        });
+      }
+      setLines(nl);
+    }
+    const ro = new ResizeObserver(compute);
+    if (containerRef.current) ro.observe(containerRef.current);
+    compute();
+    return () => ro.disconnect();
+  }, [skillLOs, zoom]);
 
   return (
-    <CascadeCanvas connectors={connectors} totalHeight={totalHeight}>
-      <TopChrome label="Outcome tree · all branches collapsed" badge="click a skill to expand" />
+    <div ref={containerRef} style={{ flex: 1, position: 'relative', overflowY: 'auto', background: C.cream }}>
+      {/* Connector SVG — behind all content */}
+      <svg style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: totalH, pointerEvents: 'none', zIndex: 0 }}>
+        {lines.map((l, i) => (
+          <line key={i} x1={l.x1} y1={l.y1} x2={l.x2} y2={l.y2}
+            stroke={C.faint2} strokeWidth={1.5} opacity={l.opacity ?? 0.4} strokeLinecap="round"
+          />
+        ))}
+      </svg>
 
-      <TierBand tier={J_TIERS[0]} minHeight={heights.total}>
-        <RootCard totalLessons={totalLessons} year={year} />
-      </TierBand>
+      <div style={{ transform: `scale(${zoom})`, transformOrigin: 'top left' }}>
+        <TopChrome label="Outcome tree · all branches collapsed" badge="click a skill to expand" />
 
-      <TierBand tier={J_TIERS[1]} minHeight={heights.skill} faded>
-        <div style={{ display: 'flex', gap: SKILL_GAP }}>
-          {skillLOs.map(s => (
-            <SkillCard key={s.ref} s={s} w={SKILL_W} onClick={() => onFocusSkill(s.ref)} />
-          ))}
-        </div>
-      </TierBand>
+        <TierBand tier={J_TIERS[0]} minHeight={BAND_COLLAPSED.total}>
+          <div ref={rootRef}>
+            <RootCard totalLessons={totalLessons} year={year} />
+          </div>
+        </TierBand>
 
-      <TierBand tier={J_TIERS[2]} minHeight={heights.knowledge}>
-        <div style={{ display: 'flex', gap: SKILL_GAP }}>
-          {skillLOs.map(s => <StubCard key={s.ref} label="Knowledge LOs" sub="expand" w={SKILL_W} />)}
-        </div>
-      </TierBand>
+        <TierBand tier={J_TIERS[1]} minHeight={BAND_COLLAPSED.skill} faded>
+          <div style={{ display: 'flex', gap: SKILL_GAP }}>
+            {skillLOs.map((s, i) => (
+              <div key={s.ref} ref={el => { skillRefs.current[i] = el; }}>
+                <SkillCard s={s} w={SKILL_W} onClick={() => onFocusSkill(s.ref)} />
+              </div>
+            ))}
+          </div>
+        </TierBand>
 
-      <TierBand tier={J_TIERS[3]} minHeight={heights.daily} last>
-        <div style={{ display: 'flex', gap: SKILL_GAP }}>
-          {skillLOs.map(s => <StubCard key={s.ref} label={`${s.count} daily lessons`} sub="expand" w={SKILL_W} />)}
-        </div>
-      </TierBand>
+        <TierBand tier={J_TIERS[2]} minHeight={BAND_COLLAPSED.knowledge}>
+          <div style={{ display: 'flex', gap: SKILL_GAP }}>
+            {skillLOs.map(s => <StubCard key={s.ref} label="Knowledge LOs" sub="expand" w={SKILL_W} />)}
+          </div>
+        </TierBand>
 
-      <Minimap viewport={{ x: 0.04, y: 0.04, w: 0.92, h: 0.92 }} tiers={J_TIERS} />
-      <ZoomControls />
-    </CascadeCanvas>
+        <TierBand tier={J_TIERS[3]} minHeight={BAND_COLLAPSED.daily} last>
+          <div style={{ display: 'flex', gap: SKILL_GAP }}>
+            {skillLOs.map(s => <StubCard key={s.ref} label={`${s.count} daily lessons`} sub="expand" w={SKILL_W} />)}
+          </div>
+        </TierBand>
+      </div>
+
+      <ZoomControls
+        zoom={zoom}
+        onZoomIn={() => setZoom(z => Math.min(1.5, parseFloat((z + 0.1).toFixed(1))))}
+        onZoomOut={() => setZoom(z => Math.max(0.4, parseFloat((z - 0.1).toFixed(1))))}
+        onFit={() => setZoom(1.0)}
+        onFocus={() => setZoom(1.2)}
+      />
+    </div>
   );
 }
 
@@ -344,110 +368,165 @@ export function JourneyCascadeExpanded({ skillLOs, klos, dailyLessons, focusedSk
   onFocusKRef: (ref: string | null) => void;
   onLessonClick: (l: CurriculumLesson) => void;
 }) {
-  const heights = BAND_EXPANDED;
-  const ns = skillLOs.length;
-  const nk = klos.length;
-  const nd = dailyLessons.length;
+  const [zoom, setZoom] = useState(1.0);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const rootRef      = useRef<HTMLDivElement>(null);
+  const skillRefs    = useRef<(HTMLDivElement | null)[]>([]);
+  const kloRefs      = useRef<(HTMLDivElement | null)[]>([]);
+  const dailyRefs    = useRef<(HTMLDivElement | null)[]>([]);
+  const [lines, setLines] = useState<ConnLine[]>([]);
 
-  const skillRowW  = ns * SKILL_W  + Math.max(0, ns - 1) * SKILL_GAP;
-  const kloRowW    = nk * KLO_W   + Math.max(0, nk - 1) * KLO_GAP;
-  const dailyRowW  = nd * DAILY_W  + Math.max(0, nd - 1) * DAILY_GAP;
+  skillRefs.current.length = skillLOs.length;
+  kloRefs.current.length   = klos.length;
+  dailyRefs.current.length = dailyLessons.length;
 
   const focusSkillIdx = skillLOs.findIndex(s => s.ref === focusedSkillRef);
   const focusKIdx     = klos.findIndex(k => k.ref === focusedKRef);
 
-  const totalCx   = TIER_RAIL_W + CW / 2;
-  const totalBot  = cardBottom('total', heights, 84);
-  const sTop      = cardTop('skill', heights, SKILL_CARD_H);
-  const sBot      = cardBottom('skill', heights, SKILL_CARD_H);
-  const kTop      = cardTop('knowledge', heights, KLO_CARD_H);
-  const kBot      = cardBottom('knowledge', heights, KLO_CARD_H);
-  const dailyTop  = bandTop('daily', heights) + 20;
+  const totalH = Object.values(BAND_EXPANDED).reduce((a, b) => a + b, 0);
 
-  const sCx = (i: number) => rowX(skillRowW, SKILL_W, SKILL_GAP, i);
-  const kCx = (i: number) => rowX(kloRowW, KLO_W, KLO_GAP, i);
-  const dCx = (i: number) => rowX(dailyRowW, DAILY_W, DAILY_GAP, i);
+  useEffect(() => {
+    function compute() {
+      const c = containerRef.current;
+      if (!c) return;
+      const nl: ConnLine[] = [];
 
-  const fSx = focusSkillIdx >= 0 ? sCx(focusSkillIdx) : totalCx;
-  const fKx = focusKIdx >= 0 ? kCx(focusKIdx) : totalCx;
-  const sSpine = sTop - 16;
-  const kSpine = kTop - 16;
-  const dSpine = dailyTop - 16;
+      const root         = relPos(rootRef.current, c);
+      const focusedSkill = focusSkillIdx >= 0 ? relPos(skillRefs.current[focusSkillIdx], c) : null;
 
-  const connectors = [
-    { d: `M ${totalCx} ${totalBot} L ${totalCx} ${sSpine}`, weight: 2, opacity: 0.5 },
-    ns > 1 ? { d: `M ${sCx(0)} ${sSpine} L ${sCx(ns - 1)} ${sSpine}`, weight: 1.5, opacity: 0.35 } : null,
-    ...skillLOs.map((_, i) => ({ d: `M ${sCx(i)} ${sSpine} L ${sCx(i)} ${sTop}`, weight: 1.5, opacity: i === focusSkillIdx ? 0.9 : 0.2 })),
-    nk > 0 ? { d: `M ${fSx} ${sBot} C ${fSx} ${(sBot + kSpine) / 2}, ${totalCx} ${(sBot + kSpine) / 2}, ${totalCx} ${kSpine}`, weight: 2, color: C.pink, opacity: 0.55 } : null,
-    nk > 1 ? { d: `M ${kCx(0)} ${kSpine} L ${kCx(nk - 1)} ${kSpine}`, weight: 1.5, color: C.pink, opacity: 0.3 } : null,
-    ...klos.map((_, i) => ({ d: `M ${kCx(i)} ${kSpine} L ${kCx(i)} ${kTop}`, weight: 1.5, color: C.pink, opacity: i === focusKIdx ? 0.9 : 0.25 })),
-    nd > 0 && focusKIdx >= 0 ? { d: `M ${fKx} ${kBot} C ${fKx} ${(kBot + dSpine) / 2}, ${totalCx} ${(kBot + dSpine) / 2}, ${totalCx} ${dSpine}`, weight: 2, color: C.teal, opacity: 0.55 } : null,
-    nd > 1 && focusKIdx >= 0 ? { d: `M ${dCx(0)} ${dSpine} L ${dCx(nd - 1)} ${dSpine}`, weight: 1.5, color: C.teal, opacity: 0.3 } : null,
-    ...dailyLessons.map((_, i) => ({ d: `M ${dCx(i)} ${dSpine} L ${dCx(i)} ${dailyTop}`, weight: 1.5, color: C.teal, opacity: 0.6 })),
-  ].filter(Boolean) as { d: string; weight?: number; color?: string; opacity?: number }[];
+      // Root → focused skill card
+      if (root && focusedSkill) {
+        nl.push({ x1: root.cx, y1: root.bot, x2: focusedSkill.cx, y2: focusedSkill.top, color: C.pink, opacity: 0.55 });
+      }
 
-  const totalHeight = Object.values(heights).reduce((a, b) => a + b, 0);
-  const focused = skillLOs.find(s => s.ref === focusedSkillRef);
+      // Focused skill → each KLO card
+      if (focusedSkill) {
+        kloRefs.current.forEach(ref => {
+          const k = relPos(ref, c);
+          if (k) nl.push({ x1: focusedSkill.cx, y1: focusedSkill.bot, x2: k.cx, y2: k.top, color: C.pink, opacity: 0.35 });
+        });
+      }
+
+      // Focused KLO → each daily chip
+      if (focusKIdx >= 0) {
+        const focusedKlo = relPos(kloRefs.current[focusKIdx], c);
+        if (focusedKlo) {
+          dailyRefs.current.forEach(ref => {
+            const d = relPos(ref, c);
+            if (d) nl.push({ x1: focusedKlo.cx, y1: focusedKlo.bot, x2: d.cx, y2: d.top, color: C.teal, opacity: 0.5 });
+          });
+        }
+      }
+
+      setLines(nl);
+    }
+    const ro = new ResizeObserver(compute);
+    if (containerRef.current) ro.observe(containerRef.current);
+    compute();
+    return () => ro.disconnect();
+  }, [skillLOs, klos, dailyLessons, focusedSkillRef, focusedKRef, zoom, focusSkillIdx, focusKIdx]);
+
+  const focused      = skillLOs.find(s => s.ref === focusedSkillRef);
+  const focusedKLoObj = klos.find(k => k.ref === focusedKRef);
 
   return (
-    <CascadeCanvas connectors={connectors} totalHeight={totalHeight}>
-      <TopChrome label={`${focused?.ref ?? ''} · ${focused?.skill ?? ''}`} badge="expanded" />
+    <div ref={containerRef} style={{ flex: 1, position: 'relative', overflowY: 'auto', background: C.cream }}>
+      {/* Connector SVG — behind all content */}
+      <svg style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: totalH, pointerEvents: 'none', zIndex: 0 }}>
+        {lines.map((l, i) => (
+          <line key={i} x1={l.x1} y1={l.y1} x2={l.x2} y2={l.y2}
+            stroke={l.color ?? C.faint2} strokeWidth={1.5} opacity={l.opacity ?? 0.5} strokeLinecap="round"
+          />
+        ))}
+      </svg>
 
-      <TierBand tier={J_TIERS[0]} minHeight={heights.total}>
-        <RootCard small totalLessons={totalLessons} year={year} />
-      </TierBand>
+      {/* Breadcrumb — replaces minimap */}
+      <div style={{ position: 'absolute', top: 16, right: 16, zIndex: 10, display: 'flex', alignItems: 'center', gap: 6 }}>
+        <Label style={{ marginRight: 2 }}>You are viewing</Label>
+        <Chip tone="pink" size="sm" style={{ fontWeight: 600 }}>{focused?.ref ?? ''} · {focused?.skill ?? ''}</Chip>
+        {focusedKRef && (
+          <>
+            <Icon name="chevronRight" size={11} color={C.faint2} />
+            <Chip tone="amber" size="sm">{focusedKRef} · {focusedKLoObj?.lo?.slice(0, 30) ?? ''}{(focusedKLoObj?.lo?.length ?? 0) > 30 ? '…' : ''}</Chip>
+          </>
+        )}
+      </div>
 
-      <TierBand tier={J_TIERS[1]} minHeight={heights.skill} faded>
-        <div style={{ display: 'flex', gap: SKILL_GAP }}>
-          {skillLOs.map((s, i) => (
-            <SkillCard key={s.ref} s={s} w={SKILL_W}
-              focused={i === focusSkillIdx} faded={i !== focusSkillIdx}
-              onClick={() => onFocusSkill(i === focusSkillIdx ? null : s.ref)}
-            />
-          ))}
-        </div>
-      </TierBand>
-
-      <TierBand tier={J_TIERS[2]} minHeight={heights.knowledge}>
-        <div style={{ display: 'flex', gap: KLO_GAP }}>
-          {klos.map((k, i) => (
-            <KloCard key={k.ref} k={k} w={KLO_W}
-              focused={i === focusKIdx}
-              onClick={() => onFocusKRef(i === focusKIdx ? null : k.ref)}
-            />
-          ))}
-          {klos.length === 0 && <StubCard label="Loading knowledge LOs…" w={KLO_W} />}
-        </div>
-      </TierBand>
-
-      {/* Daily tier — align to top */}
-      <div style={{ position: 'relative', minHeight: heights.daily, display: 'flex', background: 'transparent' }}>
-        <div style={{
-          width: TIER_RAIL_W, flexShrink: 0, padding: '14px 12px 14px 16px',
-          display: 'flex', flexDirection: 'column', gap: 4, background: 'transparent',
-          borderRight: `1px dashed ${C.borderSoft}`,
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-            <div style={{ width: 3, height: 14, borderRadius: 2, background: J_TIERS[3].accent }} />
-            <span style={{ fontFamily: SANS, fontSize: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', lineHeight: 1.1, color: C.ink }}>{J_TIERS[3].label}</span>
+      <div style={{ transform: `scale(${zoom})`, transformOrigin: 'top left' }}>
+        <TierBand tier={J_TIERS[0]} minHeight={BAND_EXPANDED.total}>
+          <div ref={rootRef}>
+            <RootCard small totalLessons={totalLessons} year={year} />
           </div>
-          <span style={{ fontFamily: SANS, fontSize: 10, color: C.faint, lineHeight: 1.4 }}>{J_TIERS[3].sub}</span>
-        </div>
-        <div style={{ flex: 1, position: 'relative', zIndex: 3, padding: '20px 24px', display: 'flex', justifyContent: 'center', alignItems: 'flex-start' }}>
-          {focusedKRef ? (
-            <div style={{ display: 'flex', gap: DAILY_GAP, alignItems: 'flex-start', flexWrap: 'wrap' }}>
-              {dailyLessons.map(l => (
-                <DailyChip key={l.id} lesson={l} w={DAILY_W} onClick={() => onLessonClick(l)} />
-              ))}
+        </TierBand>
+
+        <TierBand tier={J_TIERS[1]} minHeight={BAND_EXPANDED.skill} faded>
+          <div style={{ display: 'flex', gap: SKILL_GAP }}>
+            {skillLOs.map((s, i) => (
+              <div key={s.ref} ref={el => { skillRefs.current[i] = el; }}>
+                <SkillCard s={s} w={SKILL_W}
+                  focused={i === focusSkillIdx} faded={i !== focusSkillIdx}
+                  onClick={() => onFocusSkill(i === focusSkillIdx ? null : s.ref)}
+                />
+              </div>
+            ))}
+          </div>
+        </TierBand>
+
+        <TierBand tier={J_TIERS[2]} minHeight={BAND_EXPANDED.knowledge}>
+          <div style={{ display: 'flex', gap: KLO_GAP }}>
+            {klos.map((k, i) => (
+              <div key={k.ref} ref={el => { kloRefs.current[i] = el; }}>
+                <KloCard k={k} w={KLO_W}
+                  focused={i === focusKIdx}
+                  onClick={() => onFocusKRef(i === focusKIdx ? null : k.ref)}
+                />
+              </div>
+            ))}
+            {klos.length === 0 && <StubCard label="Loading knowledge LOs…" w={KLO_W} />}
+          </div>
+        </TierBand>
+
+        {/* Daily tier */}
+        <div style={{ position: 'relative', minHeight: BAND_EXPANDED.daily, display: 'flex', background: 'transparent' }}>
+          <div style={{
+            width: TIER_RAIL_W, flexShrink: 0, padding: '14px 12px 14px 16px',
+            display: 'flex', flexDirection: 'column', gap: 4, background: 'transparent',
+            borderRight: `1px dashed ${C.borderSoft}`,
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+              <div style={{ width: 3, height: 14, borderRadius: 2, background: J_TIERS[3].accent }} />
+              <span style={{ fontFamily: SANS, fontSize: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', lineHeight: 1.1, color: C.ink }}>{J_TIERS[3].label}</span>
             </div>
-          ) : (
-            <StubCard label="Select a Knowledge LO above to see daily lessons" w={400} />
-          )}
+            <span style={{ fontFamily: SANS, fontSize: 10, color: C.faint, lineHeight: 1.4 }}>{J_TIERS[3].sub}</span>
+          </div>
+          <div style={{ flex: 1, position: 'relative', zIndex: 2, padding: '20px 24px', display: 'flex', justifyContent: 'center', alignItems: 'flex-start' }}>
+            {focusedKRef ? (
+              <div style={{ display: 'flex', gap: DAILY_GAP, alignItems: 'flex-start', flexWrap: 'wrap' }}>
+                {dailyLessons.map((l, i) => (
+                  <div key={l.id} ref={el => { dailyRefs.current[i] = el; }}>
+                    <DailyChip lesson={l} w={DAILY_W} onClick={() => onLessonClick(l)} />
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <StubCard label="Select a Knowledge LO above to see daily lessons" w={400} />
+            )}
+          </div>
         </div>
       </div>
 
-      <Minimap viewport={{ x: 0.42, y: 0.06, w: 0.16, h: 0.88 }} tiers={J_TIERS} />
-      <ZoomControls />
-    </CascadeCanvas>
+      <ZoomControls
+        zoom={zoom}
+        onZoomIn={() => setZoom(z => Math.min(1.5, parseFloat((z + 0.1).toFixed(1))))}
+        onZoomOut={() => setZoom(z => Math.max(0.4, parseFloat((z - 0.1).toFixed(1))))}
+        onFit={() => setZoom(1.0)}
+        onFocus={() => {
+          setZoom(1.2);
+          // Scroll focused skill card into view
+          const el = skillRefs.current[focusSkillIdx];
+          if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }}
+      />
+    </div>
   );
 }
