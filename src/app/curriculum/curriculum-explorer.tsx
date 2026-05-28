@@ -55,11 +55,11 @@ export function CurriculumExplorer({ initialYear, initialYearData }: Props) {
   // All lessons for the year (client-side)
   const allLessons = useMemo(() => getLessonsByYear(year), [year]);
 
-  // Lessons for focused KRef (journey daily tier)
+  // Lessons for focused KRef (journey daily tier) — filter by BOTH skill AND knowledge
   const kRefLessons = useMemo(() => {
-    if (!focusedKRef) return [];
-    return allLessons.filter(l => l.knowledgeLORef === focusedKRef);
-  }, [focusedKRef, allLessons]);
+    if (!focusedSkillRef || !focusedKRef) return [];
+    return allLessons.filter(l => l.skillLORef === focusedSkillRef && l.knowledgeLORef === focusedKRef);
+  }, [focusedSkillRef, focusedKRef, allLessons]);
 
   // Themes for focused skill (content mode)
   const themesForSkill = useMemo(() => {
