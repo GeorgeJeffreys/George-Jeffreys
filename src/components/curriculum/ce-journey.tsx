@@ -1,26 +1,73 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import { C, SANS } from '@/lib/tokens';
 import { Icon } from '@/components/icon';
 import {
   CeLeftPanel, NavRow, Chip, Label, HiBtn,
   ZoomControls, SKILL_COLOR, skillKey,
+  type TierDef,
 } from './ce-shell';
 import type { CurriculumLesson } from '@/types/curriculum';
 
 export interface SkillLO { ref: string; lo: string; skill: string; count: number }
 export interface KnowledgeLO { ref: string; lo: string; count: number; weeks: number[] }
 
-// ── Connector ─────────────────────────────────────────────────────────────────
+// ── Tier constants ────────────────────────────────────────────────────────────
 
-function VertConnector() {
+const RAIL_W = 96;
+
+const J_TIERS: TierDef[] = [
+  { id: 'total',     label: 'Total LO',     sub: 'The whole-year outcome',   accent: '#8E1F49' },
+  { id: 'skill',     label: 'Skill LO',     sub: 'Major skill outcomes',     accent: C.pink },
+  { id: 'knowledge', label: 'Knowledge LO', sub: '~4 per skill',             accent: C.amber },
+  { id: 'daily',     label: 'Daily LO',     sub: '5 per week · the lesson',  accent: C.faint },
+];
+
+// ── Tier row (Fix #3 — left rail tier labels) ─────────────────────────────────
+// Not using TierBand from ce-shell because position:sticky breaks inside scale()
+
+function TierRow({ tier, children, alignCenter = false, last = false }: {
+  tier: TierDef;
+  children: React.ReactNode;
+  alignCenter?: boolean;
+  last?: boolean;
+}) {
   return (
     <div style={{
-      width: 1, height: 28, margin: '4px auto',
-      background: 'repeating-linear-gradient(to bottom, #E5DDD3 0px, #E5DDD3 4px, transparent 4px, transparent 8px)',
-    }} />
+      display: 'flex',
+      borderBottom: last ? 'none' : `1px solid ${C.borderSoft}`,
+      background: 'transparent',
+    }}>
+      {/* Sticky-style left rail — scrolls with content when inside transform */}
+      <div style={{
+        width: RAIL_W, flexShrink: 0,
+        padding: '14px 12px 14px 16px',
+        display: 'flex', flexDirection: 'column', gap: 4,
+        borderRight: `1px dashed ${C.borderSoft}`,
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+          <div style={{ width: 3, height: 14, borderRadius: 2, background: tier.accent }} />
+          <span style={{
+            fontFamily: SANS, fontSize: 10, fontWeight: 700, color: C.ink,
+            textTransform: 'uppercase', letterSpacing: '0.1em', lineHeight: 1.1,
+          }}>{tier.label}</span>
+        </div>
+        <span style={{ fontFamily: SANS, fontSize: 10, color: C.faint, lineHeight: 1.4 }}>
+          {tier.sub}
+        </span>
+      </div>
+      {/* Content area */}
+      <div style={{
+        flex: 1, padding: '20px 24px',
+        display: 'flex',
+        alignItems: alignCenter ? 'center' : 'flex-start',
+        justifyContent: alignCenter ? 'center' : 'flex-start',
+      }}>
+        {children}
+      </div>
+    </div>
   );
 }
 
@@ -59,23 +106,25 @@ function RootCard({ totalLessons, year }: { totalLessons: number; year: number }
   );
 }
 
-function SkillCard({ s, focused, faded, w, onClick }: {
-  s: SkillLO; focused?: boolean; faded?: boolean; w: number; onClick: () => void;
+function SkillCard({ s, focused, faded, onClick }: {
+  s: SkillLO; focused?: boolean; faded?: boolean; onClick: () => void;
 }) {
   const col = SKILL_COLOR[skillKey(s.skill)];
   return (
     <div
       onClick={onClick}
       style={{
-        width: w, maxHeight: 160, background: '#FFFFFF',
+        width: 200, maxHeight: 160, background: '#FFFFFF',
         border: `1px solid ${focused ? C.pinkBorder : '#E5DDD3'}`,
-        borderRadius: 12, padding: 10, opacity: faded ? 0.5 : 1,
+        borderRadius: 12, padding: 10,
+        opacity: faded ? 0.6 : 1,
         boxShadow: focused
           ? `0 0 0 3px ${C.pinkSoft},0 6px 18px rgba(56,30,30,0.06)`
           : '0 1px 0 rgba(56,30,30,0.02)',
         display: 'flex', flexDirection: 'column', position: 'relative',
         cursor: 'pointer', overflow: 'hidden',
-        transition: 'opacity 0.15s',
+        transition: 'opacity 0.15s, box-shadow 0.15s',
+        flexShrink: 0,
       }}
     >
       <span style={{
@@ -114,20 +163,22 @@ function SkillCard({ s, focused, faded, w, onClick }: {
   );
 }
 
-function KloCard({ k, focused, faded, w, onClick }: {
-  k: KnowledgeLO; focused?: boolean; faded?: boolean; w: number; onClick: () => void;
+function KloCard({ k, focused, faded, onClick }: {
+  k: KnowledgeLO; focused?: boolean; faded?: boolean; onClick: () => void;
 }) {
   return (
     <div
       onClick={onClick}
       style={{
-        width: w, maxHeight: 140,
+        width: 180, maxHeight: 140,
         background: C.amberSoft, border: `1px solid ${focused ? '#E8A636' : '#EFD9A5'}`,
-        borderRadius: 12, padding: '8px 10px', opacity: faded ? 0.45 : 1,
+        borderRadius: 12, padding: '8px 10px',
+        opacity: faded ? 0.6 : 1,
         boxShadow: focused ? '0 0 0 3px rgba(232,166,54,0.18)' : 'none',
         display: 'flex', flexDirection: 'column', gap: 3,
         position: 'relative', cursor: 'pointer', overflow: 'hidden',
         transition: 'opacity 0.15s',
+        flexShrink: 0,
       }}
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
@@ -158,8 +209,8 @@ function KloCard({ k, focused, faded, w, onClick }: {
   );
 }
 
-function DailyChip({ lesson, w, onClick }: {
-  lesson: CurriculumLesson; w: number; onClick: () => void;
+function DailyChip({ lesson, onClick }: {
+  lesson: CurriculumLesson; onClick: () => void;
 }) {
   const [hover, setHover] = useState(false);
   const words = lesson.dailyLO.split(/\s+/);
@@ -170,36 +221,38 @@ function DailyChip({ lesson, w, onClick }: {
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       style={{
-        width: w, background: '#FFFFFF',
+        width: 160, background: '#FFFFFF',
         border: `1px solid ${hover ? C.pink : '#E5DDD3'}`,
-        borderRadius: 8, padding: '6px 9px',
-        display: 'flex', flexDirection: 'column', gap: 3,
-        boxShadow: hover ? '0 8px 24px rgba(56,30,30,0.12)' : '0 1px 0 rgba(56,30,30,0.02)',
-        cursor: 'pointer', transition: 'all 0.15s',
+        borderRadius: 8, padding: '5px 8px',
+        display: 'flex', flexDirection: 'column', gap: 2,
+        boxShadow: hover ? '0 4px 12px rgba(56,30,30,0.1)' : '0 1px 0 rgba(56,30,30,0.02)',
+        cursor: 'pointer', transition: 'all 0.12s',
+        flexShrink: 0,
       }}
     >
       <span style={{
-        fontFamily: SANS, fontSize: 9.5, fontWeight: 700,
+        fontFamily: SANS, fontSize: 9, fontWeight: 700,
         color: C.faint, fontVariantNumeric: 'tabular-nums',
       }}>{lesson.id}</span>
       <span style={{
-        fontFamily: SANS, fontSize: 11, color: C.ink, lineHeight: 1.3,
-        overflow: 'hidden', wordBreak: 'break-word',
-      }}>{preview}</span>
+        fontFamily: SANS, fontSize: 10.5, color: C.ink, lineHeight: 1.3,
+        overflow: 'hidden', display: '-webkit-box',
+        WebkitLineClamp: 2, WebkitBoxOrient: 'vertical',
+        wordBreak: 'break-word',
+      } as React.CSSProperties}>{preview}</span>
     </div>
   );
 }
 
-// ── Lesson Modal (Fix #7) ─────────────────────────────────────────────────────
+// ── Lesson Modal ──────────────────────────────────────────────────────────────
 
 function LessonModal({ lesson, onClose }: { lesson: CurriculumLesson; onClose: () => void }) {
   const router = useRouter();
   return (
     <>
-      <div
-        onClick={onClose}
-        style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.4)', zIndex: 100 }}
-      />
+      <div onClick={onClose} style={{
+        position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.4)', zIndex: 100,
+      }} />
       <div style={{
         position: 'fixed', top: '50%', left: '50%',
         transform: 'translate(-50%, -50%)',
@@ -208,15 +261,12 @@ function LessonModal({ lesson, onClose }: { lesson: CurriculumLesson; onClose: (
         width: 480, maxWidth: '90vw', maxHeight: '80vh', overflowY: 'auto',
         boxShadow: '0 24px 64px rgba(0,0,0,0.18)',
       }}>
-        <button
-          onClick={onClose}
-          style={{
-            position: 'absolute', top: 12, right: 12,
-            width: 28, height: 28, borderRadius: 999,
-            border: `1px solid ${C.border}`, background: C.cream,
-            cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
-          }}
-        >
+        <button onClick={onClose} style={{
+          position: 'absolute', top: 12, right: 12,
+          width: 28, height: 28, borderRadius: 999,
+          border: `1px solid ${C.border}`, background: C.cream,
+          cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
+        }}>
           <Icon name="x" size={14} color={C.faint} />
         </button>
 
@@ -225,9 +275,7 @@ function LessonModal({ lesson, onClose }: { lesson: CurriculumLesson; onClose: (
         <p style={{
           fontFamily: SANS, fontSize: 15, fontWeight: 600, color: C.ink,
           lineHeight: 1.5, margin: '12px 0 16px',
-        }}>
-          {lesson.dailyLO}
-        </p>
+        }}>{lesson.dailyLO}</p>
 
         {lesson.knowledgeLO && (
           <div style={{ marginBottom: 12 }}>
@@ -247,10 +295,9 @@ function LessonModal({ lesson, onClose }: { lesson: CurriculumLesson; onClose: (
                 borderRadius: 8, padding: '8px 10px',
               }}>
                 <Label>Grammar</Label>
-                <p style={{
-                  fontFamily: SANS, fontSize: 12.5, color: C.ink,
-                  margin: '4px 0 0', lineHeight: 1.4,
-                }}>{lesson.grammarFocus}</p>
+                <p style={{ fontFamily: SANS, fontSize: 12.5, color: C.ink, margin: '4px 0 0', lineHeight: 1.4 }}>
+                  {lesson.grammarFocus}
+                </p>
               </div>
             )}
             {lesson.vocabFocus && (
@@ -259,10 +306,9 @@ function LessonModal({ lesson, onClose }: { lesson: CurriculumLesson; onClose: (
                 borderRadius: 8, padding: '8px 10px',
               }}>
                 <Label>Vocab</Label>
-                <p style={{
-                  fontFamily: SANS, fontSize: 12.5, color: C.ink,
-                  margin: '4px 0 0', lineHeight: 1.4,
-                }}>{lesson.vocabFocus}</p>
+                <p style={{ fontFamily: SANS, fontSize: 12.5, color: C.ink, margin: '4px 0 0', lineHeight: 1.4 }}>
+                  {lesson.vocabFocus}
+                </p>
               </div>
             )}
           </div>
@@ -275,8 +321,7 @@ function LessonModal({ lesson, onClose }: { lesson: CurriculumLesson; onClose: (
         </div>
 
         <HiBtn
-          variant="primary"
-          size="md"
+          variant="primary" size="md"
           icon={<Icon name="arrowRight" size={14} color="#fff" />}
           onClick={() => router.push(`/plan/new?lessonId=${encodeURIComponent(lesson.id)}`)}
           style={{ width: '100%', justifyContent: 'center' }}
@@ -379,15 +424,15 @@ export function JourneyLeft({
   );
 }
 
-// ── Journey Org Chart (Fixes #5, #6, #7, #8) ─────────────────────────────────
+// ── Journey Org Chart — Fixes #1 (always visible), #2 (wheel zoom), #3 (tier rails) ───
 
 export function JourneyOrgChart({
-  skillLOs, klos, dailyLessons, focusedSkillRef, focusedKRef,
+  skillLOs, klosBySkill, allLessons, focusedSkillRef, focusedKRef,
   totalLessons, year, onFocusSkill, onFocusKRef,
 }: {
   skillLOs: SkillLO[];
-  klos: KnowledgeLO[];
-  dailyLessons: CurriculumLesson[];
+  klosBySkill: Map<string, KnowledgeLO[]>;
+  allLessons: CurriculumLesson[];
   focusedSkillRef: string | null;
   focusedKRef: string | null;
   totalLessons: number;
@@ -397,89 +442,180 @@ export function JourneyOrgChart({
 }) {
   const [zoom, setZoom] = useState(1.0);
   const [modalLesson, setModalLesson] = useState<CurriculumLesson | null>(null);
+  const outerRef = useRef<HTMLDivElement>(null);
+
+  // Group daily lessons by skill+klo key for O(1) lookup
+  const dailyByKey = useMemo(() => {
+    const m = new Map<string, CurriculumLesson[]>();
+    allLessons.forEach(l => {
+      if (!l.skillLORef || !l.knowledgeLORef) return;
+      const key = `${l.skillLORef}|${l.knowledgeLORef}`;
+      const arr = m.get(key) ?? [];
+      arr.push(l);
+      m.set(key, arr);
+    });
+    return m;
+  }, [allLessons]);
+
+  // Fix #2 — mouse wheel / trackpad pinch zoom
+  useEffect(() => {
+    const el = outerRef.current;
+    if (!el) return;
+    const handleWheel = (e: WheelEvent) => {
+      e.preventDefault();
+      setZoom(z => Math.min(1.5, Math.max(0.3, z + e.deltaY * -0.001)));
+    };
+    el.addEventListener('wheel', handleWheel, { passive: false });
+    return () => el.removeEventListener('wheel', handleWheel);
+  }, []);
 
   return (
     <>
-      {/* Outer wrapper: non-scrollable, position: relative so ZoomControls stays visible */}
-      <div style={{ flex: 1, position: 'relative', overflow: 'hidden', background: C.cream }}>
+      {/* Outer: non-scrollable, position:relative keeps ZoomControls fixed (Fix #8) */}
+      <div ref={outerRef} style={{ flex: 1, position: 'relative', overflow: 'hidden', background: C.cream }}>
         {/* Scrollable inner */}
         <div style={{ position: 'absolute', inset: 0, overflowY: 'auto', overflowX: 'auto' }}>
+          {/* Scaled canvas — Fix #2 zoom applied here */}
           <div style={{
-            transform: `scale(${zoom})`, transformOrigin: 'top center',
-            minWidth: 900, padding: '32px 32px 80px',
-            display: 'flex', flexDirection: 'column', alignItems: 'center',
+            transform: `scale(${zoom})`,
+            transformOrigin: 'top left',
+            minWidth: 'max-content',
+            paddingBottom: 80,
           }}>
 
-            {/* Total LO */}
-            <RootCard totalLessons={totalLessons} year={year} />
+            {/* ── Tier 1: Total LO ── */}
+            <TierRow tier={J_TIERS[0]} alignCenter>
+              <RootCard totalLessons={totalLessons} year={year} />
+            </TierRow>
 
-            <VertConnector />
+            {/* ── Tier 2: Skill LOs — always all visible ── */}
+            <TierRow tier={J_TIERS[1]}>
+              <div style={{ display: 'flex', gap: 16, flexWrap: 'nowrap' }}>
+                {skillLOs.map(s => (
+                  <SkillCard
+                    key={s.ref}
+                    s={s}
+                    focused={s.ref === focusedSkillRef}
+                    faded={!!focusedSkillRef && s.ref !== focusedSkillRef}
+                    onClick={() => onFocusSkill(s.ref === focusedSkillRef ? null : s.ref)}
+                  />
+                ))}
+              </div>
+            </TierRow>
 
-            {/* Skill LO row */}
-            <div style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap', maxWidth: '100%' }}>
-              {skillLOs.map(s => (
-                <SkillCard
-                  key={s.ref}
-                  s={s}
-                  w={200}
-                  focused={s.ref === focusedSkillRef}
-                  faded={!!focusedSkillRef && s.ref !== focusedSkillRef}
-                  onClick={() => onFocusSkill(s.ref === focusedSkillRef ? null : s.ref)}
-                />
-              ))}
-            </div>
+            {/* ── Tier 3: Knowledge LOs — always all visible, grouped by parent skill ── */}
+            <TierRow tier={J_TIERS[2]}>
+              <div style={{ display: 'flex', gap: 20, flexWrap: 'nowrap', alignItems: 'flex-start' }}>
+                {skillLOs.map(s => {
+                  const col = SKILL_COLOR[skillKey(s.skill)];
+                  const klos = klosBySkill.get(s.ref) ?? [];
+                  const isSkillFocused = s.ref === focusedSkillRef;
+                  return (
+                    <div key={s.ref} style={{
+                      display: 'flex', flexDirection: 'column', gap: 6,
+                      opacity: (focusedSkillRef && !isSkillFocused) ? 0.6 : 1,
+                      transition: 'opacity 0.15s',
+                    }}>
+                      {/* Parent skill label */}
+                      <span style={{
+                        fontFamily: SANS, fontSize: 9, fontWeight: 700,
+                        color: col.fg, background: col.bg,
+                        padding: '1px 7px', borderRadius: 4, alignSelf: 'flex-start',
+                        border: `1px solid ${col.bg}`,
+                      }}>{s.ref}</span>
+                      {/* KLO cards stacked */}
+                      {klos.length > 0 ? (
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                          {klos.map(k => (
+                            <KloCard
+                              key={k.ref}
+                              k={k}
+                              focused={isSkillFocused && k.ref === focusedKRef}
+                              faded={isSkillFocused && !!focusedKRef && k.ref !== focusedKRef}
+                              onClick={() => {
+                                if (!isSkillFocused) onFocusSkill(s.ref);
+                                onFocusKRef(k.ref === focusedKRef ? null : k.ref);
+                              }}
+                            />
+                          ))}
+                        </div>
+                      ) : (
+                        <div style={{
+                          width: 180, padding: '10px 12px',
+                          fontFamily: SANS, fontSize: 10, color: C.faint, fontStyle: 'italic',
+                          background: 'rgba(255,255,255,0.4)', border: `1px dashed ${C.borderSoft}`,
+                          borderRadius: 8,
+                        }}>loading…</div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </TierRow>
 
-            {/* KLO tier — only shown when a skill is focused */}
-            {focusedSkillRef && (
-              <>
-                <VertConnector />
-                {klos.length > 0 ? (
-                  <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap', maxWidth: '100%' }}>
-                    {klos.map(k => (
-                      <KloCard
-                        key={k.ref}
-                        k={k}
-                        w={180}
-                        focused={k.ref === focusedKRef}
-                        faded={!!focusedKRef && k.ref !== focusedKRef}
-                        onClick={() => onFocusKRef(k.ref === focusedKRef ? null : k.ref)}
-                      />
-                    ))}
-                  </div>
-                ) : (
-                  <div style={{ padding: '20px 0', textAlign: 'center' }}>
-                    <span style={{ fontFamily: SANS, fontSize: 12, color: C.faint }}>Loading knowledge outcomes…</span>
-                  </div>
-                )}
-              </>
-            )}
-
-            {/* Daily tier — only shown when a KLO is focused */}
-            {focusedKRef && (
-              <>
-                <VertConnector />
-                {dailyLessons.length > 0 ? (
-                  <div style={{ display: 'flex', gap: 8, justifyContent: 'center', flexWrap: 'wrap', maxWidth: '100%' }}>
-                    {dailyLessons.map(l => (
-                      <DailyChip key={l.id} lesson={l} w={160} onClick={() => setModalLesson(l)} />
-                    ))}
-                  </div>
-                ) : (
-                  <div style={{ padding: '20px 0', textAlign: 'center' }}>
-                    <span style={{ fontFamily: SANS, fontSize: 12, color: C.faint }}>No lessons found for this knowledge outcome.</span>
-                  </div>
-                )}
-              </>
-            )}
+            {/* ── Tier 4: Daily LOs — always all visible, grouped by parent KLO within each skill ── */}
+            <TierRow tier={J_TIERS[3]} last>
+              <div style={{ display: 'flex', gap: 20, flexWrap: 'nowrap', alignItems: 'flex-start' }}>
+                {skillLOs.map(s => {
+                  const klos = klosBySkill.get(s.ref) ?? [];
+                  const isSkillFocused = s.ref === focusedSkillRef;
+                  return (
+                    <div key={s.ref} style={{
+                      display: 'flex', flexDirection: 'column', gap: 10,
+                      width: 180, flexShrink: 0,
+                      opacity: (focusedSkillRef && !isSkillFocused) ? 0.6 : 1,
+                      transition: 'opacity 0.15s',
+                    }}>
+                      {klos.map(k => {
+                        const lessons = dailyByKey.get(`${s.ref}|${k.ref}`) ?? [];
+                        const isKloFocused = isSkillFocused && k.ref === focusedKRef;
+                        return (
+                          <div key={k.ref} style={{
+                            display: 'flex', flexDirection: 'column', gap: 4,
+                            opacity: (isSkillFocused && focusedKRef && !isKloFocused) ? 0.6 : 1,
+                          }}>
+                            {/* Parent KLO label */}
+                            <span style={{
+                              fontFamily: SANS, fontSize: 9, fontWeight: 700,
+                              color: '#7A5A11', background: C.amberSoft,
+                              padding: '1px 6px', borderRadius: 3, alignSelf: 'flex-start',
+                            }}>{k.ref}</span>
+                            {/* Daily chips */}
+                            {lessons.length > 0 ? (
+                              <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+                                {lessons.map(l => (
+                                  <DailyChip key={l.id} lesson={l} onClick={() => setModalLesson(l)} />
+                                ))}
+                              </div>
+                            ) : klos.length > 0 ? (
+                              <span style={{
+                                fontFamily: SANS, fontSize: 10, color: C.faint2,
+                                fontStyle: 'italic',
+                              }}>—</span>
+                            ) : null}
+                          </div>
+                        );
+                      })}
+                      {klos.length === 0 && (
+                        <span style={{
+                          fontFamily: SANS, fontSize: 10, color: C.faint2,
+                          fontStyle: 'italic',
+                        }}>loading…</span>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </TierRow>
 
           </div>
         </div>
 
-        {/* Zoom controls — absolutely positioned in outer (non-scrollable) wrapper, Fix #8 */}
+        {/* Zoom controls — in outer non-scrollable wrapper, stays visible (Fix #8) */}
         <ZoomControls
           zoom={zoom}
           onZoomIn={() => setZoom(z => Math.min(1.5, parseFloat((z + 0.1).toFixed(1))))}
-          onZoomOut={() => setZoom(z => Math.max(0.4, parseFloat((z - 0.1).toFixed(1))))}
+          onZoomOut={() => setZoom(z => Math.max(0.3, parseFloat((z - 0.1).toFixed(1))))}
           onFit={() => setZoom(1.0)}
           onFocus={() => setZoom(1.2)}
         />

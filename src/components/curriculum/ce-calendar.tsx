@@ -316,7 +316,7 @@ export function WeekView({ week, month, lessons, onBack }: WeekViewProps) {
                   gap: 1, paddingTop: 2,
                 }}>
                   <span style={{ fontFamily: SANS, fontSize: 9.5, fontWeight: 600, color: C.faint2, textTransform: 'uppercase', letterSpacing: '0.08em' }}>P</span>
-                  <span style={{ fontFamily: SANS, fontSize: 28, fontWeight: 700, color: isExpanded ? col.fg : C.ink, lineHeight: 1 }}>{p}</span>
+                  <span style={{ fontFamily: SANS, fontSize: 40, fontWeight: 700, color: isExpanded ? col.fg : C.ink, lineHeight: 1 }}>{p}</span>
                 </div>
 
                 {/* Main content column */}
@@ -417,7 +417,7 @@ export function WeekView({ week, month, lessons, onBack }: WeekViewProps) {
               )}
 
               {/* Skill colour bar at bottom */}
-              {lesson && <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: 3, background: col.line }} />}
+              {lesson && <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: 4, background: col.line }} />}
             </div>
           );
         })}

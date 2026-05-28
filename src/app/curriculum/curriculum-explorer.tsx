@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import {
   CeShell, CeTopBar, CeModeTabs, CeRightSidebar,
   type CeMode,
@@ -11,7 +11,7 @@ import {
   type SkillLO, type KnowledgeLO,
 } from '@/components/curriculum/ce-journey';
 import {
-  ContentLeft, ContentCascadeCollapsed, ContentCascadeExpanded,
+  ContentLeft, ContentGrid,
   type SkillData, type ThemeData,
 } from '@/components/curriculum/ce-content';
 import type { CurriculumLesson } from '@/types/curriculum';
@@ -44,18 +44,15 @@ export function CurriculumExplorer({ initialYear, initialYearData }: Props) {
   const [focusedKRef, setFocusedKRef]             = useState<string | null>(null);
   const [klosBySkill, setKlosBySkill]             = useState<Map<string, KnowledgeLO[]>>(new Map());
 
+  // Track which skill KLO loads have been requested (avoids re-fetching when klosBySkill updates)
+  const klosRequested = useRef(new Set<string>());
+
   // Content state
   const [focusedSkill, setFocusedSkill]   = useState<string | null>(null);
   const [focusedTheme, setFocusedTheme]   = useState<string | null>(null);
 
   // All lessons for the year (client-side)
   const allLessons = useMemo(() => getLessonsByYear(year), [year]);
-
-  // Lessons for focused KRef (journey daily tier) — filter by BOTH skill AND knowledge
-  const kRefLessons = useMemo(() => {
-    if (!focusedSkillRef || !focusedKRef) return [];
-    return allLessons.filter(l => l.skillLORef === focusedSkillRef && l.knowledgeLORef === focusedKRef);
-  }, [focusedSkillRef, focusedKRef, allLessons]);
 
   // Themes for focused skill (content mode)
   const themesForSkill = useMemo(() => {
@@ -69,8 +66,7 @@ export function CurriculumExplorer({ initialYear, initialYearData }: Props) {
   // Lessons for focused theme (content lesson tier)
   const themeLessons = useMemo(() => {
     if (!focusedTheme) return [];
-    const filtered = allLessons.filter(l => l.theme === focusedTheme && (!focusedSkill || l.linguisticSkill === focusedSkill));
-    return filtered;
+    return allLessons.filter(l => l.theme === focusedTheme && (!focusedSkill || l.linguisticSkill === focusedSkill));
   }, [focusedTheme, focusedSkill, allLessons]);
 
   // Themes-by-skill map for left nav
@@ -90,6 +86,7 @@ export function CurriculumExplorer({ initialYear, initialYearData }: Props) {
   useEffect(() => {
     if (year === initialYear) return;
     let cancelled = false;
+    klosRequested.current = new Set();
     fetchCurriculumYearData(year).then(data => {
       if (!cancelled) {
         setYearData(data);
@@ -123,13 +120,19 @@ export function CurriculumExplorer({ initialYear, initialYearData }: Props) {
     });
   }, [selectedMonth, year, yearData.months, weekLessons]);
 
-  // Load KLOs when skill is focused in journey mode
+  // Fix #1 — pre-load ALL skill KLOs when in journey mode so the full tree is visible
   useEffect(() => {
-    if (!focusedSkillRef || klosBySkill.has(focusedSkillRef)) return;
-    fetchKnowledgeLOs(year, focusedSkillRef).then(klos => {
-      setKlosBySkill(prev => { const next = new Map(prev); next.set(focusedSkillRef, klos); return next; });
+    if (mode !== 'journey') return;
+    (yearData.skillLOs as SkillLO[]).forEach(s => {
+      const key = `${year}:${s.ref}`;
+      if (klosRequested.current.has(key)) return;
+      klosRequested.current.add(key);
+      fetchKnowledgeLOs(year, s.ref).then(klos => {
+        setKlosBySkill(prev => { const next = new Map(prev); next.set(s.ref, klos); return next; });
+      });
     });
-  }, [focusedSkillRef, year, klosBySkill]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mode, year, yearData.skillLOs]);
 
   function handleFocusSkill(ref: string | null) {
     setFocusedSkillRef(ref);
@@ -209,8 +212,8 @@ export function CurriculumExplorer({ initialYear, initialYearData }: Props) {
       return (
         <JourneyOrgChart
           skillLOs={yearData.skillLOs as SkillLO[]}
-          klos={focusedSkillRef ? (klosBySkill.get(focusedSkillRef) ?? []) : []}
-          dailyLessons={kRefLessons}
+          klosBySkill={klosBySkill}
+          allLessons={allLessons}
           focusedSkillRef={focusedSkillRef}
           focusedKRef={focusedKRef}
           totalLessons={yearData.totalLessons}
@@ -221,28 +224,14 @@ export function CurriculumExplorer({ initialYear, initialYearData }: Props) {
       );
     }
 
-    // content
-    if (focusedSkill) {
-      return (
-        <ContentCascadeExpanded
-          skillBreakdown={yearData.skillBreakdown as SkillData[]}
-          themes={themesForSkill}
-          lessons={themeLessons}
-          focusedSkill={focusedSkill}
-          focusedTheme={focusedTheme}
-          totalLessons={yearData.totalLessons}
-          year={year}
-          onFocusSkill={s => { setFocusedSkill(s); setFocusedTheme(null); }}
-          onFocusTheme={setFocusedTheme}
-        />
-      );
-    }
+    // Content mode — simple lesson card grid (Fix #4)
     return (
-      <ContentCascadeCollapsed
+      <ContentGrid
+        lessons={themeLessons}
+        focusedSkill={focusedSkill}
+        focusedTheme={focusedTheme}
         skillBreakdown={yearData.skillBreakdown as SkillData[]}
-        totalLessons={yearData.totalLessons}
-        year={year}
-        onFocusSkill={s => setFocusedSkill(s)}
+        themes={themesForSkill}
       />
     );
   }
