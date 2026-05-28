@@ -1,36 +1,87 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Project Union HQ
 
-## Getting Started
+Consulting engagement management tool for **Designers Guild** — built for the Project Union engagement. McKinsey-style deliverable interface covering diagnostics, scenario modelling, strategy pillars, recommendations, and a 2-year plan.
 
-First, run the development server:
+## Stack
+
+- **Next.js 16** (App Router, TypeScript)
+- **Supabase** (Postgres via `@supabase/supabase-js`)
+- **Tailwind CSS v4** with custom design tokens
+- **xlsx** for Excel import/export
+- **Anthropic Claude** for the built-in strategy chat panel
+
+---
+
+## 1. Supabase Setup
+
+1. Create a new Supabase project at [supabase.com](https://supabase.com).
+2. In the SQL editor, run the migration:
+   ```
+   supabase/migrations/20240101000000_project_union.sql
+   ```
+   This creates all tables and seeds illustrative data for Designers Guild.
+3. From **Project Settings → API**, copy:
+   - `NEXT_PUBLIC_SUPABASE_URL`
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+   - `SUPABASE_SERVICE_ROLE_KEY` (Settings → API → service_role)
+
+---
+
+## 2. Local Development
 
 ```bash
+# Install dependencies
+npm install
+
+# Copy and fill in environment variables
+cp .env.example .env.local
+# Edit .env.local with your Supabase and Anthropic keys
+
+# Start dev server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) — redirects to the Engagement Calendar.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 3. Vercel Deployment
 
-## Learn More
+1. Push this repo to GitHub.
+2. Import into [Vercel](https://vercel.com/new).
+3. Add environment variables in **Settings → Environment Variables**:
+   - `NEXT_PUBLIC_SUPABASE_URL`
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+   - `SUPABASE_SERVICE_ROLE_KEY`
+   - `ANTHROPIC_API_KEY`
+   - `NEXT_PUBLIC_APP_URL` → your Vercel deployment URL (e.g. `https://project-union.vercel.app`)
+4. Deploy. Vercel will detect Next.js automatically.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Modules
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Module | Audience | Path |
+|--------|----------|------|
+| Engagement Calendar | Internal | `/calendar` |
+| Diagnostic Tree | Internal | `/tree` |
+| Workstream Explorer | Internal | `/workstream` |
+| Scenario Modeller | **Client** | `/scenarios` |
+| Strategy Pillars | **Client** | `/pillars` |
+| Recommendations | **Client** | `/recommendations` |
+| 2-Year Plan | **Client** | `/plan` |
 
-## Deploy on Vercel
+The Claude chat panel is always visible on the right (collapsible). It has live access to all Supabase data and can create tasks, options, and recommendations via `<action>` blocks.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Excel Import/Export
+
+- **Diagnostic Tree → Import**: `.xlsx` with columns `node` (label) and `value` — upserts by label match.
+- **Diagnostic Tree → Export**: downloads all tree nodes as `.xlsx`.
+
+---
+
+## Environment Variables Reference
+
+See `.env.example` for all required variables.
