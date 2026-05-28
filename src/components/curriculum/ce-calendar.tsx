@@ -232,17 +232,17 @@ interface WeekViewProps {
   month: string;
   lessons: CurriculumLesson[];
   onBack: () => void;
-  onLessonClick: (l: CurriculumLesson) => void;
 }
 
-export function WeekView({ week, month, lessons, onBack, onLessonClick }: WeekViewProps) {
-  const weeks = [week]; // Single week, 4 lessons per period shown in rows
-
-  // For a week drill-in, show period rows × (just this week's lessons)
-  // Following handoff: period rows down the left, week cols across
-  // Since we only have 1 week, show 5 period rows vertically as cards
+export function WeekView({ week, month, lessons, onBack }: WeekViewProps) {
+  const [expandedPeriod, setExpandedPeriod] = useState<number | null>(null);
 
   const weekLO = lessons[0]?.knowledgeLO ?? '';
+
+  function togglePeriod(p: number, hasLesson: boolean) {
+    if (!hasLesson) return;
+    setExpandedPeriod(prev => prev === p ? null : p);
+  }
 
   return (
     <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0, overflow: 'hidden' }}>
@@ -280,66 +280,135 @@ export function WeekView({ week, month, lessons, onBack, onLessonClick }: WeekVi
         </div>
       )}
 
-      {/* 5 period cards */}
-      <div style={{ flex: 1, overflowY: 'auto', padding: '16px 24px', display: 'flex', flexDirection: 'column', gap: 12, background: C.cream }}>
+      {/* 5 period cards (accordion) */}
+      <div style={{ flex: 1, overflowY: 'auto', padding: '16px 24px', display: 'flex', flexDirection: 'column', gap: 10, background: C.cream }}>
         {[1, 2, 3, 4, 5].map(p => {
           const lesson = lessons.find(l => l.periodNum === p);
           const sk = lesson ? skillKey(lesson.linguisticSkill) : 'basic';
           const col = SKILL_COLOR[sk];
+          const isExpanded = expandedPeriod === p;
 
           return (
             <div
               key={p}
-              onClick={() => lesson && onLessonClick(lesson)}
+              onClick={() => togglePeriod(p, !!lesson)}
               style={{
-                background: C.surface, border: `1px solid ${lesson ? C.border : C.borderSoft}`,
-                borderRadius: 12, padding: 16, display: 'flex', gap: 16,
+                background: '#FFFFFF',
+                border: `1px solid ${isExpanded ? col.line : '#E5DDD3'}`,
+                borderLeft: isExpanded ? `3px solid ${col.line}` : `1px solid #E5DDD3`,
+                borderRadius: 12,
                 cursor: lesson ? 'pointer' : 'default',
                 position: 'relative', overflow: 'hidden',
-                boxShadow: '0 1px 0 rgba(56,30,30,0.02)',
+                boxShadow: isExpanded ? '0 4px 16px rgba(56,30,30,0.08)' : '0 1px 0 rgba(56,30,30,0.02)',
                 opacity: lesson ? 1 : 0.5,
+                transition: 'border-color 0.15s, box-shadow 0.15s',
               }}
             >
-              {/* Period block */}
-              <div style={{
-                width: 72, flexShrink: 0, background: C.cream, border: `1px solid ${C.borderSoft}`,
-                borderRadius: 10, padding: '10px 4px',
-                display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 2,
-              }}>
-                <span style={{ fontFamily: SANS, fontSize: 10, fontWeight: 600, color: C.faint, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Period</span>
-                <span style={{ fontFamily: SANS, fontSize: 32, fontWeight: 700, color: C.ink, lineHeight: 1 }}>{p}</span>
-                <span style={{ fontFamily: SANS, fontSize: 10.5, color: C.faint2 }}>50 min</span>
+              {/* Collapsed row */}
+              <div style={{ padding: '12px 16px', display: 'flex', gap: 14, alignItems: 'flex-start', minHeight: 80 }}>
+                {/* Period badge */}
+                <div style={{
+                  width: 52, flexShrink: 0,
+                  display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+                  gap: 1, paddingTop: 2,
+                }}>
+                  <span style={{ fontFamily: SANS, fontSize: 9.5, fontWeight: 600, color: C.faint2, textTransform: 'uppercase', letterSpacing: '0.08em' }}>P</span>
+                  <span style={{ fontFamily: SANS, fontSize: 28, fontWeight: 700, color: isExpanded ? col.fg : C.ink, lineHeight: 1 }}>{p}</span>
+                </div>
+
+                {/* Main content column */}
+                {lesson ? (
+                  <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 6 }}>
+                    {/* ID + lesson ref */}
+                    <span style={{ fontFamily: SANS, fontSize: 11, fontWeight: 600, color: C.faint2, fontVariantNumeric: 'tabular-nums' }}>
+                      {lesson.id}
+                    </span>
+                    {/* Daily LO — 2-line clamp when collapsed */}
+                    <span style={{
+                      fontFamily: SANS, fontSize: 13.5, fontWeight: 500, color: C.ink, lineHeight: 1.4,
+                      ...(!isExpanded ? {
+                        display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden',
+                      } : {}),
+                    }}>
+                      {lesson.dailyLO}
+                    </span>
+                    {/* Chips — always on separate row below LO */}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
+                      <span style={{
+                        display: 'inline-flex', alignItems: 'center',
+                        padding: '1px 7px', background: col.bg, color: col.fg,
+                        border: `1px solid ${col.bg}`, borderRadius: 999,
+                        fontFamily: SANS, fontSize: 10, fontWeight: 600,
+                      }}>{col.label}</span>
+                      {lesson.theme && (
+                        <Chip tone="amber" size="sm">{lesson.theme}</Chip>
+                      )}
+                    </div>
+                  </div>
+                ) : (
+                  <div style={{ flex: 1, display: 'flex', alignItems: 'center', paddingTop: 8 }}>
+                    <span style={{ fontFamily: SANS, fontSize: 12, color: C.faint2 }}>No lesson scheduled</span>
+                  </div>
+                )}
+
+                {/* Chevron */}
+                {lesson && (
+                  <div style={{
+                    flexShrink: 0, alignSelf: 'center',
+                    transform: isExpanded ? 'rotate(180deg)' : 'none',
+                    transition: 'transform 0.2s',
+                  }}>
+                    <Icon name="chevronDown" size={14} color={C.faint2} />
+                  </div>
+                )}
               </div>
 
-              {/* Lesson detail */}
-              {lesson ? (
-                <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 10 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
-                    <span style={{ fontFamily: SANS, fontSize: 11.5, fontWeight: 700, color: C.faint, fontVariantNumeric: 'tabular-nums' }}>{lesson.id}</span>
-                    <span style={{ display: 'inline-flex', alignItems: 'center', padding: '1px 7px', background: col.bg, color: col.fg, border: `1px solid ${col.bg}`, borderRadius: 999, fontFamily: SANS, fontSize: 10, fontWeight: 600 }}>{col.label}</span>
-                    {lesson.theme && <Chip tone="amber" size="sm">{lesson.theme}</Chip>}
-                  </div>
-                  <div>
-                    <Label style={{ display: 'block', marginBottom: 3 }}>Daily LO</Label>
-                    <span style={{ fontFamily: SANS, fontSize: 15, fontWeight: 500, color: C.ink, lineHeight: 1.4 }}>{lesson.dailyLO}</span>
-                  </div>
+              {/* Expanded detail panel */}
+              {isExpanded && lesson && (
+                <div
+                  onClick={e => e.stopPropagation()}
+                  style={{
+                    borderTop: `1px solid #E5DDD3`,
+                    padding: '14px 16px 16px',
+                    display: 'flex', flexDirection: 'column', gap: 12,
+                    background: '#FDFAF7',
+                  }}
+                >
+                  {/* Grammar / Vocab row */}
                   {(lesson.grammarFocus || lesson.vocabFocus) && (
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, padding: 10, background: C.cream, borderRadius: 8 }}>
-                      {lesson.grammarFocus && <div><Label style={{ display: 'block', marginBottom: 2 }}>Grammar</Label><span style={{ fontFamily: SANS, fontSize: 11.5 }}>{lesson.grammarFocus}</span></div>}
-                      {lesson.vocabFocus && <div><Label style={{ display: 'block', marginBottom: 2 }}>Vocab focus</Label><span style={{ fontFamily: SANS, fontSize: 11.5, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', display: 'block' }}>{lesson.vocabFocus}</span></div>}
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+                      {lesson.grammarFocus && (
+                        <div>
+                          <Label style={{ display: 'block', marginBottom: 3 }}>Grammar focus</Label>
+                          <span style={{ fontFamily: SANS, fontSize: 12, color: C.ink, lineHeight: 1.4 }}>{lesson.grammarFocus}</span>
+                        </div>
+                      )}
+                      {lesson.vocabFocus && (
+                        <div>
+                          <Label style={{ display: 'block', marginBottom: 3 }}>Vocab focus</Label>
+                          <span style={{ fontFamily: SANS, fontSize: 12, color: C.ink, lineHeight: 1.4 }}>{lesson.vocabFocus}</span>
+                        </div>
+                      )}
                     </div>
                   )}
-                </div>
-              ) : (
-                <div style={{ flex: 1, display: 'flex', alignItems: 'center' }}>
-                  <span style={{ fontFamily: SANS, fontSize: 12, color: C.faint2 }}>No lesson scheduled</span>
-                </div>
-              )}
 
-              {lesson && (
-                <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', gap: 6 }}>
-                  <HiBtn variant="ghost" size="sm" icon={<Icon name="book" size={12} color={C.ink} />}>Preview</HiBtn>
-                  <HiBtn variant="primary" size="sm" icon={<Icon name="arrowRight" size={12} color="#fff" />}>Open lesson</HiBtn>
+                  {/* Resources */}
+                  {lesson.resources && (
+                    <div>
+                      <Label style={{ display: 'block', marginBottom: 3 }}>Resources</Label>
+                      <span style={{ fontFamily: SANS, fontSize: 12, color: C.ink }}>{lesson.resources}</span>
+                    </div>
+                  )}
+
+                  {/* Action buttons */}
+                  <div style={{ display: 'flex', gap: 8, paddingTop: 2 }}>
+                    <HiBtn variant="ghost" size="sm" icon={<Icon name="book" size={12} color={C.ink} />}>
+                      Preview plan
+                    </HiBtn>
+                    <HiBtn variant="primary" size="sm" icon={<Icon name="arrowRight" size={12} color="#fff" />}>
+                      Open lesson →
+                    </HiBtn>
+                  </div>
                 </div>
               )}
 

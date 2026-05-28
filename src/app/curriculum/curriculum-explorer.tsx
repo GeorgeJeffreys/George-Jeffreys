@@ -192,7 +192,6 @@ export function CurriculumExplorer({ initialYear, initialYearData }: Props) {
             month={month}
             lessons={weekLessons.get(selectedWeek) ?? []}
             onBack={() => setSelectedWeek(null)}
-            onLessonClick={setDrawerLesson}
           />
         );
       }
