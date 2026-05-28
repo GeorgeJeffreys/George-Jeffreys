@@ -28,8 +28,8 @@ export function skillKey(skill: string): string {
 export function Label({ children, style }: { children: React.ReactNode; style?: React.CSSProperties }) {
   return (
     <span style={{
-      fontFamily: SANS, fontSize: 10, fontWeight: 700,
-      color: C.faint2, textTransform: 'uppercase', letterSpacing: '0.08em',
+      fontFamily: SANS, fontSize: 10.5, fontWeight: 700,
+      color: C.faint, textTransform: 'uppercase', letterSpacing: '0.08em',
       ...style,
     }}>{children}</span>
   );
@@ -523,7 +523,7 @@ export function CascadeCanvas({ children, connectors, totalHeight }: {
   return (
     <div style={{ flex: 1, position: 'relative', overflowY: 'auto', background: C.cream }}>
       {connectors && totalHeight && (
-        <svg style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: totalHeight, pointerEvents: 'none', zIndex: 1 }}>
+        <svg style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: totalHeight, pointerEvents: 'none', zIndex: 0 }}>
           {connectors.map((p, i) => (
             <path key={i} d={p.d}
               stroke={p.color || C.faint2} strokeWidth={p.weight || 1.5}

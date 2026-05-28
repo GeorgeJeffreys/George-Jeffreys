@@ -77,9 +77,9 @@ function SkillCardC({ s, focused, faded, w, onClick }: { s: SkillData; focused?:
       width: w, height: SKILL_CARD_H, background: C.surface,
       border: `1px solid ${focused ? C.pinkBorder : C.border}`,
       borderTop: `4px solid ${col.line}`,
-      borderRadius: 10, padding: 10, opacity: faded ? 0.5 : 1,
+      borderRadius: 12, padding: 10, opacity: faded ? 0.5 : 1,
       boxShadow: focused ? `0 0 0 3px ${C.pinkSoft},0 6px 18px rgba(56,30,30,0.06)` : '0 1px 0 rgba(56,30,30,0.02)',
-      display: 'flex', flexDirection: 'column', position: 'relative', zIndex: 3, cursor: 'pointer',
+      display: 'flex', flexDirection: 'column', position: 'relative', zIndex: 2, cursor: 'pointer',
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
         <div style={{ width: 22, height: 22, borderRadius: 6, background: col.bg, color: col.fg, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -106,9 +106,9 @@ function ThemeCardC({ theme, count, focused, faded, w, onClick }: { theme: strin
     <div onClick={onClick} style={{
       width: w, height: THEME_CARD_H,
       background: C.amberSoft, border: `1px solid ${focused ? '#E8A636' : '#EFD9A5'}`,
-      borderRadius: 10, padding: '10px 12px', opacity: faded ? 0.45 : 1,
+      borderRadius: 12, padding: '10px 12px', opacity: faded ? 0.45 : 1,
       boxShadow: focused ? '0 0 0 3px rgba(232,166,54,0.18)' : 'none',
-      display: 'flex', flexDirection: 'column', position: 'relative', zIndex: 3, cursor: 'pointer',
+      display: 'flex', flexDirection: 'column', position: 'relative', zIndex: 2, cursor: 'pointer',
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
         <span style={{ fontFamily: SANS, fontSize: 9.5, fontWeight: 700, color: '#7A5A11', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Theme</span>
@@ -131,7 +131,7 @@ function LessonCardC({ lesson, hover, w, onClick }: { lesson: CurriculumLesson; 
       boxShadow: hover ? `0 0 0 3px ${C.pinkSoft},0 8px 24px rgba(56,30,30,0.08)` : '0 1px 0 rgba(56,30,30,0.02)',
       position: 'relative', overflow: 'hidden',
       display: 'flex', flexDirection: 'column', gap: 6,
-      zIndex: hover ? 6 : 3, cursor: 'pointer',
+      zIndex: hover ? 5 : 2, cursor: 'pointer',
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
         <span style={{ fontFamily: SANS, fontSize: 10.5, fontWeight: 700, color: C.faint, fontVariantNumeric: 'tabular-nums' }}>{lesson.id}</span>
