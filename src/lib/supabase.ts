@@ -1,11 +1,17 @@
-import { createClient } from "@supabase/supabase-js";
+import { createClient } from '@supabase/supabase-js';
 
-// Server-side client — uses service role key, never expose to the browser.
-// Supabase's Database generic doesn't thread correctly with JSONB array columns
-// in the Row/Insert types; query results are typed explicitly at call sites.
+const url  = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+
+// Browser client — singleton
+let _client: ReturnType<typeof createClient> | null = null;
+export function getSupabase() {
+  if (!_client) _client = createClient(url, anon);
+  return _client;
+}
+
+// Server-side client (service role) — only call from API routes / Server Components
 export function createServerClient() {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  if (!url || !key) throw new Error("Supabase env vars not configured");
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY ?? anon;
   return createClient(url, key, { auth: { persistSession: false } });
 }

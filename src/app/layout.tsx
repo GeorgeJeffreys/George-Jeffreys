@@ -1,30 +1,29 @@
 import type { Metadata } from 'next';
-import { Sora, Sacramento } from 'next/font/google';
+import { DM_Sans, DM_Mono } from 'next/font/google';
 import './globals.css';
 
-const sora = Sora({
+const dmSans = DM_Sans({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-sora',
+  variable: '--font-dm-sans',
 });
 
-// Sacramento is used exclusively for the Alsama wordmark.
-const sacramento = Sacramento({
-  weight: '400',
+const dmMono = DM_Mono({
+  weight: ['300', '400', '500'],
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-sacramento',
+  variable: '--font-dm-mono',
 });
 
 export const metadata: Metadata = {
-  title: 'Alsama Lesson Planner',
-  description: 'Lesson planning portal for the Alsama Project English curriculum',
+  title: 'Project Union HQ — Designers Guild',
+  description: 'Consulting engagement management for Project Union',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${sora.variable} ${sacramento.variable}`}>
-      <body>{children}</body>
+    <html lang="en" className={`${dmSans.variable} ${dmMono.variable}`}>
+      <body className="h-full">{children}</body>
     </html>
   );
 }
