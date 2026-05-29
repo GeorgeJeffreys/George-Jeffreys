@@ -34,22 +34,37 @@ export default function ChatPanel({ open, onToggle }: Props) {
   };
 
   const parseAndExecuteAction = useCallback(async (text: string) => {
-    const match = text.match(/<action>([\s\S]*?)<\/action>/);
-    if (!match) return;
-    try {
-      const action = JSON.parse(match[1]);
-      const sb = getSupabase();
-      if (action.type === 'add_recommendation') {
-        await sb.from('recommendations').insert(action.data);
-        showToast('Added to Recommendations');
-      } else if (action.type === 'add_task') {
-        await sb.from('tasks').insert(action.data);
-        showToast('Added to Calendar');
-      } else if (action.type === 'add_option') {
-        await sb.from('options').insert(action.data);
-        showToast('Added to Workstream');
-      }
-    } catch { /* ignore parse errors */ }
+    const ACTION_REGEX = /<action>([\s\S]*?)<\/action>/g;
+    const matches = [...text.matchAll(ACTION_REGEX)];
+    if (matches.length === 0) return;
+    const sb = getSupabase();
+    for (const match of matches) {
+      try {
+        const action = JSON.parse(match[1]);
+        if (action.type === 'add_recommendation') {
+          const { data: recData } = await sb.from('recommendations').insert(action.data).select('id').single();
+          if (recData?.id) {
+            const cashflowRows = Array.from({ length: 8 }, (_, i) => ({
+              rec_id: recData.id,
+              quarter: i + 1,
+              cost_out: 0,
+              saving_in: 0,
+            }));
+            await sb.from('cashflow').insert(cashflowRows);
+          }
+          showToast('✓ Added to Recommendations');
+        } else if (action.type === 'add_task') {
+          await sb.from('tasks').insert(action.data);
+          showToast('✓ Added to Calendar');
+        } else if (action.type === 'add_option') {
+          await sb.from('options').insert(action.data);
+          showToast('✓ Added to Workstream');
+        } else if (action.type === 'add_scenario') {
+          await sb.from('scenarios').insert(action.data);
+          showToast('✓ Added to Scenarios');
+        }
+      } catch { /* ignore parse errors */ }
+    }
   }, []);
 
   const send = async () => {
