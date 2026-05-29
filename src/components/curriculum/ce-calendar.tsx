@@ -286,8 +286,10 @@ export function WeekView({ week, month, lessons, onBack }: WeekViewProps) {
       <div style={{ flex: 1, overflowY: 'auto', padding: '16px 24px', display: 'flex', flexDirection: 'column', gap: 10, background: C.cream }}>
         {[1, 2, 3, 4, 5].map(p => {
           const lesson = lessons.find(l => l.periodNum === p);
+          // Diagnostic: log all fields so teachers can see what data is present
+          if (lesson) console.log('cell data:', lesson);
           const sk = lesson ? skillKey(lesson.linguisticSkill) : 'basic';
-          const col = SKILL_COLOR[sk];
+          const col = SKILL_COLOR[sk] ?? SKILL_COLOR.basic;
           const isExpanded = expandedPeriod === p;
           const hasExtra = !!(lesson?.grammarFocus || lesson?.vocabFocus);
 
@@ -307,58 +309,60 @@ export function WeekView({ week, month, lessons, onBack }: WeekViewProps) {
                 transition: 'border-color 0.15s, box-shadow 0.15s',
               }}
             >
-              {/* Always-visible row: period number, ID, 2-line LO, chips, skill bar */}
-              <div style={{ padding: '12px 16px 16px', display: 'flex', gap: 14, alignItems: 'flex-start', minHeight: 80 }}>
-                {/* Period badge */}
+              {/* Always-visible row: period number left, lesson ID top-right, LO, chips */}
+              <div style={{ padding: '12px 16px 16px', display: 'flex', gap: 14, alignItems: 'flex-start' }}>
+                {/* Period badge — large number on left */}
                 <div style={{
-                  width: 52, flexShrink: 0,
-                  display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-                  gap: 1, paddingTop: 2,
+                  width: 48, flexShrink: 0,
+                  display: 'flex', flexDirection: 'column', alignItems: 'center',
+                  paddingTop: 2,
                 }}>
-                  <span style={{ fontFamily: SANS, fontSize: 9.5, fontWeight: 600, color: C.faint2, textTransform: 'uppercase', letterSpacing: '0.08em' }}>P</span>
-                  <span style={{ fontFamily: SANS, fontSize: 40, fontWeight: 700, color: isExpanded ? col.fg : C.ink, lineHeight: 1 }}>{p}</span>
+                  <span style={{ fontFamily: SANS, fontSize: 9.5, fontWeight: 700, color: C.faint2, textTransform: 'uppercase', letterSpacing: '0.08em' }}>P</span>
+                  <span style={{ fontFamily: SANS, fontSize: 40, fontWeight: 800, color: isExpanded ? col.fg : C.ink, lineHeight: 1 }}>{p}</span>
                 </div>
 
                 {/* Main content column */}
                 {lesson ? (
-                  <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 6 }}>
-                    <span style={{ fontFamily: SANS, fontSize: 11, fontWeight: 600, color: C.faint2, fontVariantNumeric: 'tabular-nums' }}>
-                      {lesson.id}
-                    </span>
-                    {/* Daily LO — always 2-line clamped in default view */}
+                  <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 5 }}>
+                    {/* Lesson ID — top right */}
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
+                      <span style={{
+                        fontFamily: 'monospace', fontSize: 10.5, fontWeight: 600,
+                        color: C.faint2, letterSpacing: '0.02em',
+                      }}>
+                        {lesson.id}
+                      </span>
+                    </div>
+                    {/* Daily LO — 2-line clamp */}
                     <span style={{
-                      fontFamily: SANS, fontSize: 13.5, fontWeight: 500, color: C.ink, lineHeight: 1.4,
+                      fontFamily: SANS, fontSize: 13, fontWeight: 500, color: C.ink, lineHeight: 1.4,
                       display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden',
-                    }}>
+                    } as React.CSSProperties}>
                       {lesson.dailyLO}
                     </span>
-                    {/* Skill + theme chips on separate row */}
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
+                    {/* Chips row + chevron */}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 5, flexWrap: 'wrap', marginTop: 2 }}>
                       <span style={{
                         display: 'inline-flex', alignItems: 'center',
-                        padding: '1px 7px', background: col.bg, color: col.fg,
+                        padding: '2px 8px', background: col.bg, color: col.fg,
                         border: `1px solid ${col.bg}`, borderRadius: 999,
                         fontFamily: SANS, fontSize: 10, fontWeight: 600,
                       }}>{col.label}</span>
-                      {lesson.theme && (
-                        <Chip tone="amber" size="sm">{lesson.theme}</Chip>
+                      {lesson.theme && <Chip tone="amber" size="sm">{lesson.theme}</Chip>}
+                      <div style={{ flex: 1 }} />
+                      {hasExtra && (
+                        <div style={{
+                          transform: isExpanded ? 'rotate(180deg)' : 'none',
+                          transition: 'transform 0.2s',
+                        }}>
+                          <Icon name="chevronDown" size={14} color={C.faint2} />
+                        </div>
                       )}
                     </div>
                   </div>
                 ) : (
                   <div style={{ flex: 1, display: 'flex', alignItems: 'center', paddingTop: 8 }}>
                     <span style={{ fontFamily: SANS, fontSize: 12, color: C.faint2 }}>No lesson scheduled</span>
-                  </div>
-                )}
-
-                {/* Chevron — only if there's extra content to expand */}
-                {lesson && hasExtra && (
-                  <div style={{
-                    flexShrink: 0, alignSelf: 'center',
-                    transform: isExpanded ? 'rotate(180deg)' : 'none',
-                    transition: 'transform 0.2s',
-                  }}>
-                    <Icon name="chevronDown" size={14} color={C.faint2} />
                   </div>
                 )}
               </div>

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect, useMemo } from 'react';
+import { useState, useRef, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import { C, SANS } from '@/lib/tokens';
 import { Icon } from '@/components/icon';
@@ -19,14 +19,13 @@ export interface KnowledgeLO { ref: string; lo: string; count: number; weeks: nu
 const RAIL_W = 96;
 
 const J_TIERS: TierDef[] = [
-  { id: 'total',     label: 'Total LO',     sub: 'The whole-year outcome',   accent: '#8E1F49' },
-  { id: 'skill',     label: 'Skill LO',     sub: 'Major skill outcomes',     accent: C.pink },
-  { id: 'knowledge', label: 'Knowledge LO', sub: '~4 per skill',             accent: C.amber },
-  { id: 'daily',     label: 'Daily LO',     sub: '5 per week · the lesson',  accent: C.faint },
+  { id: 'total',     label: 'Total LO',     sub: 'The whole-year outcome',    accent: '#8E1F49' },
+  { id: 'skill',     label: 'Skill LO',     sub: 'Click a skill to drill in', accent: C.pink },
+  { id: 'knowledge', label: 'Knowledge LO', sub: 'Click a KLO to drill in',   accent: C.amber },
+  { id: 'daily',     label: 'Daily LO',     sub: '5 per week · the lesson',   accent: C.faint },
 ];
 
-// ── Tier row (Fix #3 — left rail tier labels) ─────────────────────────────────
-// Not using TierBand from ce-shell because position:sticky breaks inside scale()
+// ── TierRow (non-sticky — works inside scale transform) ───────────────────────
 
 function TierRow({ tier, children, alignCenter = false, last = false }: {
   tier: TierDef;
@@ -38,9 +37,7 @@ function TierRow({ tier, children, alignCenter = false, last = false }: {
     <div style={{
       display: 'flex',
       borderBottom: last ? 'none' : `1px solid ${C.borderSoft}`,
-      background: 'transparent',
     }}>
-      {/* Sticky-style left rail — scrolls with content when inside transform */}
       <div style={{
         width: RAIL_W, flexShrink: 0,
         padding: '14px 12px 14px 16px',
@@ -58,7 +55,6 @@ function TierRow({ tier, children, alignCenter = false, last = false }: {
           {tier.sub}
         </span>
       </div>
-      {/* Content area */}
       <div style={{
         flex: 1, padding: '20px 24px',
         display: 'flex',
@@ -102,6 +98,10 @@ function RootCard({ totalLessons, year }: { totalLessons: number; year: number }
       } as React.CSSProperties}>
         {lo}
       </p>
+      <span style={{
+        fontFamily: SANS, fontSize: 10, color: 'rgba(255,255,255,0.6)',
+        display: 'block', marginTop: 6,
+      }}>{totalLessons} lessons total</span>
     </div>
   );
 }
@@ -114,16 +114,16 @@ function SkillCard({ s, focused, faded, onClick }: {
     <div
       onClick={onClick}
       style={{
-        width: 200, maxHeight: 160, background: '#FFFFFF',
-        border: `1px solid ${focused ? C.pinkBorder : '#E5DDD3'}`,
+        width: 200, background: '#FFFFFF',
+        border: `2px solid ${focused ? C.pink : '#E5DDD3'}`,
         borderRadius: 12, padding: 10,
-        opacity: faded ? 0.6 : 1,
+        opacity: faded ? 0.3 : 1,
         boxShadow: focused
           ? `0 0 0 3px ${C.pinkSoft},0 6px 18px rgba(56,30,30,0.06)`
           : '0 1px 0 rgba(56,30,30,0.02)',
         display: 'flex', flexDirection: 'column', position: 'relative',
         cursor: 'pointer', overflow: 'hidden',
-        transition: 'opacity 0.15s, box-shadow 0.15s',
+        transition: 'opacity 0.15s, border-color 0.15s, box-shadow 0.15s',
         flexShrink: 0,
       }}
     >
@@ -170,14 +170,14 @@ function KloCard({ k, focused, faded, onClick }: {
     <div
       onClick={onClick}
       style={{
-        width: 180, maxHeight: 140,
-        background: C.amberSoft, border: `1px solid ${focused ? '#E8A636' : '#EFD9A5'}`,
+        width: 190,
+        background: C.amberSoft, border: `2px solid ${focused ? '#E8A636' : '#EFD9A5'}`,
         borderRadius: 12, padding: '8px 10px',
-        opacity: faded ? 0.6 : 1,
+        opacity: faded ? 0.3 : 1,
         boxShadow: focused ? '0 0 0 3px rgba(232,166,54,0.18)' : 'none',
         display: 'flex', flexDirection: 'column', gap: 3,
-        position: 'relative', cursor: 'pointer', overflow: 'hidden',
-        transition: 'opacity 0.15s',
+        cursor: 'pointer', overflow: 'hidden',
+        transition: 'opacity 0.15s, border-color 0.15s',
         flexShrink: 0,
       }}
     >
@@ -355,7 +355,7 @@ export function JourneyLeft({
     <CeLeftPanel
       title="Outcome hierarchy"
       sublabel="Total → Skill → Knowledge → Daily"
-      footerHint="Outcomes subdivide by grain. The day is the smallest LO — one lesson."
+      footerHint="Click a Skill LO to reveal its Knowledge LOs, then click a KLO for daily lessons."
     >
       <div style={{
         margin: '6px 12px 8px', padding: '8px 10px', borderRadius: 8,
@@ -424,7 +424,7 @@ export function JourneyLeft({
   );
 }
 
-// ── Journey Org Chart — Fixes #1 (always visible), #2 (wheel zoom), #3 (tier rails) ───
+// ── Journey Org Chart — progressive disclosure + pan ─────────────────────────
 
 export function JourneyOrgChart({
   skillLOs, klosBySkill, allLessons, focusedSkillRef, focusedKRef,
@@ -441,10 +441,12 @@ export function JourneyOrgChart({
   onFocusKRef: (ref: string | null) => void;
 }) {
   const [zoom, setZoom] = useState(1.0);
+  const [cursorMode, setCursorMode] = useState<'grab' | 'grabbing'>('grab');
   const [modalLesson, setModalLesson] = useState<CurriculumLesson | null>(null);
-  const outerRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const panRef = useRef({ active: false, moved: false, startX: 0, startY: 0, scrollLeft: 0, scrollTop: 0 });
 
-  // Group daily lessons by skill+klo key for O(1) lookup
+  // Group daily lessons by skill+klo key
   const dailyByKey = useMemo(() => {
     const m = new Map<string, CurriculumLesson[]>();
     allLessons.forEach(l => {
@@ -457,25 +459,73 @@ export function JourneyOrgChart({
     return m;
   }, [allLessons]);
 
-  // Fix #2 — mouse wheel / trackpad pinch zoom
-  useEffect(() => {
-    const el = outerRef.current;
-    if (!el) return;
-    const handleWheel = (e: WheelEvent) => {
-      e.preventDefault();
-      setZoom(z => Math.min(1.5, Math.max(0.3, z + e.deltaY * -0.001)));
+  // ── Pan handlers ──────────────────────────────────────────────────────────
+
+  function onPanStart(e: React.MouseEvent) {
+    if (e.button !== 0 || !scrollRef.current) return;
+    panRef.current = {
+      active: true, moved: false,
+      startX: e.clientX, startY: e.clientY,
+      scrollLeft: scrollRef.current.scrollLeft,
+      scrollTop: scrollRef.current.scrollTop,
     };
-    el.addEventListener('wheel', handleWheel, { passive: false });
-    return () => el.removeEventListener('wheel', handleWheel);
-  }, []);
+  }
+
+  function onPanMove(e: React.MouseEvent) {
+    const p = panRef.current;
+    if (!p.active || !scrollRef.current) return;
+    const dx = e.clientX - p.startX;
+    const dy = e.clientY - p.startY;
+    if (!p.moved && Math.abs(dx) + Math.abs(dy) > 4) {
+      p.moved = true;
+      setCursorMode('grabbing');
+    }
+    if (p.moved) {
+      scrollRef.current.scrollLeft = p.scrollLeft - dx;
+      scrollRef.current.scrollTop = p.scrollTop - dy;
+    }
+  }
+
+  function onPanEnd() {
+    if (!panRef.current.active) return;
+    panRef.current.active = false;
+    if (panRef.current.moved) setCursorMode('grab');
+  }
+
+  // Suppress card click if the mouse moved during the drag
+  function onClickCapture(e: React.MouseEvent) {
+    if (panRef.current.moved) {
+      e.stopPropagation();
+      panRef.current.moved = false;
+    }
+  }
+
+  const focusedKlos = focusedSkillRef ? (klosBySkill.get(focusedSkillRef) ?? []) : [];
+  const dailyLessons = (focusedSkillRef && focusedKRef)
+    ? (dailyByKey.get(`${focusedSkillRef}|${focusedKRef}`) ?? [])
+    : [];
 
   return (
     <>
-      {/* Outer: non-scrollable, position:relative keeps ZoomControls fixed (Fix #8) */}
-      <div ref={outerRef} style={{ flex: 1, position: 'relative', overflow: 'hidden', background: C.cream }}>
+      <div
+        style={{
+          flex: 1, position: 'relative', overflow: 'hidden',
+          background: C.cream,
+          cursor: cursorMode,
+          userSelect: 'none',
+        }}
+        onMouseDown={onPanStart}
+        onMouseMove={onPanMove}
+        onMouseUp={onPanEnd}
+        onMouseLeave={onPanEnd}
+        onClickCapture={onClickCapture}
+      >
         {/* Scrollable inner */}
-        <div style={{ position: 'absolute', inset: 0, overflowY: 'auto', overflowX: 'auto' }}>
-          {/* Scaled canvas — Fix #2 zoom applied here */}
+        <div
+          ref={scrollRef}
+          style={{ position: 'absolute', inset: 0, overflowY: 'auto', overflowX: 'auto' }}
+        >
+          {/* Scaled canvas */}
           <div style={{
             transform: `scale(${zoom})`,
             transformOrigin: 'top left',
@@ -483,13 +533,13 @@ export function JourneyOrgChart({
             paddingBottom: 80,
           }}>
 
-            {/* ── Tier 1: Total LO ── */}
+            {/* ── Tier 1: Total LO — always visible ── */}
             <TierRow tier={J_TIERS[0]} alignCenter>
               <RootCard totalLessons={totalLessons} year={year} />
             </TierRow>
 
-            {/* ── Tier 2: Skill LOs — always all visible ── */}
-            <TierRow tier={J_TIERS[1]}>
+            {/* ── Tier 2: Skill LOs — always visible, all skills ── */}
+            <TierRow tier={J_TIERS[1]} last={!focusedSkillRef}>
               <div style={{ display: 'flex', gap: 16, flexWrap: 'nowrap' }}>
                 {skillLOs.map(s => (
                   <SkillCard
@@ -503,115 +553,48 @@ export function JourneyOrgChart({
               </div>
             </TierRow>
 
-            {/* ── Tier 3: Knowledge LOs — always all visible, grouped by parent skill ── */}
-            <TierRow tier={J_TIERS[2]}>
-              <div style={{ display: 'flex', gap: 20, flexWrap: 'nowrap', alignItems: 'flex-start' }}>
-                {skillLOs.map(s => {
-                  const col = SKILL_COLOR[skillKey(s.skill)];
-                  const klos = klosBySkill.get(s.ref) ?? [];
-                  const isSkillFocused = s.ref === focusedSkillRef;
-                  return (
-                    <div key={s.ref} style={{
-                      display: 'flex', flexDirection: 'column', gap: 6,
-                      opacity: (focusedSkillRef && !isSkillFocused) ? 0.6 : 1,
-                      transition: 'opacity 0.15s',
-                    }}>
-                      {/* Parent skill label */}
-                      <span style={{
-                        fontFamily: SANS, fontSize: 9, fontWeight: 700,
-                        color: col.fg, background: col.bg,
-                        padding: '1px 7px', borderRadius: 4, alignSelf: 'flex-start',
-                        border: `1px solid ${col.bg}`,
-                      }}>{s.ref}</span>
-                      {/* KLO cards stacked */}
-                      {klos.length > 0 ? (
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-                          {klos.map(k => (
-                            <KloCard
-                              key={k.ref}
-                              k={k}
-                              focused={isSkillFocused && k.ref === focusedKRef}
-                              faded={isSkillFocused && !!focusedKRef && k.ref !== focusedKRef}
-                              onClick={() => {
-                                if (!isSkillFocused) onFocusSkill(s.ref);
-                                onFocusKRef(k.ref === focusedKRef ? null : k.ref);
-                              }}
-                            />
-                          ))}
-                        </div>
-                      ) : (
-                        <div style={{
-                          width: 180, padding: '10px 12px',
-                          fontFamily: SANS, fontSize: 10, color: C.faint, fontStyle: 'italic',
-                          background: 'rgba(255,255,255,0.4)', border: `1px dashed ${C.borderSoft}`,
-                          borderRadius: 8,
-                        }}>loading…</div>
-                      )}
-                    </div>
-                  );
-                })}
-              </div>
-            </TierRow>
+            {/* ── Tier 3: KLOs — only when a skill is focused ── */}
+            {focusedSkillRef && (
+              <TierRow tier={J_TIERS[2]} last={!focusedKRef}>
+                <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', alignItems: 'flex-start' }}>
+                  {focusedKlos.length === 0 ? (
+                    <span style={{
+                      fontFamily: SANS, fontSize: 12, color: C.faint, fontStyle: 'italic',
+                    }}>Loading knowledge outcomes…</span>
+                  ) : focusedKlos.map(k => (
+                    <KloCard
+                      key={k.ref}
+                      k={k}
+                      focused={k.ref === focusedKRef}
+                      faded={focusedKRef !== null && k.ref !== focusedKRef}
+                      onClick={() => onFocusKRef(k.ref === focusedKRef ? null : k.ref)}
+                    />
+                  ))}
+                </div>
+              </TierRow>
+            )}
 
-            {/* ── Tier 4: Daily LOs — always all visible, grouped by parent KLO within each skill ── */}
-            <TierRow tier={J_TIERS[3]} last>
-              <div style={{ display: 'flex', gap: 20, flexWrap: 'nowrap', alignItems: 'flex-start' }}>
-                {skillLOs.map(s => {
-                  const klos = klosBySkill.get(s.ref) ?? [];
-                  const isSkillFocused = s.ref === focusedSkillRef;
-                  return (
-                    <div key={s.ref} style={{
-                      display: 'flex', flexDirection: 'column', gap: 10,
-                      width: 180, flexShrink: 0,
-                      opacity: (focusedSkillRef && !isSkillFocused) ? 0.6 : 1,
-                      transition: 'opacity 0.15s',
-                    }}>
-                      {klos.map(k => {
-                        const lessons = dailyByKey.get(`${s.ref}|${k.ref}`) ?? [];
-                        const isKloFocused = isSkillFocused && k.ref === focusedKRef;
-                        return (
-                          <div key={k.ref} style={{
-                            display: 'flex', flexDirection: 'column', gap: 4,
-                            opacity: (isSkillFocused && focusedKRef && !isKloFocused) ? 0.6 : 1,
-                          }}>
-                            {/* Parent KLO label */}
-                            <span style={{
-                              fontFamily: SANS, fontSize: 9, fontWeight: 700,
-                              color: '#7A5A11', background: C.amberSoft,
-                              padding: '1px 6px', borderRadius: 3, alignSelf: 'flex-start',
-                            }}>{k.ref}</span>
-                            {/* Daily chips */}
-                            {lessons.length > 0 ? (
-                              <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-                                {lessons.map(l => (
-                                  <DailyChip key={l.id} lesson={l} onClick={() => setModalLesson(l)} />
-                                ))}
-                              </div>
-                            ) : klos.length > 0 ? (
-                              <span style={{
-                                fontFamily: SANS, fontSize: 10, color: C.faint2,
-                                fontStyle: 'italic',
-                              }}>—</span>
-                            ) : null}
-                          </div>
-                        );
-                      })}
-                      {klos.length === 0 && (
-                        <span style={{
-                          fontFamily: SANS, fontSize: 10, color: C.faint2,
-                          fontStyle: 'italic',
-                        }}>loading…</span>
-                      )}
-                    </div>
-                  );
-                })}
-              </div>
-            </TierRow>
+            {/* ── Tier 4: Daily LOs — only when both skill and KLO are focused ── */}
+            {focusedSkillRef && focusedKRef && (
+              <TierRow tier={J_TIERS[3]} last>
+                {dailyLessons.length === 0 ? (
+                  <span style={{ fontFamily: SANS, fontSize: 12, color: C.faint, fontStyle: 'italic' }}>
+                    No lessons found for this outcome.
+                  </span>
+                ) : (
+                  <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                    {dailyLessons.map(l => (
+                      <DailyChip key={l.id} lesson={l} onClick={() => setModalLesson(l)} />
+                    ))}
+                  </div>
+                )}
+              </TierRow>
+            )}
 
           </div>
         </div>
 
-        {/* Zoom controls — in outer non-scrollable wrapper, stays visible (Fix #8) */}
+        {/* Zoom controls */}
         <ZoomControls
           zoom={zoom}
           onZoomIn={() => setZoom(z => Math.min(1.5, parseFloat((z + 0.1).toFixed(1))))}

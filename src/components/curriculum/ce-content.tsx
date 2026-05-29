@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { C, SANS } from '@/lib/tokens';
 import { Icon } from '@/components/icon';
@@ -104,91 +105,111 @@ export function ContentLeft({
   );
 }
 
-// ── Lesson card (for the grid) ─────────────────────────────────────────────────
+// ── Lesson card (matches Calendar week view cell style) ───────────────────────
 
 function LessonCard({ lesson }: { lesson: CurriculumLesson }) {
   const router = useRouter();
-  const col = SKILL_COLOR[skillKey(lesson.linguisticSkill)];
+  const [expanded, setExpanded] = useState(false);
+  const col = SKILL_COLOR[skillKey(lesson.linguisticSkill)] ?? SKILL_COLOR.basic;
+  const hasExtra = !!(lesson.grammarFocus || lesson.vocabFocus);
   const planUrl = `/plan/new?lessonId=${encodeURIComponent(lesson.id)}`;
 
   return (
-    <div
-      onClick={() => router.push(planUrl)}
-      style={{
-        background: C.surface,
-        border: `1px solid ${C.border}`,
-        borderRadius: 12, padding: '14px 14px 12px',
-        display: 'flex', flexDirection: 'column', gap: 8,
-        position: 'relative', overflow: 'hidden',
-        cursor: 'pointer',
-        transition: 'box-shadow 0.12s, border-color 0.12s',
-      }}
-      onMouseEnter={e => {
-        (e.currentTarget as HTMLDivElement).style.borderColor = C.pinkBorder;
-        (e.currentTarget as HTMLDivElement).style.boxShadow = `0 0 0 3px ${C.pinkSoft},0 6px 18px rgba(56,30,30,0.08)`;
-      }}
-      onMouseLeave={e => {
-        (e.currentTarget as HTMLDivElement).style.borderColor = C.border;
-        (e.currentTarget as HTMLDivElement).style.boxShadow = 'none';
-      }}
+    <div style={{
+      background: '#FFFFFF',
+      border: `1px solid #E5DDD3`,
+      borderRadius: 12,
+      position: 'relative', overflow: 'hidden',
+      transition: 'border-color 0.15s, box-shadow 0.15s',
+    }}
+    onMouseEnter={e => {
+      (e.currentTarget as HTMLDivElement).style.borderColor = C.pinkBorder;
+      (e.currentTarget as HTMLDivElement).style.boxShadow = `0 0 0 2px ${C.pinkSoft},0 4px 12px rgba(56,30,30,0.06)`;
+    }}
+    onMouseLeave={e => {
+      (e.currentTarget as HTMLDivElement).style.borderColor = '#E5DDD3';
+      (e.currentTarget as HTMLDivElement).style.boxShadow = 'none';
+    }}
     >
-      {/* ID + week/period badge */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+      {/* Always-visible content */}
+      <div style={{ padding: '12px 14px', display: 'flex', flexDirection: 'column', gap: 5 }}>
+        {/* Top row: lesson ID left, week/period badge right */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+          <span style={{
+            fontFamily: 'monospace', fontSize: 10.5, fontWeight: 600,
+            color: C.faint2, letterSpacing: '0.02em',
+          }}>{lesson.id}</span>
+          <div style={{ flex: 1 }} />
+          {(lesson.week != null || lesson.periodNum != null) && (
+            <Chip tone="neutral" size="sm">
+              {[lesson.week != null ? `Wk ${lesson.week}` : null, lesson.periodNum != null ? `P${lesson.periodNum}` : null].filter(Boolean).join(' · ')}
+            </Chip>
+          )}
+        </div>
+        {/* Daily LO — 2-line clamp */}
         <span style={{
-          fontFamily: SANS, fontSize: 10.5, fontWeight: 700,
-          color: C.faint, fontVariantNumeric: 'tabular-nums',
-        }}>{lesson.id}</span>
-        {(lesson.week != null || lesson.periodNum != null) && (
-          <Chip tone="neutral" size="sm">
-            {[lesson.month, lesson.week != null ? `Wk ${lesson.week}` : null, lesson.periodNum != null ? `P${lesson.periodNum}` : null].filter(Boolean).join(' · ')}
-          </Chip>
-        )}
-      </div>
-
-      {/* Daily LO */}
-      <div>
-        <Label style={{ display: 'block', marginBottom: 3 }}>Daily LO</Label>
-        <span style={{
-          fontFamily: SANS, fontSize: 13, fontWeight: 500, color: C.ink,
-          lineHeight: 1.4,
+          fontFamily: SANS, fontSize: 13, fontWeight: 500, color: C.ink, lineHeight: 1.4,
           overflow: 'hidden', display: '-webkit-box',
-          WebkitLineClamp: 3, WebkitBoxOrient: 'vertical',
-          wordBreak: 'break-word',
+          WebkitLineClamp: 2, WebkitBoxOrient: 'vertical',
         } as React.CSSProperties}>{lesson.dailyLO}</span>
+        {/* Chips row + expand chevron */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 5, flexWrap: 'wrap', marginTop: 2 }}>
+          <span style={{
+            display: 'inline-flex', alignItems: 'center',
+            padding: '2px 8px', background: col.bg, color: col.fg,
+            border: `1px solid ${col.bg}`, borderRadius: 999,
+            fontFamily: SANS, fontSize: 10, fontWeight: 600,
+          }}>{col.label}</span>
+          {lesson.theme && <Chip tone="amber" size="sm">{lesson.theme}</Chip>}
+          <div style={{ flex: 1 }} />
+          {hasExtra && (
+            <div
+              onClick={e => { e.stopPropagation(); setExpanded(x => !x); }}
+              style={{
+                cursor: 'pointer',
+                transform: expanded ? 'rotate(180deg)' : 'none',
+                transition: 'transform 0.2s',
+              }}
+            >
+              <Icon name="chevronDown" size={13} color={C.faint2} />
+            </div>
+          )}
+        </div>
       </div>
 
-      {/* Grammar / Vocab */}
-      {(lesson.grammarFocus || lesson.vocabFocus) && (
-        <span style={{
-          fontFamily: SANS, fontSize: 11, color: C.faint, lineHeight: 1.4,
+      {/* Expanded: grammar / vocab */}
+      {expanded && hasExtra && (
+        <div style={{
+          borderTop: `1px solid #E5DDD3`,
+          padding: '10px 14px 12px',
+          background: '#FDFAF7',
+          display: 'flex', flexDirection: 'column', gap: 8,
         }}>
-          <span style={{ fontWeight: 600 }}>
-            {lesson.grammarFocus ? 'Grammar' : 'Vocab'}
-          </span> — {lesson.grammarFocus || lesson.vocabFocus}
-        </span>
+          {lesson.grammarFocus && (
+            <div>
+              <Label style={{ display: 'block', marginBottom: 3 }}>Grammar</Label>
+              <span style={{ fontFamily: SANS, fontSize: 12, color: C.ink, lineHeight: 1.4 }}>
+                {lesson.grammarFocus}
+              </span>
+            </div>
+          )}
+          {lesson.vocabFocus && (
+            <div>
+              <Label style={{ display: 'block', marginBottom: 3 }}>Vocab</Label>
+              <span style={{ fontFamily: SANS, fontSize: 12, color: C.ink, lineHeight: 1.4 }}>
+                {lesson.vocabFocus}
+              </span>
+            </div>
+          )}
+        </div>
       )}
 
-      {/* Chips row */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 5, flexWrap: 'wrap', marginTop: 'auto' }}>
-        <span style={{
-          display: 'inline-flex', alignItems: 'center',
-          padding: '1px 7px', background: col.bg, color: col.fg,
-          border: `1px solid ${col.bg}`, borderRadius: 999,
-          fontFamily: SANS, fontSize: 10, fontWeight: 600,
-        }}>{col.label}</span>
-        {lesson.theme && (
-          <Chip tone="amber" size="sm">{lesson.theme}</Chip>
-        )}
-      </div>
-
-      {/* Open lesson button */}
-      <div
-        style={{
-          paddingTop: 10, borderTop: `1px solid ${C.border}`,
-          display: 'flex', justifyContent: 'flex-end',
-        }}
-        onClick={e => e.stopPropagation()}
-      >
+      {/* Open lesson footer */}
+      <div style={{
+        padding: '8px 14px 12px',
+        borderTop: `1px solid #E5DDD3`,
+        display: 'flex', justifyContent: 'flex-end',
+      }}>
         <HiBtn
           variant="primary" size="sm"
           icon={<Icon name="arrowRight" size={12} color="#fff" />}
@@ -198,8 +219,8 @@ function LessonCard({ lesson }: { lesson: CurriculumLesson }) {
         </HiBtn>
       </div>
 
-      {/* Skill colour bar */}
-      <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: 3, background: col.line }} />
+      {/* Skill colour bar at very bottom */}
+      <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: 4, background: col.line }} />
     </div>
   );
 }
