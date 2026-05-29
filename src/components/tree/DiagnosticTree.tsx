@@ -1,663 +1,298 @@
 'use client';
 
-// Note: xlsx is a browser-only package.
-// Import it dynamically inside click handlers:
-//   const XLSX = await import('xlsx');
-// Do NOT import it at module level.
+import { useState, useRef } from 'react';
+import type { TreeNode } from '@/types/union';
 
-import { useState, useCallback, useRef } from 'react';
-import { TreeNode } from '@/types/union';
-import TreeNodeCard from './TreeNodeCard';
-
-interface Props {
-  initialNodes: TreeNode[];
-}
-
-// ── Tree builder ────────────────────────────────────────────────────────────
+// ── Tree builder ──────────────────────────────────────────────────────────────
 function buildTree(flat: TreeNode[]): TreeNode[] {
   const map = new Map<string, TreeNode>();
+  for (const n of flat) map.set(n.id, { ...n, children: [] });
   const roots: TreeNode[] = [];
-
-  // Clone nodes so we can attach children without mutating props
-  for (const n of flat) {
-    map.set(n.id, { ...n, children: [] });
-  }
-
   for (const n of map.values()) {
-    if (n.parent_id == null) {
-      roots.push(n);
-    } else {
-      const parent = map.get(n.parent_id);
-      if (parent) {
-        parent.children = parent.children ?? [];
-        parent.children.push(n);
-      }
-    }
+    if (n.parent_id === null) roots.push(n);
+    else map.get(n.parent_id)?.children?.push(n);
   }
-
-  // Sort children by sort_order
-  function sortChildren(nodes: TreeNode[]) {
+  function sort(nodes: TreeNode[]) {
     nodes.sort((a, b) => a.sort_order - b.sort_order);
-    for (const n of nodes) {
-      if (n.children?.length) sortChildren(n.children);
-    }
+    nodes.forEach(n => n.children?.length && sort(n.children));
   }
-  sortChildren(roots);
-  roots.sort((a, b) => a.sort_order - b.sort_order);
-
+  sort(roots);
   return roots;
 }
 
-// ── Collect all node ids at a specific depth ────────────────────────────────
-function collectExpandedDefaults(roots: TreeNode[]): Set<string> {
-  // Root nodes (depth 0) and their children (depth 1) are expanded by default
-  const expanded = new Set<string>();
-  for (const root of roots) {
-    expanded.add(root.id);
-    if (root.children) {
-      for (const child of root.children) {
-        expanded.add(child.id);
-      }
-    }
-  }
-  return expanded;
+// ── Contextual sub-text per node label ───────────────────────────────────────
+const SUB: Record<string, string> = {
+  'EBITDA':         'Overhead problem · not margin',
+  'Revenue':        '−£3.6m vs budget · volume & price gap',
+  'Costs':          'COGS stable · overhead is the gap',
+  'Volume':         'Account count declining · dormants uncontacted',
+  'Price/Mix':      'Underpriced vs Colefax · Signature gap ~12%',
+  'Channel':        'US £5m · DTC under-developed',
+  'COGS':           '45.6% of revenue · stable · not addressable',
+  'Property':       '11.8% rev · Colefax benchmark 7% · gap £1.3m',
+  'Headcount':      '150 staff · £180k/head vs £309k Colefax',
+  'Other overhead': 'Marketing · tech · sampling · EU offices',
+};
+
+function valueColour(label: string): string {
+  if (['EBITDA', 'Costs', 'Property', 'Headcount'].includes(label)) return '#B84A2E';
+  if (['Revenue', 'GM%'].includes(label)) return '#1A4A3A';
+  if (['Volume', 'Price/Mix', 'Channel', 'Other overhead'].includes(label)) return '#8B6914';
+  return '#1A1714';
 }
 
-// ── Connector line between parent and child columns ─────────────────────────
-function ConnectorLine() {
+// ── Individual node box ───────────────────────────────────────────────────────
+function NodeBox({
+  node, isExpanded, hasChildren, onToggle, topBorder, isLeaf,
+}: {
+  node: TreeNode;
+  isExpanded: boolean;
+  hasChildren: boolean;
+  onToggle: () => void;
+  topBorder?: string;
+  isLeaf?: boolean;
+}) {
   return (
     <div
+      onClick={hasChildren ? onToggle : undefined}
       style={{
-        display: 'flex',
-        alignItems: 'center',
-        padding: '0 4px',
-        flexShrink: 0,
+        border: `1px solid ${isExpanded ? '#1A4A3A' : '#E2DDD6'}`,
+        borderRadius: 6,
+        padding: '10px 12px',
+        background: isExpanded ? '#E8F0EC' : isLeaf ? '#F0EDE8' : '#FFFFFF',
+        cursor: hasChildren ? 'pointer' : 'default',
+        transition: 'border-color 0.12s, background 0.12s, box-shadow 0.12s',
+        position: 'relative',
+        boxShadow: '0 1px 2px rgba(0,0,0,0.04)',
+        ...(topBorder ? { borderTop: `2px solid ${topBorder}` } : {}),
       }}
     >
-      <div
-        style={{
-          width: 32,
-          height: 2,
-          background: 'var(--color-border)',
-          borderRadius: 1,
-        }}
-      />
-    </div>
-  );
-}
-
-// ── Vertical bar connecting sibling nodes ────────────────────────────────────
-// Renders a column of children connected by a vertical spine + horizontal branches
-function ChildrenColumn({
-  children,
-  depth,
-  expandedIds,
-  onToggle,
-  onValueChange,
-  savingIds,
-}: {
-  children: TreeNode[];
-  depth: number;
-  expandedIds: Set<string>;
-  onToggle: (id: string) => void;
-  onValueChange: (id: string, value: string) => void;
-  savingIds: Set<string>;
-}) {
-  if (children.length === 0) return null;
-
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 12, position: 'relative' }}>
-      {children.map((child, idx) => {
-        const isExpanded = expandedIds.has(child.id);
-        const hasGrandchildren = (child.children?.length ?? 0) > 0;
-
-        return (
-          <div key={child.id} style={{ display: 'flex', alignItems: 'center' }}>
-            {/* Vertical connector dot indicator */}
-            <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
-              {children.length > 1 && (
-                <div
-                  style={{
-                    position: 'absolute',
-                    left: -20,
-                    top: idx === 0 ? '50%' : 0,
-                    bottom: idx === children.length - 1 ? '50%' : 0,
-                    width: 2,
-                    background: 'var(--color-border)',
-                  }}
-                />
-              )}
-              {children.length > 1 && (
-                <div
-                  style={{
-                    position: 'absolute',
-                    left: -20,
-                    top: '50%',
-                    width: 20,
-                    height: 2,
-                    background: 'var(--color-border)',
-                    transform: 'translateY(-50%)',
-                  }}
-                />
-              )}
-            </div>
-
-            {/* Node card */}
-            <TreeNodeCard
-              node={child}
-              depth={depth}
-              expanded={isExpanded}
-              onToggle={() => onToggle(child.id)}
-              onValueChange={onValueChange}
-              hasChildren={hasGrandchildren}
-              isSaving={savingIds.has(child.id)}
-            />
-
-            {/* Expand grand-children */}
-            {isExpanded && hasGrandchildren && child.children && (
-              <>
-                <ConnectorLine />
-                <ChildrenColumn
-                  children={child.children}
-                  depth={depth + 1}
-                  expandedIds={expandedIds}
-                  onToggle={onToggle}
-                  onValueChange={onValueChange}
-                  savingIds={savingIds}
-                />
-              </>
-            )}
-          </div>
-        );
-      })}
-    </div>
-  );
-}
-
-// ── Root tree level renderer ─────────────────────────────────────────────────
-function TreeLevel({
-  roots,
-  expandedIds,
-  onToggle,
-  onValueChange,
-  savingIds,
-}: {
-  roots: TreeNode[];
-  expandedIds: Set<string>;
-  onToggle: (id: string) => void;
-  onValueChange: (id: string, value: string) => void;
-  savingIds: Set<string>;
-}) {
-  return (
-    <div style={{ display: 'flex', alignItems: 'flex-start', gap: 0 }}>
-      {/* Root nodes column */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
-        {roots.map(root => {
-          const isExpanded = expandedIds.has(root.id);
-          const hasChildren = (root.children?.length ?? 0) > 0;
-
-          return (
-            <div key={root.id} style={{ display: 'flex', alignItems: 'center' }}>
-              <TreeNodeCard
-                node={root}
-                depth={0}
-                expanded={isExpanded}
-                onToggle={() => onToggle(root.id)}
-                onValueChange={onValueChange}
-                hasChildren={hasChildren}
-                isSaving={savingIds.has(root.id)}
-              />
-
-              {isExpanded && hasChildren && root.children && (
-                <>
-                  <ConnectorLine />
-                  <ChildrenColumn
-                    children={root.children}
-                    depth={1}
-                    expandedIds={expandedIds}
-                    onToggle={onToggle}
-                    onValueChange={onValueChange}
-                    savingIds={savingIds}
-                  />
-                </>
-              )}
-            </div>
-          );
-        })}
+      <div style={{ fontSize: 10, fontFamily: 'var(--font-mono)', color: '#A09890', marginBottom: 5, letterSpacing: '0.04em' }}>
+        {node.label}
       </div>
+      <div style={{ fontSize: isLeaf ? 15 : 20, fontWeight: isLeaf ? 400 : 300, letterSpacing: isLeaf ? '-0.01em' : '-0.02em', color: valueColour(node.label) }}>
+        {node.value ?? '—'}
+      </div>
+      {SUB[node.label] && (
+        <div style={{ fontSize: 10, color: '#A09890', marginTop: 3, lineHeight: 1.4 }}>
+          {SUB[node.label]}
+        </div>
+      )}
+      {hasChildren && (
+        <div style={{ position: 'absolute', bottom: 8, right: 10, fontSize: 9, color: '#A09890', fontFamily: 'var(--font-mono)' }}>
+          {isExpanded ? '▴ collapse' : '▾ expand'}
+        </div>
+      )}
     </div>
   );
 }
 
-// ── Main Component ───────────────────────────────────────────────────────────
-export default function DiagnosticTree({ initialNodes }: Props) {
+const BTN: React.CSSProperties = {
+  fontFamily: 'var(--font-sans)', fontSize: 12, padding: '6px 14px',
+  borderRadius: 6, border: '1px solid #C8C0B4', background: 'transparent',
+  color: '#1A1714', cursor: 'pointer',
+};
+
+// ── Main component ────────────────────────────────────────────────────────────
+export default function DiagnosticTree({ initialNodes }: { initialNodes: TreeNode[] }) {
   const [flatNodes, setFlatNodes] = useState<TreeNode[]>(initialNodes);
-  const [expandedIds, setExpandedIds] = useState<Set<string>>(() => {
-    const tree = buildTree(initialNodes);
-    return collectExpandedDefaults(tree);
-  });
-  const [savingIds, setSavingIds] = useState<Set<string>>(new Set());
-  const [importError, setImportError] = useState<string | null>(null);
-  const [importSuccess, setImportSuccess] = useState<string | null>(null);
+  const [expanded, setExpanded] = useState<Set<string>>(new Set());
+  const [importMsg, setImportMsg] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const saveTimers = useRef<Map<string, ReturnType<typeof setTimeout>>>(new Map());
 
   const tree = buildTree(flatNodes);
+  const root = tree[0];
+  const level1 = root?.children ?? [];
+  const rev   = level1.find(n => n.label === 'Revenue');
+  const costs = level1.find(n => n.label === 'Costs');
 
-  const handleToggle = useCallback((id: string) => {
-    setExpandedIds(prev => {
-      const next = new Set(prev);
-      if (next.has(id)) {
-        next.delete(id);
-      } else {
-        next.add(id);
-      }
-      return next;
-    });
-  }, []);
+  const toggle = (id: string) => setExpanded(prev => {
+    const next = new Set(prev);
+    next.has(id) ? next.delete(id) : next.add(id);
+    return next;
+  });
 
-  // Debounced save on value change
-  const handleValueChange = useCallback((id: string, value: string) => {
-    // Optimistically update local state
-    setFlatNodes(prev =>
-      prev.map(n => (n.id === id ? { ...n, value: value || null } : n))
-    );
-
-    // Debounce the API call
-    const existing = saveTimers.current.get(id);
-    if (existing) clearTimeout(existing);
-
-    const timer = setTimeout(async () => {
-      setSavingIds(prev => new Set(prev).add(id));
-      try {
-        await fetch('/api/tree', {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ id, value: value || null }),
-        });
-      } catch {
-        // silently fail — value already updated locally
-      } finally {
-        setSavingIds(prev => {
-          const next = new Set(prev);
-          next.delete(id);
-          return next;
-        });
-        saveTimers.current.delete(id);
-      }
-    }, 800);
-
-    saveTimers.current.set(id, timer);
-  }, []);
-
-  // ── Export to Excel ────────────────────────────────────────────────────────
-  // xlsx is browser-only — imported dynamically
   const handleExport = async () => {
     const XLSX = await import('xlsx');
-    const rows = flatNodes.map(n => ({ node: n.label, value: n.value ?? '' }));
-    const ws = XLSX.utils.json_to_sheet(rows);
+    const ws = XLSX.utils.json_to_sheet(flatNodes.map(n => ({ node: n.label, value: n.value ?? '' })));
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Diagnostic Tree');
     XLSX.writeFile(wb, 'diagnostic-tree.xlsx');
   };
 
-  // ── Import from Excel ──────────────────────────────────────────────────────
-  // xlsx is browser-only — imported dynamically
   const handleImport = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-
-    setImportError(null);
-    setImportSuccess(null);
-
+    setImportMsg(null);
     try {
       const XLSX = await import('xlsx');
-      const data = await file.arrayBuffer();
-      const wb = XLSX.read(data, { type: 'array' });
-      const sheetName = wb.SheetNames[0];
-      const ws = wb.Sheets[sheetName];
-      const rows = XLSX.utils.sheet_to_json<{ node: string; value: string }>(ws);
-
-      if (!rows.length || !('node' in rows[0])) {
-        throw new Error('File must have "node" and "value" columns');
-      }
-
-      const payload = rows.map(r => ({
-        label: String(r.node ?? '').trim(),
-        value: r.value != null ? String(r.value).trim() : null,
-      })).filter(r => r.label);
-
+      const wb = XLSX.read(await file.arrayBuffer(), { type: 'array' });
+      const rows = XLSX.utils.sheet_to_json<{ node: string; value: string }>(wb.Sheets[wb.SheetNames[0]]);
+      if (!rows.length || !('node' in rows[0])) throw new Error('File must have "node" and "value" columns');
+      const payload = rows
+        .map(r => ({ label: String(r.node).trim(), value: r.value != null ? String(r.value).trim() : null }))
+        .filter(r => r.label);
       const res = await fetch('/api/tree', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
+        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload),
       });
-
-      if (!res.ok) {
-        const err = await res.json();
-        throw new Error(err.error ?? 'Import failed');
-      }
-
-      // Refresh nodes from server
-      const updated = await fetch('/api/tree', { cache: 'no-store' });
-      if (updated.ok) {
-        const freshNodes: TreeNode[] = await updated.json();
-        setFlatNodes(freshNodes);
-        setImportSuccess(`Imported ${payload.length} row${payload.length !== 1 ? 's' : ''} successfully`);
+      if (!res.ok) throw new Error((await res.json()).error ?? 'Import failed');
+      const fresh = await fetch('/api/tree', { cache: 'no-store' });
+      if (fresh.ok) {
+        setFlatNodes(await fresh.json());
+        setImportMsg({ type: 'success', text: `Imported ${payload.length} rows successfully` });
       }
     } catch (err) {
-      setImportError(err instanceof Error ? err.message : 'Import failed');
+      setImportMsg({ type: 'error', text: err instanceof Error ? err.message : 'Import failed' });
     } finally {
-      // Reset file input so the same file can be re-selected
       if (fileInputRef.current) fileInputRef.current.value = '';
     }
   };
 
   return (
-    <div style={{ padding: '28px 32px', minHeight: '100%' }}>
-      {/* Header */}
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'flex-start',
-          justifyContent: 'space-between',
-          marginBottom: 28,
-        }}
-      >
-        <div>
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 8,
-              marginBottom: 4,
-            }}
-          >
-            <span
-              style={{
-                fontSize: 11,
-                fontWeight: 600,
-                letterSpacing: '0.1em',
-                color: 'var(--color-text-tertiary)',
-                fontFamily: 'var(--font-mono)',
-                textTransform: 'uppercase',
-              }}
-            >
-              Project Union · Internal
-            </span>
-            <span
-              style={{
-                fontSize: 9,
-                fontWeight: 600,
-                letterSpacing: '0.06em',
-                textTransform: 'uppercase',
-                padding: '2px 5px',
-                borderRadius: 3,
-                fontFamily: 'var(--font-mono)',
-                background: 'var(--color-surface-2)',
-                color: 'var(--color-text-tertiary)',
-              }}
-            >
-              internal
-            </span>
-          </div>
-          <h1
-            style={{
-              fontSize: 22,
-              fontWeight: 700,
-              color: 'var(--color-text-primary)',
-              margin: 0,
-              lineHeight: 1.2,
-            }}
-          >
-            Diagnostic Tree
-          </h1>
-          <div style={{ fontSize: 13, color: 'var(--color-text-secondary)', marginTop: 4 }}>
-            EBITDA decomposition — click any node to expand its children
-          </div>
-        </div>
-
-        {/* Action buttons */}
-        {/* Note: xlsx is browser-only — imported dynamically inside handlers */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          {/* Hidden file input for import */}
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept=".xlsx,.xls"
-            style={{ display: 'none' }}
-            onChange={handleImport}
-          />
-
-          <button
-            onClick={() => fileInputRef.current?.click()}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 6,
-              padding: '9px 14px',
-              borderRadius: 8,
-              border: '1px solid var(--color-border)',
-              background: 'var(--color-surface)',
-              color: 'var(--color-text-secondary)',
-              fontSize: 12,
-              fontWeight: 600,
-              boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
-            }}
-          >
-            <span style={{ fontSize: 14 }}>↑</span>
-            Import Excel
-          </button>
-
-          <button
-            onClick={handleExport}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 6,
-              padding: '9px 14px',
-              borderRadius: 8,
-              border: '1px solid var(--color-border)',
-              background: 'var(--color-surface)',
-              color: 'var(--color-text-secondary)',
-              fontSize: 12,
-              fontWeight: 600,
-              boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
-            }}
-          >
-            <span style={{ fontSize: 14 }}>↓</span>
-            Export
-          </button>
-        </div>
+    <div style={{ padding: 28 }}>
+      {/* Title */}
+      <div style={{ display: 'flex', alignItems: 'baseline', gap: 12, marginBottom: 20 }}>
+        <h1 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: '#1A1714' }}>Diagnostic Tree</h1>
+        <span style={{
+          fontSize: 9, fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase',
+          padding: '2px 6px', borderRadius: 3, background: '#F0EDE8', color: '#A09890',
+          fontFamily: 'var(--font-mono)',
+        }}>internal</span>
       </div>
 
-      {/* Import status messages */}
-      {importError && (
-        <div
-          style={{
-            marginBottom: 16,
-            padding: '10px 14px',
-            background: 'var(--color-coral-soft)',
-            color: 'var(--color-coral)',
-            borderRadius: 8,
-            fontSize: 12,
-            fontWeight: 500,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-          }}
-        >
-          <span>{importError}</span>
-          <button
-            onClick={() => setImportError(null)}
-            style={{
-              background: 'transparent',
-              border: 'none',
-              color: 'var(--color-coral)',
-              fontSize: 16,
-              cursor: 'pointer',
-              padding: '0 0 0 12px',
-              lineHeight: 1,
-            }}
-          >
-            ×
-          </button>
-        </div>
-      )}
-
-      {importSuccess && (
-        <div
-          style={{
-            marginBottom: 16,
-            padding: '10px 14px',
-            background: 'var(--color-accent-soft)',
-            color: 'var(--color-accent)',
-            borderRadius: 8,
-            fontSize: 12,
-            fontWeight: 500,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-          }}
-        >
-          <span>{importSuccess}</span>
-          <button
-            onClick={() => setImportSuccess(null)}
-            style={{
-              background: 'transparent',
-              border: 'none',
-              color: 'var(--color-accent)',
-              fontSize: 16,
-              cursor: 'pointer',
-              padding: '0 0 0 12px',
-              lineHeight: 1,
-            }}
-          >
-            ×
-          </button>
-        </div>
-      )}
-
-      {/* Legend */}
-      <div
-        style={{
-          display: 'flex',
-          gap: 16,
-          marginBottom: 24,
-          padding: '10px 16px',
-          background: 'var(--color-surface)',
-          border: '1px solid var(--color-border)',
-          borderRadius: 8,
-          flexWrap: 'wrap',
-        }}
-      >
+      {/* Four metric summary cards */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 10, marginBottom: 20 }}>
         {[
-          { label: 'Root / EBITDA', color: 'var(--color-accent)', bg: 'var(--color-accent-soft)' },
-          { label: 'Level 1 (Revenue / Cost)', color: 'var(--color-gold)', bg: 'var(--color-gold-soft)' },
-          { label: 'Leaf nodes', color: 'var(--color-text-primary)', bg: 'var(--color-surface-2)' },
-        ].map(({ label, color, bg }) => (
-          <div key={label} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-            <span
-              style={{
-                width: 12,
-                height: 12,
-                borderRadius: 3,
-                background: bg,
-                border: `1.5px solid ${color}`,
-                display: 'inline-block',
-                flexShrink: 0,
-              }}
-            />
-            <span
-              style={{
-                fontSize: 11,
-                color: 'var(--color-text-secondary)',
-                fontWeight: 500,
-              }}
-            >
-              {label}
-            </span>
+          { label: 'Revenue LTM',  value: '£27.0m',  colour: '#1A1714', delta: 'vs budget £30.6m (−£3.6m)' },
+          { label: 'Gross margin', value: '54.4%',   colour: '#1A4A3A', delta: 'Stable · not the problem'   },
+          { label: 'Overhead',     value: '£16.5m',  colour: '#B84A2E', delta: '61% of revenue · addressable'},
+          { label: 'EBITDA',       value: '−£2.0m',  colour: '#B84A2E', delta: 'Target +£5–7m at exit'      },
+        ].map(m => (
+          <div key={m.label} style={{ background: '#FFFFFF', border: '1px solid #E2DDD6', borderRadius: 6, padding: '12px 14px' }}>
+            <div style={{ fontSize: 10, fontFamily: 'var(--font-mono)', color: '#A09890', letterSpacing: '0.04em', marginBottom: 6 }}>
+              {m.label}
+            </div>
+            <div style={{ fontSize: 22, fontWeight: 300, letterSpacing: '-0.02em', color: m.colour }}>
+              {m.value}
+            </div>
+            <div style={{ fontSize: 10, color: '#A09890', marginTop: 3 }}>{m.delta}</div>
           </div>
         ))}
-        <div style={{ marginLeft: 'auto', fontSize: 11, color: 'var(--color-text-tertiary)', fontFamily: 'var(--font-mono)', display: 'flex', alignItems: 'center' }}>
-          {flatNodes.length} nodes
-        </div>
       </div>
 
-      {/* Tree content */}
-      {tree.length === 0 ? (
-        <div
-          style={{
-            padding: '60px 24px',
-            textAlign: 'center',
-            color: 'var(--color-text-tertiary)',
-            background: 'var(--color-surface)',
-            border: '1px solid var(--color-border)',
-            borderRadius: 10,
-          }}
-        >
-          <div style={{ fontSize: 32, marginBottom: 12 }}>⬡</div>
-          <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 6 }}>No tree data yet</div>
-          <div style={{ fontSize: 12 }}>
-            Import an Excel file with{' '}
-            <code
-              style={{
-                fontFamily: 'var(--font-mono)',
-                background: 'var(--color-surface-2)',
-                padding: '1px 5px',
-                borderRadius: 3,
-              }}
-            >
-              node
-            </code>{' '}
-            and{' '}
-            <code
-              style={{
-                fontFamily: 'var(--font-mono)',
-                background: 'var(--color-surface-2)',
-                padding: '1px 5px',
-                borderRadius: 3,
-              }}
-            >
-              value
-            </code>{' '}
-            columns to populate the tree.
-          </div>
-        </div>
-      ) : (
-        <div
-          style={{
-            background: 'var(--color-surface)',
-            border: '1px solid var(--color-border)',
-            borderRadius: 10,
-            padding: '28px 24px',
-            overflowX: 'auto',
-            boxShadow: '0 1px 4px rgba(0,0,0,0.05)',
-          }}
-        >
-          <div style={{ display: 'inline-block', minWidth: '100%' }}>
-            <TreeLevel
-              roots={tree}
-              expandedIds={expandedIds}
-              onToggle={handleToggle}
-              onValueChange={handleValueChange}
-              savingIds={savingIds}
-            />
-          </div>
+      {/* Import bar */}
+      <div style={{
+        display: 'flex', gap: 8, alignItems: 'center',
+        padding: '12px 16px', background: '#F0EDE8', border: '1px solid #E2DDD6',
+        borderRadius: 6, marginBottom: 20,
+      }}>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#6B6560" strokeWidth="1.3">
+          <path d="M8 1v10M4 7l4 4 4-4"/><path d="M2 13h12"/>
+        </svg>
+        <span style={{ fontSize: 12, color: '#6B6560', flex: 1 }}>
+          No actuals imported. Showing illustrative DG figures. Import Excel / CSV to populate all nodes.
+        </span>
+        <input ref={fileInputRef} type="file" accept=".xlsx,.xls" style={{ display: 'none' }} onChange={handleImport} />
+        <button style={BTN} onClick={() => fileInputRef.current?.click()}>Import Excel</button>
+        <button style={BTN} onClick={handleExport}>Export</button>
+      </div>
+
+      {/* Import status */}
+      {importMsg && (
+        <div style={{
+          marginBottom: 16, padding: '10px 14px', borderRadius: 8, fontSize: 12,
+          display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+          background: importMsg.type === 'success' ? '#E8F0EC' : '#F7EAE7',
+          color: importMsg.type === 'success' ? '#1A4A3A' : '#B84A2E',
+        }}>
+          {importMsg.text}
+          <button onClick={() => setImportMsg(null)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'inherit', fontSize: 18, lineHeight: 1, padding: '0 0 0 12px' }}>×</button>
         </div>
       )}
 
-      {/* Footer hint */}
-      <div
-        style={{
-          marginTop: 12,
-          fontSize: 11,
-          color: 'var(--color-text-tertiary)',
-          fontFamily: 'var(--font-mono)',
-        }}
-      >
-        Click the ▶ chevron on any node to expand its children · Editable nodes save automatically
-      </div>
+      {/* Tree */}
+      {!root ? (
+        <div style={{ padding: '60px 24px', textAlign: 'center', color: '#A09890', background: '#FFFFFF', border: '1px solid #E2DDD6', borderRadius: 10 }}>
+          <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 6 }}>No tree data</div>
+          <div style={{ fontSize: 12 }}>Check Supabase connection and run the migration SQL.</div>
+        </div>
+      ) : (
+        <div>
+          {/* Root — EBITDA, centred, max 260px */}
+          <div style={{ maxWidth: 260, margin: '0 auto 4px' }}>
+            <NodeBox
+              node={root}
+              isExpanded={expanded.has(root.id)}
+              hasChildren={level1.length > 0}
+              onToggle={() => toggle(root.id)}
+            />
+          </div>
+
+          {/* Vertical connector root → L1 */}
+          {expanded.has(root.id) && (
+            <div style={{ width: 1, background: '#E2DDD6', height: 10, margin: '0 auto' }} />
+          )}
+
+          {/* Level 1 — Revenue + Costs side by side */}
+          {expanded.has(root.id) && (
+            <div style={{ display: 'flex', gap: 12 }}>
+              {/* Revenue branch */}
+              <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 4 }}>
+                {rev && (
+                  <>
+                    <NodeBox
+                      node={rev}
+                      isExpanded={expanded.has(rev.id)}
+                      hasChildren={(rev.children?.length ?? 0) > 0}
+                      onToggle={() => toggle(rev.id)}
+                      topBorder="#1A4A3A"
+                    />
+                    {/* Level 2 — Revenue leaf nodes */}
+                    {expanded.has(rev.id) && (
+                      <div style={{ display: 'flex', gap: 8, marginTop: 2 }}>
+                        {(rev.children ?? []).map(leaf => (
+                          <div key={leaf.id} style={{ flex: 1 }}>
+                            <NodeBox node={leaf} isExpanded={false} hasChildren={false} onToggle={() => {}} isLeaf />
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </>
+                )}
+              </div>
+
+              {/* Cost branch */}
+              <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 4 }}>
+                {costs && (
+                  <>
+                    <NodeBox
+                      node={costs}
+                      isExpanded={expanded.has(costs.id)}
+                      hasChildren={(costs.children?.length ?? 0) > 0}
+                      onToggle={() => toggle(costs.id)}
+                      topBorder="#B84A2E"
+                    />
+                    {/* Level 2 — Cost leaf nodes */}
+                    {expanded.has(costs.id) && (
+                      <div style={{ display: 'flex', gap: 8, marginTop: 2 }}>
+                        {(costs.children ?? []).map(leaf => (
+                          <div key={leaf.id} style={{ flex: 1 }}>
+                            <NodeBox node={leaf} isExpanded={false} hasChildren={false} onToggle={() => {}} isLeaf />
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </>
+                )}
+              </div>
+            </div>
+          )}
+
+          <div style={{ marginTop: 16, fontSize: 11, color: '#A09890', fontFamily: 'var(--font-mono)', textAlign: 'center' }}>
+            Click any leaf node to drill into sub-components · All editable values live in Scenario Modeller
+          </div>
+        </div>
+      )}
     </div>
   );
 }
