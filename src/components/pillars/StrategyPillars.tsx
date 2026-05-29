@@ -60,13 +60,23 @@ const NEXT_RAG: Record<RAG, RAG> = { R: 'A', A: 'G', G: 'R' };
 
 const ROW_ROWS = ['TACTICS', 'PEOPLE', 'PROCESS &\nSYSTEMS', 'KPIS'] as const;
 
-export default function StrategyPillars() {
-  const [goal, setGoal] = useState(
-    'Restore Designers Guild to sustained profitability and position for a premium exit at 8–10× EBITDA in 24–30 months.'
-  );
-  const [strategy, setStrategy] = useState(
-    'Close the £7–9m EBITDA gap through five interlocked workstreams: trade account recovery, pricing discipline, structural cost reduction, US channel expansion, and investor-ready exit preparation.'
-  );
+async function saveSetting(key: string, value: string) {
+  await fetch('/api/settings', {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ key, value }),
+  });
+}
+
+export default function StrategyPillars({
+  initialGoal = 'Restore Designers Guild to sustained profitability and position for a premium exit at 8–10× EBITDA in 24–30 months.',
+  initialStrategy = 'Close the £7–9m EBITDA gap through five interlocked workstreams: trade account recovery, pricing discipline, structural cost reduction, US channel expansion, and investor-ready exit preparation.',
+}: {
+  initialGoal?: string;
+  initialStrategy?: string;
+}) {
+  const [goal, setGoal] = useState(initialGoal);
+  const [strategy, setStrategy] = useState(initialStrategy);
   const [pillars, setPillars] = useState(PILLARS);
 
   const cycleRAG = (pi: number, ki: number) => {
@@ -106,7 +116,11 @@ export default function StrategyPillars() {
           <div
             contentEditable
             suppressContentEditableWarning
-            onBlur={e => setGoal(e.currentTarget.textContent ?? goal)}
+            onBlur={e => {
+              const v = e.currentTarget.textContent ?? goal;
+              setGoal(v);
+              saveSetting('pillar_goal', v);
+            }}
             style={{ fontSize: 14, fontWeight: 600, color: BLUE, lineHeight: 1.5, outline: 'none', cursor: 'text' }}
           >
             {goal}
@@ -121,7 +135,11 @@ export default function StrategyPillars() {
           <div
             contentEditable
             suppressContentEditableWarning
-            onBlur={e => setStrategy(e.currentTarget.textContent ?? strategy)}
+            onBlur={e => {
+              const v = e.currentTarget.textContent ?? strategy;
+              setStrategy(v);
+              saveSetting('pillar_strategy', v);
+            }}
             style={{ fontSize: 13, fontWeight: 400, color: '#1A1714', lineHeight: 1.6, outline: 'none', cursor: 'text' }}
           >
             {strategy}
