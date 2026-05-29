@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useCallback } from 'react';
 import type { TreeNode } from '@/types/union';
 
 // ── Tree builder ──────────────────────────────────────────────────────────────
@@ -43,7 +43,7 @@ function valueColour(label: string): string {
 
 // ── Individual node box ───────────────────────────────────────────────────────
 function NodeBox({
-  node, isExpanded, hasChildren, onToggle, topBorder, isLeaf,
+  node, isExpanded, hasChildren, onToggle, topBorder, isLeaf, onEdit,
 }: {
   node: TreeNode;
   isExpanded: boolean;
@@ -51,7 +51,27 @@ function NodeBox({
   onToggle: () => void;
   topBorder?: string;
   isLeaf?: boolean;
+  onEdit?: (id: string, value: string) => Promise<void>;
 }) {
+  const [editing, setEditing] = useState(false);
+  const [draft, setDraft] = useState('');
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const startEdit = (e: React.MouseEvent) => {
+    if (!isLeaf || !onEdit) return;
+    e.stopPropagation();
+    setDraft(node.value ?? '');
+    setEditing(true);
+    setTimeout(() => inputRef.current?.select(), 10);
+  };
+
+  const commitEdit = async () => {
+    setEditing(false);
+    if (draft !== (node.value ?? '') && onEdit) {
+      await onEdit(node.id, draft);
+    }
+  };
+
   return (
     <div
       onClick={hasChildren ? onToggle : undefined}
@@ -70,10 +90,34 @@ function NodeBox({
       <div style={{ fontSize: 10, fontFamily: 'var(--font-mono)', color: '#A09890', marginBottom: 5, letterSpacing: '0.04em' }}>
         {node.label}
       </div>
-      <div style={{ fontSize: isLeaf ? 15 : 20, fontWeight: isLeaf ? 400 : 300, letterSpacing: isLeaf ? '-0.01em' : '-0.02em', color: valueColour(node.label) }}>
-        {node.value ?? '—'}
-      </div>
-      {SUB[node.label] && (
+      {editing ? (
+        <input
+          ref={inputRef}
+          value={draft}
+          onChange={e => setDraft(e.target.value)}
+          onBlur={commitEdit}
+          onKeyDown={e => { if (e.key === 'Enter') commitEdit(); if (e.key === 'Escape') setEditing(false); }}
+          style={{
+            width: '100%', border: 'none', borderBottom: '2px solid #1A4A3A',
+            background: 'transparent', fontSize: 15, fontWeight: 400,
+            color: valueColour(node.label), outline: 'none', padding: 0,
+          }}
+          autoFocus
+        />
+      ) : (
+        <div
+          onClick={isLeaf && onEdit ? startEdit : undefined}
+          title={isLeaf && onEdit ? 'Click to edit' : undefined}
+          style={{
+            fontSize: isLeaf ? 15 : 20, fontWeight: isLeaf ? 400 : 300,
+            letterSpacing: isLeaf ? '-0.01em' : '-0.02em', color: valueColour(node.label),
+            cursor: isLeaf && onEdit ? 'text' : 'inherit',
+          }}
+        >
+          {node.value ?? '—'}
+        </div>
+      )}
+      {SUB[node.label] && !editing && (
         <div style={{ fontSize: 10, color: '#A09890', marginTop: 3, lineHeight: 1.4 }}>
           {SUB[node.label]}
         </div>
@@ -81,6 +125,11 @@ function NodeBox({
       {hasChildren && (
         <div style={{ position: 'absolute', bottom: 8, right: 10, fontSize: 9, color: '#A09890', fontFamily: 'var(--font-mono)' }}>
           {isExpanded ? '▴ collapse' : '▾ expand'}
+        </div>
+      )}
+      {isLeaf && onEdit && !editing && (
+        <div style={{ position: 'absolute', bottom: 6, right: 8, fontSize: 8, color: '#C8C0B4', fontFamily: 'var(--font-mono)' }}>
+          ✎
         </div>
       )}
     </div>
@@ -111,6 +160,15 @@ export default function DiagnosticTree({ initialNodes }: { initialNodes: TreeNod
     next.has(id) ? next.delete(id) : next.add(id);
     return next;
   });
+
+  const handleEdit = useCallback(async (id: string, value: string) => {
+    setFlatNodes(prev => prev.map(n => n.id === id ? { ...n, value } : n));
+    await fetch('/api/tree', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id, value }),
+    });
+  }, []);
 
   const handleExport = async () => {
     const XLSX = await import('xlsx');
@@ -252,7 +310,7 @@ export default function DiagnosticTree({ initialNodes }: { initialNodes: TreeNod
                       <div style={{ display: 'flex', gap: 8, marginTop: 2 }}>
                         {(rev.children ?? []).map(leaf => (
                           <div key={leaf.id} style={{ flex: 1 }}>
-                            <NodeBox node={leaf} isExpanded={false} hasChildren={false} onToggle={() => {}} isLeaf />
+                            <NodeBox node={leaf} isExpanded={false} hasChildren={false} onToggle={() => {}} isLeaf onEdit={handleEdit} />
                           </div>
                         ))}
                       </div>
@@ -277,7 +335,7 @@ export default function DiagnosticTree({ initialNodes }: { initialNodes: TreeNod
                       <div style={{ display: 'flex', gap: 8, marginTop: 2 }}>
                         {(costs.children ?? []).map(leaf => (
                           <div key={leaf.id} style={{ flex: 1 }}>
-                            <NodeBox node={leaf} isExpanded={false} hasChildren={false} onToggle={() => {}} isLeaf />
+                            <NodeBox node={leaf} isExpanded={false} hasChildren={false} onToggle={() => {}} isLeaf onEdit={handleEdit} />
                           </div>
                         ))}
                       </div>
