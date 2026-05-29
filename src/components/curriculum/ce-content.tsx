@@ -233,10 +233,11 @@ interface ContentGridProps {
   focusedTheme: string | null;
   skillBreakdown: SkillData[];
   themes: ThemeData[];
+  onFocusTheme?: (t: string) => void;
 }
 
 export function ContentGrid({
-  lessons, focusedSkill, focusedTheme, skillBreakdown, themes,
+  lessons, focusedSkill, focusedTheme, skillBreakdown, themes, onFocusTheme,
 }: ContentGridProps) {
   if (!focusedSkill && !focusedTheme) {
     // Empty state — no selection
@@ -307,6 +308,7 @@ export function ContentGrid({
             {themes.map(t => (
               <div
                 key={t.theme}
+                onClick={() => onFocusTheme?.(t.theme)}
                 style={{
                   background: C.amberSoft, border: `1px solid #EFD9A5`,
                   borderRadius: 12, padding: '12px 14px',

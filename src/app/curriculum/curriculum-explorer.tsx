@@ -232,6 +232,7 @@ export function CurriculumExplorer({ initialYear, initialYearData }: Props) {
         focusedTheme={focusedTheme}
         skillBreakdown={yearData.skillBreakdown as SkillData[]}
         themes={themesForSkill}
+        onFocusTheme={setFocusedTheme}
       />
     );
   }
