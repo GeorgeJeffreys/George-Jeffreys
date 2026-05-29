@@ -1,9 +1,9 @@
+import { getBaseUrl } from '@/lib/url';
 import { TreeNode } from '@/types/union';
 import DiagnosticTree from '@/components/tree/DiagnosticTree';
 
 async function getTreeNodes(): Promise<TreeNode[]> {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
-  const res = await fetch(`${baseUrl}/api/tree`, { cache: 'no-store' });
+  const res = await fetch(`${getBaseUrl()}/api/tree`, { cache: 'no-store' });
   if (!res.ok) return [];
   return res.json();
 }
