@@ -286,8 +286,7 @@ export function WeekView({ week, month, lessons, onBack }: WeekViewProps) {
       <div style={{ flex: 1, overflowY: 'auto', padding: '16px 24px', display: 'flex', flexDirection: 'column', gap: 10, background: C.cream }}>
         {[1, 2, 3, 4, 5].map(p => {
           const lesson = lessons.find(l => l.periodNum === p);
-          // Diagnostic: log all fields so teachers can see what data is present
-          if (lesson) console.log('cell data:', lesson);
+          console.log('period cell data:', JSON.stringify(lesson ?? null));
           const sk = lesson ? skillKey(lesson.linguisticSkill) : 'basic';
           const col = SKILL_COLOR[sk] ?? SKILL_COLOR.basic;
           const isExpanded = expandedPeriod === p;
@@ -338,7 +337,7 @@ export function WeekView({ week, month, lessons, onBack }: WeekViewProps) {
                       fontFamily: SANS, fontSize: 13, fontWeight: 500, color: C.ink, lineHeight: 1.4,
                       display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden',
                     } as React.CSSProperties}>
-                      {lesson.dailyLO}
+                      {lesson.dailyLO || lesson.id}
                     </span>
                     {/* Chips row + chevron */}
                     <div style={{ display: 'flex', alignItems: 'center', gap: 5, flexWrap: 'wrap', marginTop: 2 }}>
@@ -381,7 +380,7 @@ export function WeekView({ week, month, lessons, onBack }: WeekViewProps) {
                   {/* Full LO unclamped */}
                   <div>
                     <Label style={{ display: 'block', marginBottom: 4 }}>Full learning outcome</Label>
-                    <span style={{ fontFamily: SANS, fontSize: 13, color: C.ink, lineHeight: 1.5 }}>{lesson.dailyLO}</span>
+                    <span style={{ fontFamily: SANS, fontSize: 13, color: C.ink, lineHeight: 1.5 }}>{lesson.dailyLO || lesson.id}</span>
                   </div>
 
                   {/* Grammar / Vocab */}
