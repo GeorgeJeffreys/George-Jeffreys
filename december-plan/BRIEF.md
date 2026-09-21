@@ -200,3 +200,84 @@ HANDOVER.md
 - An assumptions register and a source index.
 - Known gaps.
 - My next actions, with suggested dates.
+
+---
+
+# Scope change, 21 Sep 2026
+
+GO, with scope changes.
+
+Read december-plan/BRIEF.md and december-plan/shared/phase0.md first. Where this message conflicts with BRIEF.md, this message wins. Append this message to BRIEF.md under "Scope change, 21 Sep 2026". If december-plan/ isn't in your working tree, check out branch claude/wharton-outdoors-scuba-dec-5ley3f first.
+
+0. WEB ACCESS
+- Retest a fetch of https://www.redsea-divingsafari.com/price-lists/marsa-shagra/euro-winter-26-27. If it works, proceed normally.
+- If fetch is still blocked, don't stall. Proceed search-only:
+  - record each search result's URL and snippet as the source;
+  - flag figures taken from snippets as ADVERTISED (snippet);
+  - flag anything you couldn't confirm as QUOTE NEEDED;
+  - write every gap into the outreach emails so the operators fill it.
+
+1. NEW SCOPE: THREE SEPARATE TRIPS, EACH PLANNED ON ITS OWN (not alternatives)
+
+A. Thanksgiving: 10 certified divers.
+   - Dates: price both options.
+     - Wed 25 – Sun 29 Nov 2026 (preferred).
+     - Thu 19 – Tue 24 Nov. Note the class days missed and the clash with the Colombia trek, which draws on the same travellers.
+   - Primary destination: south-west Puerto Rico, based in La Parguera. Diving on the Wall, plus Desecheo Island from Rincón if the weather allows, and a bioluminescent-bay evening.
+   - Variant to price side by side: Tiger Beach, Grand Bahama. Day boats run from Old Bahama Bay. Leads to verify:
+     - Neal Watson historically charged $399 plus 12% VAT per shark day;
+     - the dives are baited;
+     - sales are final, with a weather credit;
+     - a full wetsuit is needed in low-70s °F water;
+     - flights go via Fort Lauderdale, or take the ferry from there.
+
+B. December: Cozumel only, as in BRIEF.md: Tue 8 – Tue 15 Dec, plus the Tue 8 – Sun 13 version. Drop the December Egypt version.
+
+C. January: Egypt, Sat 2 – Sat 9 Jan 2027 door to door, land-based only.
+   - Decide the base for this 7-night window, where transfer time now matters more: Sharm el-Sheikh vs Marsa Alam / Marsa Shagra vs Hurghada / El Gouna.
+   - January is Marsa Shagra's low season. Full board, per person per night sharing: Royal Tent €78, Deluxe Chalet €113. Verify.
+   - Also price an open-jaw ending in Europe for people going on to Euroski. Check Euroski's 2027 dates and resort.
+
+2. CORRECTIONS FROM PHASE 0 (adopt them)
+- The Cozumel marine park fee is now $15 a day and is not included in Blue Note's course price.
+- American flies a Saturday-only nonstop from Philadelphia to Cozumel in winter. Note it; it doesn't fit the December dates.
+- Marsa Shagra's free places go to the 11th, 21st and 30th guest and cover room, transfers and diving only.
+- Allianz lists Egypt as an Impacted Country under the 28 Feb 2026 known-event exclusion.
+
+3. ANSWERS TO YOUR QUESTIONS
+- Budget ceilings, per person, all-in including flights. Flag anything over.
+  - Thanksgiving: $1,500. Show Tiger Beach's extra cost separately.
+  - Cozumel: $2,000 for certified divers, $2,300 for beginners.
+  - Egypt: $2,700.
+- Nationality mix is unknown. Check entry rules for US, Canadian, UK, EU, Indian, Chinese, South Korean and Brazilian passports.
+- Me: cost me as a diving participant whose place is covered by operator free places where available. Leave any teaching role out of the numbers.
+- Group sizes:
+  - Thanksgiving: 8, 10, 12.
+  - Cozumel: 20, 30, 40, about half beginners.
+  - Egypt: 15, 20, 25, about half beginners.
+
+4. WORKSTREAMS
+Run these as subagents, at most five at once. Brief each one fully and include the RULES and OUTPUT sections from BRIEF.md.
+- W1: Cozumel diving, as in BRIEF.md.
+- W2: Cozumel accommodation and travel, as in BRIEF.md.
+- W3: Egypt base and diving, as in BRIEF.md, but for 2–9 Jan.
+- W4: Egypt accommodation and travel, as in BRIEF.md, but for 2–9 Jan, including the Euroski open-jaw.
+- W5: Thanksgiving.
+  - Puerto Rico: operators (Paradise Scuba La Parguera and others), lodging in La Parguera, car hire, flights to San Juan and Aguadilla for both date options, and a day-by-day plan.
+  - Tiger Beach variant: operators (Neal Watson, Epic Diving, West End Watersports), Old Bahama Bay or alternatives, flights or the ferry.
+  - Outreach drafts for both.
+- W6: Rules, risk and money for all three trips. Same scope as workstream 5 in BRIEF.md, plus:
+  - entry rules for the Bahamas and Puerto Rico;
+  - whether club rules allow trips on class days, which affects the 19–24 Nov option.
+
+5. OUTPUT CHANGES
+- Rename egypt/ to january/ and add thanksgiving/.
+- The pricing workbook covers all three trips, in the same plain style.
+- DECISION_MEMO.md: one screen per trip covering:
+  - recommended dates;
+  - operators and lodging to request quotes from;
+  - price bands per person by group;
+  - minimum viable numbers;
+  - top risks.
+  For Thanksgiving, add a Puerto Rico vs Tiger Beach head-to-head.
+- HANDOVER.md as before.
