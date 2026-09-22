@@ -50,6 +50,7 @@ Status values: draft | approved | sent | replied | chased | quoted | bookable | 
 | Colombia trek 2026 dates | unknown | George checks CampusGroups | 2026-09-22 |
 | Web fetch in this environment | blocked | George changes environment network policy or pastes key pages into shared/sources/ | |
 | Email connector | none attached | George connects Gmail or Outlook in claude.ai and enables it for this environment and the routine | |
+| Scheduled routine | not created (permission block) | George creates it from ROUTINE.md or approves creation | |
 
 ## Log
 
