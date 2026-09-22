@@ -1,7 +1,10 @@
-# Ready-to-send email to MBA Student Life
+# Email to MBA Student Life
+
+Sent 2026-09-22 from emailgeorgej@gmail.com via Gmail, thread 1a0ca71cf070351f, in a shortened 8-question form with Cozumel dates 8–14 Dec. The full 12-question draft below is kept for reference.
 
 To: MBAstudentlife@wharton.upenn.edu
-From: George [surname], Wharton Outdoors Club (WG'27)
+From: George Jeffreys, Wharton Outdoors Club (WG'27)
+Subject: Outdoors Club scuba treks 2026-27 — approval process and policy questions
 Subject: Outdoors Club scuba treks 2026-27 — approval process and policy questions
 
 Dear MBA Student Life team,
