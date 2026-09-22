@@ -1,14 +1,14 @@
 # Decision memo — Wharton Outdoors Club dive trips, 2026–27
 
-Prepared 21 Sep 2026. Three separate trips, each costed on its own. Every price below comes from `pricing/december_pricing.xlsx` (Summary sheet) and traces to a row in `pricing/sources.csv`; none is a quote. Web fetch was blocked throughout, so figures rest on search-result snippets of the named sources (ADVERTISED), the brief's unverified leads (QUOTE NEEDED) or our estimates (INFERRED). "All-in" means flights at the aggregator band midpoint, 2 sharing, diving, fees, transfers, a USD 35/day meal allowance where not on full board, USD 50 tips and USD 119 DAN cover. "Core" strips out meals, tips and insurance.
+Prepared 21 Sep 2026; Cozumel restated to 6 nights on 22 Sep 2026. Three separate trips, each costed on its own. Every price below comes from `pricing/december_pricing.xlsx` (Summary sheet) and traces to a row in `pricing/sources.csv`; none is a quote. Web fetch was blocked throughout, so figures rest on search-result snippets of the named sources (ADVERTISED), the brief's unverified leads (QUOTE NEEDED) or our estimates (INFERRED). "All-in" means flights at the aggregator band midpoint, 2 sharing, diving, fees, transfers, a USD 35/day meal allowance where not on full board, USD 50 tips and USD 119 DAN cover. "Core" strips out meals, tips and insurance.
 
 ## Recommendation
 
-Run Thanksgiving in Puerto Rico on Wed 25 – Sun 29 Nov, Cozumel on Tue 8 – Tue 15 Dec, and Egypt at Marsa Shagra on Sat 2 – Sat 9 Jan. Confidence: high for the Thanksgiving dates and destination, medium for Cozumel (price fits only on the core definition and the exam overlap needs Student Life's view), medium for Egypt (the base decision is about 70 percent confident; every euro figure is unverified and cancellation insurance is the open problem). Drop Tiger Beach as a group trip and the 19–24 Nov window. Send the Student Life email and the operator quote requests this week; the numbers cannot firm up without them.
+Run Thanksgiving in Puerto Rico on Wed 25 – Sun 29 Nov, Cozumel on Tue 8 – Mon 14 Dec, and Egypt at Marsa Shagra on Sat 2 – Sat 9 Jan. Confidence: high for the Thanksgiving dates and destination, medium for Cozumel (price fits only on the core definition and the exam overlap needs Student Life's view), medium for Egypt (the base decision is about 70 percent confident; every euro figure is unverified and cancellation insurance is the open problem). Drop Tiger Beach as a group trip and the 19–24 Nov window. Send the Student Life email and the operator quote requests this week; the numbers cannot firm up without them.
 
 Decisions you must make now:
-1. Whether the published ceilings include meals and insurance. On the core definition all three trips fit; on the all-in definition Cozumel certified is over by USD 334 and Puerto Rico by USD 196.
-2. Whether to charge the disclosed per-head organiser fee (Approach 2 in the workbook: USD 39–81 Cozumel, USD 65–111 Egypt, USD 117–184 Thanksgiving) or absorb the remainder yourself.
+1. Whether the published ceilings include meals and insurance. On the core definition all three trips fit; on the all-in definition Cozumel certified is over by USD 245 and Puerto Rico by USD 196.
+2. Whether to charge the disclosed per-head organiser fee (Approach 2 in the workbook: USD 37–76 Cozumel, USD 65–111 Egypt, USD 117–184 Thanksgiving) or absorb the remainder yourself.
 3. Cozumel: one big-boat operator (Dive Paradise, bundled with Hotel Cozumel & Resort) or a split between a training-led shop (Sand Dollar) and a boat-led shop (Blue Note, Aldora).
 4. Egypt: Royal Tent (fits) or Deluxe Chalet (USD 200 over); and whether to proceed at all before an insurer confirms it will write Egypt cancellation cover.
 5. Whether partners are eligible, which changes headcount and the Student Life ask.
@@ -53,24 +53,24 @@ Ceiling USD 1,500. Airfare is the swing: the model uses USD 550 return; Frontier
 
 ## Trip B — Cozumel, 20–40 people, about half beginners
 
-**Recommended dates:** Tue 8 – Tue 15 Dec 2026 (7 nights). Open Water Wed–Fri, boats Sat–Sun, Mon 14 spare for a norther, fly Tue 15. Overlaps four Penn final-exam weekdays (10, 11, 14, 15 Dec); the 5-night version overlaps two but has no weather buffer for the certification dives and is not cheaper for certified divers on a per-night basis. Core exams end Mon 7 Dec, so a Tue 8 departure works for everyone.
+**Recommended dates:** Tue 8 – Mon 14 Dec 2026 (6 nights, locked as tentative on 22 Sep). Open Water Wed–Fri, boats Sat–Sun, fly Mon 14 (last dive Sun, so any Monday flight after about 08:00 clears the 18-hour rule). Overlaps three Penn final-exam weekdays (10, 11, 14 Dec). Dropping the spare Monday means a norther on Sat or Sun hits the certification dives; Sand Dollar's shore site is the fallback, and the outreach asks each operator how they would handle it. Core exams end Mon 7 Dec, so a Tue 8 departure works for everyone.
 
 **Quote from (ranked):** Dive Paradise (only fleet with two 44-ft boats seating 16 each; Hotel Cozumel & Resort bundle; prices QUOTE NEEDED); Blue Note Scuba (best-documented prices: OW USD 400 + eLearning, 5-day/10-dive USD 600, AOW USD 530; one 42-ft boat, so 20-person scenario only); Sand Dollar Sports (best beginner site: shore dives at its reef-restoration site still run when the port closes; 25 percent deposit, free cancellation 48 h); Aldora Divers (two-tank USD 95 + 16 percent tax; 120 cf steel tanks for the advanced group); Salty Endeavors (cheapest AOW, USD 350 + IVA); Blue Magic Scuba (published group cancellation ladder, but the business is advertised for sale); Scuba Club Cozumel; ScubaTony. Lodging: Hotel Cozumel & Resort (USD 41–54 pp, breakfast, 180 rooms, pool, Dive Paradise pier; the only property that holds 40) and Casa Mexicana (USD 65–84 pp, breakfast, 88 rooms, downtown). Drafts in `cozumel/outreach/`.
 
-**Price per person (7 nights, before organiser charge):**
+**Price per person (6 nights, before organiser charge):**
 
 | | Certified | Beginner | Advanced |
 |---|---|---|---|
-| All-in | 2,334 | 2,429 | 3,031 |
-| Core | 1,920 | 2,015 | 2,617 |
+| All-in | 2,245 | 2,340 | 2,942 |
+| Core | 1,866 | 1,961 | 2,563 |
 | Ceiling | 2,000 | 2,300 | 2,000 |
 | 5-night all-in | 2,118 | 2,094 | 2,815 |
 
-Organiser charge (Approach 2, one free diving place assumed per 10 paying, QUOTE NEEDED): USD 81 at 20, 53 at 30, 39 at 40. Airfare band USD 568–800 moves the total by ±116. The Cancún nonstop plus bus and ferry saves about USD 285 but adds two weather-exposed links. Advanced divers breach USD 2,000 under any definition; sell AOW, nitrox and the night dive as an opt-in supplement of about USD 700. The bull-shark day from Playa del Carmen (baited, optional) adds about USD 260.
+Organiser charge (Approach 2, one free diving place assumed per 10 paying, QUOTE NEEDED): USD 76 at 20, 50 at 30, 37 at 40. Airfare band USD 568–800 moves the total by ±116. The Cancún nonstop plus bus and ferry saves about USD 285 but adds two weather-exposed links. Advanced divers breach USD 2,000 under any definition; sell AOW, nitrox and the night dive as an opt-in supplement of about USD 700. The bull-shark day from Playa del Carmen (baited, optional) adds about USD 260.
 
 **Minimum viable:** 11 (one free place at 10 paying). Capacity is the binding constraint, not price: 20 beginners need three instructors and 20 certified divers need three boats in the same morning. At 40, only Dive Paradise's big boats or a two-operator split seats everyone. Break-even against the all-in ceiling is not reachable at current prices; against the core ceiling every scenario clears.
 
-**Top risks:** exam-week overlap and Student Life's class-day rule; norther closures (nine logged in Decembers 2010–17; usually hours to a day) with no buffer in the 5-night version; no operator publishes group rates, leader places, deposit sizes or insurance certificates; Blue Magic ownership; park fee (USD 15/day) and eLearning (USD 195) sit outside course prices.
+**Top risks:** exam-week overlap and Student Life's class-day rule; norther closures (nine logged in Decembers 2010–17; usually hours to a day) with no spare day now in either version; no operator publishes group rates, leader places, deposit sizes or insurance certificates; Blue Magic ownership; park fee (USD 15/day) and eLearning (USD 195) sit outside course prices.
 
 ---
 

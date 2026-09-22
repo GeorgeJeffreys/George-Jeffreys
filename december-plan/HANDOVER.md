@@ -1,6 +1,6 @@
 # Handover — Wharton Outdoors Club dive trips, 2026–27
 
-Prepared 21 Sep 2026 on branch `claude/wharton-outdoors-scuba-dec-5ley3f`. Read `DECISION_MEMO.md` first; this file says how the work was done, what it rests on, and what to do next.
+Prepared 21 Sep 2026, updated 22 Sep 2026 (Cozumel 6 nights, final emails, tracker, routine) on branch `claude/wharton-outdoors-scuba-dec-5ley3f`. Read `DECISION_MEMO.md` first; this file says how the work was done, what it rests on, and what to do next.
 
 ## 1. What was done
 
@@ -31,6 +31,9 @@ Nothing was sent, booked or paid. No accounts were created.
 | `thanksgiving/outreach/` | 6 operator emails and 2 lodging emails |
 | `pricing/december_pricing.xlsx` | Inputs sheet (blue cells), then Cozumel, January, Thanksgiving and Summary sheets; 570 formulas, recalculated, no errors |
 | `pricing/sources.csv` | One row per workbook input: value used, flag, URL, access date |
+| `pricing/build_pricing.py` | Regenerates the workbook from code; run it, then recalc, after changing inputs |
+| `cozumel/outreach/final/` | Five ready-to-send Cozumel emails with recipient addresses (22 Sep) |
+| `TRACKER.md` | Live pipeline tracker for all three trips; the scheduled routine reads and updates it |
 
 Workbook notes: gridlines off, Arial, no source notes on the sheets. Change any blue cell on Inputs and every sheet updates. Each trip sheet has: per-person build-up by group; organiser place under three approaches; airfare and exchange-rate sensitivity; break-even group size; a draft deposit schedule. The Summary sheet shows all-in and core prices against your ceilings.
 

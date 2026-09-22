@@ -281,3 +281,9 @@ Run these as subagents, at most five at once. Brief each one fully and include t
   - top risks.
   For Thanksgiving, add a Puerto Rico vs Tiger Beach head-to-head.
 - HANDOVER.md as before.
+
+---
+
+# Scope change, 22 Sep 2026
+
+Let's lock in those three as tentative. I know want to move beyond drafts. Move Cozumel to 6 nights. That means securing accommodation and operator potential. I want you to source those, draft emails, and send them through mcp. Be casual, friendly and brief in the email. Give Wharton context, also that I'm a former padi MSDT leading the trip. Make sure to ask to start a conversation around a book grouping and pricing structure. We don't yet know exact numbers but give them guidance. The next milestone I want us to get to is having concrete bookable options for all of these trips so I can trigger them when ready. I also want you to start managing this yourself with cowork or triggered/scheduled agents. Tell me what you need to do that
