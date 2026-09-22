@@ -16,3 +16,6 @@ George has an event in Washington DC on Sat 12 Dec 2026 that he must attend.
 
 ## Workbook effect
 Nights, dive days and course days are unchanged, so per-person prices stand. Only the date labels change; airfare band may move slightly for a Sunday outbound and Saturday return.
+
+## Earlier than core exams? (asked 22 Sep)
+Core exams run Wed 2 – Mon 7 Dec. The only six-night window before them is Thanksgiving week (about Wed 25 Nov – Tue 1 Dec), which is the Puerto Rico trip's slot, clashes with the Colombia trek, and asks first-year beginners (most of the Open Water demand) to skip the last class days before core exams. Not recommended. George's own syllabi are in his Claude chat account, not in Drive or this repo; if he uploads them to the "Wharton dive trips" Drive folder or pastes the exam dates, plan around them. Decision still open between Sun 13 – Sat 19 Dec (recommended) and Mon 14 – Sun 20 Dec.
