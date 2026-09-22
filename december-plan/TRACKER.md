@@ -17,7 +17,7 @@ Milestone: by Tue 29 Sep 2026, three viable planned trips: for each, ONE dive ce
 
 Status values: draft | approved | sent | replied | chased | quoted | bookable | dropped. Dates are ISO. Update the `last_action` and `next_action` columns on every touch.
 
-## Cozumel, Tue 8 – Mon 14 Dec 2026, 20–40 people (tentative, locked 2026-09-22)
+## Cozumel, Tue 8 – Mon 14 Dec 2026, 20–40 people (tentative, locked 2026-09-22) — DATE CHANGE PENDING: likely Sun 13 – Sat 19 Dec (see cozumel/DATE_CHANGE_PENDING.md). Existing threads stay on the old dates until George confirms; every NEW first-contact email uses Sun 13 – Sat 19 Dec.
 
 | contact | role | email | send | status | last_action | next_action | notes |
 |---|---|---|---|---|---|---|---|
@@ -32,7 +32,7 @@ Status values: draft | approved | sent | replied | chased | quoted | bookable | 
 | Scuba Club Cozumel | dive resort | see cozumel/operators.csv | no | dropped | 2026-09-22 | none | Reported permanently closed (TripAdvisor snippet); verify only if needed |
 | Flights PHL–CZM | individual bookings | n/a | no | dropped | 2026-09-22 George: people book their own flights | keep the fare band in the workbook current | |
 
-Reserve contacts, Cozumel (send on 2026-09-24 if the first wave is silent):
+Reserve contacts, Cozumel (send on 2026-09-24 if the first wave is silent; use the NEW dates Sun 13 – Sat 19 Dec, OW Mon 14 – Wed 16, boats Thu 17 – Fri 18):
 
 | contact | role | email | send | status | last_action | next_action | notes |
 |---|---|---|---|---|---|---|---|
@@ -96,6 +96,7 @@ Reserve contacts, Egypt (send on 2026-09-24 if the first wave is silent):
 - 2026-09-22 (later): Gmail connected. Five Cozumel emails sent from emailgeorgej@gmail.com (Dive Paradise, Blue Note, Aldora, Casa Mexicana, Sand Dollar). Norther wording removed from outreach at George's request.
 
 - 2026-09-22 (first routine run, 18:24 UTC): Gmail and Drive confirmed working; no replies yet; fetch still blocked; found the same contact addresses independently; uploaded tracker and memo to Drive; xlsx upload failed on size; its edits did not reach the repo.
+- 2026-09-22 (23:00 UTC): George has a DC event on Sat 12 Dec. Cozumel likely moves to Sun 13 – Sat 19 Dec; analysis in cozumel/DATE_CHANGE_PENDING.md. Pencilled only; existing contacts not told; new emails use the new dates.
 - 2026-09-22 (22:40 UTC): George: send the drafts, hands-off from here. All four replies sent; drafts folder clean. Routine prompt switched to hands-off mode (replies itself; escalates decisions only). Recommended permission settings saved to december-plan/SETTINGS_RECOMMENDED.json for George to install (the agent cannot edit its own permissions).
 - 2026-09-22 (night, later): George's answers: drafts 2 and 4 approved as written; Sand Dollar draft loses the call offer; Blue Note draft asks for rough hotel quotes; one centre for all divers; no group flights. Drafts updated; Casa del Mar emailed; routine prompt updated with the standing decisions.
 - 2026-09-22 (late): Four substantive replies processed. Quoted figures into the workbook: Cozumel OW USD 350 all-in (Sand Dollar), 2-tank USD 110 and nitrox USD 11 (Aldora), leader comps confirmed; Thanksgiving Wall USD 145 less 15% plus tax, leader free (Paradise). Beginner Cozumel all-in now USD 2,270 (under the 2,300 ceiling); Puerto Rico all-in USD 1,720. Suggested replies saved as Gmail drafts. Routine moved to twice daily.
@@ -104,4 +105,6 @@ Reserve contacts, Egypt (send on 2026-09-24 if the first wave is silent):
 
 ## Needs George
 
-Nothing pending. The four replies of 22 Sep (Blue Note, Aldora, Sand Dollar, Paradise Scuba) were sent from George's Gmail at 22:40 UTC on his instruction; the drafts folder is empty. From now on the routine replies to operators itself on facts and quotes, and escalates here only money, commitments, choices between options, date changes and anything from Wharton or Penn, each with a recommendation and a ready draft.
+- Cozumel date change: confirm Sun 13 – Sat 19 Dec (recommended) or Mon 14 – Sun 20, so the routine can tell the existing contacts and re-confirm capacity. Until then nothing goes to them about dates.
+
+Otherwise nothing pending. The four replies of 22 Sep (Blue Note, Aldora, Sand Dollar, Paradise Scuba) were sent from George's Gmail at 22:40 UTC on his instruction; the drafts folder is empty. From now on the routine replies to operators itself on facts and quotes, and escalates here only money, commitments, choices between options, date changes and anything from Wharton or Penn, each with a recommendation and a ready draft.
