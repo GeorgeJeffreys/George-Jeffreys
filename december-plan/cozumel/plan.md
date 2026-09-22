@@ -31,33 +31,19 @@ Lodging bundles (for the accommodation workstream): Dive Paradise (Cozumel Hotel
 
 Safety rules applied: OW ≤ 18 m, AOW ≤ 30 m, Deep ≤ 40 m; last dive at least 18 h before wheels-up (DAN guidance for multiple days of diving); no diving on the afternoon before a flight. Boat times follow the operators' advertised departures (Blue Note 09:00/14:00; Salty 08:00/13:30; ScubaTony 07:30/13:00; Dive Paradise 08:30–09:00). Marine park fee USD 15 / MXN 220 applies on every marine-park dive day.
 
-### 7-night version (Tue 8 – Tue 15 Dec)
+### 6-night version, Sun 13 – Sat 19 Dec (confirmed 22 Sep; last dive Fri 18 by about 13:00, flights Sat 19 after about 07:00)
 
 | Day | Beginners (Open Water, eLearning done at home) | Certified | Advanced (≈15%) |
 |---|---|---|---|
-| Tue 8 | Arrive; medical forms, eLearning check, gear fitting at shop | Arrive; gear fitting; refresher briefing for anyone >12 months out | Arrive; AOW/EANx knowledge reviews; fit computers |
-| Wed 9 | Confined water 1–3 (shore/pool) + OW dive 1 from shore (≤12 m) | Refresher (USD 30 on boat, or ≈USD 97–99 shore session if >24 months) then 2-tank boat | AOW dives 1–3: Deep (30 m, Santa Rosa or Palancar wall), Navigation, Peak Performance Buoyancy |
-| Thu 10 | Confined water 4–5 + OW dive 2 from shore (≤12 m) | 2-tank boat (Palancar Gardens, Cedral) | AOW dives 4–5: Drift + Wreck (C-53 Felipe Xicotencatl, ≈24 m) → AOW certified; EANx theory evening |
-| Fri 11 | OW dives 3–4 from boat (≤18 m; e.g. Paradise, Colombia Shallows) → certified | 2-tank boat (Colombia, Palancar) + optional afternoon 1-tank | Deep specialty dives 1–2 on EANx (≤40 m, e.g. Palancar Bricks/Punta Sur where conditions allow) |
-| Sat 12 | 2-tank boat, group day, ≤18 m sites | 2-tank boat, group day | Deep dives 3–4 or Drift specialty (2 dives); Night dive 1 (≈USD 95 + tax at Scuba Club / charter USD 800 for up to 10 at Blue Note) |
-| Sun 13 | 2-tank boat ≤18 m (finish by ~13:00) | 2-tank boat (finish by ~13:00) | Option A: bull-shark day at Playa del Carmen (baited; ferry ≈06:00–07:00, back mid-afternoon). Option B: Night specialty dives 2–3 |
-| Mon 14 | SPARE. If no closure: land day (San Gervasio, Punta Sur) or morning shore dive ≤12 m finishing by 10:00. If the port closed earlier in the week: OW dives 3–4 here | SPARE. Morning 2-tank only if flights are after ≈09:00 Tue and the group accepts a tighter margin; otherwise land day | SPARE (as certified); no dives deeper than 18 m the day before flying |
-| Tue 15 | Fly (≥18 h after last dive) | Fly | Fly |
+| Sun 13 | Arrive; medical forms, eLearning check, gear fitting at shop | Arrive; gear fitting; refresher briefing for anyone >12 months out | Arrive; AOW/EANx knowledge reviews; fit computers |
+| Mon 14 | Confined water 1–3 (shore) + OW dive 1 from shore (≤12 m) | Refresher (USD 30 on boat, or ≈USD 97–99 shore session if >24 months) then 2-tank boat | AOW dives 1–3: Deep (30 m, Santa Rosa or Palancar wall), Navigation, Peak Performance Buoyancy |
+| Tue 15 | Confined water 4–5 + OW dive 2 from shore (≤12 m) | 2-tank boat (Palancar Gardens, Cedral) | AOW dives 4–5: Drift + Wreck (C-53 Felipe Xicotencatl, ≈24 m) → AOW certified; EANx theory evening |
+| Wed 16 | OW dives 3–4 from boat (≤18 m; e.g. Paradise, Colombia Shallows) → certified | 2-tank boat (Colombia, Palancar) + optional afternoon 1-tank | Deep specialty dives 1–2 on EANx (≤40 m where conditions allow) |
+| Thu 17 | 2-tank boat, group day, ≤18 m sites | 2-tank boat, group day | Deep dives 3–4 or Drift specialty (2 dives); Night dive (≈USD 95 + tax at Scuba Club / charter USD 800 for up to 10 at Blue Note) |
+| Fri 18 | 2-tank boat ≤18 m, back by ~13:00 | 2-tank boat, back by ~13:00 | Option A: bull-shark day at Playa del Carmen (baited; early ferry, back mid-afternoon; shallow, so the 18 h rule still holds for a Saturday flight after ~07:00). Option B: 2-tank group day (≤30 m), back by ~13:00. No night dive |
+| Sat 19 | Fly (≥18 h after last dive) | Fly | Fly (George: Cancún to London direct) |
 
-Notes: a norther on Wed or Thu delays the beginners by one day at most (shore/confined sessions can still run in the lee of the west coast at Sand Dollar's site); a closure on Fri pushes OW dives 3–4 to Sat and the group day to Sun; a two-day closure Fri–Sat uses Mon 14. Advanced dive counts are heavy (12–14 dives Wed–Sun); anyone doing the bull-shark day on Sun should skip Sat's deep dives.
-
-### 5-night version (Tue 8 – Sun 13 Dec; last dive Sat 12 by 13:00, flights Sun 13 after 07:00)
-
-| Day | Beginners | Certified | Advanced |
-|---|---|---|---|
-| Tue 8 | Arrive; paperwork; gear fitting | Arrive; gear fitting | Arrive; knowledge reviews |
-| Wed 9 | Confined 1–3 + OW dive 1 (shore) | Refresher + 2-tank | AOW dives 1–3 (Deep 30 m, Nav, PPB) |
-| Thu 10 | Confined 4–5 + OW dive 2 (shore) | 2-tank | AOW dives 4–5 (Drift, Wreck C-53) → AOW |
-| Fri 11 | OW dives 3–4 (boat, ≤18 m) → certified | 2-tank (+ optional 1-tank pm) | Deep specialty 1–2 on EANx, or bull-shark day at Playa (baited; conflicts with group diving, optional) |
-| Sat 12 | 2-tank group day ≤18 m, back by 13:00 | 2-tank group day, back by 13:00 | 2-tank group day (≤30 m), back by 13:00; no night dive |
-| Sun 13 | Fly | Fly | Fly |
-
-Risk: no buffer. One closed day removes the beginners' fun dives; two closed days prevent certification (offer a PADI referral to finish at home). Certified divers get four dive days (8 dives), so a 4-day package rather than the 5-day one is needed (QUOTE NEEDED at every operator).
+Notes: no spare day. A norther on Mon or Tue delays the beginners by one day at most (confined and shore sessions still run in the lee of the west coast at Sand Dollar's site) and pushes OW dives 3–4 to Thu; a two-day closure early in the week prevents certification on the trip (offer a PADI referral to finish at home). Certified divers get five dive days (10 dives) Mon–Fri, so the standard 5-day package applies; the group days are Thu–Fri. Advanced dive counts are heavy (12–14 dives Mon–Fri); anyone doing the bull-shark day on Fri should skip Thu's deep dives. Earlier 7-night (8–15 Dec) and 5-night (8–13 Dec) versions were retired on 22 Sep when the dates moved.
 
 ## Beginner-capacity analysis
 

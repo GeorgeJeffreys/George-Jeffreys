@@ -1,3 +1,4 @@
+<!-- Sent 22 Sep 2026 with the old dates (8–14 Dec). Dates moved on 22 Sep to Sun 13 – Sat 19 Dec: this contact gets date-change-note.md; any new send uses the new dates. -->
 To: info@bluenotescuba.com
 Subject: Wharton dive group, 8-14 Dec 2026: group booking chat?
 

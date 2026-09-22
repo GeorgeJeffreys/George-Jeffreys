@@ -26,6 +26,8 @@ Distance to the shortlisted operators (INFERRED from published addresses and km 
 
 ## Flights
 
+Dates moved on 22 Sep to Sun 13 – Sat 19 Dec; day names below that refer to Tue 8 / Sun 13 / Tue 15 are from the earlier versions and read as Sun 13 out, Sat 19 back. The Saturday AA nonstop now fits the return leg if it operates in 2026-27 (QUOTE NEEDED).
+
 ### Recommendation
 
 Both versions: PHL–CZM on American with one stop, preferably Charlotte. American is the only carrier on CLT–CZM (about 10 nonstops a week, departures 09:05–09:49, 3 h 14 m; FlightConnections snippet), so the outbound is an early PHL departure and an early-afternoon Cozumel arrival on Tue 8 Dec; Miami and Dallas connections exist on AA and Houston on United. Aggregator bands: Expedia lists PHL–CZM returns from USD 568, Momondo a typical range of USD 607–2,026, Cheapflights quotes AA at USD 608 as the cheapest carrier; the brief's USD 432–803 band sits inside this. Treat USD 568–800 as the planning band for both the 8–15 Dec and 8–13 Dec versions (ADVERTISED (snippet), QUOTE NEEDED for the exact dates). Door to door 7–9 h each way (INFERRED). Every snippet confirms there is no nonstop on Tuesdays or Sundays.

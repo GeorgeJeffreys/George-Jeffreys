@@ -17,7 +17,7 @@ Milestone: by Tue 29 Sep 2026, three viable planned trips: for each, ONE dive ce
 
 Status values: draft | approved | sent | replied | chased | quoted | bookable | dropped. Dates are ISO. Update the `last_action` and `next_action` columns on every touch.
 
-## Cozumel, Tue 8 – Mon 14 Dec 2026, 20–40 people (tentative, locked 2026-09-22) — DATE CHANGE PENDING: likely Sun 13 – Sat 19 Dec (see cozumel/DATE_CHANGE_PENDING.md). Existing threads stay on the old dates until George confirms; every NEW first-contact email uses Sun 13 – Sat 19 Dec.
+## Cozumel, Sun 13 – Sat 19 Dec 2026, 20–40 people (tentative; dates CONFIRMED by George 2026-09-22 night, moved from Tue 8 – Mon 14 because of his DC event on Sat 12). Every existing Cozumel thread gets the date-change note in cozumel/outreach/final/date-change-note.md at the routine's next run (this session's Gmail connector was on the Wharton account, so it could not send); every new first-contact email uses Sun 13 – Sat 19 Dec.
 
 | contact | role | email | send | status | last_action | next_action | notes |
 |---|---|---|---|---|---|---|---|
@@ -97,6 +97,7 @@ Reserve contacts, Egypt (send on 2026-09-24 if the first wave is silent):
 
 - 2026-09-22 (first routine run, 18:24 UTC): Gmail and Drive confirmed working; no replies yet; fetch still blocked; found the same contact addresses independently; uploaded tracker and memo to Drive; xlsx upload failed on size; its edits did not reach the repo.
 - 2026-09-22 (23:00 UTC): George has a DC event on Sat 12 Dec. Cozumel likely moves to Sun 13 – Sat 19 Dec; analysis in cozumel/DATE_CHANGE_PENDING.md. Pencilled only; existing contacts not told; new emails use the new dates.
+- 2026-09-22 (23:50 UTC): George CONFIRMED Cozumel Sun 13 – Sat 19 Dec, six nights; he flies Cancún to the UK afterwards. Option 6–11 Dec rejected (first-years' core exams). Files, workbook labels, memo, plan and routine prompt updated. Date-change notes to the six existing Cozumel contacts queued for the routine (Gmail connector was on the Wharton account, so not sent from this session).
 - 2026-09-22 (23:30 UTC): George switched the Gmail connector to his Wharton account briefly. Read his Fall 2026 course emails for exam dates: FNCE 7070 exams Tue 29 Sep and Thu 19 Nov (in class, mandatory), project due Thu 10 Dec (virtual); no other December exam found; core exam schedule and calendars only linked, not printed. Earlier-than-core-exams still not recommended; 13–19 Dec still recommended. No emails sent. Gmail sends must resume from emailgeorgej@gmail.com once George switches the connector back.
 - 2026-09-22 (22:40 UTC): George: send the drafts, hands-off from here. All four replies sent; drafts folder clean. Routine prompt switched to hands-off mode (replies itself; escalates decisions only). Recommended permission settings saved to december-plan/SETTINGS_RECOMMENDED.json for George to install (the agent cannot edit its own permissions).
 - 2026-09-22 (night, later): George's answers: drafts 2 and 4 approved as written; Sand Dollar draft loses the call offer; Blue Note draft asks for rough hotel quotes; one centre for all divers; no group flights. Drafts updated; Casa del Mar emailed; routine prompt updated with the standing decisions.
@@ -106,6 +107,7 @@ Reserve contacts, Egypt (send on 2026-09-24 if the first wave is silent):
 
 ## Needs George
 
-- Cozumel date change: confirm Sun 13 – Sat 19 Dec (recommended) or Mon 14 – Sun 20, so the routine can tell the existing contacts and re-confirm capacity. Until then nothing goes to them about dates. George's Wharton inbox (checked 22 Sep) shows no December exam for him: FNCE 7070 exams are 29 Sep and 19 Nov, its project is due 10 Dec (virtual); MGMT 7850, MGMT 7210 and MKTG 7110 have no exam dates in email. Remaining check: the three full-semester syllabi on Canvas for anything dated 10–20 Dec. Detail in cozumel/DATE_CHANGE_PENDING.md.
+- Gmail connector: switch it back to emailgeorgej@gmail.com (it was on the Wharton account on 22 Sep night). The routine checks the account before sending and will not send from Wharton.
+- Syllabi check (low priority): the three full-semester syllabi for any final dated 14–19 Dec; nothing in email suggests one.
 
 Otherwise nothing pending. The four replies of 22 Sep (Blue Note, Aldora, Sand Dollar, Paradise Scuba) were sent from George's Gmail at 22:40 UTC on his instruction; the drafts folder is empty. From now on the routine replies to operators itself on facts and quotes, and escalates here only money, commitments, choices between options, date changes and anything from Wharton or Penn, each with a recommendation and a ready draft.

@@ -1,4 +1,6 @@
-# Cozumel date change, pending (raised by George 22 Sep 2026)
+# Cozumel date change: DECIDED 22 Sep 2026 night. Sun 13 – Sat 19 Dec 2026, six nights. George flies Cancún to the UK afterwards.
+
+History below. Existing Cozumel contacts get the note in outreach/final/date-change-note.md; new emails use the new dates.
 
 George has an event in Washington DC on Sat 12 Dec 2026 that he must attend.
 
@@ -9,7 +11,7 @@ George has an event in Washington DC on Sat 12 Dec 2026 that he must attend.
 - Variant: group flies Sat 12 on the nonstop, George joins Sun 13. Rejected for now: a day with divers on site and George not in charge.
 
 ## Status
-- Pencilled, not confirmed. George has not yet decided.
+- CONFIRMED by George 22 Sep night (superseding the lines below, kept for the record).
 - Do NOT raise the new dates with anyone already emailed (Dive Paradise, Blue Note, Sand Dollar, Aldora, Casa Mexicana, Casa del Mar) until George says so; keep those threads on Tue 8 – Mon 14 Dec facts only.
 - All NEW first-contact emails (reserve wave and beyond) use Sun 13 – Sat 19 Dec 2026, six nights, Open Water Mon 14 – Wed 16, boat days Thu 17 – Fri 18.
 - When George confirms, send a short note to every existing contact in their threads with the new dates, re-ask capacity for those days, update TRACKER.md, the workbook labels in pricing/build_pricing.py, DECISION_MEMO.md and the plan.
