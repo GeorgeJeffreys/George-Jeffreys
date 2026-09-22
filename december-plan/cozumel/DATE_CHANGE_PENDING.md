@@ -39,3 +39,14 @@ What this changes:
 - Recommendation unchanged: Sun 13 – Sat 19 Dec. Only reason to pick Mon 14 – Sun 20 instead: a final exam for one of George's courses on Mon 14 Dec, which the syllabi would show.
 
 Asked of George: check the three full-semester syllabi (or his Claude chat copies) for any final exam or deliverable dated 10–20 Dec, then confirm the dates. If a syllabus shows an exam on Sat 12 or Mon 14 Dec, say so and the plan shifts to Mon 14 – Sun 20 or later.
+
+## Option C: Sun 6 – Fri 11 Dec (asked 22 Sep night, to get George to the UK for Christmas sooner)
+
+Confirmed by search 22 Sep: the Fall 2026 core exam period is Wed 2 – Mon 7 Dec (MBA Inside, tentative). Penn finals Thu 10 – Thu 17 Dec (phase0, tentative).
+
+- First-years (half the group, most of the Open Water demand) would fly out on Sun 6 in the middle of their core exams, with Mon 7 an exam day. Joining late on Tue 8 leaves three days: no boat day, no proper no-fly margin. In practice this makes 6–11 a second-year and certified-only trip.
+- George: MGMT 7850 meets Mon 7 Dec (probably the last session, with group presentations and tracked participation); FNCE 7070 project due Thu 10 Dec from Cozumel (virtual, so possible, but it is work during the trip); any 10–11 Dec final for MGMT 7210 or MKTG 7110 is unknown until the syllabi are checked.
+- Upside: DC on Sat 12 is met, George could be in the UK from Sun 13 if he has no finals 14–17 Dec, and early-December air and hotel prices are usually lower than mid-December.
+- Verdict: only viable if George accepts dropping the beginner half. Not recommended for the trip as briefed.
+
+Christmas-friendly alternative that keeps first-years: Sun 13 – Fri 18 Dec (5 nights: OW Mon–Wed, boat day Thu, fly Fri) and George flies Cancún to London directly on Fri 18 or Sat 19 rather than via Philadelphia. That puts him in the UK by 19 Dec with the full group intact. The gap between this and 6–11 is about a week with his parents, and the price of that week is the beginners.
