@@ -48,9 +48,9 @@ Status values: draft | approved | sent | replied | chased | quoted | bookable | 
 | Email to MBA Student Life | draft (shared/email_student_life.md) | George sends | 2026-09-22 |
 | Euroski 2027 dates | unknown | George asks Ski Club | 2026-09-22 |
 | Colombia trek 2026 dates | unknown | George checks CampusGroups | 2026-09-22 |
-| Web fetch in this environment | blocked | George changes environment network policy or pastes key pages into shared/sources/ | |
+| Web fetch in this environment | George reports opened 2026-09-22; still blocked in the original session; routine tests it each run | verify on first routine run | |
 | Email connector | Gmail connected 2026-09-22 | none | |
-| Scheduled routine | created 2026-09-22 (trig_01VjhzqZFLBuAb3E5cQaRP3a), weekdays 09:00 ET, but it holds NO Gmail grant | George attaches Gmail to the routine in the claude.ai Routines UI | |
+| Scheduled routine | live: trig_01VjhzqZFLBuAb3E5cQaRP3a, weekdays 09:00 ET, Gmail and Google Drive attached 2026-09-22 | first live run fired 2026-09-22 as a test | |
 
 ## Log
 

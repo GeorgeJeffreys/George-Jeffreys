@@ -1,6 +1,6 @@
 # Scheduled routine — "Dive trips pipeline check-in"
 
-Status: CREATED 22 Sep 2026 as trig_01VjhzqZFLBuAb3E5cQaRP3a (weekdays 13:00 UTC, fresh session, push and email notifications). It was created without a Gmail grant because this session cannot pass connectors through; George must attach Gmail to it in the claude.ai Routines UI or it will only research and update files.
+Status: LIVE. trig_01VjhzqZFLBuAb3E5cQaRP3a, weekdays 13:00 UTC, fresh session, Gmail and Google Drive attached by George on 22 Sep 2026, push and email notifications. Prompt below is the version stored on 22 Sep 2026 (with the Drive upload and fetch-test steps).
 
 Settings
 - Schedule: `0 13 * * 1-5` (UTC), i.e. 09:00 Philadelphia on weekdays. Hourly is the minimum; daily is enough while replies trickle in.
