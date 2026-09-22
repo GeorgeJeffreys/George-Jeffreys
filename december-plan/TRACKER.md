@@ -46,11 +46,12 @@ Status values: draft | approved | sent | replied | chased | quoted | bookable | 
 | item | status | next_action | date |
 |---|---|---|---|
 | Email to MBA Student Life | sent 2026-09-22 via Gmail, thread 1a0ca71cf070351f (shortened to 8 questions; Cozumel dates 8–14 Dec) | log the reply under Needs George; the routine must not email Student Life | 2026-09-22 |
-| Euroski 2027 dates | unknown | George asks Ski Club | 2026-09-22 |
+| Euroski 2027 dates | Ski Club key-dates page shows Jan 6–12, St. Anton (routine search 2026-09-22); year still not explicit | George asks Ski Club to confirm 2027 | 2026-09-22 |
 | Colombia trek 2026 dates | unknown | George checks CampusGroups | 2026-09-22 |
-| Web fetch in this environment | George reports opened 2026-09-22; still blocked in the original session; routine tests it each run | confirm from the routine's first-run report | |
+| Web fetch in this environment | STILL BLOCKED: the routine's fresh session on 2026-09-22 got EGRESS_BLOCKED on redsea-divingsafari.com, so the environment's network policy has not changed | George sets Network access to full internet on the environment (claude.ai > Code > Environments > George Claude Environment); routine retests each run | 2026-09-22 |
 | Email connector | Gmail connected 2026-09-22 | none | |
-| Scheduled routine | live: trig_01VjhzqZFLBuAb3E5cQaRP3a, weekdays 09:00 ET, Gmail and Google Drive attached; prompt updated 2026-09-22 with Drive upload and fetch test | first run fired 2026-09-22 18:24 UTC; it created the Drive folder but pushed no commit; verify repo access | |
+| Scheduled routine | live: trig_01VjhzqZFLBuAb3E5cQaRP3a, weekdays 09:00 ET, Gmail and Google Drive attached; prompt updated 2026-09-22 (Drive as fallback state store, bounce handling, push-status reporting) | first run 2026-09-22 18:24 UTC: Gmail and Drive worked, fetch blocked, its tracker edits reached Drive but not the repo (push not confirmed). Next run reports push status explicitly | |
+| Google Drive folder | "Wharton dive trips" (https://drive.google.com/drive/folders/17fUirPHQ088oQJiB6dRJZFqk7hFAWATm): TRACKER.md, DECISION_MEMO.md and a "summary" Google Sheet with the headline prices. The full workbook exceeds the upload tool's size limit; it lives in the repo at pricing/december_pricing.xlsx | routine refreshes each run | 2026-09-22 |
 
 ## Log
 
@@ -58,6 +59,7 @@ Status values: draft | approved | sent | replied | chased | quoted | bookable | 
 - 2026-09-22: Three trips locked as tentative. Cozumel moved to 6 nights (Tue 8 – Mon 14). Five final Cozumel emails written with addresses; sending blocked until an email connector exists. Tracker and routine created.
 - 2026-09-22 (later): Gmail connected. Five Cozumel emails sent from emailgeorgej@gmail.com (Dive Paradise, Blue Note, Aldora, Casa Mexicana, Sand Dollar). Norther wording removed from outreach at George's request.
 
+- 2026-09-22 (first routine run, 18:24 UTC): Gmail and Drive confirmed working; no replies yet; fetch still blocked; found the same contact addresses independently; uploaded tracker and memo to Drive; xlsx upload failed on size; its edits did not reach the repo.
 - 2026-09-22 (evening): George approved everything. Sent: Paradise Scuba, Taino Divers, Parador Villa Parguera (Thanksgiving); Red Sea Diving Safari, Blue Ocean, Emperor Divers (Egypt); MBA Student Life. Tiger Beach variant dropped. Routine prompt updated with Drive upload and fetch test. Drive folder "Wharton dive trips" exists (created by the routine's first run).
 
 ## Needs George
