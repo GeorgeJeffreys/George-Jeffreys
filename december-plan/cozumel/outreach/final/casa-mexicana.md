@@ -12,4 +12,3 @@ We would love to base the group downtown with you (and Suites Bahia or Suites Co
 Thanks,
 George Jeffreys
 Wharton Outdoors Club, MBA Class of 2027
-[phone]

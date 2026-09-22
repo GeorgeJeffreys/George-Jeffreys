@@ -1,6 +1,6 @@
 # Scheduled routine — "Dive trips pipeline check-in"
 
-Status: NOT yet created. The attempt on 22 Sep 2026 was blocked by this session's permission mode (creating a persistent scheduled task counts as unauthorised persistence). Either create it yourself in claude.ai Code under Routines with the settings below, or reply "create the routine" in a session whose permissions allow it.
+Status: CREATED 22 Sep 2026 as trig_01VjhzqZFLBuAb3E5cQaRP3a (weekdays 13:00 UTC, fresh session, push and email notifications). It was created without a Gmail grant because this session cannot pass connectors through; George must attach Gmail to it in the claude.ai Routines UI or it will only research and update files.
 
 Settings
 - Schedule: `0 13 * * 1-5` (UTC), i.e. 09:00 Philadelphia on weekdays. Hourly is the minimum; daily is enough while replies trickle in.

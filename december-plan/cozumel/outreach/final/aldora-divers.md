@@ -14,4 +14,3 @@ No need for exact figures yet. I would just like to start a conversation about h
 Thanks,
 George Jeffreys
 Wharton Outdoors Club, MBA Class of 2027
-[phone]

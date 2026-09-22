@@ -10,11 +10,11 @@ Status values: draft | approved | sent | replied | chased | quoted | bookable | 
 
 | contact | role | email | send | status | last_action | next_action | notes |
 |---|---|---|---|---|---|---|---|
-| Dive Paradise | operator + Hotel Cozumel & Resort bundle | reservations@diveparadise.com | approved | draft | 2026-09-22 final email written (cozumel/outreach/final/dive-paradise.md) | send when email connector is live | Big boats; ask instructors for 10–20 students |
-| Blue Note Scuba | operator | info@bluenotescuba.com | approved | draft | 2026-09-22 final email written | send | One 42-ft boat; capacity question |
-| Sand Dollar Sports | operator (beginner training) | unknown; web form sanddollarsports.com/contact-us/ | approved | draft | 2026-09-22 final email written | find address or submit via form (George) | Shore site works in a norther |
-| Aldora Divers | operator (certified/advanced) | frontdesk@aldora.com | approved | draft | 2026-09-22 final email written | send | 6 per boat cap |
-| Casa Mexicana | hotel (downtown) | reservaciones@casamexicanacozumel.com | approved | draft | 2026-09-22 final email written | send | 88 rooms; sister hotels for overflow |
+| Dive Paradise | operator + Hotel Cozumel & Resort bundle | reservations@diveparadise.com | approved | sent | 2026-09-22 sent via Gmail, thread 1a0ca55da573b85a | chase 2026-09-28 if no reply | Big boats; ask instructors for 10–20 students |
+| Blue Note Scuba | operator | info@bluenotescuba.com | approved | sent | 2026-09-22 sent via Gmail, thread 1a0ca55e7f19ae79 | chase 2026-09-28 if no reply | One 42-ft boat; capacity question |
+| Sand Dollar Sports | operator (beginner training) | sds@sanddollarsports.com | approved | sent | 2026-09-22 sent via Gmail, thread 1a0ca5674e6c857a | chase 2026-09-28 if no reply | Shore site works in a norther |
+| Aldora Divers | operator (certified/advanced) | frontdesk@aldora.com | approved | sent | 2026-09-22 sent via Gmail, thread 1a0ca55f8e267357 | chase 2026-09-28 if no reply | 6 per boat cap |
+| Casa Mexicana | hotel (downtown) | reservaciones@casamexicanacozumel.com | approved | sent | 2026-09-22 sent via Gmail, thread 1a0ca560b2f3f88a | chase 2026-09-28 if no reply | 88 rooms; sister hotels for overflow |
 | Hotel Cozumel & Resort | hotel (resort, pool) | unknown; cozumelhotel.com.mx contact page; quoted via Dive Paradise | n/a | draft | 2026-09-22 | covered by Dive Paradise email | 180 rooms; only property that holds 40 |
 | Salty Endeavors, ScubaTony | operators (reserve) | see cozumel/operators.csv | not yet | draft | 2026-09-21 drafts in cozumel/outreach/ | hold unless the first four cannot cover 30–40 | |
 | Blue Magic Scuba | operator | see cozumel/operators.csv | no | dropped | 2026-09-21 | none | Business advertised for sale |
@@ -49,10 +49,15 @@ Status values: draft | approved | sent | replied | chased | quoted | bookable | 
 | Euroski 2027 dates | unknown | George asks Ski Club | 2026-09-22 |
 | Colombia trek 2026 dates | unknown | George checks CampusGroups | 2026-09-22 |
 | Web fetch in this environment | blocked | George changes environment network policy or pastes key pages into shared/sources/ | |
-| Email connector | none attached | George connects Gmail or Outlook in claude.ai and enables it for this environment and the routine | |
-| Scheduled routine | not created (permission block) | George creates it from ROUTINE.md or approves creation | |
+| Email connector | Gmail connected 2026-09-22 | none | |
+| Scheduled routine | created 2026-09-22 (trig_01VjhzqZFLBuAb3E5cQaRP3a), weekdays 09:00 ET, but it holds NO Gmail grant | George attaches Gmail to the routine in the claude.ai Routines UI | |
 
 ## Log
 
 - 2026-09-21: Phase 0 and Phase 1 delivered (memo, handover, workbook, CSVs, drafts).
 - 2026-09-22: Three trips locked as tentative. Cozumel moved to 6 nights (Tue 8 – Mon 14). Five final Cozumel emails written with addresses; sending blocked until an email connector exists. Tracker and routine created.
+- 2026-09-22 (later): Gmail connected. Five Cozumel emails sent from emailgeorgej@gmail.com (Dive Paradise, Blue Note, Aldora, Casa Mexicana, Sand Dollar). Norther wording removed from outreach at George's request.
+
+## Needs George
+
+- Approve sending the Thanksgiving and Egypt drafts (mark rows `send: approved`), or say so in chat.
