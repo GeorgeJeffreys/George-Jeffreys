@@ -2,7 +2,7 @@
 
 Owner: George (decides, books, pays). Agent: scheduled routine "Dive trips pipeline check-in" (weekdays 09:00 ET; reads this file, chases after 2 business days, sends the reserve wave the same day, drafts suggested replies for George rather than replying, updates pricing inputs, commits to branch `claude/wharton-outdoors-scuba-dec-5ley3f`). Nothing is ever booked or paid by the agent. The agent never emails MBA Student Life or anyone at Wharton or Penn (George's instruction, 22 Sep).
 
-Milestone: by Tue 29 Sep 2026, three viable planned trips: for each, at least one operator and one lodging that has replied with capacity confirmed and indicative pricing, plus a flight plan, so George can trigger bookings.
+Milestone: by Tue 29 Sep 2026, three viable planned trips: for each, ONE dive centre that can take all divers (beginners and certified together, so George is in charge of every diver) and one lodging, both replied with capacity confirmed and indicative pricing. George's standing decisions, 22 Sep: never split a trip across centres; participants book their own flights (no group holds); paper quotes first, no calls unless George asks.
 
 ## Week plan, Tue 22 – Tue 29 Sep
 
@@ -11,7 +11,7 @@ Milestone: by Tue 29 Sep 2026, three viable planned trips: for each, at least on
 | Tue 22 | First wave sent: 5 Cozumel, 3 Thanksgiving, 3 Egypt contacts. Same day: Blue Note, Aldora, Sand Dollar and Paradise Scuba replied; Emperor acknowledged. Suggested replies drafted for George | done |
 | Wed 23 | Routine run: log any replies, draft suggested replies, research price pages | routine |
 | Thu 24 | Two business days without reply: chase first wave, send reserve wave (below) | routine |
-| Fri 25 | Week summary to George; George requests AA (PHL–SJU, PHL–CZM) and Lufthansa (PHL–HRG) group holds via the airlines' group forms | routine / George |
+| Fri 25 | Week summary to George | routine |
 | Mon 28 | Chase reserve wave; if a trip still has no operator reply, propose further candidates for George | routine |
 | Tue 29 | Viability check per trip against the milestone; George picks the operator and lodging to book | routine / George |
 
@@ -30,7 +30,7 @@ Status values: draft | approved | sent | replied | chased | quoted | bookable | 
 | Salty Endeavors, ScubaTony | operators (reserve) | see cozumel/operators.csv | not yet | draft | 2026-09-21 drafts in cozumel/outreach/ | hold unless the first four cannot cover 30–40 | |
 | Blue Magic Scuba | operator | see cozumel/operators.csv | no | dropped | 2026-09-21 | none | Business advertised for sale |
 | Scuba Club Cozumel | dive resort | see cozumel/operators.csv | no | dropped | 2026-09-22 | none | Reported permanently closed (TripAdvisor snippet); verify only if needed |
-| American Airlines Group Travel | flights PHL–CZM 8/14 Dec | groups.aa.com (web form) | George | draft | | George to request a 20-seat hold via the group form by 2026-09-25 | |
+| Flights PHL–CZM | individual bookings | n/a | no | dropped | 2026-09-22 George: people book their own flights | keep the fare band in the workbook current | |
 
 Reserve contacts, Cozumel (send on 2026-09-24 if the first wave is silent):
 
@@ -38,7 +38,7 @@ Reserve contacts, Cozumel (send on 2026-09-24 if the first wave is silent):
 |---|---|---|---|---|---|---|---|
 | Salty Endeavors | operator (3 boats x 8, two departures, cheapest AOW) | letsgodiving@saltyendeavors.com | approved-after-2026-09-24 | draft | 2026-09-22 address found (ADVERTISED snippet, cozumelscuba.com/contact-salty-endeavors) | send with reserve wave | template: cozumel/outreach/final/blue-note-scuba.md, swap the operator line |
 | ScubaTony | operator (all-in pricing, 18 seats) | info@scubatony.com | approved-after-2026-09-24 | draft | 2026-09-22 address found (ADVERTISED snippet, scubatony.com/contactus.aspx) | send with reserve wave | fits the 20-person case |
-| Casa del Mar Cozumel Hotel & Dive Resort | hotel (resort, triples allowed) | unknown (casadelmarcozumel.com contact page) | approved-after-2026-09-24 | draft | 2026-09-22 | routine to find address, then send | template: hotel-casa-mexicana |
+| Casa del Mar Cozumel Hotel & Dive Resort | hotel (resort, next to Sand Dollar, triples allowed) | reservations@casadelmarcozumel.com | approved | sent | 2026-09-22 sent via Gmail, thread CDM_THREAD (George asked for it early) | chase 2026-09-24 if no reply | now a first-wave hotel |
 | Hotel Cozumel & Resort (direct) | hotel (180 rooms, pool) | unknown (cozumelhotel.com.mx/es/contact-us.php) | approved-after-2026-09-24 | draft | 2026-09-22 | routine to find address; else George submits the form | also quoted via Dive Paradise |
 
 ## Thanksgiving, Wed 25 – Sun 29 Nov 2026, 8–12 certified divers (tentative)
@@ -48,7 +48,7 @@ Reserve contacts, Cozumel (send on 2026-09-24 if the first wave is silent):
 | Paradise Scuba & Snorkeling Center | operator | paradisescubapr@gmail.com | approved | quoted | 2026-09-22 Kiko replied (thread 1a0ca716dc6c7ebd): 12 on one vessel, dates open, Wall USD 145 + tax, 15% group discount, leader free, gear 25, no nitrox, 50% deposit, 30-day refund; suggested reply drafted | George sends draft; confirm tax, Thanksgiving Day, night dive and bio bay prices | thanksgiving/replies/paradise-scuba-2026-09-22.md |
 | Taino Divers | Desecheo operator | tainodivers@gmail.com | approved | sent | 2026-09-22 sent via Gmail, thread 1a0ca717fcf5d4cf | chase 2026-09-24 if no reply | USD 120 + 20 fee |
 | Parador Villa Parguera | lodging | hotel@villaparguerapr.com | approved | sent | 2026-09-22 sent via Gmail, thread 1a0ca718db8b088d | chase 2026-09-24 if no reply | 5–6 rooms |
-| AA / Frontier group desk | flights PHL–SJU | groups.aa.com (web form) | George | draft | | George requests a 10-seat hold by 2026-09-25 | Thanksgiving fares are the swing |
+| Flights PHL–SJU | individual bookings | n/a | no | dropped | 2026-09-22 George: people book their own flights | keep the fare band current; Thanksgiving fares are the swing | |
 | Neal Watson's Tiger Beach | opt-in variant | see thanksgiving/outreach/ | no | dropped | 2026-09-22 | none unless George revives the variant | BAITED; sales final |
 
 Reserve contacts, Thanksgiving (send on 2026-09-24 if the first wave is silent):
@@ -66,7 +66,7 @@ Reserve contacts, Thanksgiving (send on 2026-09-24 if the first wave is silent):
 | Red Sea Diving Safari, Marsa Shagra | operator + lodging (primary) | reservations.ma@redsea-divingsafari.com | approved | sent | 2026-09-22 sent via Gmail, thread 1a0ca71a4aee743e | chase 2026-09-24 if no reply | Ask price list, feast-period rule, free places, capacity |
 | Emperor Divers Port Ghalib | operator (fallback) | info@emperordivers.com (routes to reservations@emperordivers.com) | approved | replied (acknowledgement) | 2026-09-22 Rose Regules (thread 1a0ca7227f5db287): will review and revert | chase 2026-09-25 if nothing substantive | january/replies/emperor-2026-09-22.md |
 | Blue Ocean Abu Dabbab | operator (overflow) | info@blueocean-eg.com | approved | sent | 2026-09-22 sent via Gmail, thread 1a0ca7212c991ce4 | chase 2026-09-24 if no reply | |
-| Lufthansa Group desk | flights PHL–HRG | lufthansa.com group form | George | draft | | George requests a 15/20/25 hold by 2026-09-25 | pay within 7 days of confirmation |
+| Flights PHL–HRG | individual bookings | n/a | no | dropped | 2026-09-22 George: people book their own flights | keep the fare band current | |
 | Insurer (Squaremouth/broker) | Egypt cancellation with CFAR | | not yet | draft | | ask before sign-up opens | known-event exclusion |
 
 Reserve contacts, Egypt (send on 2026-09-24 if the first wave is silent):
@@ -96,6 +96,7 @@ Reserve contacts, Egypt (send on 2026-09-24 if the first wave is silent):
 - 2026-09-22 (later): Gmail connected. Five Cozumel emails sent from emailgeorgej@gmail.com (Dive Paradise, Blue Note, Aldora, Casa Mexicana, Sand Dollar). Norther wording removed from outreach at George's request.
 
 - 2026-09-22 (first routine run, 18:24 UTC): Gmail and Drive confirmed working; no replies yet; fetch still blocked; found the same contact addresses independently; uploaded tracker and memo to Drive; xlsx upload failed on size; its edits did not reach the repo.
+- 2026-09-22 (night, later): George's answers: drafts 2 and 4 approved as written; Sand Dollar draft loses the call offer; Blue Note draft asks for rough hotel quotes; one centre for all divers; no group flights. Drafts updated; Casa del Mar emailed; routine prompt updated with the standing decisions.
 - 2026-09-22 (late): Four substantive replies processed. Quoted figures into the workbook: Cozumel OW USD 350 all-in (Sand Dollar), 2-tank USD 110 and nitrox USD 11 (Aldora), leader comps confirmed; Thanksgiving Wall USD 145 less 15% plus tax, leader free (Paradise). Beginner Cozumel all-in now USD 2,270 (under the 2,300 ceiling); Puerto Rico all-in USD 1,720. Suggested replies saved as Gmail drafts. Routine moved to twice daily.
 - 2026-09-22 (night): George's rules: no more Student Life emails; chase and expand after 2 business days; replies go to George with a suggested draft; target three viable trips by Tue 29 Sep. Reserve contacts pre-loaded with addresses; routine prompt updated.
 - 2026-09-22 (evening): George approved everything. Sent: Paradise Scuba, Taino Divers, Parador Villa Parguera (Thanksgiving); Red Sea Diving Safari, Blue Ocean, Emperor Divers (Egypt); MBA Student Life. Tiger Beach variant dropped. Routine prompt updated with Drive upload and fetch test. Drive folder "Wharton dive trips" exists (created by the routine's first run).
@@ -109,4 +110,4 @@ Four suggested replies are waiting as Gmail drafts in the original threads. Edit
 3. Sand Dollar (Angelica): 16 Open Water students at a time, USD 350 all-in with gear, wetsuit and DAN training cover, free diver, USD 14 park fee, one day may run at 1 pm, assumes Casa del Mar. Draft confirms PADI and eLearning, asks about a second cohort above 16, the certified package price, deposit terms, and offers a call. https://mail.google.com/mail/?authuser=emailgeorgej@gmail.com#all?compose=thread-f:1877057007822603642%2Bmsg-a:r-8074656063535884897
 4. Paradise Scuba (Kiko): 12 on one boat, dates open, USD 145 plus tax less 15%, leader free, gear 25, no nitrox, 50% deposit, 30-day refund. Draft pencils Thu 26 to Sat 28 Nov for 12 and asks tax rate, Thanksgiving Day, night dive and bio bay prices, invoicing. https://mail.google.com/mail/?authuser=emailgeorgej@gmail.com#all?compose=thread-f:1877058861335871165%2Bmsg-a:r-5745198931336882374
 
-Decision forming for Cozumel: Sand Dollar for the Open Water block (16 max per cohort) plus Aldora for the certified and advanced divers, with Blue Note's quote as the comparison. Lodging still unanswered (Casa Mexicana; Casa del Mar is next to Sand Dollar and now worth emailing in the reserve wave).
+George's steer (22 Sep night): one centre for everyone. Drafts updated accordingly: Sand Dollar asked whether it can take the certified divers too (and a second OW cohort above 16); Aldora asked whether it can take the Open Water students too; Blue Note asked for rough hotel quotes alongside its group quote. Leading single-centre candidates: Sand Dollar (16 OW confirmed, certified priced as advertised), Blue Note (quote pending), Dive Paradise (no reply yet). Casa del Mar emailed today for lodging next to Sand Dollar.
