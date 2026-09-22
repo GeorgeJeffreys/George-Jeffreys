@@ -1,0 +1,37 @@
+{
+  "_note": "Copy this file to .claude/settings.json in the repository (commit it) so sessions and routine runs on this repo stop prompting for these tools. The agent cannot write its own permission settings; George must do this once.",
+  "permissions": {
+    "allow": [
+      "Bash", "Read", "Edit", "Write", "Glob", "Grep", "WebFetch", "WebSearch",
+      "mcp__Gmail__search_threads", "mcp__Gmail__get_thread", "mcp__Gmail__get_message",
+      "mcp__Gmail__list_drafts", "mcp__Gmail__create_draft", "mcp__Gmail__update_draft", "mcp__Gmail__delete_draft",
+      "mcp__Gmail__send_message", "mcp__Gmail__reply", "mcp__Gmail__forward",
+      "mcp__Gmail__list_labels", "mcp__Gmail__label_thread", "mcp__Gmail__label_message",
+      "mcp__Google_Drive__search_files", "mcp__Google_Drive__list_recent_files", "mcp__Google_Drive__read_file_content",
+      "mcp__Google_Drive__download_file_content", "mcp__Google_Drive__get_file_metadata",
+      "mcp__Google_Drive__create_file", "mcp__Google_Drive__update_file", "mcp__Google_Drive__trash_file",
+      "mcp__Claude_Code_Remote__create_trigger", "mcp__Claude_Code_Remote__update_trigger", "mcp__Claude_Code_Remote__fire_trigger",
+      "mcp__Claude_Code_Remote__list_triggers", "mcp__Claude_Code_Remote__send_later",
+      "mcp__Claude_Code_Remote__get_session", "mcp__Claude_Code_Remote__list_environments"
+    ],
+    "deny": [
+      "mcp__Gmail__trash_thread", "mcp__Gmail__trash_message", "mcp__Gmail__mark_thread_spam", "mcp__Gmail__mark_message_spam",
+      "mcp__Claude_Code_Remote__delete_trigger",
+      "Bash(rm -rf *)", "Bash(git push --force*)"
+    ]
+  },
+  "autoMode": {
+    "allow": [
+      "$defaults",
+      "This repository is George's dive-trip planning workspace (december-plan/). Sending, replying to and drafting Gmail messages to the dive operators, hotels and other contacts listed in december-plan/TRACKER.md is expected and authorised.",
+      "Creating, updating and firing Claude Code Remote routines (triggers) that run the dive-trip pipeline is expected and authorised.",
+      "Uploading, replacing and trashing files in the Google Drive folder 'Wharton dive trips' is expected and authorised.",
+      "Installing Python packages with pip and system packages with apt-get (openpyxl, libreoffice-calc) to rebuild december-plan/pricing/december_pricing.xlsx is expected."
+    ],
+    "soft_deny": [
+      "$defaults",
+      "Never email MBA Student Life or any wharton.upenn.edu or upenn.edu address.",
+      "Never send a message that commits George to a deposit, payment, headcount or date; those go to a Gmail draft and the tracker's Needs George section."
+    ]
+  }
+}
