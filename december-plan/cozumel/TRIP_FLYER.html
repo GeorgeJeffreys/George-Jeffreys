@@ -23,7 +23,7 @@ h2{font-size:20px;font-weight:700;margin:28px 0 10px}
 table{border-collapse:separate;border-spacing:0;width:100%;min-width:860px;font-size:13px;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
 th,td{padding:9px 10px;vertical-align:top;border-bottom:1px solid var(--line);border-right:1px solid var(--line)}
 th{font-family:"Sora",sans-serif;font-weight:700;font-size:13px;text-align:left}
-th.day small{display:block;font-weight:400;color:var(--muted);font-size:11px}
+th.day{min-width:110px} th.day small{display:block;font-weight:400;color:var(--muted);font-size:11px}
 td.track{font-family:"Sora",sans-serif;font-weight:700;font-size:12px;white-space:nowrap;width:96px}
 tr.beg td.track{color:var(--beg)} tr.cert td.track{color:var(--cert)} tr.all td.track{color:var(--all)}
 tr.beg td:not(.track){background:var(--beg-soft)} tr.cert td:not(.track){background:var(--cert-soft)} tr.all td:not(.track){background:var(--all-soft)}
@@ -33,7 +33,7 @@ td b{font-weight:600}
 .price .card{border-top:4px solid var(--sea)}
 .price .big{font-family:"Sora",sans-serif;font-size:34px;font-weight:800;line-height:1;margin:4px 0 2px;font-variant-numeric:tabular-nums}
 .price .big small{font-size:14px;font-weight:600;color:var(--muted);margin-left:4px}
-.price dl{display:grid;grid-template-columns:1fr auto;gap:3px 10px;margin:10px 0 0;font-size:13px}
+.price dl{display:grid;grid-template-columns:minmax(140px,1fr) auto;gap:3px 10px;margin:10px 0 0;font-size:13px}
 .price dt{color:var(--muted)}.price dd{margin:0;text-align:right;font-variant-numeric:tabular-nums}
 .price dd.total{font-weight:700}
 .cta{background:var(--card);border:2px solid var(--sea);border-radius:12px;padding:16px 18px;margin-top:24px}
