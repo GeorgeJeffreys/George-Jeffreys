@@ -5,7 +5,7 @@ Basis: one dive centre for everyone (leading candidate Sand Dollar Sports; its s
 ## Groups
 
 - Beginners (about half): PADI Open Water, eLearning finished at home before travel (processing code included), no pool, so five confined-water sessions plus four open-water dives with the shop, Mon–Wed. Cohort A 08:30; cohort B 13:00 if we go past 16 students. USD 350 all-in incl. gear, wetsuit and DAN training cover.
-- Certified: five boat mornings Mon–Fri on the 5-day two-tank package (USD 510 + USD 14 park fee per boat day), PLUS one built-in afternoon dive on Tue 15 (one-tank or twilight two-tank, priced on top: Dive Paradise 76 / 135, Aldora twilight two-tank about 111 incl. tax, Sand Dollar and Blue Note QUOTE NEEDED) and an optional night dive Thu 17. That is 11–13 dives in the week, so no day is only a half day for anyone who wants more. Tune-up shore dive on arrival for anyone rusty (USD 5).
+- Certified: five boat mornings Mon–Fri on the 5-day two-tank package (USD 510 + USD 14 park fee per boat day), PLUS one built-in afternoon dive on Tue 15 (one-tank or twilight two-tank, priced on top: Dive Paradise 76 / 135, Aldora twilight two-tank about 111 incl. tax, Blue Note two-tank afternoon USD 130 + park fee ADVERTISED; Sand Dollar QUOTE NEEDED) and an optional night dive Thu 17. That is 11–13 dives in the week, so no day is only a half day for anyone who wants more. Tune-up shore dive on arrival for anyone rusty (USD 5).
 - Advanced (roughly 15%): AOW on top (USD 380 with eLearning done, plus the PADI AOW eLearning bought at home), nitrox fills (USD 13 a tank, about 20 tanks so pre-book), night dive, and the deeper walls with the certified group once signed off.
 
 ## Day by day
