@@ -62,6 +62,7 @@ inp('hotel_dep', "Hotel deposit at booking (share of block)", 0.25, "share", "QU
 h2("Included in the fee for everyone")
 inp('elearn_ow', "PADI Open Water eLearning (club buys the codes)", 195, "USD", "ADVERTISED", MONEY)
 inp('dan', "DAN membership + Preferred plan, bought for each person", 119, "USD", "ADVERTISED", MONEY)
+inp('tax_buffer', "Tax buffer per head (Mexican IVA and lodging tax if the quotes are pre-tax)", 200, "USD", "policy (George, 23 Sep): assume USD 200 until Doug confirms", MONEY)
 h2("Leader costs carried by the group (George shares a room like everyone)")
 inp('g_flight', "George's flight allowance", 700, "USD", "policy; PHL–CZM band 568–800", MONEY)
 inp('g_room', "George's half of a shared room, 6 nights", f"=({R['room_lo']}*{R['nights_lo']}+{R['room_hi']}*{R['nights_hi']})/2", "USD", "formula", MONEY)
@@ -89,13 +90,14 @@ rows = [
  ("Diving with Blue Note", f"={R['ow']}+{R['ow_extra']}", f"={R['pkg']}"),
  ("Gear rental, everyone", f"={R['rental']}*{R['rent_days_beg']}", f"={R['rental']}*{R['rent_days_cert']}"),
  ("Marine park fees", f"={R['park']}*{R['park_days_beg']}", f"={R['park']}*{R['park_days_cert']}"),
+ ("Tax buffer (IVA and lodging tax, if the quotes are pre-tax)", f"={R['tax_buffer']}", f"={R['tax_buffer']}"),
  ("PADI eLearning", f"={R['elearn_ow']}", "0"),
  ("DAN dive-accident cover", f"={R['dan']}", f"={R['dan']}"),
  ("Hotel Plaza, 6 nights with breakfast, 2 sharing", f"={room_pp}", f"={room_pp}"),
  ("Leader's costs shared (George's flight, half-room, DAN, rental, odd-room risk)", f"={leader_total}/{paying}", f"={leader_total}/{paying}"),
- ("Subtotal", "=SUM(B3:B9)", "=SUM(C3:C9)"),
- ("Contingency", f"=ROUND(B10*{R['contingency']},0)", f"=ROUND(C10*{R['contingency']},0)"),
- ("TRIP FEE (rounded up to the nearest 5)", "=CEILING(B10+B11,5)", "=CEILING(C10+C11,5)"),
+ ("Subtotal", "=SUM(B3:B10)", "=SUM(C3:C10)"),
+ ("Contingency", f"=ROUND(B11*{R['contingency']},0)", f"=ROUND(C11*{R['contingency']},0)"),
+ ("TRIP FEE (rounded up to the nearest 5)", "=CEILING(B11+B12,5)", "=CEILING(C11+C12,5)"),
  ("", None, None),
  ("Optional add-ons at sign-up, charged at cost", None, None),
  ("AOW: course free with eLearning; eLearning", "n/a", f"={R['elearn_aow']}"),
@@ -104,17 +106,17 @@ rows = [
  ("Night dive, private charter shared by 10", f"={R['night_charter']}/10", f"={R['night_charter']}/10"),
  ("", None, None),
  ("GUIDANCE BUDGET WITHOUT FLIGHTS", None, None),
- ("Trip fee", "=B12", "=C12"),
+ ("Trip fee", "=B13", "=C13"),
  ("Own spending: meals, drinks, tips, airport transfers", f"={R['meals']}*{R['days_meals']}+{R['tips']}+{R['xfer']}", f"={R['meals']}*{R['days_meals']}+{R['tips']}+{R['xfer']}"),
- ("Guidance budget", "=B21+B22", "=C21+C22"),
- ("Guidance budget, certified taking AOW and nitrox", "n/a", "=C23+C15+C16"),
+ ("Guidance budget", "=B22+B23", "=C22+C23"),
+ ("Guidance budget, certified taking AOW and nitrox", "n/a", "=C24+C16+C17"),
 ]
 for label, b, c in rows:
     fee.append([label, b, c]); r = fee.max_row
     for col in (2, 3): fee.cell(r, col).number_format = MONEY
-for r in (10, 12, 20, 23, 24):
+for r in (11, 13, 21, 24, 25):
     for cell in fee[r]: cell.font = BOLD
-fee['A26'] = "The fee covers everything diving-related (course or package, gear, park fees, eLearning), DAN insurance and the hotel; everything else is the person's own. It is set at the pricing headcount; a bigger group makes a surplus that is refunded pro rata or held as buffer, a smaller group down to the minimum is covered by the contingency (see Group sheet). George's place: diving covered by Blue Note's comp, flight and room carried by the group, commission to George, all disclosed on the sign-up page."
+fee['A27'] = "The fee covers everything diving-related (course or package, gear, park fees, eLearning), DAN insurance and the hotel; everything else is the person's own. It is set at the pricing headcount; a bigger group makes a surplus that is refunded pro rata or held as buffer, a smaller group down to the minimum is covered by the contingency (see Group sheet). George's place: diving covered by Blue Note's comp, flight and room carried by the group, commission to George, all disclosed on the sign-up page."
 
 # ---------------- Group ----------------
 g = wb.create_sheet("Group")
@@ -138,7 +140,7 @@ r_beg = grow("Open Water students", lambda c, n: f"=ROUND({c}{r_pay}*{R['beg_sha
 r_cert = grow("Paying certified divers", lambda c, n: f"={c}{r_pay}-{c}{r_beg}", '0')
 r_rooms = grow("Rooms, everyone 2 sharing including George (odd person alone at the group's cost)", lambda c, n: f"=ROUNDUP({c}{r_n}/2,0)", '0')
 sect("Revenue")
-r_rev = grow("Trip fees collected", lambda c, n: f"={c}{r_beg}*Fee!$B$12+{c}{r_cert}*Fee!$C$12", bold=True)
+r_rev = grow("Trip fees collected", lambda c, n: f"={c}{r_beg}*Fee!$B$13+{c}{r_cert}*Fee!$C$13", bold=True)
 sect("Costs")
 r_bn_ow = grow("Blue Note: Open Water courses and extra days", lambda c, n: f"={c}{r_beg}*({R['ow']}+{R['ow_extra']})")
 r_bn_pk = grow("Blue Note: certified packages, paid divers", lambda c, n: f"={c}{r_cert}*{R['pkg']}")
@@ -150,12 +152,13 @@ r_comm = grow("Less 10% commission on paid certified packages", lambda c, n: f"=
 r_bn_net = grow("Blue Note net payable", lambda c, n: f"={c}{r_bn_gross}+{c}{r_comm}", bold=True)
 r_comm_out = grow("Commission passed to George", lambda c, n: f"=-{c}{r_comm}")
 r_rent = grow("Gear rental for everyone including George", lambda c, n: f"={c}{r_beg}*{R['rental']}*{R['rent_days_beg']}+({c}{r_cert}+1)*{R['rental']}*{R['rent_days_cert']}")
+r_tax = grow("Tax buffer held (paid to Blue Note and the hotel if charged; otherwise refunded)", lambda c, n: f"={c}{r_n}*{R['tax_buffer']}")
 r_park = grow("Marine park fees (cash on the island, paid from the float)", lambda c, n: f"={c}{r_beg}*{R['park']}*{R['park_days_beg']}+({c}{r_cert}+1)*{R['park']}*{R['park_days_cert']}")
 r_el = grow("PADI Open Water eLearning codes", lambda c, n: f"={c}{r_beg}*{R['elearn_ow']}")
 r_dan = grow("DAN cover for everyone including George", lambda c, n: f"={c}{r_n}*{R['dan']}")
 r_hotel = grow("Hotel Plaza block, all rooms", lambda c, n: f"={c}{r_rooms}*({R['room_lo']}*{R['nights_lo']}+{R['room_hi']}*{R['nights_hi']})")
 r_gfl = grow("George's flight allowance", lambda c, n: f"={R['g_flight']}")
-r_costs = grow("TOTAL COSTS", lambda c, n: f"={c}{r_bn_net}+{c}{r_comm_out}+{c}{r_rent}+{c}{r_park}+{c}{r_el}+{c}{r_dan}+{c}{r_hotel}+{c}{r_gfl}", bold=True)
+r_costs = grow("TOTAL COSTS", lambda c, n: f"={c}{r_bn_net}+{c}{r_comm_out}+{c}{r_rent}+{c}{r_tax}+{c}{r_park}+{c}{r_el}+{c}{r_dan}+{c}{r_hotel}+{c}{r_gfl}", bold=True)
 sect("Result")
 r_sur = grow("Surplus (contingency and over-recovery; refunded pro rata or held)", lambda c, n: f"={c}{r_rev}-{c}{r_costs}", bold=True)
 r_surpp = grow("Surplus per paying person", lambda c, n: f"={c}{r_sur}/{c}{r_pay}")
