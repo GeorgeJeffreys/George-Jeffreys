@@ -64,7 +64,7 @@ Reserve contacts, Thanksgiving (send on 2026-09-24 if the first wave is silent):
 
 | contact | role | email | send | status | last_action | next_action | notes |
 |---|---|---|---|---|---|---|---|
-| Red Sea Diving Safari, Marsa Shagra | operator + lodging (primary) | reservations.ma@redsea-divingsafari.com | approved | sent | 2026-09-22 sent via Gmail, thread 1a0ca71a4aee743e | chase 2026-09-24 if no reply | Ask price list, feast-period rule, free places, capacity |
+| Red Sea Diving Safari, Marsa Shagra | operator + lodging (primary; TDI tec facility, Tec 40 and sidemount on the house reef, good for George) | reservations.ma@redsea-divingsafari.com | approved | sent | 2026-09-22 sent via Gmail, thread 1a0ca71a4aee743e | chase 2026-09-24 if no reply | Ask price list, feast-period rule, free places, capacity |
 | Emperor Divers Port Ghalib | operator (fallback) | info@emperordivers.com (routes to reservations@emperordivers.com) | approved | replied (acknowledgement) | 2026-09-22 Rose Regules (thread 1a0ca7227f5db287): will review and revert | chase 2026-09-25 if nothing substantive | january/replies/emperor-2026-09-22.md |
 | Blue Ocean Abu Dabbab | operator + lodge package (fallback to RSDS) | info@blueocean-eg.com | approved | replied | 2026-09-23 Rita replied (thread 1a0ca7212c991ce4): full package possible, lodge double/triple, no free rooms, free diving places by activity; replied with five pricing questions | await prices (chase 2026-09-25) | january/replies/blue-ocean-2026-09-23.md |
 | Flights PHL–HRG | individual bookings | n/a | no | dropped | 2026-09-22 George: people book their own flights | keep the fare band current | |

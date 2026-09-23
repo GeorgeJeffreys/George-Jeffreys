@@ -43,3 +43,13 @@ Wind: the house reef dives from the bay in almost any wind; day boats are the fi
 ## Money and forms before travel
 
 DAN cover (USD 119); PADI e-codes; Egypt e-visa; cancellation insurance with CFAR bought within the insurer's window of the first deposit (see DECISION_MEMO risks); the village's deposit terms and feast-period rule (QUOTE NEEDED).
+
+## George's week at Marsa Shagra: technical diving (researched 23 Sep, nobody asked yet)
+
+Marsa Shagra is the first TDI facility in the southern Red Sea and runs PADI Tec 40 and sidemount training from the house reef, which drops to 55 m a few fin-kicks from the jetty; certified tech divers there dive the Elphinstone Arch at 55 m (ADVERTISED, redsea-divingsafari.com/diving/tec-diving; scubadiving.com feature; oonasdivers.com). That makes RSDS the right centre for George as well as the group.
+
+Options, in order of fit with leading the trip:
+- PADI Tec 40 or TDI Intro to Tech across the Mon–Thu afternoons: theory the first evening, skills and the four training dives on the house-reef wall after the morning sessions with the students; deco training within 10 minutes and 40 m fits the sheltered wall; Wed afternoon clashes with Elphinstone, so the Elphinstone day boat moves to the advanced group's plan without George or the course runs Mon, Tue, Thu plus Fri morning (last dive by 12:00).
+- Sidemount practice with the centre's own rigs (they teach sidemount, so rigs exist; rental price QUOTE NEEDED) on any afternoon, no course needed since George is certified.
+- Elphinstone with the advanced group on Wed, and the Arch if he is Tec-certified by then (he would not be; keep for a future trip).
+Paying for it: RSDS gives the 11th and 22nd guest free (ADVERTISED); at 22 guests that is two free places worth roughly EUR 1,100–1,400 of lodging, board and diving. Under the club rule George's place is comped and his flight carried by the group, so a free place beyond his own is the pot, plus any commission RSDS offers (asked in the chaser). A Tec 40 course is typically EUR 400–600 in the Red Sea (INFERRED; QUOTE NEEDED).
