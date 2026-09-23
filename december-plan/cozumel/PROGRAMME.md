@@ -1,6 +1,6 @@
 # Cozumel programme, Sun 13 – Sat 19 Dec 2026: the rounded trip plan
 
-Basis: one dive centre for everyone (leading candidate Sand Dollar Sports; its shore training site and 1 pm second cohort make the beginner side work), one hotel (Casa del Mar, 200 yards from the shop), participants fly themselves in. Safety: OW 18 m, AOW 30 m, Deep 40 m; last dive out of the water by 13:00 Fri 18; no dive after that. Every evening at 18:30 there is a 15-minute briefing for the next day (template in `shared/briefing_template.md`). Prices are per person and QUOTED (Sand Dollar 23 Sep) unless flagged.
+Basis: one dive centre for everyone (leading candidate Sand Dollar Sports; its shore training site and 1 pm second cohort make the beginner side work), one hotel (Casa del Mar, 200 yards from the shop), participants fly themselves in. Safety: OW 18 m, AOW 30 m, Deep 40 m; last dive out of the water by 13:00 Fri 18; no dive after that. Every evening at 18:30 there is a 15-minute briefing for the next day (template in `shared/briefing_template.md`). Off-afternoon and add-on activities are planned by us, not by the operators (George, 23 Sep); the routine researches and prices them. Prices are per person and QUOTED (Sand Dollar 23 Sep) unless flagged.
 
 ## Groups
 

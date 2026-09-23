@@ -1,8 +1,12 @@
+Dates shortened on 23 Sep to Sat 2 – Fri 8 Jan (fly home Fri 8); the Sat 9 flight rows below are the earlier research and need re-checking for Fri 8.
+
 # W4 — Egypt accommodation and travel, Sat 2 – Sat 9 Jan 2027
 
 Access date for everything below: 21 Sep 2026. WebFetch and curl are blocked; all figures come from search-result snippets and are flagged. The session's shared WebSearch budget ran out part-way through this workstream, so several rows are QUOTE NEEDED rather than sourced; each gap is written into the outreach emails. Currency: USD with EUR alongside at the placeholder rate USD 1 = EUR 0.92 (EUR 1 = USD 1.087); GBP figures are left unconverted.
 
-## Conclusions
+#Dates shortened on 23 Sep to Sat 2 – Fri 8 Jan (fly home Fri 8); the Sat 9 flight rows below are the earlier research and need re-checking for Fri 8.
+
+# Conclusions
 
 1. Fly Philadelphia to Hurghada (HRG) via a Lufthansa Group hub (Frankfurt, Munich, Zurich or Vienna): aggregator snippets put January return economy at USD 700–1,300 (ADVERTISED, aggregator), about 15–18 h each way (INFERRED), leaving USD 1,400–2,000 of the USD 2,700 ceiling for lodging, diving, transfers and visa. Marsa Alam (RMF) is the better airport for Marsa Shagra but a snippet shows only one Zurich–RMF flight in January 2027, so RMF is a bonus to price, not the plan; Sharm is not clearly easier from Europe and carries Sinai optics.
 2. Lodging at Marsa Shagra: Royal Tent EUR 78 (USD 85) and Deluxe Chalet EUR 113 (USD 123) per person per night full board sharing are the brief's figures and remain QUOTE NEEDED; the winter 26-27 euro price list exists (valid 1 Nov 2026 – 30 Apr 2027) but is blocked and no snippet exposed a price. Seven nights therefore cost about USD 595–860 pp before diving. Hurghada alternatives (Hilton Hurghada Plaza with Emperor Divers on site; Sea Star Beau Rivage; Hor Palace/ORCA) have no verified rates: QUOTE NEEDED, emails drafted.
@@ -10,9 +14,13 @@ Access date for everything below: 21 Sep 2026. WebFetch and curl are blocked; al
 4. Visas: since 1 Mar 2026 the single-entry tourist visa costs USD 30 (was USD 25), on arrival or as an e-visa at visa2egypt.gov.eg. US, Canadian, UK and EU passports: e-visa or on arrival. Chinese passports: e-visa only, no on-arrival. Indian passports: on-arrival only with a valid multiple-entry US/UK/Schengen visa and, per some sources, a guarantee letter from an Egyptian agent; e-visa is the safe route. Brazilian and South Korean: listed as e-visa eligible by a third-party checker only (QUOTE NEEDED against the official list). The free Sinai-only stamp at Sharm is useless for Marsa Alam or Hurghada.
 5. Biggest risks: RMF and SSH direct services from Europe are charter/leisure carriers with thin January schedules; Egypt is an "impacted country" under insurers' Middle East known-event exclusion dated 28 Feb 2026, so cancellation cover for policies bought now may be unavailable; and the group needs at least 18 h between the last dive and the Sat 9 Jan flight, so diving ends Thu 7 Jan or early Fri 8 Jan.
 
-## 1. Lodging
+#Dates shortened on 23 Sep to Sat 2 – Fri 8 Jan (fly home Fri 8); the Sat 9 flight rows below are the earlier research and need re-checking for Fri 8.
 
-### Chosen base: Marsa Shagra Village (Red Sea Diving Safari), Marsa Alam
+# 1. Lodging
+
+##Dates shortened on 23 Sep to Sat 2 – Fri 8 Jan (fly home Fri 8); the Sat 9 flight rows below are the earlier research and need re-checking for Fri 8.
+
+# Chosen base: Marsa Shagra Village (Red Sea Diving Safari), Marsa Alam
 
 The lodging is the operator's own village; the house reef, dive centre and restaurant are on site, so transfers to diving are nil. Per-person, per-night, full board, sharing, January (winter list, valid 1 Nov 2026 – 30 Apr 2027):
 
@@ -25,7 +33,9 @@ The lodging is the operator's own village; the house reef, dive centre and resta
 
 Seven nights: Royal Tent EUR 546 (USD 594); Deluxe Chalet EUR 791 (USD 860). The December workstream's brief carried EUR 89 and EUR 122 for the same categories (see shared/phase0.md); the January figures are lower and plausibly reflect the low-season band, but neither set is verified. Group terms known from the shared phase0 note: the 11th, 21st and 30th guest is free on transfers, accommodation and dive package (snippet-based). Deposit and cancellation terms: QUOTE NEEDED. Sources: https://www.redsea-divingsafari.com/price-lists/marsa-shagra/euro-winter-26-27 (blocked; title only), https://www.redsea-divingsafari.com/villages/marsa-shagra/accommodation/ (room categories), https://www.redsea-divingsafari.com/price-lists. The Marsa Shagra enquiry email belongs to another workstream and is not duplicated here.
 
-### Alternative base: Hurghada (kept over Sharm)
+##Dates shortened on 23 Sep to Sat 2 – Fri 8 Jan (fly home Fri 8); the Sat 9 flight rows below are the earlier research and need re-checking for Fri 8.
+
+# Alternative base: Hurghada (kept over Sharm)
 
 Hurghada is kept as the alternative because the flight research did not show Sharm to be clearly easier from Europe in January (both have Lufthansa Group, Turkish and easyJet service; see section 2), and because HRG doubles as the fallback airport for Marsa Shagra (about 3 h by road). Dive-centre proximity is the selection rule.
 
@@ -38,7 +48,9 @@ Hurghada is kept as the alternative because the flight research did not show Sha
 
 Group, deposit and cancellation terms for all four: QUOTE NEEDED; the outreach emails ask for 2-share and 3-share rates, half board versus breakfast, a 20-room block hold, deposit schedule, free-cancellation date, attrition allowance, and airport coach pricing for 15/20/25.
 
-## 2. Flights
+#Dates shortened on 23 Sep to Sat 2 – Fri 8 Jan (fly home Fri 8); the Sat 9 flight rows below are the earlier research and need re-checking for Fri 8.
+
+# 2. Flights
 
 Recommendation: book the group PHL–HRG return on a Lufthansa Group itinerary via Frankfurt, Munich, Zurich or Vienna, using the Lufthansa Group Travel desk for 10+ passengers, and hold a sub-group on a multi-city PHL–HRG / HRG–ZRH ticket only once the Euroski date is confirmed. Price RMF as an option once the Condor winter 26-27 timetable and the Edelweiss January schedule are read.
 
@@ -54,7 +66,9 @@ Recommendation: book the group PHL–HRG return on a Lufthansa Group itinerary v
 
 Timing: a Sat 2 Jan evening departure from PHL lands in Egypt on Sun 3 Jan afternoon or evening (INFERRED), giving five diving days Mon 4 – Fri 8 Jan with the last dive no later than about 18 h before the Sat 9 Jan departure; for an early-morning Sat departure the last dive is Thu 7 Jan or first thing Fri 8 Jan.
 
-### Airline group-booking desks (10+ passengers)
+##Dates shortened on 23 Sep to Sat 2 – Fri 8 Jan (fly home Fri 8); the Sat 9 flight rows below are the earlier research and need re-checking for Fri 8.
+
+# Airline group-booking desks (10+ passengers)
 
 | Airline | Threshold | Terms captured | Flag | Source |
 |---|---|---|---|---|
@@ -63,7 +77,9 @@ Timing: a Sat 2 Jan evening departure from PHL lands in Egypt on Sun 3 Jan after
 | EgyptAir | 10+ | Online group request form; deposit or full payment may be required; cancellation rules differ from individual tickets | QUOTE NEEDED | https://www.egyptair.com/en/Book/Pages/Group-Reservation.aspx |
 | British Airways, United, Delta, American | 10+ (standard industry threshold, INFERRED) | Not researched (search budget exhausted) | QUOTE NEEDED | none |
 
-## 3. Euroski open-jaw
+#Dates shortened on 23 Sep to Sat 2 – Fri 8 Jan (fly home Fri 8); the Sat 9 flight rows below are the earlier research and need re-checking for Fri 8.
+
+# 3. Euroski open-jaw
 
 Found: the Wharton Ski & Snowboard Club key-dates page lists the "Euro Ski Trip" as 6–12 January, 140+ members, St. Anton, Austria (https://groups.wharton.upenn.edu/skisnowboard/keydates/; snippet gives no year). Flag: UNCONFIRMED YEAR. Two readings:
 
@@ -72,7 +88,9 @@ Found: the Wharton Ski & Snowboard Club key-dates page lists the "Euro Ski Trip"
 
 Action: George to ask the Ski Club for the 2027 dates before any open-jaw is priced. Gateway airports for St. Anton: Zurich (about 2.5 h by rail/road, INFERRED; Edelweiss and Swiss serve HRG, Edelweiss serves RMF thinly in January), Innsbruck (about 1 h; no Egypt service in winter, INFERRED), Munich (about 3 h; Lufthansa/Condor serve HRG, INFERRED). Open-jaw pricing: QUOTE NEEDED (see flights.csv). Onward London connections: easyJet, TUI and BA serve HRG/SSH–London; January days of week QUOTE NEEDED.
 
-## 4. Transfers
+#Dates shortened on 23 Sep to Sat 2 – Fri 8 Jan (fly home Fri 8); the Sat 9 flight rows below are the earlier research and need re-checking for Fri 8.
+
+# 4. Transfers
 
 | Leg | Provider | Per person one way | Flag | Source |
 |---|---|---|---|---|
@@ -86,7 +104,9 @@ Action: George to ask the Ski Club for the 2027 dates before any open-jaw is pri
 
 At 20 people via HRG, transfers add about USD 90 pp return (EUR 82); via RMF about USD 48 pp (EUR 44), both QUOTE NEEDED.
 
-## 5. Visas by passport
+#Dates shortened on 23 Sep to Sat 2 – Fri 8 Jan (fly home Fri 8); the Sat 9 flight rows below are the earlier research and need re-checking for Fri 8.
+
+# 5. Visas by passport
 
 Fee change: from 1 Mar 2026 the single-entry tourist visa (on arrival and e-visa) is USD 30, up from USD 25; the on-arrival sticker is still USD 25 plus a "+USD 5 surcharge" sticker (https://visasnews.com/en/egypt-visa-on-arrival-fee-has-officially-increased/ ; https://semelegantvoyage.com/en-us/egypt-visa-guide-2026-us-travelers/ — both secondary; QUOTE NEEDED against visa2egypt.gov.eg, which was not fetchable). E-visa portal: https://visa2egypt.gov.eg, 3–7 business days, PDF by email, card payment. Cash USD in exact notes for on-arrival.
 
@@ -105,7 +125,9 @@ Sinai-only stamp: free, up to 15 days, issued only on direct arrival at Sharm el
 
 Red Sea Diving Safari's EUR 45 visa and meet-and-assist service (brief figure; QUOTE NEEDED) is worth taking for the on-arrival-eligible passports because it removes the cash queue; e-visa holders (China, India, and any Brazilian or South Korean member if confirmed) still need the meet-and-assist only if the operator prices it separately. Passports must have six months' validity from entry.
 
-## 6. Risks
+#Dates shortened on 23 Sep to Sat 2 – Fri 8 Jan (fly home Fri 8); the Sat 9 flight rows below are the earlier research and need re-checking for Fri 8.
+
+# 6. Risks
 
 - Charter-only airports. RMF and SSH are served from Europe in January mainly by leisure carriers (Condor, Edelweiss, TUI, easyJet, Transavia, Neos) on specific days of the week; a snippet shows a single ZRH–RMF flight in January 2027. Build the plan on HRG with the 3 h road transfer and treat RMF as an upgrade if the Condor/Edelweiss schedules fit Sat 2 / Sat 9 Jan. Flag: schedules QUOTE NEEDED.
 - January weather. Red Sea winter brings northerly wind days and occasional morning fog on the coast; specific delay statistics were not captured (search budget). Mitigation: no dives on the final morning, keep an 18 h fly-after-dive buffer, and book itineraries with a single ticket so misconnections are the airline's problem.
@@ -114,7 +136,9 @@ Red Sea Diving Safari's EUR 45 visa and meet-and-assist service (brief figure; Q
 - Visa surprises. Indian and Chinese members must have e-visas in hand before departure; airlines may deny boarding without one. Fee moved to USD 30 in March 2026; check for further 2026 changes before departure.
 - Marsa Shagra group terms unverified. The 11th/21st/30th guest free rule and the room rates are unverified; the 30-person cap on the free-place rule matters if the group reaches 25 plus partners.
 
-## 7. Gaps carried into outreach
+#Dates shortened on 23 Sep to Sat 2 – Fri 8 Jan (fly home Fri 8); the Sat 9 flight rows below are the earlier research and need re-checking for Fri 8.
+
+# 7. Gaps carried into outreach
 
 1. Marsa Shagra winter 26-27 rates for all six room categories, single supplements, deposit and cancellation, and transfer prices (owned by the other workstream's email).
 2. Hurghada hotels: rates at 2- and 3-share, board basis, 20-room block, deposit, cancellation, attrition, airport coach (three emails in outreach/).

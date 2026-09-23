@@ -17,7 +17,7 @@ Milestone: by Tue 29 Sep 2026, three viable planned trips: for each, ONE dive ce
 
 Status values: draft | approved | sent | replied | chased | quoted | bookable | dropped. Dates are ISO. Update the `last_action` and `next_action` columns on every touch.
 
-## Cozumel, Sun 13 – Sat 19 Dec 2026, 20–40 people (tentative; dates CONFIRMED by George 2026-09-22 night, moved from Tue 8 – Mon 14 because of his DC event on Sat 12). Date-change notes sent to all six existing Cozumel contacts on 2026-09-23 14:36 UTC; every new first-contact email uses Sun 13 – Sat 19 Dec.
+## Cozumel, Sun 13 – Sat 19 Dec 2026, 20–40 people (CONFIRMED GO 23 Sep; dates CONFIRMED by George 2026-09-22 night, moved from Tue 8 – Mon 14 because of his DC event on Sat 12). Date-change notes sent to all six existing Cozumel contacts on 2026-09-23 14:36 UTC; every new first-contact email uses Sun 13 – Sat 19 Dec.
 
 | contact | role | email | send | status | last_action | next_action | notes |
 |---|---|---|---|---|---|---|---|
@@ -41,7 +41,7 @@ Reserve contacts, Cozumel (send on 2026-09-24 if the first wave is silent; use t
 | Casa del Mar Cozumel Hotel & Dive Resort | hotel, LEADING (200 yards from Sand Dollar, which recommends it; triples allowed) | reservations@casadelmarcozumel.com | approved | sent | 2026-09-23 date-change note sent in thread 1a0cb3a2f3032070 (doubles as first nudge) | chase 2026-09-25 if still silent; also check booking-site rates for Sun 13 – Sat 19 | now a first-wave hotel |
 | Hotel Cozumel & Resort (direct) | hotel (180 rooms, pool) | unknown (cozumelhotel.com.mx/es/contact-us.php) | approved-after-2026-09-24 | draft | 2026-09-22 | routine to find address; else George submits the form | also quoted via Dive Paradise |
 
-## Thanksgiving, Wed 25 – Sun 29 Nov 2026, 8–12 certified divers (tentative)
+## Thanksgiving, Wed 25 – Sun 29 Nov 2026, 8–12 certified divers (CONFIRMED GO 23 Sep; equal priority)
 
 | contact | role | email | send | status | last_action | next_action | notes |
 |---|---|---|---|---|---|---|---|
@@ -60,7 +60,7 @@ Reserve contacts, Thanksgiving (send on 2026-09-24 if the first wave is silent):
 | West Divers | operator (second boat, La Parguera) | unknown (phone 787-899-3223 only) | approved-after-2026-09-24 | draft | 2026-09-22 | routine to find address; else George calls | |
 | Rincón Diving & Snorkeling / Aquatica Dive & Surf | Desecheo back-ups | unknown | approved-after-2026-09-24 | draft | 2026-09-22 | routine to find addresses; send with the reserve wave now that Taino is out | |
 
-## Egypt, Sat 2 – Sat 9 Jan 2027, 15–25 people (tentative)
+## Egypt, Sat 2 – Fri 8 Jan 2027, 15–25 people (CONFIRMED GO 23 Sep; shortened by one day at the end; contacts were emailed as 3–9 Jan and get the new end date in the next message in each thread)
 
 | contact | role | email | send | status | last_action | next_action | notes |
 |---|---|---|---|---|---|---|---|
@@ -109,6 +109,7 @@ Reserve contacts, Egypt (send on 2026-09-24 if the first wave is silent):
 - 2026-09-22 (night): George's rules: no more Student Life emails; chase and expand after 2 business days; replies go to George with a suggested draft; target three viable trips by Tue 29 Sep. Reserve contacts pre-loaded with addresses; routine prompt updated.
 - 2026-09-23 (13:09 UTC routine run): connector was on the Wharton account, so nothing sent; fetch still blocked everywhere; found Orca Dive Club's address and the Dive Paradise 2026 rates PDF location; Cancún–London fare band noted. Its tracker edits reached Drive only; merged here.
 - 2026-09-23 (14:36 UTC, George's morning work run by hand after he switched the connector back): date-change notes sent to all six Cozumel contacts (Sand Dollar and Aldora inside substantive replies). New replies processed: Sand Dollar (full certified price list, second OW cohort, deposit and refund terms), Aldora (full price list, deposits), Taino Divers (no boat, refers Island Style Charters), Blue Ocean (willing, terms). Workbook inputs moved to Sand Dollar's quoted 5-day package (USD 102/day), park fee USD 14, nitrox 13, night 85, tune-up 5, gear 20; Cozumel all-in now certified 2,201 / beginner 2,248 / advanced 2,894. Six sources rows added.
+- 2026-09-23 (17:00 UTC): George: all three trips are confirmed go with equal priority; Egypt shortened by a day at the end (Sun 3 – Fri 8 on the ground); off-afternoon activities and add-ons are planned by us, not asked of operators; routine now four times a day and reports into the main session only, no emails or push. Programmes written (cozumel/PROGRAMME.md, january/PROGRAMME.md, shared/briefing_template.md). Workbook Egypt inputs: 5 nights, 4 dive days.
 - 2026-09-22 (evening): George approved everything. Sent: Paradise Scuba, Taino Divers, Parador Villa Parguera (Thanksgiving); Red Sea Diving Safari, Blue Ocean, Emperor Divers (Egypt); MBA Student Life. Tiger Beach variant dropped. Routine prompt updated with Drive upload and fetch test. Drive folder "Wharton dive trips" exists (created by the routine's first run).
 
 ## Needs George

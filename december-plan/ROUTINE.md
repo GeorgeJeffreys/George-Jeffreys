@@ -1,15 +1,24 @@
 # Scheduled routine — "Dive trips pipeline check-in"
 
-Status: LIVE. trig_01VjhzqZFLBuAb3E5cQaRP3a, weekdays 13:00 UTC, fresh session, Gmail and Google Drive attached by George on 22 Sep 2026, push and email notifications. Prompt below is the version stored on the routine on 22 Sep 2026 (night): 2-business-day chase, reserve wave, suggested-reply drafts for George, no Student Life emails, 29 Sep viability target.
+Status from 23 Sep 2026 evening: fires INTO the main planning session (session_0169irXwrgR4zfoxWYodwM9b) four times a day, 08:00, 12:00, 16:00 and 20:00 Philadelphia time (cron `0 0,12,16,20 * * *` UTC). No email or push notifications: George reads updates in the session. The old fresh-session routine trig_01VjhzqZFLBuAb3E5cQaRP3a was deleted the same evening.
 
-Settings
-- Schedule: `0 13 * * 1-5` (UTC), i.e. 09:00 Philadelphia on weekdays. Hourly is the minimum; daily is enough while replies trickle in.
-- Fires: a fresh session each time, in the "George Claude Environment" (env_01Nw9WnfCtECqZjs2B8DNixX) with the George-Jeffreys repository.
-- Notifications: push and email on runs with something to report.
-- Connectors to grant: Gmail (or Outlook), once connected in claude.ai. Without it the routine can only research and update files; it cannot read replies or send.
+## Standing facts
 
-Prompt (stored verbatim on the routine; edit via update_trigger or the Routines UI)
+- George Jeffreys, former PADI MSDT, Wharton MBA Class of 2027, Gmail emailgeorgej@gmail.com (sending account; verify with get_thread 1a0ca55da573b85a before any send, and send nothing if it is not found).
+- Three trips, all CONFIRMED GO with equal priority (23 Sep): Thanksgiving, Puerto Rico, Wed 25 – Sun 29 Nov 2026, 8–12 certified divers; Cozumel, Sun 13 – Sat 19 Dec 2026, 20–40 people, half beginners, Open Water Mon–Wed, group boats Thu–Fri, fly Sat; Egypt, Marsa Shagra or nearby, Sat 2 – Fri 8 Jan 2027, 15–25 people, half beginners, five nights on the ground Sun 3 – Fri 8 (contacts were emailed as 3–9 Jan; give the new end date in the next message in each Egypt thread).
+- Milestone: by Tue 29 Sep, each trip viable: one dive centre for all divers plus one lodging, both replied with capacity and indicative prices.
+- Standing decisions: one centre per trip for all divers; participants book their own flights; paper quotes first, no calls unless George asks; never email MBA Student Life or anyone at Wharton or Penn; never raise weather or norther risk with operators; off-afternoon activities and add-ons are planned by us (research and price them ourselves), not asked of operators.
+- Never book, pay, sign, create accounts, fill in operators' spreadsheets or submit forms; never commit George to a deposit, headcount, date or price. Money, commitments, choices between options, date changes and anything from Wharton or Penn go to George with a recommendation and a ready Gmail draft in the thread.
+- Figures are flagged ADVERTISED (page or snippet), QUOTE NEEDED, INFERRED or QUOTED with source and date. UK English, casual, brief emails signed George Jeffreys, Wharton Outdoors Club, MBA Class of 2027.
+- Safety: OW 18 m, AOW 30 m, Deep 40 m; 18 h before flying; no liveaboards; label baited shark dives.
 
----
-See the routine in claude.ai Routines for the live text; a copy of the 22 Sep night version is in TRACKER.md's header rules and the Week plan. Key behaviours: test fetch each run; log replies, save them under <trip>/replies/, update pricing inputs, and create a Gmail draft reply for George instead of replying; chase once after 2 business days and send the reserve wave the same day; never email Wharton or Penn; keep Drive current; report push status and distance from viable against Tue 29 Sep.
----
+## Each run
+
+1. `git pull` on branch `claude/wharton-outdoors-scuba-dec-5ley3f`. Read `december-plan/TRACKER.md` (live pipeline, Week plan, Reserve contacts, Needs George). The programmes are `cozumel/PROGRAMME.md`, `january/PROGRAMME.md`, `thanksgiving/plan.md`; briefing template `shared/briefing_template.md`.
+2. Account check (above). Then search Gmail for replies in every tracked thread and from any listed contact's domain. For each reply: set the row to replied or quoted; save the substance to `<trip>/replies/<contact>-<date>.md`; put quoted prices into the Inputs section of `pricing/build_pricing.py` (flag QUOTED), rebuild (`python3 pricing/build_pricing.py`), recalc (`python3 /mnt/skills/public/xlsx/scripts/recalc.py pricing/december_pricing.xlsx`), regenerate `pricing/summary.csv` from the Summary sheet, add `pricing/sources.csv` rows. Reply in-thread yourself on facts and quote-chasing (capacity for the whole group, prices at the three group sizes, leader place, deposit and refund ladder, hold-until date); escalate money, commitments, choices, date changes and Wharton/Penn mail to George as a draft plus a Needs George line.
+3. Chase rows with status sent after two business days (one chaser, then status chased). The day a trip's first wave goes to chased, send the first-contact email to that trip's reserve contacts with public addresses (Cozumel with the new dates, Egypt with Sun 3 – Fri 8). Bounce: find another public address, resend once. If a trip is still silent after the reserve wave is chased, propose further candidates to George rather than emailing beyond the list.
+4. Research up to three gaps per run, highest value first: Marsa Shagra winter 26-27 price list and General Notes; Dive Paradise 2026 rates PDF; Casa del Mar rates for 13–19 Dec; Cozumel off-afternoon costs (jeep hire, Punta Sur and San Gervasio entry, El Cielo boat); Marsa Alam desert excursion operators and prices; Island Style Charters email; AA Saturday PHL–CZM nonstop for 19 Dec; Euroski 2027 dates. Update the CSVs, PROGRAMME files, workbook inputs and sources.csv.
+5. Viability: when a centre has confirmed capacity for the whole group on the dates with indicative prices and a lodging has replied, mark the trip viable and put the booking step (deposit amount, payee, deadline, refund terms) under Needs George with a ready draft.
+6. Drive: refresh TRACKER.md, DECISION_MEMO.md and the summary sheet in folder 17fUirPHQ088oQJiB6dRJZFqk7hFAWATm (upload new, trash old).
+7. Update TRACKER.md (last_action, next_action, Week plan, Needs George, Log), commit, push (`git pull --rebase` once if rejected).
+8. Report in the session: if nothing arrived, nothing was sent and nothing needs George, the whole message is one line, "No change." Otherwise lead with Needs George items (recommendation and draft link), then one line per trip on distance from viable, then what was sent, chased or changed in the numbers.

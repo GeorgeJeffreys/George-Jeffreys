@@ -1,4 +1,4 @@
-# Egypt, Sat 2 – Sat 9 Jan 2027: base and diving plan (workstream W3)
+# Egypt, Sat 2 – Fri 8 Jan 2027 (shortened by a day on 23 Sep; see PROGRAMME.md): base and diving plan (workstream W3)
 
 Rounded day-by-day programme (courses, diving, add-ons, off afternoon, evening briefings): `january/PROGRAMME.md` (23 Sep).
 
