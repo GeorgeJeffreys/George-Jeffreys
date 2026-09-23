@@ -41,7 +41,7 @@ Reserve contacts, Cozumel (not needed unless the four quoted centres fall throug
 | Casa del Mar Cozumel Hotel & Dive Resort | hotel, LEADING (200 yards from Sand Dollar, which recommends it; triples allowed) | reservations@casadelmarcozumel.com | approved | sent | 2026-09-23 date-change note sent in thread 1a0cb3a2f3032070 (doubles as first nudge) | chase 2026-09-25 if still silent; also check booking-site rates for Sun 13 – Sat 19 | now a first-wave hotel |
 | Hotel Cozumel & Resort (direct) | hotel (180 rooms, pool) | unknown (cozumelhotel.com.mx/es/contact-us.php) | approved-after-2026-09-24 | draft | 2026-09-22 | routine to find address; else George submits the form | also quoted via Dive Paradise |
 
-## Thanksgiving, Wed 25 – Sun 29 Nov 2026, 8–12 certified divers (CONFIRMED GO 23 Sep; equal priority)
+## Thanksgiving, Wed 25 – Sun 29 Nov 2026, 8–12 certified divers (CONFIRMED GO 23 Sep; equal priority). Budget sketched 23 Sep on the club rule: fee USD 1,350 (pricing/thanksgiving_group_budget.xlsx), guidance without flights 1,570; programme thanksgiving/PROGRAMME.md; flyer prompt thanksgiving/FLYER_PROMPT.md. Cars inside the group budget (George). Fee firms up once Paradise confirms the tax rate and afternoon/night dive prices and the hotel quotes.
 
 | contact | role | email | send | status | last_action | next_action | notes |
 |---|---|---|---|---|---|---|---|

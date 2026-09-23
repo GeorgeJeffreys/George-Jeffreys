@@ -18,6 +18,9 @@ George's top choice is Blue Note + Hotel Plaza. Drive Blue Note to bookable. Que
 ## Standing documents
 Decisions: shared/DECISIONS_LOG.md (append every new decision George makes, dated). Template for building any trip: shared/TRIP_TEMPLATE.md. Apply the pricing rule and the budget builder to Thanksgiving and Egypt as soon as each has a quoted centre and hotel: copy pricing/build_cozumel_budget.py, change the Inputs, produce a Fee/Group/Payments workbook and a facts-only flyer prompt for each, and put the posted fee under Needs George.
 
+## Thanksgiving status (23 Sep evening)
+Puerto Rico confirmed; Paradise Scuba is the centre. Open with Kiko: tax rate on the USD 145 (IVU 11.5% assumed), afternoon third-dive and night-dive prices, weather refund terms, whether they run on Thanksgiving Day, invoicing. Hotel: chase Parador Villa Parguera 24 Sep with the group shape (5–6 rooms, 2 sharing, 4 nights, breakfast?) and send Parguera Plaza the first-contact email the same day. Cars: research three mid-size hire cars from SJU for Wed 25 – Sun 29 Nov (band only, no booking). Rebuild pricing/build_thanksgiving_budget.py when quotes land and keep thanksgiving/FLYER_PROMPT.md's numbers matching.
+
 ## Each run
 
 1. `git pull` on branch `claude/wharton-outdoors-scuba-dec-5ley3f`. Read `december-plan/TRACKER.md` (live pipeline, Week plan, Reserve contacts, Needs George). The programmes are `cozumel/PROGRAMME.md`, `january/PROGRAMME.md`, `thanksgiving/plan.md`; briefing template `shared/briefing_template.md`.

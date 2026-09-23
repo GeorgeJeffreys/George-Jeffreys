@@ -31,6 +31,8 @@
 - 23 Sep: posted Cozumel fees USD 1,700 beginner / 1,600 certified (workbook rounds the computed 1,680 / 1,555 up to the nearest 100). Deposit USD 400 by Sat 10 Oct, balance Fri 6 Nov, capacity 40.
 - Standing: nothing is booked, paid or signed by the agent; money through CampusGroups or the operator's own link, never personal Venmo or Zelle; the leader's comped place, cross-subsidy and commission are disclosed on the sign-up page.
 
+- 23 Sep: Puerto Rico confirmed as the Thanksgiving spot (nonstop PHL–SJU, no passport, warm water, one-boat operator with leader free, bio bay). Hire cars sit inside the group budget. Thanksgiving fee sketched at USD 1,350; bio bay and night dive are add-ons.
+
 ## Process
 - 22 Sep: agent runs the pipeline hands-off, replies to operators itself on facts and quotes, escalates only money, commitments, choices, date changes and Wharton/Penn mail; chases after two business days; expands to reserve contacts the same day.
 - 23 Sep: routine four times a day, in-session, no email or push; George reads updates here. Target: three viable trips by Tue 29 Sep.
