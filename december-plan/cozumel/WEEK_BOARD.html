@@ -1,0 +1,256 @@
+<title>Cozumel Week Board</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#F5F8FA; --surface:#FFFFFF; --ink:#12212E; --muted:#5B6B78; --line:#D6DFE6;
+  --beg:#1B9AAA; --beg-soft:#E0F4F6; --cert:#1F4E79; --cert-soft:#E3ECF5; --adv:#5B3F9E; --adv-soft:#ECE6F7;
+  --all:#B8891B; --all-soft:#FBF3DC; --warn:#C0392B; --ok:#2E7D5B;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E161D; --surface:#16212A; --ink:#E8EEF2; --muted:#9FB0BC; --line:#2A3946;
+    --beg:#4CC5D3; --beg-soft:#0F343A; --cert:#7FA9D6; --cert-soft:#1B2C40; --adv:#B39DE6; --adv-soft:#2A2340;
+    --all:#E1B84D; --all-soft:#3A2F12; --warn:#F07B6D; --ok:#5CC08F; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E161D; --surface:#16212A; --ink:#E8EEF2; --muted:#9FB0BC; --line:#2A3946;
+  --beg:#4CC5D3; --beg-soft:#0F343A; --cert:#7FA9D6; --cert-soft:#1B2C40; --adv:#B39DE6; --adv-soft:#2A2340;
+  --all:#E1B84D; --all-soft:#3A2F12; --warn:#F07B6D; --ok:#5CC08F; color-scheme:dark;
+}
+body{background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:15px;line-height:1.5;padding-block:0 48px;padding-inline:16px;max-width:1180px;margin:0 auto}
+h1,h2,h3{font-family:"Sora",system-ui,sans-serif;text-wrap:balance;margin:0}
+h1{font-size:clamp(26px,4vw,38px);font-weight:700;letter-spacing:-.01em}
+h2{font-size:20px;font-weight:600;margin-top:40px;margin-bottom:12px}
+h3{font-size:15px;font-weight:600}
+p{margin:0 0 10px;max-width:72ch}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+header{padding-block:28px 8px;border-bottom:1px solid var(--line);margin-bottom:8px}
+header .facts{display:flex;flex-wrap:wrap;gap:8px 20px;font-family:var(--mono);font-size:13px;color:var(--muted);margin-top:10px}
+.legend{display:flex;flex-wrap:wrap;gap:10px 18px;margin:14px 0 6px;font-size:13px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+.d-beg{background:var(--beg)}.d-cert{background:var(--cert)}.d-adv{background:var(--adv)}.d-all{background:var(--all)}
+
+.week{overflow-x:auto;padding-bottom:6px}
+table.grid{border-collapse:separate;border-spacing:0;min-width:1040px;width:100%;font-size:13px}
+table.grid th,table.grid td{vertical-align:top;padding:8px 9px;border-bottom:1px solid var(--line);border-right:1px solid var(--line)}
+table.grid th{font-family:"Sora",sans-serif;font-weight:600;font-size:13px;text-align:left;background:var(--surface)}
+table.grid th.day{border-top:1px solid var(--line)}
+table.grid th.day small{display:block;font-family:var(--mono);font-weight:400;color:var(--muted);font-size:11px;margin-top:2px}
+table.grid td.track{font-family:"Sora",sans-serif;font-weight:600;font-size:12px;white-space:nowrap;background:var(--surface);width:88px}
+table.grid tr.beg td.track{color:var(--beg)} table.grid tr.cert td.track{color:var(--cert)} table.grid tr.adv td.track{color:var(--adv)} table.grid tr.all td.track{color:var(--all)}
+table.grid tr.beg td:not(.track){background:var(--beg-soft)} table.grid tr.cert td:not(.track){background:var(--cert-soft)} table.grid tr.adv td:not(.track){background:var(--adv-soft)} table.grid tr.all td:not(.track){background:var(--all-soft)}
+table.grid td b{font-weight:600}
+table.grid td .t{font-family:var(--mono);font-size:11px;color:var(--muted);display:block;margin-bottom:2px}
+.pill{display:inline-block;font-family:var(--mono);font-size:11px;padding:1px 7px;border-radius:999px;border:1px solid var(--line);color:var(--muted);margin-top:4px}
+.pill.warn{color:var(--warn);border-color:var(--warn)}
+.pill.ok{color:var(--ok);border-color:var(--ok)}
+
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+.card h3{margin-bottom:8px}
+.card ul{margin:0;padding-left:18px}
+.card li{margin-bottom:6px}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.note{font-size:13px;color:var(--muted)}
+
+.shops{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.shop{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:10px}
+.shop .head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.shop .verdict{font-family:var(--mono);font-size:12px;padding:2px 8px;border-radius:6px;border:1px solid var(--line)}
+.shop .verdict.lead{border-color:var(--ok);color:var(--ok)} .shop .verdict.hold{border-color:var(--all);color:var(--all)} .shop .verdict.drop{border-color:var(--muted)}
+.shop dl{display:grid;grid-template-columns:96px 1fr;gap:4px 10px;margin:0;font-size:13px}
+.shop dt{color:var(--muted);font-family:var(--mono);font-size:11px;letter-spacing:.04em;text-transform:uppercase;padding-top:2px}
+.shop dd{margin:0}
+.shop .email{border-top:1px dashed var(--line);padding-top:8px;font-size:13px}
+.shop .email b{font-family:"Sora",sans-serif;font-weight:600;font-size:12px;color:var(--muted);letter-spacing:.04em;text-transform:uppercase;display:block;margin-bottom:3px}
+
+.decide{border-left:4px solid var(--all);padding:12px 16px;background:var(--surface);border-radius:0 10px 10px 0;margin-top:14px}
+.decide ol{margin:6px 0 0;padding-left:20px}
+.brief{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;counter-reset:b}
+.brief div{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:13px}
+.brief div::before{counter-increment:b;content:counter(b);font-family:var(--mono);color:var(--muted);margin-right:8px}
+@media (max-width:640px){ .shop dl{grid-template-columns:1fr} .shop dt{padding-top:6px} }
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<header>
+  <div class="eyebrow">Wharton Outdoors Club · Cozumel · briefing for George, 23 Sep 2026</div>
+  <h1>Cozumel Week Board</h1>
+  <div class="facts">
+    <span>Sun 13 – Sat 19 Dec 2026 · 6 nights</span>
+    <span>20–40 people · about half Open Water students</span>
+    <span>One centre for everyone · you lead every diver</span>
+    <span>Last dive by 13:00 Fri · flights Sat after 07:00</span>
+  </div>
+  <div class="legend">
+    <span><i class="dot d-beg"></i>Beginners: PADI Open Water, eLearning done at home, no pool</span>
+    <span><i class="dot d-cert"></i>Certified: five boat days</span>
+    <span><i class="dot d-adv"></i>Advanced: AOW, nitrox, deep walls</span>
+    <span><i class="dot d-all"></i>Everyone</span>
+  </div>
+</header>
+
+<h2>The week, by track</h2>
+<p class="note">Operator-neutral shape. Sand Dollar's actual boat slots for our week are Mon am, Tue am, Wed pm, Thu am, Fri pm, so with them the Friday boat moves to Thursday and Friday becomes an early shore dive (see options). Blue Note runs the course Mon confined, Tue dives 1–2, Wed dives 3–4 from the boat. Depth rules: OW 18 m, AOW 30 m, Deep 40 m.</p>
+<div class="week">
+<table class="grid">
+  <thead><tr>
+    <th></th>
+    <th class="day">Sun 13<small>arrive</small></th>
+    <th class="day">Mon 14<small>course day 1</small></th>
+    <th class="day">Tue 15<small>course day 2</small></th>
+    <th class="day">Wed 16<small>certification · off afternoon</small></th>
+    <th class="day">Thu 17<small>group boat day 1</small></th>
+    <th class="day">Fri 18<small>group boat day 2 · last dive 13:00</small></th>
+    <th class="day">Sat 19<small>fly</small></th>
+  </tr></thead>
+  <tbody>
+  <tr class="beg"><td class="track">Beginners</td>
+    <td><span class="t">pm</span>Check in, medical and liability forms, eLearning record check, gear fitting at the shop</td>
+    <td><span class="t">08:30 · 13:00 second cohort</span>Confined water 1–3 and OW dive 1 from shore (≤12 m)</td>
+    <td><span class="t">08:30 / 13:00</span>Confined 4–5 and OW dives 2–3 from shore</td>
+    <td><span class="t">am</span>OW dive 4, exam, swim test. <b>Certified by lunch.</b><span class="pill ok">Open Water card</span></td>
+    <td><span class="t">08:30</span>First boat dives with the instructors: Paradise Reef, Colombia Shallows, Yucab (≤18 m)</td>
+    <td><span class="t">08:30 · back 13:00</span>Two-tank boat on ≤18 m sites</td>
+    <td>Fly home</td>
+  </tr>
+  <tr class="cert"><td class="track">Certified</td>
+    <td><span class="t">late pm</span>Same paperwork, plus optional tune-up shore dive on the house reef (USD 5) for anyone rusty</td>
+    <td><span class="t">08:30</span>Two-tank boat: Palancar Gardens, Paso del Cedral (easy drift)</td>
+    <td><span class="t">08:30</span>Two-tank boat: Santa Rosa Wall, Yucab</td>
+    <td><span class="t">08:30 (Sand Dollar: 13:00)</span>Two-tank boat: Columbia, Palancar Caves</td>
+    <td><span class="t">08:30</span>Two-tank boat: Palancar Bricks, Cedral. Optional 1-tank afternoon dive</td>
+    <td><span class="t">08:30 · back 13:00</span>Two-tank boat. Nothing after 13:00</td>
+    <td>Fly home</td>
+  </tr>
+  <tr class="adv"><td class="track">Advanced</td>
+    <td><span class="t">pm</span>AOW knowledge reviews handed in (AOW eLearning done at home)</td>
+    <td><span class="t">am boat · pm shore</span>Boat with certified, then AOW Peak Performance Buoyancy and Navigation from shore</td>
+    <td><span class="t">08:30</span>AOW on the boat: Deep (30 m, Santa Rosa) and Drift</td>
+    <td><span class="t">08:30</span>AOW: C-53 wreck (24 m) or elective. <b>AOW complete by Thu night.</b></td>
+    <td><span class="t">08:30 · 18:00</span>Punta Sur / Devil's Throat (≈40 m, Deep sign-off) or Santa Rosa on nitrox. Night dive 18:00 (AOW fifth dive)</td>
+    <td><span class="t">08:30 · back 13:00</span>Same boat, ≤30 m. No bull-shark day on the last dive day</td>
+    <td>Fly home</td>
+  </tr>
+  <tr class="all"><td class="track">Everyone</td>
+    <td><span class="t">18:30</span>Welcome briefing: rules, groups, buddy pairs, Monday times. Group dinner downtown</td>
+    <td><span class="t">18:30</span>Evening briefing</td>
+    <td><span class="t">18:30</span>Evening briefing</td>
+    <td><span class="t">13:30 · 19:30</span><b>Off afternoon</b>: island loop or El Cielo. Certification dinner and briefing</td>
+    <td><span class="t">18:30</span>Short briefing before the night dive</td>
+    <td><span class="t">pm</span>Beach, town, packing. Farewell dinner. Departure briefing and the no-fly rule</td>
+    <td>George: Cancún to London direct</td>
+  </tr>
+  </tbody>
+</table>
+</div>
+
+<h2>Off afternoon, add-ons, options</h2>
+<div class="cols">
+  <div class="card">
+    <h3>Wed 16, from 13:30: the off afternoon (we organise it)</h3>
+    <ul>
+      <li><b>Island loop</b> by rented jeeps and scooters: San Gervasio Maya ruins, Punta Sur eco park (lighthouse, crocodile lagoon, Celarain beach), late lunch at an east-side beach club (Chen Río or Punta Morena). Best all-round pick, not weather-dependent. Jeep hire about USD 60–90 a day, park entries USD 10–20 each (advertised, to be priced).</li>
+      <li><b>El Cielo sandbar</b> by boat: starfish, rays, waist-deep water. Blue Note will run it on their own boat; good for partners and anyone not diving that afternoon. About USD 50–80 a head (advertised).</li>
+      <li><b>Town afternoon</b> as the wet-weather fallback: Kaokao chocolate workshop, tequila tasting, the seafront and market.</li>
+    </ul>
+    <p class="note">Nothing at depth the day before two boat days, and an alcohol-light evening.</p>
+  </div>
+  <div class="card">
+    <h3>Add-ons for certified divers (opt-in, priced separately)</h3>
+    <ul>
+      <li><b>AOW</b> across Mon–Thu: Blue Note free with eLearning; Sand Dollar USD 380 with eLearning done; Aldora USD 749 all-in.</li>
+      <li><b>Nitrox</b>: Blue Note course free with eLearning; fills USD 13 a tank at Sand Dollar (about 20 tanks, 6–8 divers set aside), USD 11 at Aldora, MXN 230–260 at Dive Paradise.</li>
+      <li><b>Night dive</b> Thu: USD 60 shore or 85 boat (Sand Dollar); 74–85 (Aldora); 93 (Dive Paradise).</li>
+      <li><b>Afternoon one-tank dives</b> Mon–Thu for the keen: USD 76 at Dive Paradise, others to be priced.</li>
+      <li><b>Deep or Drift specialty</b> for a few, to be priced.</li>
+      <li><b>Bull-shark day</b> at Playa del Carmen (baited, off-island, AOW or 20+ dives, about USD 260): only as a Thursday option for a handful who accept missing group day 1. Not in the core plan.</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>Options and contingencies</h3>
+    <ul>
+      <li><b>Sand Dollar's Friday boat is 13:00</b>, too late for Saturday flyers. Asked for a morning slot. If not: Thu 17 is the last boat day, Fri 18 an early guided shore dive, and the off afternoon moves to Friday, with the island loop as the farewell.</li>
+      <li><b>Port closure on a training day</b>: Sand Dollar's shore site keeps confined water and the shallow dives going in the lee; Wed closure pushes dive 4 to Thu morning and the new divers join the boats Fri. Two closed days early in the week mean a PADI referral to finish at home.</li>
+      <li><b>More than 16 students</b>: Sand Dollar runs a second cohort at 13:00; Aldora puts five instructors on 20 at 4:1; Blue Note and Dive Paradise still to answer.</li>
+      <li><b>Hotel</b>: Casa del Mar (200 yards from Sand Dollar, being priced for us), Hotel Plaza downtown (Blue Note's contracted USD 70–88 a room with breakfast), or Cozumel Hotel &amp; Resort all-inclusive (Dive Paradise, USD 522 a head for six nights, book by 30 Sep).</li>
+    </ul>
+  </div>
+</div>
+
+<h2>Evening briefing, every night at 18:30, 15 minutes</h2>
+<div class="brief">
+  <div>Today in one minute: who certified, incidents, kit issues</div>
+  <div>Tomorrow by track: meeting point, time, boat or shore, sites, depth, who leads</div>
+  <div>Rules of the day: depth limits, buddies, hydration, no alcohol before diving</div>
+  <div>Weather and port call, and what changes if the port closes</div>
+  <div>Money and admin: park fee cash, forms, eLearning records</div>
+  <div>Extras and the dinner plan; no-fly reminder on the last dive day; questions</div>
+</div>
+<p class="note" style="margin-top:8px">Same shape every night, then posted to the trip WhatsApp with times in bold. Template in the repo at shared/briefing_template.md.</p>
+
+<h2>The four shops, qualitatively</h2>
+<p class="note">Reputation lines are general standing from public listings and diver forums; live review scores could not be fetched this week, so treat them as background, not verification. Email notes are from the 22–23 Sep threads.</p>
+<div class="shops">
+
+  <div class="shop">
+    <div class="head"><h3>Sand Dollar Sports</h3><span class="verdict lead">keep · beginner leader</span></div>
+    <dl>
+      <dt>Where</dt><dd>Costera Sur km 3.2, south hotel zone, own beach club and coral-restoration shore site. Casa del Mar is 200 yards away; downtown means taxis for students.</dd>
+      <dt>Diving</dt><dd>Shore training in the lee, then boats to the southern reefs. One 28-diver boat plus crew, 6:1 on boats, 4:1 on night shore dives. Nitrox limited to about 20 tanks.</dd>
+      <dt>Reputation</dt><dd>Large multi-sport operator, PADI 5 Star, Green Fins certified, runs high-volume courses routinely. Known for the restoration site and for keeping training going when the port closes.</dd>
+      <dt>Numbers</dt><dd class="num">OW 350 all-in incl. DAN training cover · 5 boat days 510 + park 14/day · AOW 380 · deposit 500 then 10% · refund to 48 h</dd>
+      <dt>Watch</dt><dd>Friday 13:00 boat. Warned that further date changes would leave no service.</dd>
+    </dl>
+    <div class="email"><b>Over email</b>Angelica: fastest and most concrete of the four. Three replies in a day, all numbers, boat days by name, offered to walk over to Casa del Mar and negotiate without revealing our dates. Blunt in a useful way.</div>
+  </div>
+
+  <div class="shop">
+    <div class="head"><h3>Blue Note Scuba</h3><span class="verdict lead">keep · price leader</span></div>
+    <dl>
+      <dt>Where</dt><dd>Downtown San Miguel, boats from Marina Fonatur. Course confined water at Tikila beach bar, checkout dives from the boat. Hotel Plaza is a block from the pier.</dd>
+      <dt>Diving</dt><dd>Splits a big group across 2–4 boats by level, 6 per guide. Runs a school group every spring break, so the format is familiar to them. El Cielo on their own boat.</dd>
+      <dt>Reputation</dt><dd>Small owner-run PADI 5 Star ECO Center with a loyal following on diver forums; the clearest published prices on the island. Fleet depth for 40 people is the open question.</dd>
+      <dt>Numbers</dt><dd class="num">OW 400 incl. gear · +2 boat days 240 · 5 boat days 600 less 10% = 540 · rental 30/day · 1 free per 5 paid · AOW and nitrox courses free · deposit 25%, refund to 7 days</dd>
+      <dt>Watch</dt><dd>Instructor count for 10–20 students and whether park fees are extra. Both asked.</dd>
+    </dl>
+    <div class="email"><b>Over email</b>Doug: short, generous, answers exactly what is asked, no upsell. Volunteered the comps, the commission and the contracted hotel rate. Easy to deal with.</div>
+  </div>
+
+  <div class="shop">
+    <div class="head"><h3>Dive Paradise</h3><span class="verdict hold">hold · one-roof fallback</span></div>
+    <dl>
+      <dt>Where</dt><dd>Cozumel Hotel &amp; Resort (Wyndham), Costera Sur km 1.7, 180 rooms, pool, private pier. The only property that sleeps 40 under one roof.</dd>
+      <dt>Diving</dt><dd>Biggest fleet on the island, two 44-ft boats seating 16, dedicated boat at 16+ divers, 1:8 by day. Welcome shore tank on arrival. Aluminium tanks only.</dd>
+      <dt>Reputation</dt><dd>Long-established, large, resort-style operation with a US reservations office; consistent rather than intimate. The all-inclusive is sociable and easy for beginners.</dd>
+      <dt>Numbers</dt><dd class="num">AI lodging 522 pp double for 6 nights incl. all meals and domestic drinks · 5 boat days 590 + park MXN 225/day · comps 1 per 11 on rooms and diving · 10% commission · deposit 500 · rate expires 30 Sep</dd>
+      <dt>Watch</dt><dd>Course prices still to come from the island team. 30 Sep booking window, extension asked.</dd>
+    </dl>
+    <div class="email"><b>Over email</b>Lisa, reservations office: warm, thorough, agent-style with attachments and fine print. Slowest to first reply (a day), then very complete. Expects the group leader to collect payments.</div>
+  </div>
+
+  <div class="shop">
+    <div class="head"><h3>Aldora Divers</h3><span class="verdict drop">drop unless others fail</span></div>
+    <dl>
+      <dt>Where</dt><dd>Calle 5 Sur, downtown, 100 m from Casa Mexicana; picks up at south hotel-zone piers too.</dd>
+      <dt>Diving</dt><dd>Fast boats capped at 6 divers, steel 120 cf tanks, 70-minute minimum dives, the walls done properly. 4:1 on courses, five instructors for 20 students.</dd>
+      <dt>Reputation</dt><dd>The serious divers' shop: PADI 5 Star IDC, strong among experienced US divers for long deep dives. Least beginner-oriented of the four.</dd>
+      <dt>Numbers</dt><dd class="num">OW 389 with own eLearning · 2-tank 130 incl. tax and park (package rate) · AOW 749 · night 74 · gear 20/day · 1 comp at 10+ · USD 100 per person to hold</dd>
+      <dt>Watch</dt><dd>Dearest by about USD 280 a head. Will not pencil without deposits and is already pushing to book.</dd>
+    </dl>
+    <div class="email"><b>Over email</b>Amanda, then an unnamed front desk: polite but templated, long price lists, a shared spreadsheet, and "let us know how you would like to proceed" within a day. Sales-led.</div>
+  </div>
+</div>
+
+<div class="decide">
+  <b>Decision by Fri 25 Sep.</b> Choose between Blue Note and Sand Dollar once these land:
+  <ol>
+    <li>Blue Note: instructors for 10–20 students, park fees in or out, the minimum to hold.</li>
+    <li>Sand Dollar: a Friday morning boat, rental rate, the Casa del Mar price.</li>
+    <li>Dive Paradise: whether the USD 522 rate survives past 30 Sep, and course prices. If it does not, decide Monday whether to lock a small block.</li>
+  </ol>
+  <p class="note" style="margin-top:8px">Per head for diving, room and meals, Blue Note and Sand Dollar are level at about USD 1,100; Blue Note ends roughly USD 70 cheaper for certified divers after comps. Full table in cozumel/OPERATOR_COMPARISON.md.</p>
+</div>
