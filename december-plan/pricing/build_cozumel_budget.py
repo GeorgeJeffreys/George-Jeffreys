@@ -97,7 +97,7 @@ rows = [
  ("Leader's costs shared (George's flight, half-room, DAN, rental, odd-room risk)", f"={leader_total}/{paying}", f"={leader_total}/{paying}"),
  ("Subtotal", "=SUM(B3:B10)", "=SUM(C3:C10)"),
  ("Contingency", f"=ROUND(B11*{R['contingency']},0)", f"=ROUND(C11*{R['contingency']},0)"),
- ("TRIP FEE (rounded up to the nearest 5)", "=CEILING(B11+B12,5)", "=CEILING(C11+C12,5)"),
+ ("TRIP FEE (rounded up to the nearest 100, as posted)", "=CEILING(B11+B12,100)", "=CEILING(C11+C12,100)"),
  ("", None, None),
  ("Optional add-ons at sign-up, charged at cost", None, None),
  ("AOW: course free with eLearning; eLearning", "n/a", f"={R['elearn_aow']}"),
