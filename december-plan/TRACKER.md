@@ -120,6 +120,7 @@ Reserve contacts, Egypt (send on 2026-09-24 if the first wave is silent):
 - Dive Paradise's all-inclusive rate (USD 522 pp) must be booked by 30 Sep. Asked Lisa for an extension; if she refuses, you decide by Mon 28 whether to lock a small block or let it go.
 - Aldora asked how we want to proceed and wants USD 100 per person to hold; told them October. Nothing to sign.
 - Desecheo (Thanksgiving) is now optional: Taino Divers has no boat and the referral, Island Style Charters, takes 4 divers per charter. Paradise Scuba's three Wall mornings still make the trip; say if you want Desecheo pursued by phone.
+- Budget caveats before the price is posted (23 Sep night): the fee assumes Blue Note's prices include tax and exclude the park fee, the rental includes a computer, the Hotel Plaza rate is per room and tax-inclusive, and the hotel has a normal group cancellation policy. Card or platform fees (about 3% of USD 25–55k) are not in the fee. Doug is being asked all of it in one email; hold the flyer price until he answers.
 - Sidemount (parked, George interested): rent a rig for the week from Cozumel Dive School (XDeep rigs held for their course) and have Blue Note put two AL80s on the boat for his afternoon dives; ask both at booking time, not before.
 - Syllabi check (low priority): the three full-semester syllabi for any final dated 14–19 Dec; nothing in email suggests one.
 
