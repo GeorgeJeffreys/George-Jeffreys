@@ -1,5 +1,7 @@
 # Cozumel diving plan — Wharton Outdoors Club, 8–15 Dec 2026
 
+Rounded day-by-day programme (courses, diving, add-ons, off afternoon, evening briefings): `cozumel/PROGRAMME.md` (23 Sep).
+
 Workstream W1. Researched 21 Sep 2026 by web search only (operator sites were unreachable through the proxy, so every figure below is from a search-result snippet and is flagged ADVERTISED (snippet), QUOTE NEEDED or INFERRED). Prices USD with MXN alongside where the operator lists both; operators use roughly 17.5–18.3 MXN/USD.
 
 ## Conclusions

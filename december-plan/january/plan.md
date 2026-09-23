@@ -1,5 +1,7 @@
 # Egypt, Sat 2 – Sat 9 Jan 2027: base and diving plan (workstream W3)
 
+Rounded day-by-day programme (courses, diving, add-ons, off afternoon, evening briefings): `january/PROGRAMME.md` (23 Sep).
+
 Access date for every fact: 21 Sep 2026. Web fetch and curl are blocked, and the session's search budget ran out mid-task, so every figure rests on search-result snippets or on the brief's leads. Flags: ADVERTISED (snippet) = seen in a snippet of the named primary page; QUOTE NEEDED = not verifiable, ask the operator; INFERRED = my estimate. Currency: USD with EUR alongside at the placeholder USD 1 = EUR 0.92 (EUR 1 = USD 1.087); the pricing workbook restates the rate.
 
 ## Conclusions
