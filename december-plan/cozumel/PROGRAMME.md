@@ -61,9 +61,11 @@ Cozumel is almost entirely single-tank recreational, but sidemount is doable for
 - South hotel zone km 3–4 (Casa del Mar, being priced; Villablanca): 200 yards from Sand Dollar's shore site, pool and beach-club access, quieter nights; taxis or a group shuttle into town for dinner (10 minutes). Best if Sand Dollar is the centre, and the 8:30 walk to the shop matters with 20 students.
 - Cozumel Hotel & Resort all-inclusive at km 1.7 (Dive Paradise's base): everyone under one roof with pool, pier, meals and domestic drinks included, which keeps a 30–40 person group together and takes the food logistics away; 20 minutes' walk or a 5-minute taxi to town, so nights out still happen. Downside: resort bubble, the 30 Sep rate deadline, and diving tied to Dive Paradise.
 
-## George's week: leading it and still enjoying it (23 Sep)
+## George's week: the leader's dividend (23 Sep)
 
-- Deputies from the group before departure: a certified-group captain (any Rescue or Divemaster), a beginner-cohort rep, and a social chair who owns dinners, the off afternoon and the WhatsApp. A treasurer collects money through CampusGroups so George never chases payments on the island.
-- The shop's divemasters run the beginner boats Thu and Fri; George dives with the advanced boat and checks on the students at the surface interval. The 18:30 briefing stays his; the social chair takes the evening from there.
-- His own diving: the afternoon third dives with a small crew of the keen (nitrox, longer profiles); Devil's Throat or Santa Rosa on nitrox Thu with the night dive that evening; a sidemount session on the Wed off afternoon if a rental rig can be arranged.
-- Sidemount with a full rental: not within Blue Note or Sand Dollar (they can add a second tank, not a harness and regulators). Cozumel Dive School's PADI Sidemount course includes an XDeep rig, computer and DSMB, but it is a three-day course that clashes with Mon–Wed; the realistic ask, at booking time only, is a one-off rig rental plus a shore session on the Wednesday afternoon.
+George runs the trip on the ground and wants to. The transactional upgrades, disclosed on the sign-up page:
+- Leader pot by centre at 20 certified / 30 people: Blue Note 10% commission (USD 1,200) plus 1 free package per 5 paid (about 2,160); Dive Paradise 10% commission on lodging and diving (about 3,300) plus 1 free place per 11 paid (about 2,200); Aldora 1 free dive place at 10+; Sand Dollar 1 free diver, no commission. Spend on George's flights, a single room, his own dives and gear, then a farewell-dinner kitty.
+- Sidemount all week on the afternoon dives: rent a rig for the week from Cozumel Dive School (XDeep rigs held for their course; George is already certified, so no course) and have the group's centre put two AL80s on the boat each afternoon. Ask both at booking time. Mornings backmount while leading.
+- Private afternoon boat: Blue Note private two-tank charter USD 1,000 for up to 10 (ADVERTISED); a leader's boat with 8 of the keen at USD 125 each; private night charter USD 800.
+- Nitrox on every dive; Devil's Throat and the night dive Thursday; comped rental for the leader (ask).
+- Single room (Hotel Plaza USD 70–88 a night; Dive Paradise USD 840 for the week); Wednesday off afternoon his; Friday afternoon at a beach club; Saturday Cancún to London.
