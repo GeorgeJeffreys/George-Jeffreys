@@ -1,6 +1,6 @@
 # Pipeline tracker — Wharton Outdoors Club dive trips
 
-Owner: George (decides, books, pays). Agent: scheduled routine "Dive trips pipeline check-in" (twice daily 09:00 and 17:00 ET; hands-off mode from 22 Sep night: replies to operators itself on facts and quote-chasing, chases after 2 business days, sends the reserve wave the same day, escalates only money, commitments, choices and Wharton/Penn mail to George as drafts under Needs George, updates pricing inputs, commits to branch `claude/wharton-outdoors-scuba-dec-5ley3f`). Nothing is ever booked or paid by the agent. The agent never emails MBA Student Life or anyone at Wharton or Penn (George's instruction, 22 Sep).
+Owner: George (decides, books, pays). Agent: scheduled routine "Dive trips pipeline check-in" (four times daily, 08:00, 12:00, 16:00 and 20:00 ET, firing into the main planning session; hands-off mode: replies to operators itself on facts and quote-chasing, chases after 2 business days, sends the reserve wave the same day, escalates only money, commitments, choices and Wharton/Penn mail to George as drafts under Needs George, updates pricing inputs, commits to branch `claude/wharton-outdoors-scuba-dec-5ley3f`). Nothing is ever booked or paid by the agent. The agent never emails MBA Student Life or anyone at Wharton or Penn (George's instruction, 22 Sep).
 
 Milestone: by Tue 29 Sep 2026, three viable planned trips: for each, ONE dive centre that can take all divers (beginners and certified together, so George is in charge of every diver) and one lodging, both replied with capacity confirmed and indicative pricing. George's standing decisions, 22 Sep: never split a trip across centres; participants book their own flights (no group holds); paper quotes first, no calls unless George asks.
 
@@ -32,7 +32,7 @@ Status values: draft | approved | sent | replied | chased | quoted | bookable | 
 | Scuba Club Cozumel | dive resort | see cozumel/operators.csv | no | dropped | 2026-09-22 | none | Reported permanently closed (TripAdvisor snippet); verify only if needed |
 | Flights PHL–CZM | individual bookings | n/a | no | dropped | 2026-09-22 George: people book their own flights | keep the fare band in the workbook current | |
 
-Reserve contacts, Cozumel (send on 2026-09-24 if the first wave is silent; use the NEW dates Sun 13 – Sat 19 Dec, OW Mon 14 – Wed 16, boats Thu 17 – Fri 18):
+Reserve contacts, Cozumel (not needed unless the four quoted centres fall through):
 
 | contact | role | email | send | status | last_action | next_action | notes |
 |---|---|---|---|---|---|---|---|
@@ -90,7 +90,7 @@ Reserve contacts, Egypt (send on 2026-09-24 if the first wave is silent):
 | AA Saturday PHL–CZM nonstop | Snippet: Saturday-only nonstop scheduled from 7 Nov (year not shown); would fit the Sat 19 Dec return | routine confirms the 2026-27 season when fetch works | 2026-09-23 |
 | Web fetch in this environment | STILL BLOCKED on the 2026-09-23 routine run (redsea-divingsafari.com, diveparadise.com, example.com all EGRESS_BLOCKED, so not domain-specific) | George sets Network access to full internet on the environment (claude.ai > Code > Environments > George Claude Environment); routine retests each run | 2026-09-23 |
 | Email connector | Back on emailgeorgej@gmail.com as of 2026-09-23 14:30 UTC (George switched it; verified by thread lookup). The 13:09 UTC routine run found it on the Wharton account and sent nothing | routine verifies each run | 2026-09-23 |
-| Scheduled routine | live: trig_01VjhzqZFLBuAb3E5cQaRP3a, twice daily 09:00 and 17:00 ET every day (changed 2026-09-22 night), Gmail and Google Drive attached; prompt updated 2026-09-22 (Drive as fallback state store, bounce handling, push-status reporting) | first run 2026-09-22 18:24 UTC: Gmail and Drive worked, fetch blocked, its tracker edits reached Drive but not the repo (push not confirmed). Next run reports push status explicitly | |
+| Scheduled routine | live: trig_01FXquqgu6QVVmADznF1E78v, four times daily (08:00, 12:00, 16:00, 20:00 ET) firing into the main session; no email or push; procedure in ROUTINE.md. Old fresh-session routine deleted 2026-09-23 | | 2026-09-23 |
 | Google Drive folder | "Wharton dive trips" (https://drive.google.com/drive/folders/17fUirPHQ088oQJiB6dRJZFqk7hFAWATm): TRACKER.md, DECISION_MEMO.md and a "summary" Google Sheet with the headline prices. The full workbook exceeds the upload tool's size limit; it lives in the repo at pricing/december_pricing.xlsx | routine refreshes each run | 2026-09-22 |
 
 ## Log
