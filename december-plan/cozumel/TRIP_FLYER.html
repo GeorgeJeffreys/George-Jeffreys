@@ -1,0 +1,112 @@
+<title>Cozumel Dive Week</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root{--bg:#F3F7F9;--card:#FFFFFF;--ink:#0F2233;--muted:#5D6F7D;--line:#D9E2E9;--sea:#0E6E8C;--sea-deep:#0A4F66;--beg:#1B9AAA;--beg-soft:#DDF3F5;--cert:#1F4E79;--cert-soft:#E2ECF6;--all:#C08A1E;--all-soft:#FBF1D8;--ok:#2E7D5B}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0D161D;--card:#151F28;--ink:#EAF0F4;--muted:#A3B3BE;--line:#2A3A47;--sea:#4FB3D1;--sea-deep:#7FCBE2;--beg:#4CC5D3;--beg-soft:#103A40;--cert:#8AB3DF;--cert-soft:#1B2D42;--all:#E3B851;--all-soft:#3B2F10;--ok:#5CC08F;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0D161D;--card:#151F28;--ink:#EAF0F4;--muted:#A3B3BE;--line:#2A3A47;--sea:#4FB3D1;--sea-deep:#7FCBE2;--beg:#4CC5D3;--beg-soft:#103A40;--cert:#8AB3DF;--cert-soft:#1B2D42;--all:#E3B851;--all-soft:#3B2F10;--ok:#5CC08F;color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:15px;line-height:1.45;margin:0;padding-block:0 40px;padding-inline:16px}
+.page{max-width:1040px;margin:0 auto}
+h1,h2,h3{font-family:"Sora",system-ui,sans-serif;margin:0;text-wrap:balance}
+.hero{background:linear-gradient(135deg,var(--sea-deep),var(--sea));color:#fff;border-radius:16px;padding:28px 28px 24px;margin-top:20px}
+.hero .kicker{font-size:13px;letter-spacing:.12em;text-transform:uppercase;opacity:.85}
+.hero h1{font-size:clamp(30px,5vw,48px);font-weight:800;line-height:1.05;margin:8px 0 10px}
+.hero .sub{font-size:17px;max-width:60ch;opacity:.95}
+.hero .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.hero .chips span{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:4px 12px;font-size:13px;font-weight:500}
+h2{font-size:20px;font-weight:700;margin:28px 0 10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+.card h3{font-size:15px;font-weight:700;margin-bottom:8px}
+.card ul{margin:0;padding-left:18px}.card li{margin-bottom:5px}
+.muted{color:var(--muted);font-size:13px}
+.week{overflow-x:auto}
+table{border-collapse:separate;border-spacing:0;width:100%;min-width:860px;font-size:13px;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+th,td{padding:9px 10px;vertical-align:top;border-bottom:1px solid var(--line);border-right:1px solid var(--line)}
+th{font-family:"Sora",sans-serif;font-weight:700;font-size:13px;text-align:left}
+th.day small{display:block;font-weight:400;color:var(--muted);font-size:11px}
+td.track{font-family:"Sora",sans-serif;font-weight:700;font-size:12px;white-space:nowrap;width:96px}
+tr.beg td.track{color:var(--beg)} tr.cert td.track{color:var(--cert)} tr.all td.track{color:var(--all)}
+tr.beg td:not(.track){background:var(--beg-soft)} tr.cert td:not(.track){background:var(--cert-soft)} tr.all td:not(.track){background:var(--all-soft)}
+td b{font-weight:600}
+.tag{display:inline-block;font-size:11px;padding:1px 7px;border-radius:999px;border:1px solid currentColor;margin-top:4px}
+.price{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.price .card{border-top:4px solid var(--sea)}
+.price .big{font-family:"Sora",sans-serif;font-size:34px;font-weight:800;line-height:1;margin:4px 0 2px;font-variant-numeric:tabular-nums}
+.price .big small{font-size:14px;font-weight:600;color:var(--muted);margin-left:4px}
+.price dl{display:grid;grid-template-columns:1fr auto;gap:3px 10px;margin:10px 0 0;font-size:13px}
+.price dt{color:var(--muted)}.price dd{margin:0;text-align:right;font-variant-numeric:tabular-nums}
+.price dd.total{font-weight:700}
+.cta{background:var(--card);border:2px solid var(--sea);border-radius:12px;padding:16px 18px;margin-top:24px}
+.cta ol{margin:6px 0 0;padding-left:20px}
+.cta li{margin-bottom:4px}
+.foot{margin-top:18px;font-size:12px;color:var(--muted);max-width:90ch}
+@media (max-width:640px){.hero{padding:22px 18px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<div class="page">
+<section class="hero">
+  <div class="kicker">Wharton Outdoors Club · Scuba</div>
+  <h1>Cozumel Dive Week<br>Sun 13 – Sat 19 Dec 2026</h1>
+  <p class="sub">Six nights on the island with the best drift diving in the Caribbean. Get certified from scratch in three days, or dive the Palancar walls every morning. Led by George Jeffreys (former PADI Master Scuba Diver Trainer), diving with Blue Note Scuba, staying at Hotel Plaza in downtown San Miguel.</p>
+  <div class="chips"><span>Two tracks: Beginner and Certified</span><span>20 to 40 of us</span><span>Right after finals</span><span>Downtown, walk to everything</span><span>No experience needed</span></div>
+</section>
+
+<h2>The week</h2>
+<div class="week">
+<table>
+<thead><tr><th></th>
+<th class="day">Sun 13<small>arrive</small></th><th class="day">Mon 14</th><th class="day">Tue 15</th><th class="day">Wed 16<small>afternoon off</small></th><th class="day">Thu 17<small>everyone on the boats</small></th><th class="day">Fri 18<small>last dive 13:00</small></th><th class="day">Sat 19<small>fly home</small></th></tr></thead>
+<tbody>
+<tr class="beg"><td class="track">Beginner track</td>
+<td>Land, check in, paperwork and gear fitting at the shop</td>
+<td>Confined-water skills at Tikila beach, first breaths underwater</td>
+<td>Open Water dives 1 and 2 from the training site</td>
+<td>Dives 3 and 4 from the boat. <b>You are a certified diver by lunch.</b><span class="tag">PADI Open Water</span></td>
+<td>First real reef dives: two-tank boat morning with the instructors, shallow sites, turtles and eagle rays</td>
+<td>Two-tank boat morning, back by 13:00</td>
+<td>Fly</td></tr>
+<tr class="cert"><td class="track">Certified track</td>
+<td>Land, check in, gear fitting. Tune-up dive if you are rusty</td>
+<td>Two-tank morning: Palancar Gardens, Cedral drift. <b>Optional third dive</b> in the afternoon</td>
+<td>Two-tank morning: Santa Rosa Wall, Yucab. <b>Optional third dive</b> or twilight two-tank</td>
+<td>Two-tank morning: Columbia, Palancar Caves</td>
+<td>Two-tank morning: Palancar Bricks. Optional afternoon dive. <b>Night dive</b> at 18:00</td>
+<td>Two-tank morning, back by 13:00</td>
+<td>Fly</td></tr>
+<tr class="all"><td class="track">Everyone</td>
+<td>18:30 welcome briefing, group dinner downtown</td>
+<td>18:30 briefing</td>
+<td>18:30 briefing</td>
+<td><b>Afternoon off</b>: jeeps and scooters round the island (San Gervasio ruins, Punta Sur, east-side beach club) or the El Cielo sandbar by boat. Certification dinner</td>
+<td>18:30 briefing</td>
+<td>Beach club afternoon, farewell dinner</td>
+<td></td></tr>
+</tbody></table>
+</div>
+<p class="muted">Every evening a 15-minute briefing on the next day. Depth limits are PADI standards. Last dive Friday by 13:00 so everyone is clear to fly Saturday.</p>
+
+<h2>What it costs</h2>
+<div class="price">
+  <div class="card"><h3>Beginner</h3><div class="big">$957<small>trip fee</small></div>
+    <div class="muted">Open Water course with all equipment, two extra boat days, six nights at Hotel Plaza with breakfast (two sharing), group kitty, 5% contingency refunded if unused.</div>
+    <dl><dt>Flights, book your own (typical)</dt><dd>$570–800</dd><dt>PADI eLearning, done before you fly</dt><dd>$195</dd><dt>DAN dive insurance (required)</dt><dd>$119</dd><dt>Marine park fees, cash on the island</dt><dd>$45</dd><dt>Food, drinks, tips, transfers</dt><dd>about $320</dd><dt>All-in estimate</dt><dd class="total">about $2,275</dd></dl></div>
+  <div class="card"><h3>Certified</h3><div class="big">$915<small>trip fee</small></div>
+    <div class="muted">Five two-tank boat mornings, six nights at Hotel Plaza with breakfast (two sharing), group kitty, 5% contingency refunded if unused.</div>
+    <dl><dt>Flights, book your own (typical)</dt><dd>$570–800</dd><dt>DAN dive insurance (required)</dt><dd>$119</dd><dt>Marine park fees, cash on the island</dt><dd>$75</dd><dt>Gear rental if you need it</dt><dd>$150</dd><dt>Food, drinks, tips, transfers</dt><dd>about $320</dd><dt>All-in estimate</dt><dd class="total">about $2,190–2,260</dd></dl></div>
+  <div class="card"><h3>Add-ons, pay as you go</h3><div class="big">$0<small>to start</small></div>
+    <dl><dt>Advanced Open Water course</dt><dd>free with eLearning (~$220)</dd><dt>Nitrox course</dt><dd>free with eLearning; fills ~$12 a tank</dd><dt>Afternoon two-tank dive</dt><dd>$145</dd><dt>Night dive (shared charter)</dt><dd>about $80</dd><dt>Single room</dt><dd>+$246</dd><dt>Third person in a room</dt><dd>same price</dd></dl>
+    <div class="muted" style="margin-top:8px">Most people do the mornings and stop. The keen can dive three times a day.</div></div>
+</div>
+
+<div class="cta">
+  <h3>How to sign up</h3>
+  <ol>
+    <li>Reply in the group chat with your name, track (Beginner or Certified) and whether you want a room-mate assigned.</li>
+    <li>Pay the $300 deposit on CampusGroups by <b>Sat 10 Oct</b>. Balance due Fri 6 Nov.</li>
+    <li>Beginners: buy PADI Open Water eLearning through the link we send and finish it before you fly. Everyone: DAN insurance and a dive medical form.</li>
+    <li>Book your own flights to Cozumel (CZM) once your place is confirmed. Arrive Sunday, leave Saturday.</li>
+  </ol>
+  <p class="muted" style="margin-top:8px">Deposits refundable in full until 6 Nov, then only if your place is resold. George's place is comped by the dive shop and the shop's group commission goes to him for organising, as is standard for group leaders.</p>
+</div>
+<p class="foot">Prices from Blue Note Scuba's and Hotel Plaza's quotes of 23 Sep 2026 and will be locked when we book. Flights and food are estimates. Capacity is 40; places go in order of deposit.</p>
+</div>

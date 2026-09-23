@@ -12,6 +12,9 @@ Status from 23 Sep 2026 evening: fires INTO the main planning session (session_0
 - Figures are flagged ADVERTISED (page or snippet), QUOTE NEEDED, INFERRED or QUOTED with source and date. UK English, casual, brief emails signed George Jeffreys, Wharton Outdoors Club, MBA Class of 2027.
 - Safety: OW 18 m, AOW 30 m, Deep 40 m; 18 h before flying; no liveaboards; label baited shark dives.
 
+## Cozumel status (23 Sep evening)
+George's top choice is Blue Note + Hotel Plaza. Drive Blue Note to bookable: get the instructor count for 10–20 students, whether park fees are in the package, the minimum to hold and the hold length, and the hotel block mechanics (how many rooms Doug can hold, deposit and release dates, triples). Do not place a deposit; when those answers are in, put the booking step (25% of the gross, payee, date) under Needs George. Keep Sand Dollar warm (answer its questions, no commitment); say nothing to Aldora or Dive Paradise about the choice until Blue Note confirms capacity, then thank them and close politely. Sidemount: George is interested (certified, wants practice); raise rig rental with Cozumel Dive School and two AL80s per afternoon dive with Blue Note only at booking time. Budget lives in pricing/cozumel_group_budget.xlsx (rebuild with build_cozumel_budget.py when Blue Note or the hotel changes a number); flyer in cozumel/TRIP_FLYER.html.
+
 ## Each run
 
 1. `git pull` on branch `claude/wharton-outdoors-scuba-dec-5ley3f`. Read `december-plan/TRACKER.md` (live pipeline, Week plan, Reserve contacts, Needs George). The programmes are `cozumel/PROGRAMME.md`, `january/PROGRAMME.md`, `thanksgiving/plan.md`; briefing template `shared/briefing_template.md`.
