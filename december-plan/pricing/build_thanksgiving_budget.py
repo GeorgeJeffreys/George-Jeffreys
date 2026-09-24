@@ -32,10 +32,10 @@ inp('contingency', "Contingency inside the fee (refunded pro rata if unused)", 0
 h2("Paradise Scuba, La Parguera (QUOTED 22 Sep 2026, Kiko)")
 inp('wall', "Two-tank Wall dive, list price", 145, "USD", "QUOTED", MONEY)
 inp('disc', "Group discount", 0.15, "share", "QUOTED", PCT)
-inp('tax', "Puerto Rico sales tax on services (IVU)", 0.115, "share", "INFERRED; Paradise said 'plus tax', rate asked", PCT)
+inp('tax', "Puerto Rico sales tax (IVU)", 0.115, "share", "QUOTED 24 Sep (Edwin, Paradise Scuba)", PCT)
 inp('dive_days', "Boat mornings (Thu, Fri, Sat; Sat out of the water by noon)", 3, "days", "programme")
 inp('gear', "Gear rental per day, everyone rents", 25, "USD/day", "QUOTED", MONEY)
-inp('night', "Night dive (optional add-on)", 95, "USD", "INFERRED; asked", MONEY)
+inp('night', "Night dive, single tank with lights, list price (optional add-on; group discount and tax apply)", 140, "USD", "QUOTED 24 Sep; gear rental 25 extra", MONEY)
 inp('pm3', "Optional third dive, one tank (add-on)", 75, "USD", "INFERRED; asked", MONEY)
 inp('dep_ps', "Paradise Scuba deposit", 0.5, "share", "QUOTED; refundable to 30 days out", PCT)
 h2("Lodging (Parador Villa Parguera; QUOTE NEEDED, chased 24 Sep)")
@@ -48,19 +48,20 @@ inp('car_days', "Rental days", 5, "days", "Wed to Sun")
 inp('car_fuel', "Fuel and tolls per car", 60, "USD", "INFERRED", MONEY)
 inp('car_seats', "People per car", 4, "people", "assumption")
 h2("Included for everyone")
-inp('dan', "DAN membership + Preferred plan", 119, "USD", "ADVERTISED", MONEY)
-inp('tax_buffer', "Tax buffer per head (hotel room tax and anything the quotes leave out)", 80, "USD", "policy; PR room tax 9–11% plus fees", MONEY)
+inp('dan', "DAN cover inside the fee", 0, "USD", "George 24 Sep: not in the fee; each diver buys their own cover (see own spending)", MONEY)
+inp('tax_buffer', "Hotel room-tax buffer per head (PR room tax 9% plus fees; kept until the hotel quotes an all-in rate)", 80, "USD", "policy; diving tax is now inside the diving line", MONEY)
 h2("Leader costs carried by the group")
 inp('g_flight', "George's flight allowance PHL–SJU", 550, "USD", "policy; Thanksgiving band 400–700", MONEY)
 inp('g_room', "George's half of a shared room", f"={R['room']}*{R['nights']}/2", "USD", "formula", MONEY)
 inp('odd_room', "Odd-headcount room risk", f"={R['g_room']}", "USD", "half a room", MONEY)
-inp('g_dan', "George's DAN", 119, "USD", "", MONEY)
+inp('g_dan', "George's DAN carried by the group", 0, "USD", "George 24 Sep: own cost like everyone", MONEY)
 inp('g_gear', "George's gear", f"={R['gear']}*{R['dive_days']}", "USD", "formula", MONEY)
 h2("Own spending guidance (no flights)")
 inp('meals', "Meals and drinks per day (Thanksgiving dinner included)", 45, "USD/day", "INFERRED", MONEY)
 inp('days_meals', "Days", 4, "days", "")
 inp('tips', "Tips", 40, "USD", "INFERRED", MONEY)
-inp('bio', "Bioluminescent bay boat tour (optional add-on)", 45, "USD", "ADVERTISED", MONEY)
+inp('bio', "Sunset Bio Bay Cruise, list price (optional add-on; eat, cruise, swim; discount and tax apply)", 85, "USD", "QUOTED 24 Sep", MONEY)
+inp('dan_own', "Dive-accident cover, required, bought by each person", 84, "USD", "ADVERTISED: DAN membership 40 + Master 44", MONEY)
 
 fee = wb.create_sheet("Fee")
 fee.column_dimensions['A'].width = 62; fee.column_dimensions['B'].width = 18
@@ -73,7 +74,7 @@ leader = f"({R['g_flight']}+{R['g_room']}+{R['odd_room']}+{R['g_dan']}+{R['g_gea
 rows = [
  ("Diving: three two-tank mornings, group discount, plus tax", f"=ROUND({R['wall']}*(1-{R['disc']})*(1+{R['tax']})*{R['dive_days']},0)"),
  ("Gear rental, everyone", f"={R['gear']}*{R['dive_days']}"),
- ("DAN dive-accident cover", f"={R['dan']}"),
+ ("DAN dive-accident cover (not in the fee; each person buys their own, see below)", f"={R['dan']}"),
  ("Hotel, 4 nights, 2 sharing", f"={R['room']}*{R['nights']}/2"),
  ("Hire cars, shared by everyone", f"={cars}/{paying}"),
  ("Tax buffer", f"={R['tax_buffer']}"),
@@ -83,13 +84,13 @@ rows = [
  ("TRIP FEE (rounded up to the nearest 50)", "=CEILING(B10+B11,50)"),
  ("", None),
  ("Optional add-ons, charged at cost", None),
- ("Bio bay night tour", f"={R['bio']}"),
- ("Night dive", f"={R['night']}"),
+ ("Sunset Bio Bay Cruise, after discount and tax", f"=ROUND({R['bio']}*(1-{R['disc']})*(1+{R['tax']}),0)"),
+ ("Night dive, after discount and tax, plus gear", f"=ROUND({R['night']}*(1-{R['disc']})*(1+{R['tax']}),0)+{R['gear']}"),
  ("Third dive in the afternoon", f"={R['pm3']}"),
  ("", None),
  ("GUIDANCE BUDGET WITHOUT FLIGHTS", None),
  ("Trip fee", "=B12"),
- ("Own spending: meals incl. Thanksgiving dinner, drinks, tips", f"={R['meals']}*{R['days_meals']}+{R['tips']}"),
+ ("Own spending: dive cover, meals incl. Thanksgiving dinner, drinks, tips", f"={R['dan_own']}+{R['meals']}*{R['days_meals']}+{R['tips']}"),
  ("Guidance budget", "=B20+B21"),
  ("Guidance budget with bio bay and night dive", "=B22+B15+B16"),
 ]

@@ -13,11 +13,11 @@ Basis: 8–12 certified divers, one boat with Paradise Scuba & Snorkeling Center
 | Sun 29 | | Drive to SJU, fly home |
 
 ## Add-ons (opt-in, at cost)
-- Third dive on Thu or Fri afternoon (about USD 75, to be confirmed by Paradise); night dive (about USD 95, asked); bio bay tour USD 45.
+- Third dive on Thu or Fri afternoon (about USD 75, price asked 24 Sep); night dive USD 140 list, about 158 after discount, tax and gear (QUOTED); Sunset Bio Bay Cruise USD 85 list, about 81 after discount and tax (QUOTED; eat, cruise, swim). Paradise opens on Thanksgiving morning for us (QUOTED).
 - Desecheo day trip only if Island Style Charters (4 divers per charter) or another boat can take the group in two runs; treated as optional.
 
 ## Contingency
 Wind on the south coast rarely stops the Wall boat; if it does, Paradise reschedules or refunds (to confirm). Hurricane season formally ends 30 Nov; a named storm means the club's own refund ladder applies and travel insurance is each person's own.
 
 ## Money (pricing/thanksgiving_group_budget.xlsx)
-Trip fee USD 1,350 covers three two-tank mornings with tax, gear, DAN, four nights two sharing, the hire cars, a tax buffer, George's flight allowance, half-room, DAN and gear, and a 6% contingency. Guidance budget without flights about USD 1,570, or 1,710 with the bio bay and a night dive. Deposit USD 400 by Sat 10 Oct, balance Fri 23 Oct (Paradise wants 50% down and full payment 30 days out). Capacity 12.
+Trip fee USD 1,250 covers three two-tank mornings with 11.5% tax (QUOTED), gear, four nights two sharing, the hire cars, a hotel room-tax buffer, George's flight allowance, half-room and gear, and a 6% contingency. DAN or equivalent cover is a required own cost (about USD 85). Guidance budget without flights about USD 1,550, or about 1,800 with the Sunset Bio Bay Cruise (about USD 81 after discount and tax) and a night dive (about USD 158 incl. gear). Deposit USD 400 by Sat 10 Oct, balance Fri 23 Oct (Paradise wants 50% down and full payment 30 days out). Capacity 12.
