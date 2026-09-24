@@ -53,6 +53,7 @@ inp('comp_per', "One free certified package per N paid", 5, "paid", "QUOTED")
 inp('dep_bn', "Blue Note deposit at booking", 0.25, "share", "QUOTED; balance 30 days out; refund to 7 days out", PCT)
 inp('pm2', "Afternoon two-tank dive (optional add-on)", 130, "USD", "ADVERTISED price page", MONEY)
 inp('night_charter', "Private night charter, up to 10 divers (optional add-on, shared)", 800, "USD", "ADVERTISED price page", MONEY)
+inp('shore', "Shore dive at Tikila Beach Bar incl. gear (optional add-on on the free mornings)", 60, "USD", "QUOTED 24 Sep", MONEY)
 inp('nitrox_fill', "Nitrox fill per tank (course free with eLearning)", 12, "USD", "INFERRED; QUOTE NEEDED", MONEY)
 h2("Hotel Plaza Cozumel (QUOTED via Blue Note's contracted rate)")
 inp('room_lo', "Room per night, 2 people with breakfast, low-rate nights", 70, "USD", "QUOTED (Dec 14–15 rate)", MONEY)
@@ -62,7 +63,7 @@ inp('nights_hi', "High-rate nights (Tue 15 – Fri 18)", 4, "nights", "")
 inp('hotel_dep', "Hotel deposit at booking (share of block)", 0.25, "share", "QUOTE NEEDED; assumption", PCT)
 h2("Included in the fee for everyone")
 inp('elearn_ow', "PADI Open Water eLearning (club buys the codes)", 230, "USD", "ADVERTISED store.padi.com about USD 230; Blue Note asked for its code price", MONEY)
-inp('dan', "Dive-accident cover inside the fee (DAN short-term 6–10 day plan via the shop, one roster)", 50, "USD", "ADVERTISED plan price; ASSUMED Blue Note sells it (asked 24 Sep). If not: 0 here and each person buys DAN Master (84)", MONEY)
+inp('dan', "Dive-accident cover inside the fee (DAN short-term plan via Blue Note, a DAN Business Member)", 50, "USD", "ADVERTISED plan price; Blue Note confirmed 24 Sep it is a DAN Business Member and is pricing cover for the certified divers; OW students are covered during the course", MONEY)
 inp('tax_buffer', "Tax buffer per head", 0, "USD", "QUOTED 24 Sep: Blue Note prices include taxes", MONEY)
 h2("Leader costs carried by the group (George shares a room like everyone)")
 inp('g_flight', "George's flight allowance", 700, "USD", "policy; PHL–CZM band 568–800", MONEY)
@@ -106,6 +107,7 @@ rows = [
  ("Nitrox: course free with eLearning; 10 fills", "n/a", f"={R['nitrox_fill']}*10"),
  ("Afternoon two-tank dive, each, incl. park fee", f"={R['pm2']}+{R['park']}", f"={R['pm2']}+{R['park']}"),
  ("Night dive, private charter shared by 10", f"={R['night_charter']}/10", f"={R['night_charter']}/10"),
+ ("Shore dive on a free morning, incl. gear", f"={R['shore']}", f"={R['shore']}"),
  ("", None, None),
  ("GUIDANCE BUDGET WITHOUT FLIGHTS", None, None),
  ("Trip fee", "=B13", "=C13"),
