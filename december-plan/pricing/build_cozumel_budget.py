@@ -41,7 +41,8 @@ h2("Blue Note Scuba (QUOTED 23 Sep 2026, Doug Atkinson)")
 inp('ow', "Open Water course, 3 days, equipment included", 400, "USD", "QUOTED", MONEY)
 inp('ow_extra', "Two extra boat days for new divers (Thu–Fri)", 240, "USD", "QUOTED", MONEY)
 inp('pkg', "Certified 5-day two-tank package", 600, "USD", "QUOTED", MONEY)
-inp('rental', "Equipment rental per day, everyone rents (in the fee)", 30, "USD/day", "QUOTED; group rate of 20–25 asked (competitors advertise 20–25)", MONEY)
+inp('rental', "Equipment rental per day, everyone rents (in the fee)", 30, "USD/day", "QUOTED 24 Sep: full set BCD, regulator, mask, fins, wetsuit; bulk-rate ask saved for October", MONEY)
+inp('computer', "Dive computer rental per day (included on courses; extra on regular rentals)", 10, "USD/day", "QUOTED 24 Sep; in the fee for every boat day under the everyone-rents rule", MONEY)
 inp('rent_days_cert', "Rental days, certified", 5, "days", "programme")
 inp('rent_days_beg', "Rental days, new divers (course includes equipment; the two extra boat days do not)", 2, "days", "ASSUMED; ask Blue Note whether the USD 240 extra days include gear")
 inp('park', "Marine park fee per boat day", 13, "USD/day", "ADVERTISED: 225 pesos in 2026 (Blue Note site shows USD 12 / 220 pesos); QUOTED 23 Sep: paid on site for boat days only, none on the two training-site days", MONEY)
@@ -61,20 +62,20 @@ inp('nights_hi', "High-rate nights (Tue 15 – Fri 18)", 4, "nights", "")
 inp('hotel_dep', "Hotel deposit at booking (share of block)", 0.25, "share", "QUOTE NEEDED; assumption", PCT)
 h2("Included in the fee for everyone")
 inp('elearn_ow', "PADI Open Water eLearning (club buys the codes)", 230, "USD", "ADVERTISED store.padi.com about USD 230; Blue Note asked for its code price", MONEY)
-inp('dan', "DAN cover inside the fee", 0, "USD", "George 24 Sep: not in the fee; each diver buys their own dive-accident cover (see own spending)", MONEY)
-inp('tax_buffer', "Tax buffer per head (Mexican IVA and lodging tax if the quotes are pre-tax)", 0, "USD", "George 24 Sep: cut; the other three shops quoted tax-inclusive; Doug asked to confirm", MONEY)
+inp('dan', "Dive-accident cover inside the fee (DAN short-term 6–10 day plan via the shop, one roster)", 50, "USD", "ADVERTISED plan price; ASSUMED Blue Note sells it (asked 24 Sep). If not: 0 here and each person buys DAN Master (84)", MONEY)
+inp('tax_buffer', "Tax buffer per head", 0, "USD", "QUOTED 24 Sep: Blue Note prices include taxes", MONEY)
 h2("Leader costs carried by the group (George shares a room like everyone)")
 inp('g_flight', "George's flight allowance", 700, "USD", "policy; PHL–CZM band 568–800", MONEY)
 inp('g_room', "George's half of a shared room, 6 nights", f"=({R['room_lo']}*{R['nights_lo']}+{R['room_hi']}*{R['nights_hi']})/2", "USD", "formula", MONEY)
 inp('odd_room', "Odd-headcount room risk (one person alone at the group's cost)", f"={R['g_room']}", "USD", "formula: half a room", MONEY)
-inp('g_dan', "George's DAN cover carried by the group", 0, "USD", "George 24 Sep: own cost like everyone", MONEY)
-inp('g_rent', "George's gear rental, 5 days", f"={R['rental']}*5", "USD", "formula", MONEY)
+inp('g_dan', "George's dive cover carried by the group", 50, "USD", "same plan as everyone", MONEY)
+inp('g_rent', "George's gear and computer rental, 5 days", f"=({R['rental']}+{R['computer']})*5", "USD", "formula", MONEY)
 h2("Own spending guidance, not in the fee (no flights)")
 inp('meals', "Lunches, dinners and drinks per day (breakfast included)", 45, "USD/day", "INFERRED for an MBA crowd", MONEY)
 inp('days_meals', "Days on the island", 6, "days", "")
 inp('tips', "Tips for boat crew and hotel", 50, "USD", "INFERRED", MONEY)
 inp('xfer', "Airport transfers both ways", 30, "USD", "ADVERTISED shared van 15 each way", MONEY)
-inp('dan_own', "Dive-accident cover, required, bought by each person", 84, "USD", "ADVERTISED: DAN membership 40 + Master 44; DAN short-term 6–10 day plan USD 50 if Blue Note sells it (asked)", MONEY)
+inp('dan_own', "Dive cover bought by each person (only if the shop cannot sell the short-term plan)", 0, "USD", "0 while cover is inside the fee; 84 (DAN membership + Master) if it moves out", MONEY)
 inp('elearn_aow', "PADI AOW eLearning (add-on for AOW takers)", 220, "USD", "ADVERTISED (about)", MONEY)
 
 # ---------------- Fee ----------------
@@ -89,16 +90,16 @@ paying = f"({R['n_price']}-1)"
 leader_total = f"({R['g_flight']}+{R['g_room']}+{R['odd_room']}+{R['g_dan']}+{R['g_rent']})"
 rows = [
  ("Diving with Blue Note", f"={R['ow']}+{R['ow_extra']}", f"={R['pkg']}"),
- ("Gear rental, everyone", f"={R['rental']}*{R['rent_days_beg']}", f"={R['rental']}*{R['rent_days_cert']}"),
+ ("Gear rental incl. computer, everyone", f"=({R['rental']}+{R['computer']})*{R['rent_days_beg']}", f"=({R['rental']}+{R['computer']})*{R['rent_days_cert']}"),
  ("Marine park fees", f"={R['park']}*{R['park_days_beg']}", f"={R['park']}*{R['park_days_cert']}"),
- ("Tax buffer (IVA and lodging tax, if the quotes are pre-tax)", f"={R['tax_buffer']}", f"={R['tax_buffer']}"),
+ ("Tax buffer (zero: Blue Note prices include taxes)", f"={R['tax_buffer']}", f"={R['tax_buffer']}"),
  ("PADI eLearning", f"={R['elearn_ow']}", "0"),
- ("DAN dive-accident cover (not in the fee; each person buys their own, see below)", f"={R['dan']}", f"={R['dan']}"),
+ ("Dive-accident cover (DAN short-term plan via the shop, assumed)", f"={R['dan']}", f"={R['dan']}"),
  ("Hotel Plaza, 6 nights with breakfast, 2 sharing", f"={room_pp}", f"={room_pp}"),
  ("Leader's costs shared (George's flight, half-room, DAN, rental, odd-room risk)", f"={leader_total}/{paying}", f"={leader_total}/{paying}"),
  ("Subtotal", "=SUM(B3:B10)", "=SUM(C3:C10)"),
  ("Contingency", f"=ROUND(B11*{R['contingency']},0)", f"=ROUND(C11*{R['contingency']},0)"),
- ("TRIP FEE (rounded up to the nearest 100, as posted)", "=CEILING(B11+B12,100)", "=CEILING(C11+C12,100)"),
+ ("TRIP FEE (rounded up to the nearest 50, as posted)", "=CEILING(B11+B12,50)", "=CEILING(C11+C12,50)"),
  ("", None, None),
  ("Optional add-ons at sign-up, charged at cost", None, None),
  ("AOW: course free with eLearning; eLearning", "n/a", f"={R['elearn_aow']}"),
@@ -108,7 +109,7 @@ rows = [
  ("", None, None),
  ("GUIDANCE BUDGET WITHOUT FLIGHTS", None, None),
  ("Trip fee", "=B13", "=C13"),
- ("Own spending: DAN cover, meals, drinks, tips, airport transfers", f"={R['dan_own']}+{R['meals']}*{R['days_meals']}+{R['tips']}+{R['xfer']}", f"={R['dan_own']}+{R['meals']}*{R['days_meals']}+{R['tips']}+{R['xfer']}"),
+ ("Own spending: meals, drinks, tips, airport transfers (own dive cover only if it leaves the fee)", f"={R['dan_own']}+{R['meals']}*{R['days_meals']}+{R['tips']}+{R['xfer']}", f"={R['dan_own']}+{R['meals']}*{R['days_meals']}+{R['tips']}+{R['xfer']}"),
  ("Guidance budget", "=B22+B23", "=C22+C23"),
  ("Guidance budget, certified taking AOW and nitrox", "n/a", "=C24+C16+C17"),
 ]
@@ -117,7 +118,7 @@ for label, b, c in rows:
     for col in (2, 3): fee.cell(r, col).number_format = MONEY
 for r in (11, 13, 21, 24, 25):
     for cell in fee[r]: cell.font = BOLD
-fee['A27'] = "The fee covers everything diving-related (course or package, gear, park fees, eLearning) and the hotel; everything else is the person's own, including the required DAN or equivalent dive-accident cover. It is set at the pricing headcount; a bigger group makes a surplus that is refunded pro rata or held as buffer, a smaller group down to the minimum is covered by the contingency (see Group sheet). George's place: diving covered by Blue Note's comp, flight and room carried by the group, commission to George, all disclosed on the sign-up page."
+fee['A27'] = "The fee covers everything diving-related (course or package, gear and computer, park fees, eLearning), dive-accident cover bought through the shop, and the hotel; flights, meals, drinks, tips and transfers are the person's own. It is set at the pricing headcount; a bigger group makes a surplus that is refunded pro rata or held as buffer, a smaller group down to the minimum is covered by the contingency (see Group sheet). George's place: diving covered by Blue Note's comp, flight and room carried by the group, commission to George, all disclosed on the sign-up page."
 
 # ---------------- Group ----------------
 g = wb.create_sheet("Group")
@@ -152,11 +153,11 @@ r_bn_gross = grow("Blue Note gross invoice", lambda c, n: f"={c}{r_bn_ow}+{c}{r_
 r_comm = grow("Less 10% commission on paid certified packages", lambda c, n: f"=-{c}{r_bn_pk}*{R['comm']}")
 r_bn_net = grow("Blue Note net payable", lambda c, n: f"={c}{r_bn_gross}+{c}{r_comm}", bold=True)
 r_comm_out = grow("Commission passed to George", lambda c, n: f"=-{c}{r_comm}")
-r_rent = grow("Gear rental for everyone including George", lambda c, n: f"={c}{r_beg}*{R['rental']}*{R['rent_days_beg']}+({c}{r_cert}+1)*{R['rental']}*{R['rent_days_cert']}")
+r_rent = grow("Gear and computer rental for everyone including George", lambda c, n: f"={c}{r_beg}*({R['rental']}+{R['computer']})*{R['rent_days_beg']}+({c}{r_cert}+1)*({R['rental']}+{R['computer']})*{R['rent_days_cert']}")
 r_tax = grow("Tax buffer held (paid to Blue Note and the hotel if charged; otherwise refunded)", lambda c, n: f"={c}{r_n}*{R['tax_buffer']}")
 r_park = grow("Marine park fees (cash on the island, paid from the float)", lambda c, n: f"={c}{r_beg}*{R['park']}*{R['park_days_beg']}+({c}{r_cert}+1)*{R['park']}*{R['park_days_cert']}")
 r_el = grow("PADI Open Water eLearning codes", lambda c, n: f"={c}{r_beg}*{R['elearn_ow']}")
-r_dan = grow("DAN cover for everyone including George", lambda c, n: f"={c}{r_n}*{R['dan']}")
+r_dan = grow("Dive cover for everyone including George (short-term plan via the shop)", lambda c, n: f"={c}{r_n}*{R['dan']}")
 r_hotel = grow("Hotel Plaza block, all rooms", lambda c, n: f"={c}{r_rooms}*({R['room_lo']}*{R['nights_lo']}+{R['room_hi']}*{R['nights_hi']})")
 r_gfl = grow("George's flight allowance", lambda c, n: f"={R['g_flight']}")
 r_costs = grow("TOTAL COSTS", lambda c, n: f"={c}{r_bn_net}+{c}{r_comm_out}+{c}{r_rent}+{c}{r_tax}+{c}{r_park}+{c}{r_el}+{c}{r_dan}+{c}{r_hotel}+{c}{r_gfl}", bold=True)

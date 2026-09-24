@@ -7,13 +7,13 @@ Basis: 8–12 certified divers, one boat with Paradise Scuba & Snorkeling Center
 | Day | Diving | Everyone |
 |---|---|---|
 | Wed 25 | | Morning flight PHL–SJU (about 4 h), pick up the cars, 2.5 h drive west to La Parguera, check in. 18:30 welcome briefing and gear check at the shop; dinner on the malecón |
-| Thu 26, Thanksgiving | 08:30 two-tank on the Wall (18–37 m drop-off); optional third dive early afternoon | Thanksgiving dinner together in the evening (own cost; we book the table) |
-| Fri 27 | 08:30 two-tank on the Wall; optional third dive | Bioluminescent bay boat tour after dark (optional add-on, about USD 45; new moon on 9 Nov, full moon about 24 Nov, so the bay is bright-ish but still visible; go late) |
-| Sat 28 | 08:30 two-tank on the Wall, out of the water by noon | Off afternoon: Cabo Rojo lighthouse and salt flats with Playa Sucia, or the Guánica dry forest; farewell dinner |
+| Thu 26, Thanksgiving | 07:00 two-tank: one Wall dive, one open-ocean reef (Paradise opens for us) | Thanksgiving dinner together in the evening (own cost; we book the table) |
+| Fri 27 | 07:00 two-tank: a different wall site and reef. Optional NIGHT DIVE in the evening (one tank on a reef, torch and marker included, about USD 158 after discount, tax and gear) | Free afternoon; evening night dive or dinner |
+| Sat 28 | 07:00 two-tank: a new wall site and reef, back by 11:30 | Off afternoon: Cabo Rojo lighthouse and salt flats with Playa Sucia, or the Guánica dry forest. Evening: Sunset Bio Bay Cruise (optional, about USD 81 after discount and tax: empanadas, drinks, mangroves, sandbar, the bay), doubling as the farewell |
 | Sun 29 | | Drive to SJU, fly home |
 
 ## Add-ons (opt-in, at cost)
-- Third dive on Thu or Fri afternoon (about USD 75, price asked 24 Sep); night dive USD 140 list, about 158 after discount, tax and gear (QUOTED); Sunset Bio Bay Cruise USD 85 list, about 81 after discount and tax (QUOTED; eat, cruise, swim). Paradise opens on Thanksgiving morning for us (QUOTED).
+- No third dive the same afternoon: Paradise dives air only and advises against it on nitrogen loading (QUOTED 24 Sep); the night dive on Fri is the extra dive instead (USD 140 list, about 158 after discount, tax and gear). Sunset Bio Bay Cruise Sat (USD 85 list, about 81 after discount and tax; eat, cruise, swim). Itinerary agreed with Paradise 24 Sep; Paradise opens on Thanksgiving morning for us.
 - Desecheo day trip only if Island Style Charters (4 divers per charter) or another boat can take the group in two runs; treated as optional.
 
 ## Contingency

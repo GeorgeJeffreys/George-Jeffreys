@@ -36,7 +36,7 @@ inp('tax', "Puerto Rico sales tax (IVU)", 0.115, "share", "QUOTED 24 Sep (Edwin,
 inp('dive_days', "Boat mornings (Thu, Fri, Sat; Sat out of the water by noon)", 3, "days", "programme")
 inp('gear', "Gear rental per day, everyone rents", 25, "USD/day", "QUOTED", MONEY)
 inp('night', "Night dive, single tank with lights, list price (optional add-on; group discount and tax apply)", 140, "USD", "QUOTED 24 Sep; gear rental 25 extra", MONEY)
-inp('pm3', "Optional third dive, one tank (add-on)", 75, "USD", "INFERRED; asked", MONEY)
+inp('pm3', "Third dive the same afternoon", 0, "USD", "NOT OFFERED (Paradise 24 Sep: air only, nitrogen loading); night dive instead", MONEY)
 inp('dep_ps', "Paradise Scuba deposit", 0.5, "share", "QUOTED; refundable to 30 days out", PCT)
 h2("Lodging (Parador Villa Parguera; QUOTE NEEDED, chased 24 Sep)")
 inp('room', "Room per night, 2 sharing", 150, "USD", "ADVERTISED band 135–170", MONEY)
@@ -86,7 +86,7 @@ rows = [
  ("Optional add-ons, charged at cost", None),
  ("Sunset Bio Bay Cruise, after discount and tax", f"=ROUND({R['bio']}*(1-{R['disc']})*(1+{R['tax']}),0)"),
  ("Night dive, after discount and tax, plus gear", f"=ROUND({R['night']}*(1-{R['disc']})*(1+{R['tax']}),0)+{R['gear']}"),
- ("Third dive in the afternoon", f"={R['pm3']}"),
+ ("Third dive in the afternoon: not offered (air only); night dive Fri instead", f"={R['pm3']}"),
  ("", None),
  ("GUIDANCE BUDGET WITHOUT FLIGHTS", None),
  ("Trip fee", "=B12"),
