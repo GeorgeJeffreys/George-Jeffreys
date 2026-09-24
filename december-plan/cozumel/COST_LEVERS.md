@@ -2,8 +2,8 @@
 
 George's brief: keep the quality, use the group's scale (20–40 divers), find a cheaper way to insure everyone, cut the fee. Web fetch is blocked, so everything here is from search snippets (ADVERTISED) unless marked QUOTED. Nothing below has been asked of Blue Note yet; the questions are queued in ROUTINE.md and go to Doug in the next natural reply, not as separate pings.
 
-## Fee today (rebuilt 24 Sep): USD 1,400 beginner / 1,300 certified
-Certified: package 600, rental 150, park 65, hotel 246, leader share 71, contingency 68, rounded up from 1,200. Beginner: course and two boat days 640, rental 60, park 39, eLearning 230, hotel 246, leader share 71, contingency 77, rounded up from 1,363. DAN and the tax buffer are already out.
+## Fee today (rebuilt 24 Sep): USD 1,400 beginner / 1,200 certified
+Certified: package 600, rental 150, park 65, hotel 246, leader share 71, contingency 68 = 1,199.6, so the posted 1,200 sits right on the rounding line: any input creeping up (park fee, rental) pushes it to 1,300 unless another lever lands. Beginner: course and two boat days 640, rental 60, park 39, eLearning 230, hotel 246, leader share 71, contingency 77, rounded up from 1,363. DAN and the tax buffer are already out.
 
 ## 1. Dive-accident cover: cheaper than USD 119 a head
 | option | per head | how | flags |
@@ -34,6 +34,6 @@ Hotel Plaza (50 rooms, pool, downtown, breakfast) at USD 70/88 a room via Blue N
 Contingency (6%, refunded if unused); rounding (posting 1,350 / 1,250 saves 50 on paper only); the beginners' Thursday and Friday boat days (USD 330 off the beginner fee but it removes the two real reef mornings that sell the course); third dives and the island loop are already outside the fee.
 
 ## Where the fee could land
-If Doug agrees a USD 20–25 rental rate and the eLearning code at cost, and the group takes the sister hotels at about USD 50 a room: certified about USD 1,100, beginner about USD 1,200, with dive cover at USD 50 on top as an own cost. With Hotel Plaza kept: about 1,200 / 1,300.
+If Doug agrees a USD 20–25 rental rate and the eLearning code at cost, and the group takes the sister hotels at about USD 50 a room: certified about USD 1,000, beginner about USD 1,200, with dive cover at USD 50 on top as an own cost. With Hotel Plaza kept: 1,200 / 1,400 today, 1,100 / 1,300 with the rental and eLearning asks granted.
 
 Sources (snippets): dan.org membership and dive-insurance comparison; world.dan.org short-term coverage; apps.dan.org short-term sign-up; diveassure.com DiveSafe and StartDive pages; bluenotescuba.com cozumel-diving-prices and private-dive-charter; cozumelscuba.com rental-gear; sanddollarsports.com; jungle-divers.com; bluemagicscuba.com; store.padi.com open-water-diver; padi.com/promotions; tripadvisor and expedia pages for Hotel Plaza Cozumel and Suites Colonial; cozumeldivehub.com marine park fees 2026.
