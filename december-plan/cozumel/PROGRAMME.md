@@ -46,7 +46,7 @@ Port closure on a training day: Sand Dollar's shore site keeps confined water an
 
 ## Money and forms before travel
 
-DAN membership and Preferred plan for everyone (USD 119); PADI OW eLearning (USD 195) and AOW eLearning bought at home; Sand Dollar's USD 500 group deposit (terms in cozumel/replies/sand-dollar-2026-09-23.md); Casa del Mar block; park fee cash USD 14 per boat day.
+DAN membership and Preferred plan, required, bought by each person (USD 119, own cost from 24 Sep); PADI OW eLearning (USD 195) and AOW eLearning bought at home; Sand Dollar's USD 500 group deposit (terms in cozumel/replies/sand-dollar-2026-09-23.md); Casa del Mar block; park fee cash USD 14 per boat day.
 
 ## Sidemount for George (researched 23 Sep, nobody asked)
 

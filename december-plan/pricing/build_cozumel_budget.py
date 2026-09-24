@@ -1,7 +1,7 @@
 """Cozumel group budget, Blue Note + Hotel Plaza basis (George's choice, 23 Sep 2026).
 
 Pricing rule (George, 23 Sep evening): participants pay ONE trip fee that covers everything except their own
-flight: diving, park fees, eLearning, DAN cover and the hotel with breakfast (everyone shares, George too),
+flight: diving, park fees, eLearning and the hotel with breakfast (everyone shares, George too),
 plus a share of the leader's costs (George's flight allowance, his half-room and DAN), plus a
 contingency. The fee is set at a conservative pricing headcount so that any larger group produces a surplus
 (refunded pro rata or held as buffer); the contingency absorbs a shortfall down to the minimum headcount.
@@ -61,19 +61,20 @@ inp('nights_hi', "High-rate nights (Tue 15 – Fri 18)", 4, "nights", "")
 inp('hotel_dep', "Hotel deposit at booking (share of block)", 0.25, "share", "QUOTE NEEDED; assumption", PCT)
 h2("Included in the fee for everyone")
 inp('elearn_ow', "PADI Open Water eLearning (club buys the codes)", 195, "USD", "ADVERTISED", MONEY)
-inp('dan', "DAN membership + Preferred plan, bought for each person", 119, "USD", "ADVERTISED", MONEY)
-inp('tax_buffer', "Tax buffer per head (Mexican IVA and lodging tax if the quotes are pre-tax)", 200, "USD", "policy (George, 23 Sep): assume USD 200 until Doug confirms", MONEY)
+inp('dan', "DAN cover inside the fee", 0, "USD", "George 24 Sep: not in the fee; each diver buys their own dive-accident cover (see own spending)", MONEY)
+inp('tax_buffer', "Tax buffer per head (Mexican IVA and lodging tax if the quotes are pre-tax)", 0, "USD", "George 24 Sep: cut; the other three shops quoted tax-inclusive; Doug asked to confirm", MONEY)
 h2("Leader costs carried by the group (George shares a room like everyone)")
 inp('g_flight', "George's flight allowance", 700, "USD", "policy; PHL–CZM band 568–800", MONEY)
 inp('g_room', "George's half of a shared room, 6 nights", f"=({R['room_lo']}*{R['nights_lo']}+{R['room_hi']}*{R['nights_hi']})/2", "USD", "formula", MONEY)
 inp('odd_room', "Odd-headcount room risk (one person alone at the group's cost)", f"={R['g_room']}", "USD", "formula: half a room", MONEY)
-inp('g_dan', "George's DAN cover", 119, "USD", "ADVERTISED", MONEY)
+inp('g_dan', "George's DAN cover carried by the group", 0, "USD", "George 24 Sep: own cost like everyone", MONEY)
 inp('g_rent', "George's gear rental, 5 days", f"={R['rental']}*5", "USD", "formula", MONEY)
 h2("Own spending guidance, not in the fee (no flights)")
 inp('meals', "Lunches, dinners and drinks per day (breakfast included)", 45, "USD/day", "INFERRED for an MBA crowd", MONEY)
 inp('days_meals', "Days on the island", 6, "days", "")
 inp('tips', "Tips for boat crew and hotel", 50, "USD", "INFERRED", MONEY)
 inp('xfer', "Airport transfers both ways", 30, "USD", "ADVERTISED shared van 15 each way", MONEY)
+inp('dan_own', "DAN or equivalent dive-accident cover, required, bought by each person", 119, "USD", "ADVERTISED DAN membership + Preferred plan", MONEY)
 inp('elearn_aow', "PADI AOW eLearning (add-on for AOW takers)", 220, "USD", "ADVERTISED (about)", MONEY)
 
 # ---------------- Fee ----------------
@@ -92,7 +93,7 @@ rows = [
  ("Marine park fees", f"={R['park']}*{R['park_days_beg']}", f"={R['park']}*{R['park_days_cert']}"),
  ("Tax buffer (IVA and lodging tax, if the quotes are pre-tax)", f"={R['tax_buffer']}", f"={R['tax_buffer']}"),
  ("PADI eLearning", f"={R['elearn_ow']}", "0"),
- ("DAN dive-accident cover", f"={R['dan']}", f"={R['dan']}"),
+ ("DAN dive-accident cover (not in the fee; each person buys their own, see below)", f"={R['dan']}", f"={R['dan']}"),
  ("Hotel Plaza, 6 nights with breakfast, 2 sharing", f"={room_pp}", f"={room_pp}"),
  ("Leader's costs shared (George's flight, half-room, DAN, rental, odd-room risk)", f"={leader_total}/{paying}", f"={leader_total}/{paying}"),
  ("Subtotal", "=SUM(B3:B10)", "=SUM(C3:C10)"),
@@ -107,7 +108,7 @@ rows = [
  ("", None, None),
  ("GUIDANCE BUDGET WITHOUT FLIGHTS", None, None),
  ("Trip fee", "=B13", "=C13"),
- ("Own spending: meals, drinks, tips, airport transfers", f"={R['meals']}*{R['days_meals']}+{R['tips']}+{R['xfer']}", f"={R['meals']}*{R['days_meals']}+{R['tips']}+{R['xfer']}"),
+ ("Own spending: DAN cover, meals, drinks, tips, airport transfers", f"={R['dan_own']}+{R['meals']}*{R['days_meals']}+{R['tips']}+{R['xfer']}", f"={R['dan_own']}+{R['meals']}*{R['days_meals']}+{R['tips']}+{R['xfer']}"),
  ("Guidance budget", "=B22+B23", "=C22+C23"),
  ("Guidance budget, certified taking AOW and nitrox", "n/a", "=C24+C16+C17"),
 ]
@@ -116,7 +117,7 @@ for label, b, c in rows:
     for col in (2, 3): fee.cell(r, col).number_format = MONEY
 for r in (11, 13, 21, 24, 25):
     for cell in fee[r]: cell.font = BOLD
-fee['A27'] = "The fee covers everything diving-related (course or package, gear, park fees, eLearning), DAN insurance and the hotel; everything else is the person's own. It is set at the pricing headcount; a bigger group makes a surplus that is refunded pro rata or held as buffer, a smaller group down to the minimum is covered by the contingency (see Group sheet). George's place: diving covered by Blue Note's comp, flight and room carried by the group, commission to George, all disclosed on the sign-up page."
+fee['A27'] = "The fee covers everything diving-related (course or package, gear, park fees, eLearning) and the hotel; everything else is the person's own, including the required DAN or equivalent dive-accident cover. It is set at the pricing headcount; a bigger group makes a surplus that is refunded pro rata or held as buffer, a smaller group down to the minimum is covered by the contingency (see Group sheet). George's place: diving covered by Blue Note's comp, flight and room carried by the group, commission to George, all disclosed on the sign-up page."
 
 # ---------------- Group ----------------
 g = wb.create_sheet("Group")
@@ -184,7 +185,7 @@ for row in [
  ("Sat 10 Oct", "Sign-up deadline for the first block; headcount to Blue Note and Hotel Plaza", "George"),
  ("by Thu 15 Oct", "Blue Note deposit 25% of the gross invoice; hotel deposit (terms to confirm)", "club account"),
  ("Fri 6 Nov", "Participant balances due (fee less deposit, plus any add-ons)", "participants"),
- ("Fri 13 Nov", "Blue Note final payment (30 days out); hotel balance per its terms; buy eLearning codes and DAN", "club account"),
+ ("Fri 13 Nov", "Blue Note final payment (30 days out); hotel balance per its terms; buy eLearning codes", "club account"),
  ("Sun 6 Dec", "Blue Note's 7-day refund cut-off", "everyone"),
  ("Sun 13 Dec", "Arrival; park fees paid from the club float; meals, drinks, tips and transfers are each person's own", "George"),
  ("after the trip", "Unused contingency and any surplus refunded pro rata", "club account"),
