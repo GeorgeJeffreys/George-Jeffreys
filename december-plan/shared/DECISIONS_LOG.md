@@ -39,6 +39,7 @@
 - 24 Sep: no haggling with Doug over his offer; one ask at the end (October, before the deposit) for any bulk reductions. Cheaper hotels are looked at when their quotes come back, not chased.
 - 25 Sep: technical diving for George is TDI only (no PADI Tec); it is a later consideration for rough pricing, not something to nail down with the centres now. No further tec asks to operators; the PADI Tec 40 availability question already sent to Marsa Shagra is corrected to TDI in the next natural reply, without urgency.
 - 25 Sep: priority order is (1) close the Cozumel offering and price, (2) Thanksgiving, (3) Egypt keeps moving on replies only.
+- 25 Sep (evening): dive cover is outside the fee after all: DAN no longer lets dive shops buy it for divers, so each person buys DAN membership + Master (about USD 84) via Blue Note's referral link and shows proof at sign-up; students are covered by the shop during the course only. Cozumel posted fees at Hotel Plaza: 1,400 / 1,300. Hotel decision (Hotel Plaza recommended vs Casa Colonial) put to George.
 - Standing: nothing is booked, paid or signed by the agent; money through CampusGroups or the operator's own link, never personal Venmo or Zelle; the leader's comped place, cross-subsidy and commission are disclosed on the sign-up page.
 
 - 23 Sep: Puerto Rico confirmed as the Thanksgiving spot (nonstop PHL–SJU, no passport, warm water, one-boat operator with leader free, bio bay). Hire cars sit inside the group budget. Thanksgiving fee sketched at USD 1,350; bio bay and night dive are add-ons.
