@@ -4,7 +4,7 @@ Create a flyer image to advertise a student club dive trip in a WhatsApp group c
 
 - Wharton Outdoors Club, Cozumel Dive Week, Sunday 13 to Saturday 19 December 2026, six nights, right after finals.
 - Cozumel, Mexico: Caribbean island off the Yucatán, famous for clear water and drift diving along the Palancar and Santa Rosa walls, turtles, eagle rays, coral reefs.
-- Two tracks. Beginner track: no experience needed; PADI Open Water course in three days (Monday to Wednesday), certified by Wednesday lunchtime, then two real reef boat days with everyone, Thursday afternoon and Friday morning. Certified track: two-tank boat dives every day Monday to Friday, mornings on Monday, Wednesday and Friday, afternoons on Tuesday and Thursday so those two mornings are free to sleep in; optional extra dives (Monday afternoon boat, shore dives on the free mornings) and an optional night dive on Thursday evening.
+- Two tracks. Beginner track: no experience needed; PADI Open Water course in three days (Monday all day, Tuesday afternoon, Wednesday morning), certified by Wednesday lunchtime, then two real reef boat days with everyone, Thursday afternoon and Friday morning. Certified track: two-tank boat dives every day Monday to Friday, mornings on Monday, Wednesday and Friday, afternoons on Tuesday and Thursday so those two mornings are free to sleep in for everyone; optional extra dives (Monday afternoon boat, shore dives on the free mornings) and an optional night dive on Thursday evening.
 - Everyone: Wednesday afternoon off for an island loop by jeep and scooter (Maya ruins at San Gervasio, Punta Sur lighthouse and beach) or the El Cielo sandbar by boat, then the certification dinner on Wednesday night; group dinners; last dive Friday by 1 pm; fly home Saturday.
 - Staying at Hotel Plaza in downtown San Miguel, breakfast included, walking distance to bars, restaurants and the seafront. Diving with Blue Note Scuba, a small PADI 5 Star centre.
 - Led by George Jeffreys, second-year MBA and former PADI Master Scuba Diver Trainer.
@@ -15,15 +15,15 @@ Create a flyer image to advertise a student club dive trip in a WhatsApp group c
 
 ## Week grid to copy exactly (added 28 Sep after ChatGPT garbled the schedule)
 
-Three colours only: blue = Beginners, green = Certified, yellow = Everyone; grey for travel. A split cell has Beginners on top and Certified below. Keep each cell to the words given.
+Colours: blue = Beginners, green = Certified, yellow = Everyone together, white with a thin grey outline = Free time, grey = Travel. Row labels (Morning, Afternoon, Evening) plain white with navy text. A split cell has Beginners on top and Certified below. Keep each cell to the words given. No boat icon on free mornings.
 
 | | Morning | Afternoon | Evening |
 |---|---|---|---|
 | Sun 13 | Grey: Arrive Cozumel | Yellow: Check in, gear fitting at Blue Note | Yellow: 6:30 pm welcome briefing, group dinner |
-| Mon 14 | Blue: Open Water day 1 (pool skills) / Green: 2-tank boat dives | Blue: Open Water day 1 continues / Green: Free (optional extra boat) | Yellow: Briefing, dinner in town |
-| Tue 15 | Blue: Open Water day 2 (first ocean dives) / Green: FREE MORNING | Blue: Free afternoon / Green: 2-tank boat dives | Yellow: Briefing, dinner in town |
+| Mon 14 | Blue: Open Water day 1 (pool skills) / Green: 2-tank boat dives | Blue: Open Water day 1 continues / White: Free (optional extra boat) | Yellow: Briefing, dinner in town |
+| Tue 15 | White: FREE MORNING (everyone) | Blue: Open Water day 2 (first ocean dives) / Green: 2-tank boat dives | Yellow: Briefing, dinner in town |
 | Wed 16 | Blue: Open Water day 3, certified by lunch / Green: 2-tank boat dives | Yellow: Island afternoon (jeep and scooter loop or El Cielo sandbar) | Yellow: Certification dinner |
-| Thu 17 | Yellow: FREE MORNING | Yellow: 2-tank boat dives, everyone together | Yellow: Optional night dive 7:30 pm, then dinner |
+| Thu 17 | White: FREE MORNING | Yellow: 2-tank boat dives, everyone together | Yellow: Optional night dive 7:30 pm, then dinner |
 | Fri 18 | Yellow: 2-tank boat dives, back by 1 pm | Yellow: Beach club afternoon | Yellow: Farewell dinner |
 | Sat 19 | Grey: Fly home | | |
 
