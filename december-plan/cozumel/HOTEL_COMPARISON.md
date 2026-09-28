@@ -4,7 +4,7 @@ All figures QUOTED unless marked. Per head = room cost for six nights divided by
 
 | Hotel | Room, six nights | Per head | Breakfast | Pool | Rooms held | Comp rule | Deposit / cancellation | Fee beginner / certified | Notes |
 |---|---|---|---|---|---|---|---|---|---|
-| Hotel Plaza (via Blue Note) | USD 492 (70 × 2 nights + 88 × 4) | 246 | included | rooftop pool | 20 blocked | 1 room per 14 paid (bites from 15 rooms) | terms to confirm (Doug); assumed 25% | 1,400 / 1,300 | Downtown, walk to everything; taxes stated as included by Doug; 50-room hotel |
+| Hotel Plaza (via Blue Note) | USD 492 (70 × 2 nights + 88 × 4) | 246 | included | rooftop pool | 20 blocked | 1 room per 14 paid (bites from 15 rooms) | terms to confirm (Doug); assumed 25% | 1,350 / 1,200 (28 Sep basis: 30 people, 3% contingency; 1,400 / 1,300 on the old 20-person, 6% basis) | Downtown, walk to everything; taxes stated as included by Doug; 50-room hotel |
 | Casa Colonial (Casa Mexicana group) | 339 (studio) to 366 (studio/suite mix) after 1 free night per 10 | 169–183 | to-go bag | at the sister hotel a few blocks away | 10 quoted; 20 "according to availability" (28 units in total) | 1 room night per 10 paid | 50% deposit, balance 15 days out; free cancellation to 20 days, 50% inside 20 days | 1,350 / 1,200 | Cheapest; plainer; kitchenettes in suites; DSA about USD 5 a room a night extra |
 | Casa Mexicana | 579 after comp nights | 290 | buffet | yes | 10 or 20 | as above | as above | 1,450 / 1,350 | Nicer rooms, terrace/ocean options, 88 rooms; dearest of the three |
 | Casa Bahía | 635–700 | 318–350 | none | no | 10 or 20 | as above | as above | 1,500 / 1,400 | No meals; not recommended |

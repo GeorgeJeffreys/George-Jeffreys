@@ -33,10 +33,10 @@ def h2(t):
     ws.append([t]); ws.cell(ws.max_row, 1).font = BOLD
 
 h2("Pricing basis")
-inp('n_price', "Pricing headcount: people including George at which the fee is set (larger groups make a surplus)", 20, "people", "policy: conservative")
-inp('n_min', "Minimum headcount the contingency must cover", 12, "people", "policy")
+inp('n_price', "Pricing headcount: people including George at which the fee is set (larger groups make a surplus)", 30, "people", "policy (George, 28 Sep): 30, last year was 40")
+inp('n_min', "Minimum headcount the contingency must cover", 14, "people", "policy (George, 28 Sep): fee 1,350 / 1,200 is covered from 14 (13 loses the odd-room cost)")
 inp('beg_share', "Share of participants who are Open Water students", 0.5, "share", "brief", PCT)
-inp('contingency', "Contingency inside the fee (refunded pro rata if unused)", 0.06, "share", "policy", PCT)
+inp('contingency', "Contingency inside the fee (refunded pro rata if unused)", 0.03, "share", "policy (George, 28 Sep): 3%, rounding to 50 adds the rest", PCT)
 h2("Blue Note Scuba (QUOTED 23 Sep 2026, Doug Atkinson)")
 inp('ow', "Open Water course, 3 days, equipment included", 400, "USD", "QUOTED", MONEY)
 inp('ow_extra', "Two extra boat days for new divers (Thu–Fri)", 240, "USD", "QUOTED", MONEY)
@@ -126,10 +126,10 @@ fee['A28'] = "The fee covers everything diving-related (course or package, gear 
 # ---------------- Group ----------------
 g = wb.create_sheet("Group")
 g.column_dimensions['A'].width = 66
-cols = {"B": 12, "C": 20, "D": 30, "E": 40}
+cols = {"B": 14, "C": 20, "D": 30, "E": 40}
 for col in cols: g.column_dimensions[col].width = 14
 g['A1'] = "Group budget at four sizes (half students; George leads and does not pay)"; g['A1'].font = H
-g.append(["", "12 people (minimum)", "20 people (pricing basis)", "30 people", "40 people"])
+g.append(["", "14 people (minimum)", "20 people", "30 people (pricing basis)", "40 people"])
 for c in g[2]: c.font = BOLD; c.fill = FILL
 def grow(label, fn, fmt=MONEY, bold=False):
     g.append([label] + [fn(col, n) for col, n in cols.items()]); r = g.max_row
