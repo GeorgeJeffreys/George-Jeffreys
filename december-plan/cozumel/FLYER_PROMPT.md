@@ -12,3 +12,19 @@ Create a flyer image to advertise a student club dive trip in a WhatsApp group c
 - Optional add-ons: Advanced Open Water and Nitrox courses free with eLearning, afternoon dives, night dive, single room.
 - Sign up: reply in the group chat with your name and track, pay the USD 400 deposit on CampusGroups by Saturday 10 October, balance due 6 November. Capacity 40, places in order of deposit.
 - Tone: fun, social, adventurous, for an active MBA crowd; the schedule must be easy to read at a glance, with the beginner and certified tracks clearly separated.
+
+## Week grid to copy exactly (added 28 Sep after ChatGPT garbled the schedule)
+
+Three colours only: blue = Beginners, green = Certified, yellow = Everyone; grey for travel. A split cell has Beginners on top and Certified below. Keep each cell to the words given.
+
+| | Morning | Afternoon | Evening |
+|---|---|---|---|
+| Sun 13 | Grey: Arrive Cozumel | Yellow: Check in, gear fitting at Blue Note | Yellow: 6:30 pm welcome briefing, group dinner |
+| Mon 14 | Blue: Open Water day 1 (pool skills) / Green: 2-tank boat dives | Blue: Open Water day 1 continues / Green: Free (optional extra boat) | Yellow: Briefing, dinner in town |
+| Tue 15 | Blue: Open Water day 2 (first ocean dives) / Green: FREE MORNING | Blue: Free afternoon / Green: 2-tank boat dives | Yellow: Briefing, dinner in town |
+| Wed 16 | Blue: Open Water day 3, certified by lunch / Green: 2-tank boat dives | Yellow: Island afternoon (jeep and scooter loop or El Cielo sandbar) | Yellow: Certification dinner |
+| Thu 17 | Yellow: FREE MORNING | Yellow: 2-tank boat dives, everyone together | Yellow: Optional night dive 7:30 pm, then dinner |
+| Fri 18 | Yellow: 2-tank boat dives, back by 1 pm | Yellow: Beach club afternoon | Yellow: Farewell dinner |
+| Sat 19 | Grey: Fly home | | |
+
+Price box: DAN insurance is NOT included. It belongs in the "Not included" column with flights, meals and drinks, tips and airport transfers.
