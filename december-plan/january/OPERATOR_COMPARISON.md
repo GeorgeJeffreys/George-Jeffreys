@@ -5,7 +5,7 @@ Both quoted in EUR; converted at 1.1465 USD/EUR (the workbook rate). RSDS figure
 | Line, EUR per person | Red Sea Diving Safari, Marsa Shagra (Royal Tent) | Blue Ocean, Abu Dabbab Lodge (basic double) | Blue Ocean (renovated double) |
 |---|---|---|---|
 | Lodging, 5 nights full board, 2 sharing | 390 (78 a night) | 275 (room 110 a night) | 363 (room 145 a night) |
-| Certified diving, Mon–Thu | 308: four one-day unlimited house-reef passes at 77 | 192 INFERRED: four-day price asked, pro rata of the 240 five-day package (two dives a day) | same |
+| Certified diving, Mon–Thu | 308: four one-day unlimited house-reef passes at 77 | 197: four-day house reef package, two dives a day (QUOTED 29 Sep) | same |
 | Boat day for the certified group (Wed) | 67: Dolphin House 48 + park fee 19 | 60: daily boat add-on (Dolphin House park fee not stated) | same |
 | Open Water student, course + certification | 452: course 358 incl. gear + e-code 94 | 370 with eLearning already done at home (retail PADI eLearning about USD 230, EUR 200, own or inside the fee); 510 if the shop supplies manual and certification (370 + 140) | same |
 | Students' Thursday diving after certification | 77: one-day pass | 48 INFERRED: one day pro rata | same |
@@ -25,7 +25,7 @@ Both quoted in EUR; converted at 1.1465 USD/EUR (the workbook rate). RSDS figure
 - What the extra buys at Marsa Shagra: unlimited house-reef diving on a marquee reef (shore entries any time, night dives on request), a purpose-built dive village with a 30-year safety record, the free-place rule that also covers George's diving and transfer, a tec facility on site for George's own TDI course later, Elphinstone by speedboat from the village, and a full answer to every question we asked within two days.
 - Blue Ocean is a dive centre at a partner hotel: plainer lodge, two boat-or-shore dives a day in the package, Elphinstone only for AOW divers with 50 logged dives, no tec, the e-code left to each student, and a 30% deposit that is refundable until a week before arrival (a softer cancellation position than RSDS's 20% non-refundable at booking).
 - Both have room for 15–25 with half students; both are low season with no supplements in early January.
-- Not yet known: Blue Ocean's four-day package price (asked 25 Sep), whether its rental includes a computer, and its environmental fees. None of these can close a gap of EUR 300 on the certified line.
+- Blue Ocean's four-day package came in at EUR 197 on 29 Sep, EUR 5 above the estimate, so the gap is unchanged. Still not known: whether its rental includes a computer, and its environmental fees. None of these can close a gap of EUR 300 on the certified line.
 
 ## Recommendation for George
 
