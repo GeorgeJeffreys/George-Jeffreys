@@ -1,6 +1,6 @@
 # Egypt option B: Sharm el-Sheikh, Naama Bay (George, 30 Sep 2026: "get a Sharm plan fully lined up")
 
-Status: first contacts sent 30 Sep to two Naama Bay centres. Camel replied 1 Oct (offer being prepared; asked about a Thursday dive day for beginners, answered yes). Red Sea Diving College silent. Nothing quoted yet. Marsa Shagra (RSDS) stays fully quoted as option A; no decision taken (George, 30 Sep). Flags: QUOTED / ADVERTISED (web snippet) / INFERRED.
+Status: first contacts sent 30 Sep to two Naama Bay centres. Camel replied 1 Oct (offer being prepared; asked about a Thursday dive day for beginners, answered yes). Red Sea Diving College acknowledged 1 Oct (co-owner Alain Sobol, quote to follow). Nothing quoted yet. Marsa Shagra (RSDS) stays fully quoted as option A; no decision taken (George, 30 Sep). Flags: QUOTED / ADVERTISED (web snippet) / INFERRED.
 
 ## Why Sharm
 A walkable resort town (Naama Bay: hotels, bars, restaurants, clubs on the beach) with day-boat access to Ras Mohammed, the Straits of Tiran and the SS Thistlegorm. The closest Red Sea match to the Cozumel formula of boat diving by day and a town by night.
@@ -37,6 +37,6 @@ Most Sharm day boats leave in the morning, so lie-ins are fewer than in Cozumel;
 - Pricing rule applies as for every trip: one fee covering diving, gear, park fees, course and hotel with the agreed board; beginner fee above certified fee (George, 30 Sep).
 
 ## Next steps
-1. Await both replies; chase Fri 2 Oct if silent.
+1. Await both quotes; chase Mon 5 Oct if none.
 2. On quotes: build pricing/build_sharm_budget.py (copy of the Egypt builder), compare with Marsa Shagra in january/OPERATOR_COMPARISON.md, and put the choice to George.
 3. George checks Penn Global's current Middle East guidance.
