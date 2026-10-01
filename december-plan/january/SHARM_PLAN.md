@@ -1,6 +1,6 @@
 # Egypt option B: Sharm el-Sheikh, Naama Bay (George, 30 Sep 2026: "get a Sharm plan fully lined up")
 
-Status: first contacts sent 30 Sep to two Naama Bay centres; nothing quoted yet. Marsa Shagra (RSDS) stays fully quoted as option A; no decision taken (George, 30 Sep). Flags: QUOTED / ADVERTISED (web snippet) / INFERRED.
+Status: first contacts sent 30 Sep to two Naama Bay centres. Camel replied 1 Oct (offer being prepared; asked about a Thursday dive day for beginners, answered yes). Red Sea Diving College silent. Nothing quoted yet. Marsa Shagra (RSDS) stays fully quoted as option A; no decision taken (George, 30 Sep). Flags: QUOTED / ADVERTISED (web snippet) / INFERRED.
 
 ## Why Sharm
 A walkable resort town (Naama Bay: hotels, bars, restaurants, clubs on the beach) with day-boat access to Ras Mohammed, the Straits of Tiran and the SS Thistlegorm. The closest Red Sea match to the Cozumel formula of boat diving by day and a town by night.
