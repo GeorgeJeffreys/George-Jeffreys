@@ -17,3 +17,12 @@ Asked: which sites the 3 boat days cover and whether the Thistlegorm is a 4th da
 
 ## Numbers
 pricing/build_sharm_budget.py -> sharm_group_budget.xlsx: fee USD 1,100 beginner / 1,050 certified (20-person basis, 6% contingency, same rule as Marsa Shagra), covered from 12 people (surplus 555 / 1,775 / 3,120 / 4,075 at 12/20/25/30).
+
+## Answers 2026-10-03 13:21 and 13:23 UTC (Alain), all QUOTED
+1. The 3 days / 6 dives cover Ras Mohammed and the Straits of Tiran; the Thistlegorm is added as an extra on the third day (+USD 160, AOW + 20 dives).
+2. The USD 445 Open Water includes the PADI eLearning code.
+3. RSDC is inside the Tao hotel, right on the Naama Bay promenade.
+4. Return airport transfers about USD 15 per person.
+5. Space held until the end of October.
+6. Half-board supplement USD 15 per person per day.
+No reply needed. Workbook updated: fee unchanged at USD 1,100 / 1,050 (breakfast); half board offered as a USD 75 add-on, because folding it in would make both fees 1,150 and break the beginner-above-certified rule. Guidance budget without flights about 1,550 / 1,500.
