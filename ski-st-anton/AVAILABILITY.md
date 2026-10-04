@@ -1,70 +1,77 @@
-# St Anton shadow trip: what is actually free for Mon 4 – Sat 9 Jan 2027
+# St Anton shadow trip: what is free for Sat 9 – Sat 16 Jan 2027
 
-> **WRONG DATES. On 5 Oct 2026 the organiser corrected the trip to Sat 9 – Sat 16 Jan 2027 (7 nights).** Everything below checked 4–9 Jan and is kept only as a record. The CSVs it cites were renamed `availability/*_4-9jan.csv`. A re-check for 9–16 Jan is in progress.
+These are the official WSSC Euro trip dates, confirmed on the club's Key Dates page. The stay is 7 nights, Saturday to Saturday. Checked 4–5 Oct 2026 on the St Anton tourist office's booking engine (Feratel/Deskline), property booking engines and Airbnb. Booking.com and VRBO blocked automated checks.
 
-Checked 4–5 Oct 2026. Sources:
-- the St Anton tourist office's booking engine (Feratel/Deskline), queried for every property in the three areas;
-- property booking engines (Gollas, Die Arlbergerin, Haus Gertrud);
-- Airbnb.
+Full rows are in:
+- `availability/st_anton.csv` (74 rows)
+- `availability/nasserein.csv` (31)
+- `availability/st_jakob.csv`
 
-Booking.com, VRBO and Interhome blocked automated checks; links to check them by hand are below. Full rows are in `availability/st_anton_4-9jan.csv`, `availability/nasserein_4-9jan.csv` and `availability/st_jakob_4-9jan.csv`.
+Unless marked otherwise, prices are engine totals for 12 people for the week. They exclude the tourist tax of €5 per person per night (€35 per person for the week).
 
-All prices are for 12 people and exclude the tourist tax of €5 per person per night.
+## Act by Fri 9 Oct
 
-## The short version
+Most options are on standard Tyrolean terms:
+- free cancellation until **10 Oct 2026**;
+- 40% charge from 11 Oct, 70% from 10 Dec, 90% from 2 Jan;
+- a 40–50% deposit.
 
-- **Supply is thin and pricier than the earlier search snippets suggested.**
-  - No single house in St Anton, Nasserein or St Jakob takes 12 for Mon–Sat. Airbnb has nothing.
-  - The answer is two or three neighbouring places, or one pension.
-  - Real prices for our dates start at **about €78 per person per night**. Most good options are €95–125.
-- **The Monday arrival costs us.** Many more places are free Sat 2 – Sat 9 Jan; Nasserein has 21 properties free that week against 6 for ours. But paying 7 nights to use 5 cancels the saving.
-- **Several shortlisted names are gone:**
-  - Pension Am Kirchhof and Haus Gertrud's 12-person flat are booked.
-  - Strolz and Windegg only take Saturday arrivals.
+Pension Strolz charges 40% from 3 months out. Small flats and rooms are still free, but every Airbnb or chalet for 8+ in St Anton is gone, and Gollas, Brunnenhof, Windegg, Haus Gertrud, Fahrner Hof and Moose Lodge are booked. **Booking this week keeps a free exit until 10 Oct. After that, every place booked is a 40% commitment.** So the headcount needs to be firm before then.
 
-## Ranked options for our exact dates
+## Best option in each area
 
-| # | Option | Area | Beds | Breakfast | € pp/night (12) | Total for 12, 5 nights | How to book | Notes |
+| | Option | Area | Sleeps | Breakfast | € pp/night (12) | € pp/night (15) | Total for 12, 7 nights | Lift access |
 |---|---|---|---|---|---|---|---|---|
-| 1 | **Fahrner Hof "Valluga" apartment (9) + Kertess triple (3)** | St Anton, Gastig (Gastigweg 24) | 12 | No; big kitchen | **77.5** | €4,650 | Enquiry: fahrnerhof@hotmail.com; Kertess via kertess.com | Best value, in your first-choice area. 170 m² flat, 3 bedrooms each with its own bathroom. About 10 min walk to the Galzigbahn. Engine shows the nights free but it isn't instant-book. The Kertess rate looks like a list price; confirm it. |
-| 2 | **Pension Munteck (4 doubles) + Appartement Sarlo (4-bed flat)** | Nasserein, 150 m apart | 12 (15 with a Dorfblick triple: €105 pp) | Yes at Munteck; Sarlo is self-catering | **96** | €5,760 | Online, tourist office engine | Cheapest bookable now. 400–500 m to the Nassereinbahn. Doubles suit couples; the flat suits 4 friends. |
-| 3 | **Pension Der Steinbock** | Nasserein/St Jakob edge (St. Jakober Dorfstr. 13) | 12–13 in 3 triples + 2 doubles (15 → €112 pp) | Yes | **121** | €7,285 | Online, booking.diearlbergerin.com | The whole group under one roof. Cheaper rooms share bathrooms. Group terms (5+ rooms) mean a 50% cancellation charge. ~700 m to the Nassereinbahn. |
-| 4 | **Pension Bergkristall (2 family rooms) + Haus Kandahar (2 doubles)** | St Anton, Oberdorf | 12 (15 with Falch Roman triple: €127 pp) | Yes | **126** | €7,542 | Online, tourist office engine | Central, 5–8 min walk to the lifts. Bergkristall alone takes 13 at €146 pp. |
-| 5 | Hotel-Garni PETE, 2 six-person suites | St Anton centre | 12 | Yes | 170 | €10,200 | Enquiry | 3 min to the lifts; pricey. |
+| **A** | **Pension Christian Strolz**: Riffler flat (6) + Galzig family room (4) + a double (2) | Nasserein | 12 (15 with the Sophia flat, 70 m away) | Yes for the 6 in the rooms; the flat has a kitchen | **63** | **64** | €5,327 | ~650 m to the Nasserein gondola |
+| **B** | **Chesa Platina**: 3 flats in one house, free sauna | St Anton (Stadleweg 26) | 12 (15 with the Wildebene flat next door) | No | **68** | **71** | €5,713 | ~20 min walk or ski bus to the Galzigbahn |
+| **C** | **Apart Dorr + Antonia + Bischof**: 3 neighbouring flats | St Anton, Gastig | 13 (16) | No | **78** | **81** | €6,537 | 9–14 min walk |
+| **D** | **Apart Edi Mall (6) + Falch Edi (4) + Thomashof (3)** | St Anton centre | 13 | No | **88** | n/a | €7,425 | Edi Mall is 80 m from the Galzigbahn |
+| **E** | **Strolz Hanspeter flat (8) + Gsörhof flat (4)** | St Jakob, St. Jakober Dorfstraße | 12 (15 with the bigger Gsörhof flat) | No | **59** | **67** | €4,960 incl. cleaning | Free ski bus |
+| **F** | **Haus Zangerl**: two 3-bedroom flats, one house | St Jakob | 12 (16) | No | **70** | **76** | €5,894 incl. cleaning | Free ski bus |
 
-Also free but expensive: Dorfblick (€155), Arlen Lodge (€171), Hotel Ehrenreich (€186), Alpenland (€192), Hotel Zur Pfeffermühle (€222).
+**My pick is A, Pension Christian Strolz.**
+- It's the cheapest option in your top two areas.
+- One family-run place, with breakfast for half the group and a kitchen for the rest.
+- A short walk to the Nasserein gondola, and it books directly on the pension's own site: https://booking.s8.hotellogin.cloud/customer/pensionstrolz/booking.php
+- For 15, add the Sophia flat at no real change per head.
 
-## If some of the group can arrive Sat 2 Jan
+**If you want St Anton itself:**
+- **B** is the value pick, but at about 20 minutes it's no closer to the Galzigbahn than Nasserein is.
+- **C** is the real "walk to the lifts" option for about €15 per person per night more than A.
 
-These are priced for 7 nights.
+### Breakfast for everyone
 
-| Option | Area | Total for 12, 7 nights | € pp/night over 7 nights | € pp per night actually used if you still arrive on the 4th |
-|---|---|---|---|---|
-| Hof am Arlberg, 2 flats of 6 in one house | St Jakob (Gand) | €6,261 | 74.5 | 104 |
-| Scherl Franz + Fahrner Anni flats | St Anton | €6,480 | 77 | 108 |
-| Alpina, 2 flats of 6 | St Jakob (Gsör) | €7,258 | 86 | 121 |
-
-These only pay off if people really use the extra two nights. Otherwise #1 and #2 above are cheaper.
-
-## Revised budget per person (excluding flights)
-
-| | Low (option #1) | Mid (#2) | Higher (#3 or #4) |
+| Option | Area | € pp/night (12) | Notes |
 |---|---|---|---|
-| Accommodation, 5 nights | 390 | 480 | 610–630 |
-| Lift pass, 4 days | 331 | 331 | 331 |
-| Rental, food, après, transfers, tourist tax | 490–765 | 765 | 765 |
-| **Total** | **~€1,200–1,500** | **~€1,575 (~$1,850)** | **~€1,700–1,725** |
+| Strolz rooms + Pension Gerda (250 m apart) | Nasserein | 71 (76 at 15) | All B&B |
+| Pension Bären + Gerda | Nasserein | 77 | Most Bären rooms share bathrooms; ~150 m to the gondola |
+| Haus Karl Murr (+ a Pension Enzian double) | St Anton, ~10 min walk | 102–108 | One house |
+| Landhaus Lechthaler | St Jakob | 104 | |
+| **Haus Viktoria B&B** | St Jakob, ski bus at the door | **~47 (estimate)** | **Calendar shows 9 rooms + a flat for 9 free all week, but no 2027 prices online. Phone +43 5446 3540.** If the website rates hold, it's the cheapest option with breakfast by far. |
 
-A realistic number to give the group: **about €1,600 / $1,900 per person before flights**.
+## Budget per person, 7 nights (excluding flights)
 
-## Next actions, in order
+The non-accommodation lines are estimates scaled from `research/context.md` to 6 ski days.
 
-1. **Email Fahrner Hof and Kertess this week** (option #1). Ask them to confirm 4–9 Jan for 9 + 3 people, the total including cleaning, and the deposit and cancellation terms.
-2. **Hold a fallback.** Munteck + Sarlo (#2) and Steinbock (#3) are bookable online now. Check their cancellation terms before booking, because rooms for these dates are disappearing.
-3. **Check by hand:**
-   - [Booking.com](https://www.booking.com/searchresults.html?ss=St.+Anton+am+Arlberg&checkin=2027-01-04&checkout=2027-01-09&group_adults=12)
-   - [VRBO](https://www.vrbo.com/search?destination=Sankt%20Anton%20am%20Arlberg&startDate=2027-01-04&endDate=2027-01-09&adults=12)
-   - [Interhome Wiesenhof](https://www.interhome.com/austria/arlberg-mountain/sankt-anton-am-arlberg/)
-   - [Stanton Hostel](https://www.booking.com/hotel/at/stanton-hostel-sankt-anton-am-arlberg.en-gb.html?checkin=2027-01-04&checkout=2027-01-09&group_adults=12)
-   - Pension Westreicher by phone, +43 5446 3282 (its website is dead)
-4. Email Haus Gollas (info@gollas.at) only if the others fall through: about €132 per person with breakfast, provided they accept a Monday arrival.
+| | Low (E or A, self-catering) | Mid (A) | Higher (C, eating out more) |
+|---|---|---|---|
+| Accommodation, 7 nights | 415–445 | 445 | 545 |
+| Lift pass, 6 days (€468) | 468 | 468 | 468 |
+| Rental, 6 days | 200 | 260 | 300 |
+| Food | 235 | 340 | 520 |
+| Après, transfers, tourist tax | 225 | 410 | 500 |
+| **Total** | **~€1,550–1,575 (~$1,830)** | **~€1,925 (~$2,250)** | **~€2,335 (~$2,730)** |
+
+- Epic Pass holders get 3 free days if they stay at a participating property, so they only buy a 3-day pass. That saves roughly €200–250; the 3-day price hasn't been checked. Ask Strolz whether it takes part.
+- A reasonable figure to give the group: **about €1,900 / $2,250 per person before flights.**
+
+## Next steps
+
+1. **Today or tomorrow:** get a rough headcount. 12 or 15 changes which combination to book.
+2. **Phone Haus Viktoria** (+43 5446 3540) for a B&B quote. If it's anywhere near €47, it beats everything.
+3. **By Fri 9 Oct:** book A (Strolz direct), or your chosen option, while cancellation is still free. Collect a deposit of about €150–200 per person from the group to cover the 40% exposure from 11 Oct.
+4. **Check by hand:**
+   - [Booking.com](https://www.booking.com/searchresults.html?ss=St.+Anton+am+Arlberg&checkin=2027-01-09&checkout=2027-01-16&group_adults=12)
+   - [VRBO](https://www.vrbo.com/search?destination=Sankt%20Anton%20am%20Arlberg&startDate=2027-01-09&endDate=2027-01-16&adults=12)
+   - [Stanton Hostel](https://www.booking.com/hotel/at/stanton-hostel-sankt-anton-am-arlberg.en-gb.html?checkin=2027-01-09&checkout=2027-01-16&group_adults=12)
+   - Pension Westreicher by phone, +43 5446 3282
