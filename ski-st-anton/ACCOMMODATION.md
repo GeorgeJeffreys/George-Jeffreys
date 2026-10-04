@@ -2,11 +2,11 @@
 
 Mon 4 – Sat 9 Jan 2027, 5 nights, 10–15 people. Research date 4 Oct 2026.
 
-How sure the prices are: every price below comes from search-result snippets. Property sites and Airbnb could not be opened from this environment. Most prices are "from" or last-season rates. None has been checked for our dates, so each needs a quote. Full rows, sources and evidence flags are in `lodging.csv` (33 options). Background on transport, lift passes and booking rules is in `research/context.md`.
+How sure the prices are: every price below comes from search-result snippets. Property sites and Airbnb could not be opened from this environment. Most prices are "from" or last-season rates. None has been checked for our dates, so each needs a quote. Full rows, sources and evidence flags are in `lodging.csv` (20 options in St Anton, Nasserein and St Jakob). On 4 Oct the organiser narrowed the search to St Anton first, then Nasserein, then St Jakob, and dropped the other towns; their research is kept in `research/neighbouring_towns.csv`. Live availability checks are in `availability/`. Background on transport, lift passes and booking rules is in `research/context.md`.
 
 ## Bottom line
 
-1. **Accommodation budget: about €50–65 per person per night, plus €5 tourist tax.** That's €275–350 per person for the 5 nights. It buys a whole pension with breakfast in St Jakob, or a whole self-catered house a few bus stops down the valley. Anything within walking distance of the lifts in St Anton centre or Nasserein starts at about €85–100 per person for a whole house. Catered chalets work out at €140–340 per person and aren't worth it.
+1. **Accommodation budget: about €50–65 per person per night, plus €5 tourist tax.** That's €275–350 per person for the 5 nights. It buys a whole pension with breakfast in St Jakob, or a basic pension in the centre. Anything within walking distance of the lifts in St Anton centre or Nasserein starts at about €85–100 per person for a whole house. Catered chalets work out at €140–340 per person and aren't worth it.
 2. **The biggest obstacle is the Monday arrival, not price.** Most whole houses and chalets let Saturday to Saturday for 7 nights in January. If an owner insists, we pay for 2–9 Jan and use 5 nights, which adds about 40% to the per-night cost. Pensions, hostels and hotels are more flexible. Ask about this first in every enquiry.
 3. **St Jakober Dorfstraße is the sweet spot.** One street in St Jakob has the cheapest beds that still feel like St Anton:
    - Pension Am Kirchhof, 12 beds with breakfast
@@ -15,8 +15,7 @@ How sure the prices are: every price below comes from search-result snippets. Pr
    - Haus Tirol, 9 beds
 
    The free ski bus runs every 15 minutes to the Nasserein gondola and the centre. With 15 people, take Am Kirchhof whole and put the overflow in Gollas or the hostel on the same street.
-4. **The Stanzertal houses (Flirsch, Pettneu) are cheapest for a whole house: about €40–50 per person.** They're 10–16 minutes on the same free ski bus. The catch is evenings: the last free bus leaves about 18:30, then a night bus runs about every 2 hours (about €5), or a taxi.
-5. **Timing check on the official Wharton trip.** The club ran Sat 10 – Sat 17 Jan last season. If it runs Saturday to Saturday again, 2027 would be 9–16 Jan, which barely overlaps our stay. The resort also changes year to year (one past trip mentions La Folie Douce, a French-resort bar). One message to a club member or a look at @whartonskiclub would settle it before anyone pays a deposit.
+4. **Timing check on the official Wharton trip.** The club ran Sat 10 – Sat 17 Jan last season. If it runs Saturday to Saturday again, 2027 would be 9–16 Jan, which barely overlaps our stay. The resort also changes year to year (one past trip mentions La Folie Douce, a French-resort bar). One message to a club member or a look at @whartonskiclub would settle it before anyone pays a deposit.
 
 ## Shortlist, ranked by value for this group
 
@@ -26,17 +25,14 @@ The price per person per night assumes 12 people and excludes the €5 tourist t
 |---|---|---|---|---|---|---|---|---|
 | 1 | **Pension Am Kirchhof** | St Jakob | 12 beds: 3 doubles + 1 multi-bed room | Breakfast buffet | ~50 | n/a (pension) | Ski bus, ~10 min | Best fit: whole house, breakfast, doubles for couples, a big room for singles. No kitchen. amkirchhof.at |
 | 2 | **Haus Gertrud** (6-bed apartment) | Gastig, St Anton | 12 in the apartment; 24 across the whole house | Kitchen, sauna | Advertised 18–33; **expect 55–85** | Ask | ~500 m walk | The only cheap whole-unit lead within walking distance. The advertised price is surely off-season, so quote it first. hausgertrud.at |
-| 3 | **9-double-room house** (Grether-Reisen 32902) | Flirsch | 14–18; 9 en-suite doubles/twins | Kitchen | ~48 | ~68 | Ski bus, 16–20 min | Takes 15 easily, and every room has its own bathroom. Weekly let; ask about Mon–Sat. |
-| 4 | **Arlberghaus Rocks** | Flirsch | 14; 6 bedrooms | Shared kitchen | ~41 | ~57 | Ski bus, 16–20 min | Cheapest named whole house. Only 2 bathrooms for 14. arlberghaus-rocks.at |
-| 5 | **Pension Westreicher Otto** | Centre, Dorfstraße 49 | 12 beds in 7 rooms | Breakfast | ~58 | n/a | 5–10 min walk | Best centre location for the price. Basic 2-star with shared bathrooms. |
-| 6 | **Riffler Lodge** | Pettneu | 12 (10 + 2 in the TV room); 5 en-suite rooms | Kitchen, sauna | ~66 | n/a: **5-night minimum advertised** | Ski bus, ~10–13 min | One of the few houses that already says 5 nights is fine. VRBO 4534471. |
-| 7 | **Stanton Hostel** | St Jakob | Pods in 4- and 6-bed dorms, plus doubles | Guest kitchen | 35 advertised; January probably 50–90 | n/a | Ski bus | The only hostel in the area. Good as overflow for #1. |
-| 8 | **Pension Der Steinbock** | Edge of Nasserein | 13–16 rooms (~26 beds) | Breakfast (sometimes ~€15 extra) | 29–49 + breakfast | n/a | ~10 min walk to the Nasserein gondola | Could hold all 15 under one roof. Some rooms share bathrooms. |
-| 9 | **Gasslihof apartments** | St Jakob | 11; en-suite doubles + triple + twin | 2 kitchens | ~44 | Ask | Bus stop at the door | Too small alone; pair it with Gollas or the hostel. |
+| 3 | **Pension Westreicher Otto** | Centre, Dorfstraße 49 | 12 beds in 7 rooms | Breakfast | ~58 | n/a | 5–10 min walk | Best centre location for the price. Basic 2-star with shared bathrooms. |
+| 4 | **Stanton Hostel** | St Jakob | Pods in 4- and 6-bed dorms, plus doubles | Guest kitchen | 35 advertised; January probably 50–90 | n/a | Ski bus | The only hostel in the area. Good as overflow for #1. |
+| 5 | **Pension Der Steinbock** | Edge of Nasserein | 13–16 rooms (~26 beds) | Breakfast (sometimes ~€15 extra) | 29–49 + breakfast | n/a | ~10 min walk to the Nasserein gondola | Could hold all 15 under one roof. Some rooms share bathrooms. |
+| 6 | **Gasslihof apartments** | St Jakob | 11; en-suite doubles + triple + twin | 2 kitchens | ~44 | Ask | Bus stop at the door | Too small alone; pair it with Gollas or the hostel. |
 
 Also seen, not recommended:
 - **Too expensive for this budget:** Chalet Brunnenhof in St Jakob (~€114, though it has 8 bedrooms and 8 bathrooms), Interhome Wiesenhof (~€90), and Pension Christian Strolz in Nasserein (~€65 including tax; a fallback).
-- **Poor value:** Chalet Narnia, Raffl's Sweet Little Home, the Mooser Hotel, Haus Arlberg in Pettneu (€160–290), and all catered chalets.
+- **Poor value:** Chalet Narnia, Raffl's Sweet Little Home, the Mooser Hotel (€160–290), and all catered chalets.
 - **Wrong location:** Landeck and Zams (train fares and a fixed last train eat the saving), the Zams ski hut (it's on a different ski area), and Stuben (poor for nightlife).
 
 ## Trade-off by area
@@ -46,7 +42,6 @@ Also seen, not recommended:
 | St Anton centre / Gastig / Oberdorf | 85–100 (Airbnb band); Haus Gertrud is the outlier | 58 (basic) to 105+ | Walk | Walk |
 | Nasserein | 100–250 | 49–65 | Walk to the Nasserein gondola | 10–15 min walk from the centre |
 | St Jakob | 44 (small) to 114 | 50 | Free ski bus, ~10 min | Night bus ~€3.50 or taxi |
-| Pettneu / Flirsch / Schnann | 40–66 | 35–80 | Free ski bus, 10–20 min | Night bus about every 2 hours (~€5) or taxi |
 
 ## What the whole trip costs per person (excluding flights)
 
@@ -66,7 +61,7 @@ For a 5-night stay with 4 ski days. The non-accommodation figures are from `rese
 ## Next steps (when you're ready)
 
 1. Confirm the official trip's resort and dates with one club member.
-2. Send quote requests for 4–9 Jan, for 12 people with up to 15, to #1, #2, #3, #4, #6 and #8. Ask about:
+2. Send quote requests for 4–9 Jan, for 12 people with up to 15, to #1–#6. Ask about:
    - a Monday arrival and the price for 5 nights versus the full week
    - the room layout
    - whether breakfast is included or its price
