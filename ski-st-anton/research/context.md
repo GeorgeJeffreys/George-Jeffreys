@@ -6,6 +6,14 @@ Web access note: WebFetch was blocked for every key page tried (groups.wharton.u
 
 ---
 
+## 0. Official trip dates: CONFIRMED (5 Oct 2026)
+
+- **WSSC Euro Ski Trip: "January 9th – 16th, 2027"**, a "week-long trip to a top European resort with 130+ students/partners". The location was "announced on September 20th at the WSSC Party". ADVERTISED (page): https://groups.wharton.upenn.edu/skisnowboard/keydates/, fetched 5 Oct 2026.
+- **The public page does not name the 2027 resort.** The organiser says it is St Anton. The previous Euro trip (2026) went to **Val Thorens**, per the club home page ("Scenes from 2026 Euro (Val-Thorens) and US (Breckenridge) Trips"): https://groups.wharton.upenn.edu/skisnowboard/home/.
+- The shadow trip is therefore set to **Sat 9 – Sat 16 Jan 2027**, matching the official trip. The 4–9 Jan dates assumed earlier in this file were wrong; sections 1, 2 and 6 below were written for them.
+
+---
+
 ## 1. The official Wharton Ski & Snowboard Club (WSSC) Euro trip
 
 ### What the evidence shows
