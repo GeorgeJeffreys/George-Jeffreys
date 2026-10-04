@@ -1,11 +1,13 @@
 # St Anton shadow trip: what is actually free for Mon 4 – Sat 9 Jan 2027
 
+> **WRONG DATES. On 5 Oct 2026 the organiser corrected the trip to Sat 9 – Sat 16 Jan 2027 (7 nights).** Everything below checked 4–9 Jan and is kept only as a record. The CSVs it cites were renamed `availability/*_4-9jan.csv`. A re-check for 9–16 Jan is in progress.
+
 Checked 4–5 Oct 2026. Sources:
 - the St Anton tourist office's booking engine (Feratel/Deskline), queried for every property in the three areas;
 - property booking engines (Gollas, Die Arlbergerin, Haus Gertrud);
 - Airbnb.
 
-Booking.com, VRBO and Interhome blocked automated checks; links to check them by hand are below. Full rows are in `availability/st_anton.csv`, `availability/nasserein.csv` and `availability/st_jakob.csv`.
+Booking.com, VRBO and Interhome blocked automated checks; links to check them by hand are below. Full rows are in `availability/st_anton_4-9jan.csv`, `availability/nasserein_4-9jan.csv` and `availability/st_jakob_4-9jan.csv`.
 
 All prices are for 12 people and exclude the tourist tax of €5 per person per night.
 
