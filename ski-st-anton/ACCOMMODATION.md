@@ -1,5 +1,7 @@
 # St Anton shadow ski trip: accommodation shortlist
 
+> **Superseded on 5 Oct 2026 by `AVAILABILITY.md`.** Live checks show real prices for our dates start at about €78 per person per night. Pension Am Kirchhof and Haus Gertrud's 12-person flat are booked. The snippet-based figures below are kept for reference.
+
 Mon 4 – Sat 9 Jan 2027, 5 nights, 10–15 people. Research date 4 Oct 2026.
 
 How sure the prices are: every price below comes from search-result snippets. Property sites and Airbnb could not be opened from this environment. Most prices are "from" or last-season rates. None has been checked for our dates, so each needs a quote. Full rows, sources and evidence flags are in `lodging.csv` (20 options in St Anton, Nasserein and St Jakob). On 4 Oct the organiser narrowed the search to St Anton first, then Nasserein, then St Jakob, and dropped the other towns; their research is kept in `research/neighbouring_towns.csv`. Live availability checks are in `availability/`. Background on transport, lift passes and booking rules is in `research/context.md`.
