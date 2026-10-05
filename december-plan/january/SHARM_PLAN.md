@@ -34,18 +34,18 @@ Most Sharm day boats leave in the morning, so lie-ins are fewer than in Cozumel;
 ## First quote: Red Sea Diving College (3 Oct, january/replies/red-sea-college-2026-10-03.md)
 On the club rule at 20 people with 6% contingency (pricing/sharm_group_budget.xlsx): **USD 1,100 beginner / 1,050 certified**, covered from 12 people. Guidance budget without flights about 1,550 / 1,500 (own spending higher than Marsa Shagra because the hotel is breakfast only: dinners and non-boat lunches about USD 30 a day).
 
-| Per person, USD | Marsa Shagra (RSDS) | Sharm (RSDC + Tao Beach) |
-|---|---|---|
-| Posted fee, beginner / certified | 1,300 / 1,250 | 1,100 / 1,050 |
-| Board | full board in the village | breakfast; boat lunch on dive days |
-| Certified diving | unlimited house reef Mon-Thu + Dolphin House boat | 3 day-boat days (6 dives) to Ras Mohammed and Tiran + Thursday boat; Thistlegorm +160 on day 3 |
-| Beginners | OW + e-code + Thursday house-reef day | OW incl. eLearning + Thursday boat |
-| Guidance budget without flights | about 1,710 / 1,660 | about 1,550 / 1,500 (half board +75 optional) |
-| Evenings | quiet eco-village | Naama Bay bars, restaurants, clubs |
-| Free places | 11th, 21st, 30th paying | 1 per 10 paying |
-| Deposit / cancellation | 20% non-refundable at booking, ladder | to agree on numbers; space held to end of October |
+| Per person, USD | Marsa Shagra (RSDS) | Sharm (RSDC + Tao Beach) | Sharm (Camel, hotel + centre in one) |
+|---|---|---|---|
+| Posted fee, beginner / certified | 1,300 / 1,250 | 1,100 / 1,050 | 1,000 / 950 (hand calc; beginner lifted to stay above certified) |
+| Board | full board in the village | breakfast; boat lunch on dive days | breakfast; half board +EUR 18/night |
+| Certified diving | unlimited house reef Mon-Thu + Dolphin House boat | 3 day-boat days (6 dives) to Ras Mohammed and Tiran + Thursday boat; Thistlegorm +160 on day 3 | 4 days, 2 guided dives a day; private boat at 15+ but sites not guaranteed; Thistlegorm EUR 127, not guaranteed, full visa needed; free nitrox |
+| Beginners | OW + e-code + Thursday house-reef day | OW incl. eLearning + Thursday boat | SSI Open Water (house reef) + Thursday dive day |
+| Guidance budget without flights | about 1,710 / 1,660 | about 1,550 / 1,500 (half board +75 optional) | about 1,400 / 1,350 (transfers included) |
+| Evenings | quiet eco-village | Naama Bay bars, restaurants, clubs | Naama Bay, a few minutes from the bay |
+| Free places | 11th, 21st, 30th paying | 1 per 10 paying | every 11th diver |
+| Deposit / cancellation | 20% non-refundable at booking, ladder | to agree on numbers; space held to end of October | 35% non-refundable within 7 days of confirmation, 65% six weeks out; quote valid 28 days; rooms held to mid-October |
 
-All RSDC follow-ups answered 3 Oct: Ras Mohammed and Tiran; Thistlegorm as an extra on day 3; eLearning code included; RSDC is inside the Tao hotel on the Naama Bay promenade; transfers about USD 15 return; half board +15 a night (offered as an add-on so the beginner fee stays above certified); space held to the end of October. Camel's offer is due after the weekend.
+All RSDC follow-ups answered 3 Oct: Ras Mohammed and Tiran; Thistlegorm as an extra on day 3; eLearning code included; RSDC is inside the Tao hotel on the Naama Bay promenade; transfers about USD 15 return; half board +15 a night (offered as an add-on so the beginner fee stays above certified); space held to the end of October. Camel's offer arrived 5 Oct (january/replies/camel-2026-10-05.md); follow-ups asked (boat vs house reef, cancellation terms, single supplement).
 
 ## Early price indicators (not quotes)
 - Flights: PHL to SSH advertised from about USD 908 return (Expedia), one stop via Istanbul or Cairo; Istanbul or Cairo to SSH from about USD 50 to 65 one way. ADVERTISED.
