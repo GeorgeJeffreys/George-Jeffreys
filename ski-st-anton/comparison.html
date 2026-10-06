@@ -1,0 +1,148 @@
+<title>St Anton Shortlist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Source+Sans+3:wght@400;600;700&display=swap">
+<style>
+/* Layout: one compact comparison sheet, grouped by area like a lift-map legend; table on desktop, stacked cards on phones */
+:root {
+  --bg: #f3f6f8;
+  --surface: #ffffff;
+  --ink: #18222e;
+  --muted: #5b6875;
+  --line: #d9e1e7;
+  --anton: #1f4f8a;
+  --anton-tint: #e3ecf7;
+  --nass: #2f6b4f;
+  --nass-tint: #e2f0e8;
+  --hold: #b8322a;
+  --hold-tint: #fbe7e5;
+  --display: "Barlow Condensed", "Arial Narrow", "Roboto Condensed", sans-serif;
+  --body: "Source Sans 3", "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #10161d; --surface: #18212b; --ink: #e8eef3; --muted: #9aa8b5; --line: #2a3643;
+    --anton: #8db6ea; --anton-tint: #1c2d44; --nass: #86c9a6; --nass-tint: #1a3328;
+    --hold: #f08a80; --hold-tint: #3a1f1d; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #10161d; --surface: #18212b; --ink: #e8eef3; --muted: #9aa8b5; --line: #2a3643;
+  --anton: #8db6ea; --anton-tint: #1c2d44; --nass: #86c9a6; --nass-tint: #1a3328;
+  --hold: #f08a80; --hold-tint: #3a1f1d; color-scheme: dark;
+}
+body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 15px; line-height: 1.4; }
+.wrap { max-width: 1120px; margin: 0 auto; padding-inline: 16px; padding-block: 24px 32px; display: grid; gap: 18px; }
+header { display: grid; gap: 6px; }
+.eyebrow { font-family: var(--display); font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-size: 14px; }
+h1 { font-family: var(--display); font-weight: 700; font-size: clamp(28px, 5vw, 40px); line-height: 1.05; margin: 0; text-wrap: balance; }
+.lede { margin: 0; color: var(--muted); max-width: 70ch; }
+.areas { display: flex; flex-wrap: wrap; gap: 10px; }
+.area-note { flex: 1 1 300px; min-width: 0; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); }
+.area-note b { font-family: var(--display); font-size: 17px; letter-spacing: .02em; }
+.area-note p { margin: 2px 0 0; color: var(--muted); font-size: 14px; }
+.chip { display: inline-block; font-family: var(--display); font-weight: 600; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; white-space: nowrap; }
+.chip.anton { background: var(--anton-tint); color: var(--anton); }
+.chip.nass { background: var(--nass-tint); color: var(--nass); }
+.chip.hold { background: var(--hold-tint); color: var(--hold); }
+.table-box { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+table { width: 100%; border-collapse: collapse; min-width: 900px; }
+th, td { text-align: left; vertical-align: top; padding: 12px 14px; border-bottom: 1px solid var(--line); }
+thead th { font-family: var(--display); font-weight: 600; font-size: 14px; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); background: var(--bg); }
+tr.group th { font-family: var(--display); font-size: 18px; font-weight: 700; letter-spacing: .03em; padding-block: 8px; }
+tr.group.anton th { color: var(--anton); background: var(--anton-tint); }
+tr.group.nass th { color: var(--nass); background: var(--nass-tint); }
+tbody tr:last-child td { border-bottom: 0; }
+.name { font-family: var(--display); font-weight: 700; font-size: 21px; line-height: 1.1; display: block; }
+.where { color: var(--muted); font-size: 13.5px; display: block; margin-top: 2px; }
+.badges { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.k { display: block; font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; font-family: var(--display); font-weight: 600; }
+.price { font-family: var(--display); font-weight: 700; font-size: 28px; line-height: 1; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.per { color: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+td ul { margin: 0; padding-left: 16px; display: grid; gap: 2px; }
+.foot { color: var(--muted); font-size: 13px; display: grid; gap: 4px; max-width: 90ch; }
+.foot p { margin: 0; }
+@media (max-width: 720px) {
+  .table-box { border: 0; background: transparent; overflow: visible; }
+  table, thead, tbody, tr, th, td { display: block; min-width: 0; width: auto; }
+  table { min-width: 0; }
+  thead { display: none; }
+  tbody { display: grid; gap: 10px; }
+  tr.group th { border-radius: 8px; border: 0; }
+  tr.opt { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 4px 0; }
+  tr.opt td { border-bottom: 1px solid var(--line); padding: 8px 14px; }
+  tr.opt td:last-child { border-bottom: 0; }
+  tr.opt td[data-label]::before { content: attr(data-label); display: block; font-family: var(--display); font-weight: 600; font-size: 12px; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; }
+}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Wharton shadow ski week · Sat 9 – Sat 16 Jan 2027 · 10 people</div>
+    <h1>Where we could stay in St Anton</h1>
+    <p class="lede">Five places that are free for our week and keep the whole group in one building. Prices are per person for all 7 nights, sharing, including the €5 a night tourist tax.</p>
+  </header>
+
+  <div class="areas">
+    <div class="area-note"><span class="chip anton">St Anton</span> <b>The village</b><p>Main lifts (Galzig, Rendl), the pedestrian centre and the après bars. Chesa Platina is on the quieter west edge, so it is a bus ride from the centre.</p></div>
+    <div class="area-note"><span class="chip nass">Nasserein</span> <b>The east end of St Anton</b><p>Its own gondola into the same ski area, and you can ski back down to it. The centre is a 10–15 min walk or a few minutes on the free ski bus.</p></div>
+  </div>
+
+  <div class="table-box">
+    <table>
+      <thead>
+        <tr><th>Place</th><th>Getting to the lifts</th><th>Rooms and beds</th><th>Kitchen and breakfast</th><th>Extras</th><th>Per person</th></tr>
+      </thead>
+      <tbody>
+        <tr class="group anton"><th colspan="6">St Anton</th></tr>
+        <tr class="opt">
+          <td><span class="name">Haus Chesa Platina</span><span class="where">Stadleweg 26 · west edge of the village</span><div class="badges"><span class="chip anton">St Anton</span><span class="chip hold">Held for us till Friday</span></div></td>
+          <td data-label="Getting to the lifts">~17 min walk to Rendl lift<br>~20 min walk or 5 min free bus to Galzig lift and the centre</td>
+          <td data-label="Rooms and beds">3 flats in one house<br>8 real beds + 2 sofa beds</td>
+          <td data-label="Kitchen and breakfast">3 kitchens<br>No breakfast</td>
+          <td data-label="Extras"><ul><li>Gym and guest lounge</li><li>Tiled stoves, balconies</li><li>Free ski and boot storage at Sport Alber by the lifts</li></ul></td>
+          <td data-label="Per person"><div class="price">€591</div><div class="per">≈ €84 a night · cleaning included</div></td>
+        </tr>
+        <tr class="opt">
+          <td><span class="name">Hotel Garni Senn</span><span class="where">Dorfstraße 91 · village, by the Nasserein gondola</span><div class="badges"><span class="chip anton">St Anton</span></div></td>
+          <td data-label="Getting to the lifts">1–2 min walk to the Nasserein gondola<br>~8 min walk to the centre</td>
+          <td data-label="Rooms and beds">2 flats in one house (6 + 4)<br>6 real beds + 2 couches for 2 each</td>
+          <td data-label="Kitchen and breakfast">2 kitchens<br>Breakfast buffet in the house (extra)</td>
+          <td data-label="Extras"><ul><li>Sauna, steam room and infrared cabin in the house</li><li>Ski to the door</li></ul></td>
+          <td data-label="Per person"><div class="price">€619</div><div class="per">≈ €88 a night</div></td>
+        </tr>
+
+        <tr class="group nass"><th colspan="6">Nasserein</th></tr>
+        <tr class="opt">
+          <td><span class="name">Pension Christian Strolz</span><span class="where">Ing.-Gomperz-Weg 11 · upper Nasserein</span><div class="badges"><span class="chip nass">Nasserein</span></div></td>
+          <td data-label="Getting to the lifts">~10 min walk to the Nasserein gondola<br>10–15 min walk to the centre, ski bus stop 1 min away</td>
+          <td data-label="Rooms and beds">Flat for 6 (2 bedrooms) + family room for 4 (2 bedrooms)<br>8 real beds + 2 sofa beds</td>
+          <td data-label="Kitchen and breakfast">Kitchen in the flat<br>Breakfast for the family room; the flat can add it</td>
+          <td data-label="Extras"><ul><li>Family-run B&amp;B</li><li>Balconies</li><li>All real beds: add a double for €568 each</li></ul></td>
+          <td data-label="Per person"><div class="price">€467</div><div class="per">≈ €67 a night</div></td>
+        </tr>
+        <tr class="opt">
+          <td><span class="name">Pension Bären</span><span class="where">Nassereinerstraße 19</span><div class="badges"><span class="chip nass">Nasserein</span></div></td>
+          <td data-label="Getting to the lifts">~3 min walk to the Nasserein gondola<br>10–15 min walk to the centre</td>
+          <td data-label="Rooms and beds">5 B&amp;B rooms<br>10 real beds, some rooms share a bathroom</td>
+          <td data-label="Kitchen and breakfast">No kitchen<br>Breakfast included (regional, organic)</td>
+          <td data-label="Extras"><ul><li>Ski in and out</li><li>Sauna and pool a short walk away</li></ul></td>
+          <td data-label="Per person"><div class="price">€564</div><div class="per">≈ €80 a night</div></td>
+        </tr>
+        <tr class="opt">
+          <td><span class="name">Appartements Val Sula</span><span class="where">Nassereinerstraße 25</span><div class="badges"><span class="chip nass">Nasserein</span></div></td>
+          <td data-label="Getting to the lifts">~4 min walk to the Nasserein gondola<br>10–15 min walk to the centre</td>
+          <td data-label="Rooms and beds">2 flats of 5 in one house (60–70 m² each)<br>8 real beds + 2 sofa beds</td>
+          <td data-label="Kitchen and breakfast">2 kitchens<br>No breakfast</td>
+          <td data-label="Extras"><ul><li>Free parking at the house</li><li>Spare flats if the group grows</li></ul></td>
+          <td data-label="Per person"><div class="price">€684</div><div class="per">≈ €98 a night</div></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="foot">
+    <p>Checked 6 Oct 2026 on the St Anton tourist office booking system and the owners' own sites; places are going fast. Chesa Platina's price is the owner's quote (€5,975 for 12, with cleaning and tax), adjusted to 10. Cleaning fees for Senn and Val Sula are still to confirm.</p>
+    <p>Not included: flights, transfers, lift pass (6 days ≈ €468), ski rental, food.</p>
+  </div>
+</div>
