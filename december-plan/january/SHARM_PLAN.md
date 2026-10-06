@@ -45,7 +45,7 @@ On the club rule at 20 people with 6% contingency (pricing/sharm_group_budget.xl
 | Free places | 11th, 21st, 30th paying | 1 per 10 paying | every 11th diver |
 | Deposit / cancellation | 20% non-refundable at booking, ladder | to agree on numbers; space held to end of October | 35% non-refundable within 7 days of confirmation, 65% six weeks out; quote valid 28 days; rooms held to mid-October |
 
-All RSDC follow-ups answered 3 Oct: Ras Mohammed and Tiran; Thistlegorm as an extra on day 3; eLearning code included; RSDC is inside the Tao hotel on the Naama Bay promenade; transfers about USD 15 return; half board +15 a night (offered as an add-on so the beginner fee stays above certified); space held to the end of October. Camel's offer arrived 5 Oct (january/replies/camel-2026-10-05.md); follow-ups asked (boat vs house reef, cancellation terms, single supplement).
+All RSDC follow-ups answered 3 Oct: Ras Mohammed and Tiran; Thistlegorm as an extra on day 3; eLearning code included; RSDC is inside the Tao hotel on the Naama Bay promenade; transfers about USD 15 return; half board +15 a night (offered as an add-on so the beginner fee stays above certified); space held to the end of October. Camel's offer arrived 5 Oct (january/replies/camel-2026-10-05.md); follow-ups answered 6 Oct: certified dives are boat dives; 24 h no-fly or an 18 h release; single supplement EUR 130; cancellation fee 35% from 29+ days out, 50% at 28–15, 75% at 14–8, 100% inside 7.
 
 ## Early price indicators (not quotes)
 - Flights: PHL to SSH advertised from about USD 908 return (Expedia), one stop via Istanbul or Cairo; Istanbul or Cairo to SSH from about USD 50 to 65 one way. ADVERTISED.

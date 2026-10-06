@@ -26,3 +26,6 @@ pricing/build_sharm_budget.py -> sharm_group_budget.xlsx: fee USD 1,100 beginner
 5. Space held until the end of October.
 6. Half-board supplement USD 15 per person per day.
 No reply needed. Workbook updated: fee unchanged at USD 1,100 / 1,050 (breakfast); half board offered as a USD 75 add-on, because folding it in would make both fees 1,150 and break the beginner-above-certified rule. Guidance budget without flights about 1,550 / 1,500.
+
+## 2026-10-06 07:06 UTC: Alain checked we had received his answers
+Replied 12:15 UTC (reply-all): received, all clear; comparing with the club's co-organisers; will come back well before the end of October (his hold date).
