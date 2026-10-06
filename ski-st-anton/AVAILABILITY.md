@@ -65,6 +65,27 @@ The non-accommodation lines are estimates scaled from `research/context.md` to 6
 - Epic Pass holders get 3 free days if they stay at a participating property, so they only buy a 3-day pass. That saves roughly €200–250; the 3-day price hasn't been checked. Ask Strolz whether it takes part.
 - A reasonable figure to give the group: **about €1,900 / $2,250 per person before flights.**
 
+
+## Round 4 (6 Oct): one roof, closer to the lifts, St Anton and Nasserein only
+
+Checked:
+- all 281 St Anton properties and the Nasserein properties on Deskline, plus multi-unit searches;
+- Airbnb, Holidu, HomeToGo, Interhome, e-domizil, Casamundo, Snowtrex and the chalet agencies.
+
+Files: `availability/round4_*.csv`. **No single flat or chalet for 10+ is free anywhere in St Anton or Nasserein for 9–16 Jan.** Every option below is several units in one building. Prices are for 7 nights and exclude the €5 per person per night tourist tax.
+
+| Option | Address | Walk to lift | Set-up | € pp/night at 12 (15) | Week |
+|---|---|---|---|---|---|
+| **Chesa Platina** (hold requested 6 Oct) | Stadleweg 26 | ~17–20 min, or 5 min bus | 3 flats; 8 beds + 4 sofa beds; can't take 15 | **68** | €5,713 |
+| Pension Bären | Nassereinerstr. 19 | 3 min (Nassereinbahn) | 7 B&B rooms, 14 real beds, breakfast, no kitchen, mostly shared bathrooms | 77 | €6,489 |
+| Mountain Spa Residences | Ing.-Gomperz-Weg 15 | ~11 min down, shuttle | 2 flats; 8 beds + 2 sofa + 2 folding; cleaning €185–500 per flat extra | 79 + cleaning (99 at 15) | €6,650 + cleaning |
+| Senn | Dorfstr. 91 | 2 min (Nassereinbahn) | 2 flats + B&B rooms; 8 beds + couches | 90 (90) | €7,524 |
+| **Val Sula** | Nassereinerstr. 25 | 4 min (Nassereinbahn) | Whole apartment house free (6 flats); 12 real beds in 3 flats; fully self-catering | 102 (93) | €8,554 |
+| Falch Roman | Alte Arlbergstr. 5 | 1 min | 3 flats; 10 beds + 1 fold-down bed | 108.5 (111.6) | €9,114 |
+| Berghof | Gastigweg 58 | 3 min (Rendlbahn) | Flat + B&B rooms, real beds, breakfast | 114 (114) | €9,586 |
+
+Gone since 4–5 Oct: Haus Gertrud Brunneis, the PETE suites, Edi Mall's second flat, Windegg, Antoinette and the Belvilla 18-bed house. Dorr, Antonia and Bischof turned out to be three separate houses.
+
 ## Next steps
 
 1. **Today or tomorrow:** get a rough headcount. 12 or 15 changes which combination to book.
