@@ -86,6 +86,22 @@ Files: `availability/round4_*.csv`. **No single flat or chalet for 10+ is free a
 
 Gone since 4–5 Oct: Haus Gertrud Brunneis, the PETE suites, Edi Mall's second flat, Windegg, Antoinette and the Belvilla 18-bed house. Dorr, Antonia and Bischof turned out to be three separate houses.
 
+## Round 5 (6 Oct): group of 10, one roof, St Anton and Nasserein
+
+**Still no single flat or chalet for 10 free in St Anton or Nasserein for 9–16 Jan.** The biggest free single units sleep 8: Chalet Marmotta Culm in Oberdorf, 2 min from the Galzigbahn, at €14,833, and Mountain Spa Residences' 8-person penthouse. Files: `availability/round5_*.csv`. Prices are for 7 nights and exclude the €5 per person per night tourist tax.
+
+| Option | Walk to lift | Set-up for 10 | € pp/night | Week |
+|---|---|---|---|---|
+| **Pension Strolz** (book direct) | 10–11 min (Nassereinbahn) | Riffler flat (6, kitchen) + Galzig family room (4, breakfast); 8 beds + 2 sofa | **62** | €4,322 |
+| Pension Strolz, all real beds | 10–11 min | + Rendl double | 76 | €5,327 |
+| Pension Bären | 3 min | 5 B&B rooms, 10 real beds, breakfast; no kitchen, shared bathrooms | 75.5 | €5,285 |
+| Wiedemann, whole house | 18 min | 3 small flats + B&B double, 10 beds | 74 | €5,197 |
+| Chesa Platina | 17 min (Rendlbahn) | All 3 flats needed; 8 beds + 2 sofa | 81.6 | €5,713 |
+| **Senn** | **2 min** (Nassereinbahn) | 2 flats (6+4), 2 kitchens; 6 beds + 4 on couches | 83.5 | €5,844 |
+| Val Sula | 4 min | 2 flats of 5; 8 beds + 2 sofa | 92.7 | €6,489 |
+
+Strolz on Booking.com is €5,536 non-refundable (tax included), so book direct.
+
 ## Next steps
 
 1. **Today or tomorrow:** get a rough headcount. 12 or 15 changes which combination to book.
