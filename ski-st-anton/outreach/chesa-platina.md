@@ -15,4 +15,9 @@
   - The Vail suite is booked that week.
   - Total for 12 people, all 3 flats, is **€5,975 including final cleaning and tourist tax**. For 10 that's about €5,905, with less tourist tax.
   - Cancellation terms are on their homepage.
-- **Status:** hold granted. Not replied to yet, on George's instruction. Next: confirm which Friday, and tell them the group is now 10.
+- **Booking request sent, 9 Oct 2026, in English, same thread (on George's instruction):**
+  - Book all three flats (Portillo, Bari Loche, Thredbo) for Sat 9 – Sat 16 Jan 2027.
+  - Asked for their best rate for the three together. Their earlier quote was EUR 5,975, including cleaning and tax.
+  - Told them the group will be 8–12 people, with one guest arriving Mon 11 Jan.
+  - Asked about the deposit amount and how to pay it, cancellation terms, check-in and check-out times, and whether there's a sauna.
+- **Status:** awaiting confirmation and deposit details. George pays the deposit himself.
