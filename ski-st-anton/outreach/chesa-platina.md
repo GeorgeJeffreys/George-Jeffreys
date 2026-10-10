@@ -20,4 +20,9 @@
   - Asked for their best rate for the three together. Their earlier quote was EUR 5,975, including cleaning and tax.
   - Told them the group will be 8–12 people, with one guest arriving Mon 11 Jan.
   - Asked about the deposit amount and how to pay it, cancellation terms, check-in and check-out times, and whether there's a sauna.
-- **Status:** awaiting confirmation and deposit details. George pays the deposit himself.
+- **Replies, 10 Oct 2026, 07:08 and 07:09 UTC:**
+  - €5,975 is their best price. Tourist tax is €5 per person per night.
+  - The deposit goes by bank transfer. A later arrival is fine.
+  - There is no sauna.
+  - A formal binding reservation confirmation followed (see `BOOKING.md`): **deposit of €2,280 due by 17 Oct 2026**. The 40% cancellation charge already applies.
+- **Status:** BOOKED, pending George's deposit transfer.
