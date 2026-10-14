@@ -5,3 +5,5 @@
 Holding reply (yes, still planning; numbers and deposit once sign-ups close; no amounts or dates) could not be sent by the routine, so it is a Gmail draft in the thread (r-4040796437702294624) for George to send.
 
 14 Oct 2026 17:51 UTC, on George's instruction: sent Kiko a release (message 1a13b8c625d0203f). The trip is not confirmed and sign-ups are not open, so please don't keep the spaces; take other bookings; we may come back closer to the time with numbers if we confirm. The holding draft was deleted.
+
+18:00 UTC Kiko replied: "No problem, thank you for letting me know!" Thread closed for now.
