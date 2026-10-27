@@ -1,7 +1,7 @@
-date_utc,payer_on_wise,participant,sent_usd,wise_fee_usd,net_received_usd,payment_type,target_net_usd,shortfall_to_add_usd,status,wise_transfer,gmail_message
-2026-10-13,ALEC ETHAN GREENWALD JOSHUA,Alec Greenwald Joshua (confirm),400.00,6.11,393.89,deposit,400.00,6.11,counted,#2429333212,1a13530fd1fe7769
-2026-10-19,NICHOLAS L WADE,Nicholas Wade (confirm),400.00,6.11,393.89,deposit,400.00,6.11,counted,#2440949360,1a154129576e3c3b
-2026-10-27,LUCIA LU YANG,Lucia Yang (confirm),400.00,6.11,393.89,deposit,400.00,6.11,CHECK: email was in Gmail trash; no trip reference,#2456307804,1a17cad702b70149
-2026-10-27,WILLIAM MITCHELL,William Mitchell (confirm),1350.00,6.11,1343.89,full (CampusGroups price?),TBC,TBC,CHECK: paid 1350 = CampusGroups beginner price; posted fee 1400 beginner / 1250 certified,#2457202682,1a17e572cb5a73bd
-2026-10-27,ALEXANDER J HELMS,Alexander Helms (confirm),1400.00,6.11,1393.89,full (beginner fee?),1400.00,6.11,counted; confirm beginner track,#2457246282,1a17e6ef93017269
-2026-10-27,THEODORE J CARNES / VANESSA L CARNES,? (likely a parent paying; confirm participant),1400.00,6.11,1393.89,full (beginner fee?),1400.00,6.11,CHECK: who the participant is; confirm beginner track,#2457247786,1a17e6fe340f59e0
+date_utc,payer_on_wise,participant,sent_usd,wise_fee_usd,net_received_usd,payment_type,track,target_net_usd,owed_usd,status,wise_transfer,gmail_message
+2026-10-13,ALEC ETHAN GREENWALD JOSHUA,Alec Greenwald Joshua,400.00,6.11,393.89,deposit,TBC,400.00,6.11 added to balance,counted,#2429333212,1a13530fd1fe7769
+2026-10-19,NICHOLAS L WADE,Nicholas Wade,400.00,6.11,393.89,deposit,TBC,400.00,6.11 added to balance,counted,#2440949360,1a154129576e3c3b
+2026-10-27,LUCIA LU YANG,Lucia Yang,400.00,6.11,393.89,deposit,TBC,400.00,6.11 added to balance,counted (Cozumel confirmed by George),#2456307804,1a17cad702b70149
+2026-10-27,WILLIAM MITCHELL,William Mitchell,1350.00,6.11,1343.89,full,beginner (probably),1400.00,56.11 (50 price gap + 6.11 fee),counted; George tells him the extra,#2457202682,1a17e572cb5a73bd
+2026-10-27,ALEXANDER J HELMS,Alexander Helms,1400.00,6.11,1393.89,full,beginner,1400.00,6.11,counted,#2457246282,1a17e6ef93017269
+2026-10-27,THEODORE J CARNES / VANESSA L CARNES,Theodore or Vanessa Carnes (joint account; which one TBC),1400.00,6.11,1393.89,full,beginner,1400.00,6.11,counted; participant name TBC,#2457247786,1a17e6fe340f59e0
