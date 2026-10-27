@@ -29,3 +29,8 @@ No reply needed. Workbook updated: fee unchanged at USD 1,100 / 1,050 (breakfast
 
 ## 2026-10-06 07:06 UTC: Alain checked we had received his answers
 Replied 12:15 UTC (reply-all): received, all clear; comparing with the club's co-organisers; will come back well before the end of October (his hold date).
+
+## 2026-10-27: chosen (George), Alain confirms hold to 1 December
+- 14:08 UTC sent: Red Sea Diving College chosen with Tao Beach; numbers to follow; keep the space held; deposit and cancellation terms to agree later (message 1a17db15bc478f97).
+- 14:57 UTC Alain (message 1a17ddde9e694c6a): "This is indeed good news!" He will hold the space and confirm the reservations until 1 December, which gives time to clarify numbers and activities, and he is very flexible on changes to numbers after that date.
+- 16:10 UTC sent: short thanks, will be in touch as sign-ups come in. No numbers or money committed.
