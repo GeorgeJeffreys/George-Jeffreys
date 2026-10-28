@@ -61,3 +61,6 @@
 - 2026-10-14 (George): replied to Doug himself: numbers vague for about two more weeks (Wharton break this week), sign-ups pushed after. Doug: fine for now; above 25 divers he needs a third boat and wants to know as soon as possible.
 - 2026-10-27 (George): Egypt is going with the Sharm options (Red Sea Diving College or Camel, both Naama Bay); let Marsa Shagra go. Blue Ocean (Abu Dabbab, the Marsa Alam alternative) released too. RSDS release drafted for George after the send was blocked.
 - 2026-10-27 (George): Egypt operator is Red Sea Diving College (PADI, Naama Bay) with the Tao Beach Hotel, fee USD 1,100 / 1,050. Camel released. All releases sent by the agent on George's instruction.
+
+- 2026-10-28 (George): Thanksgiving (Puerto Rico, 25–29 Nov) is cancelled: "Forget Thanksgiving. We're not doing it." Paradise Scuba and the Nautilus had already been released; nothing further sent.
+- 2026-10-28 (George): the 800 USD Wise payment from Kedar Kumar Bathina Reddy (reference "Trek Deposit Kedar and Theeba") is Cozumel: two deposits, Kedar and Theeba.
