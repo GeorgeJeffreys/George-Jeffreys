@@ -16,3 +16,4 @@ Source data: cozumel/deposits.csv (one row per Wise "Money received" email). The
 
 Totals owed on balances so far: 3 x 6.11 on deposits; 6.11 + 6.11 + 56.11 on the full payments.
 Not counted: Riley Emerson Solter, 20 Oct, 366.38 USD net, reference "Euroski" (George: Euroski).
+Not counted: Kedar Kumar Bathina Reddy, 27 Oct, 800 USD received (no fee shown), reference "Trek Deposit Kedar and Theeba" (Wise #2457717624, message 1a17fac6fea516b0). Looks like a trek deposit for two, not Cozumel; George to confirm.
