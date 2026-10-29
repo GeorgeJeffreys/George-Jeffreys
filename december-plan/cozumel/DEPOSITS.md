@@ -4,7 +4,7 @@ Rule (George, 27 Oct): each deposit must be USD 400 NET of Wise fees. Any shortf
 Posted fees: USD 1,400 beginner / 1,250 certified (CampusGroups still shows 1,350 / 1,200). Balance due Fri 6 Nov.
 Source data: cozumel/deposits.csv (one row per Wise "Money received" email). The routine adds a row for every new one.
 
-## So far (8 transfers covering 9 people, USD 6,550 sent, 42.77 in Wise fees, 6,507.23 received net)
+## So far (9 transfers covering 10 people, USD 7,950 sent, 48.88 in Wise fees, 7,901.12 received net)
 | Date | Participant | Sent | Net | Type | Owed on balance | Note |
 |---|---|---|---|---|---|---|
 | 13 Oct | Alec Ethan Greenwald Joshua | 400 | 393.89 | deposit | 6.11 | track TBC |
@@ -16,6 +16,7 @@ Source data: cozumel/deposits.csv (one row per Wise "Money received" email). The
 | 27 Oct | Kedar Kumar Bathina Reddy | 400 | 400.00 | deposit | 0 | one transfer of 800 for two; reference "Trek Deposit Kedar and Theeba"; Cozumel (George, 28 Oct); no Wise fee shown |
 | 27 Oct | Theeba (surname TBC) | 400 | 400.00 | deposit | 0 | paid by Kedar in the same transfer |
 | 29 Oct | John Kibler | 400 | 393.89 | deposit | 6.11 | no trip reference on the transfer; counted as Cozumel (400 = the deposit) |
+| 29 Oct | Joseph Lyle Kahnke | 1,400 | 1,393.89 | full, beginner (1,400 = beginner fee) | 6.11 | no trip reference on the transfer |
 
-Totals owed on balances so far: 4 x 6.11 on deposits (Kedar and Theeba owe nothing); 6.11 + 6.11 + 56.11 on the full payments; 92.77 in all.
+Totals owed on balances so far: 4 x 6.11 on deposits (Kedar and Theeba owe nothing); 6.11 + 6.11 + 6.11 + 56.11 on the full payments; 98.88 in all.
 Not counted: Riley Emerson Solter, 20 Oct, 366.38 USD net, reference "Euroski" (George: Euroski).
