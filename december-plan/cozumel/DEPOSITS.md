@@ -1,6 +1,7 @@
 # Cozumel payments received via Wise (started 27 Oct 2026)
 
-Rule (George, 27 Oct): each deposit must be USD 400 NET of Wise fees. Any shortfall (usually the 6.11 Wise fee) is added to that person's balance for the later payment. The same applies to full payments: the net received is set against the fee.
+Rule (George, 27 Oct): each deposit must be USD 400 NET of Wise fees. Any shortfall (usually the 6.11 Wise fee) is added to that person's balance for the later payment.
+UPDATE (George, 1 Nov): Wise fees are paid to George in CASH (small amounts), not added to balances. The "Owed on balance" column below is now the cash each person owes George for fees. The exception is William/Jack Mitchell's 50 price gap, which is part of the fee, not a Wise fee; George is telling him. The same applies to full payments: the net received is set against the fee.
 Posted fees: USD 1,400 beginner / 1,250 certified (CampusGroups still shows 1,350 / 1,200). Balance due Fri 6 Nov.
 Source data: cozumel/deposits.csv (one row per Wise "Money received" email). The routine adds a row for every new one.
 
