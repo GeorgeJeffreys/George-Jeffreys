@@ -1,7 +1,7 @@
 # Cozumel pre-trip checklist: WhatsApp message (DRAFT, 1 Nov 2026)
 
 Status: draft. Do not post until Doug replies with his forms, the eLearning ordering, equipment sizes and dates. Fill every [bracket] first.
-Links to check before posting: the DAN pages (they move from time to time). Bank or Wise details are never written into this repo; George adds them by hand.
+The DAN link is Doug's own Blue Note link (his 25 Sep email). Check it still opens before posting. Bank or Wise details are never written into this repo; George adds them by hand.
 
 ---
 
@@ -18,7 +18,8 @@ Wise charges a small fee. Just pay me that in cash when you see me.
 
 *2. 🛟 Buy DAN dive insurance by Fri Nov 27 (required for everyone)*
 This covers dive accidents, chamber treatment and evacuation. The dive shop's insurance doesn't cover you personally.
-👉 Join DAN (about $40/yr) and add the *Master* dive accident plan (about $44): https://dan.org/membership/
+👉 Buy it through Blue Note's DAN link (Doug, 25 Sep): https://apps.dan.org/scuba-dive-insurance/?rc=w1695003
+The DAN membership plus the *Master* plan is about $84.
 Send me a screenshot of your DAN confirmation.
 (If you're also coming to Egypt in January, the same annual cover works for that too.)
 
