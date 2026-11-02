@@ -18,7 +18,7 @@ Wise charges a small fee. Just pay me that in cash when you see me.
 
 *2. 🛟 Buy DAN dive insurance by Fri Nov 27 (required for everyone)*
 This covers dive accidents, chamber treatment and evacuation. The dive shop's insurance doesn't cover you personally.
-👉 Buy it through Blue Note's DAN link (Doug, 25 Sep): https://apps.dan.org/scuba-dive-insurance/?rc=w1695003
+👉 Buy it through Blue Note's DAN link: https://apps.dan.org/scuba-dive-insurance/?rc=w1695003
 The DAN membership plus the *Master* plan is about $84.
 Send me a screenshot of your DAN confirmation.
 (If you're also coming to Egypt in January, the same annual cover works for that too.)
