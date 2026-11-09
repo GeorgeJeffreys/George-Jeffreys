@@ -26,3 +26,5 @@
   - There is no sauna.
   - A formal binding reservation confirmation followed (see `BOOKING.md`): **deposit of €2,280 due by 17 Oct 2026**. The 40% cancellation charge already applies.
 - **Status:** BOOKED, pending George's deposit transfer.
+- **Deposit:** €2,280 confirmed received by the owners on 17 Oct 2026 ("Deposit confirmation for Mr. Jeffreys").
+- **9 Nov 2026:** asked the owners, in the deposit-confirmation thread, for a named booking confirmation PDF for one guest's Schengen visa application (dates, address, signature or stamp). Awaiting reply.

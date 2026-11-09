@@ -1,6 +1,6 @@
 # Booking: Haus Chesa Platina, St Anton
 
-**Status: confirmed by the owners on 10 Oct 2026 as a binding reservation. A deposit is due by Sat 17 Oct 2026.**
+**Status: confirmed and deposit paid (owners confirmed receipt of the deposit on 17 Oct 2026).**
 
 - **Where:** Chesa Platina, Fam. Kathrein/Nöbl, Stadleweg 26, 6580 St. Anton am Arlberg. +43 5446 2866, info@chesaplatina.com
 - **Dates:** arrive Sat 9 Jan 2027, depart Sat 16 Jan 2027 (7 nights). One guest arriving Mon 11 Jan is fine with them.
