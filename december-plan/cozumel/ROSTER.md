@@ -1,4 +1,41 @@
-# Cozumel roster, 13–19 Dec 2026 (from the CampusGroups export, 1 Nov 2026)
+# Cozumel FINAL LIST, 13–19 Dec 2026 (George, 9 Nov)
+
+23 divers plus George: 20 Open Water beginners and 3 certified.
+Source: CampusGroups export (1 Nov) less Tim Zhao (dropped out 9 Nov), plus 3 off-list beginners named by George on 9 Nov.
+
+| # | Name | Track | Source |
+|---|---|---|---|
+| 1 | Natalie Kahn | Open Water | CampusGroups |
+| 2 | Meghal Dubey | Open Water | CampusGroups |
+| 3 | Spencer Hanson (MBA partner) | Open Water | CampusGroups |
+| 4 | Mallika Jain | Open Water | CampusGroups |
+| 5 | Nicholas Wade | Open Water | CampusGroups |
+| 6 | Adarsh Suresh | Open Water | CampusGroups |
+| 7 | Alex Helms | Open Water | CampusGroups |
+| 8 | Alec Greenwald | Open Water | CampusGroups |
+| 9 | Jack Mitchell | Open Water | CampusGroups |
+| 10 | Kedar Reddy | Open Water | CampusGroups |
+| 11 | Theeba (Kedar's second place) | Open Water | CampusGroups |
+| 12 | Teddy Carnes | Open Water | CampusGroups |
+| 13 | Chris Brown | Open Water | CampusGroups |
+| 14 | Dina Daas | Open Water | CampusGroups |
+| 15 | Ellie Miller | Open Water | CampusGroups |
+| 16 | John Kibler | Open Water | CampusGroups |
+| 17 | Joe Kahnke | Open Water | CampusGroups |
+| 18 | Lucia Yang | Open Water | off-list |
+| 19 | Erin Angell | Open Water | off-list |
+| 20 | Rachel (surname TBC) | Open Water | off-list |
+| 21 | Josh Dinardo | Certified | CampusGroups |
+| 22 | Brett Graham | Certified | CampusGroups |
+| 23 | Juan Solera | Certified | CampusGroups |
+| – | George Jeffreys | organiser / instructor TBC | – |
+
+Rooms: one participant has asked for a non-shared room and will pay the supplement (name and price TBC). With 24 people including George, that means 1 single, 11 doubles and 1 more person rooming alone (George?), so 13 rooms, which matches the count already given to Doug.
+Groups: 20 beginners at 4 per instructor is 5 groups. George's group comes out of those (Doug to plan). The 3 certified divers are below Doug's guided-group size, so ask Doug how they fit on the boats.
+
+---
+
+# Original roster working notes (CampusGroups export, 1 Nov 2026)
 
 Source: CampusGroups attendee export uploaded by George on 1 Nov. Emails are not copied into the repo.
 The export has 21 complete registrations. Kedar Reddy registered twice, which is Kedar plus Theeba. Spencer Hanson's second row is "NOT COMPLETE" and is a duplicate.
