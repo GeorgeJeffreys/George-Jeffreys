@@ -26,7 +26,7 @@ Source: CampusGroups export (1 Nov) less Tim Zhao (dropped out 9 Nov), plus 3 of
 | 19 | Erin Angell | Open Water | off-list |
 | 20 | Rachel (surname TBC) | Open Water | off-list |
 | 21 | Josh Dinardo | Certified | CampusGroups |
-| 22 | Brett Graham | Certified | CampusGroups |
+| 22 | Brett Graham | Certified | CampusGroups; UNDECIDED, George asked for a decision by 9 Nov |
 | 23 | Juan Solera | Certified | CampusGroups |
 | – | George Jeffreys | organiser / instructor TBC | – |
 
