@@ -11,7 +11,7 @@ Paid means a Wise payment was seen (see deposits.csv). George to confirm whether
 | 3 | Josh Dinardo | Certified | no payment seen |
 | 4 | Spencer Hanson (MBA partner) | Open Water | no payment seen |
 | 5 | Mallika Jain | Open Water | no payment seen |
-| 6 | Tim Zhao | Certified | no payment seen |
+| 6 | ~~Tim Zhao~~ | Certified | DROPPED OUT (George, 9 Nov) |
 | 7 | Nicholas Wade | Open Water | deposit 400 |
 | 8 | Adarsh Suresh | Open Water | no payment seen |
 | 9 | Brett Graham | Certified | no payment seen |
@@ -30,7 +30,7 @@ Paid means a Wise payment was seen (see deposits.csv). George to confirm whether
 
 Not in CampusGroups but coming (George, 1 Nov): 3 or 4 people, about 1 certified and the rest Open Water. Lucia Lu Yang (deposit 400) is one of them. Names of the others are still to come.
 
-Totals: 24–25 participants, made up of 19–20 Open Water and 5 certified, plus George.
+Totals: 23–24 participants after Tim Zhao dropped out (9 Nov), made up of 19–20 Open Water and 4 certified, plus George.
 
 ## Groups (proposal, 1 Nov)
 - Open Water, at 4 students per instructor: 5 groups. George teaches one group of 3–4 friends (at least confined water and OW 1–2). Blue Note instructors take 4 groups of 4.
