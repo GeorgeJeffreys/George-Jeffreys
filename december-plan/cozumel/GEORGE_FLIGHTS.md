@@ -21,3 +21,18 @@ Return Sat 19 Dec
 Ground: ADO bus CUN–Playa $14–15, 1 h–1 h 30. Private transfer $50–85. Ferry Cozumel–Playa: Winjet from 07:00, Xcaret Xailing hourly from 07:30 ($16), Ultramar 08:00/09:00/10:00/12:00 (~$17). The port closes in strong nortes.
 
 Recommendation (agent): out Sat 12 Dec on Delta via ATL (or AA via MIA), back Sat 19 on AA via MIA to Heathrow. About $850 total, no ferry, one buffer day.
+
+## Update 11 Nov 2026: from DC instead of Philadelphia (estimates only, no live quote for the exact dates)
+Recommendation: two one-way tickets on American, Main Cabin (not Basic), booked on aa.com.
+- Out Sun 13 Dec: AA401 DCA 06:45 → MIA 09:26, then AA3530 MIA 12:56 → CZM 15:04. Backup: AA422 DCA 08:20 makes the same MIA–CZM flight. About $260–350 with Main Cabin and the $45 bag.
+- Back Sat 19 Dec: AA3530 CZM 15:44 → MIA 17:29, then AA38 MIA 19:05 → LHR 08:15 Sun (1 h 36 connection with customs and bag re-check; BA208 23:00 and AA56 23:20 are the backups). About $580–720 with one bag included in Main Cabin / Economy Standard.
+- Total about $850–1,050. Also price the multi-city on aa.com; take it if cheaper.
+- Alternatives: out via DFW (AA454 DCA 05:00, AA2095 DFW 10:40 → CZM 14:25); United IAD–IAH–CZM lands 15:42 (too tight). Delta ATL–CZM only restarts 19 Dec, so not usable outbound.
+
+# Erin's flights: SFO round trip (research 11 Nov 2026; estimates only)
+Return Fri 18 Dec means she skips Friday's dives (18-hour no-fly rule after her last dive on Thursday afternoon).
+Recommendation: United via Houston, booked on united.com.
+- Out: UA505 SFO Sat 12 Dec 23:59 (red-eye) → IAH 05:51, then UA1919 IAH → CZM, landing around midday Sun 13 Dec (sources disagree: 10:01 → 12:23 or 12:21 → 15:42; check at booking).
+- Back: UA1867 CZM Fri 18 Dec 13:25 → IAH 15:57, then UA1341 IAH 18:05 → SFO 20:23.
+- About $400–600 round trip in Basic Economy plus $45 each way for a checked bag; standard Economy if she wants a full-size carry-on.
+- Alternative: UA1145 SFO 23:01 Sat → CUN 06:13 Sun, bus and ferry; back UA1118 CUN Fri 16:50 → SFO 20:53. About $440–650 plus about $80 bus and ferry.
