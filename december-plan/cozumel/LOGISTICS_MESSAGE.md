@@ -1,16 +1,16 @@
 # Cozumel logistics: WhatsApp message (10 Nov 2026)
 
-Status: ready for George to paste once the trip is confirmed. Paste the form link in place of [FORM LINK] first.
-Form (11 Nov): built by create_cozumel_form.gs (George runs it once at script.google.com). Each person sees only their own answers, and responses go to a private sheet for George. It replaces the shared trip sheet and Doug's gear sheet.
+Status: final, ready to paste (11 Nov). George went back to the shared sheet instead of the form.
+Sheet: "Cozumel Dec 2026: trip sheet (flights, eLearning, gear)". Formatted by polish_trip_sheet.gs. Sharing must be "Anyone with the link: Editor".
 
 ---
 
 🐢🌊 *COZUMEL LOGISTICS* 🌊🐢
 Sun 13 – Sat 19 Dec · Blue Note Scuba · Hotel Plaza Cozumel
 
-*1. 📋 Fill in the trip form (by Fri 20 Nov)*
-[FORM LINK]
-One form for everything: your email and date of birth (for the PADI eLearning), gear sizes, flights, roommate and any dietary needs. Only I see your answers. Save the "edit your response" link at the end so you can add flights and tick things off later.
+*1. 📋 Fill in your row on the trip sheet (by Fri 20 Nov)*
+https://docs.google.com/spreadsheets/d/1Dwswoxle77W-eMUIqrXBaDjOxPJ9jLn4sC0HNWFNohM/edit?usp=sharing
+One sheet for everything: your email and date of birth (for the PADI eLearning), gear sizes, flights, roommate and any dietary needs. Find your name, fill in your own row only, and come back to update it as you book flights and tick things off.
 
 *2. ✈️ Getting there: Sun 13 Dec*
 • Fly into *Cozumel (CZM)* and land by *4pm*, or
@@ -30,10 +30,10 @@ Hotel Plaza Cozumel, two to a room, breakfast included. Check in Sun 13, check o
 
 *5. 🛟 DAN dive insurance: everyone, by Fri 27 Nov*
 Buy it through Blue Note's link: https://apps.dan.org/scuba-dive-insurance/?rc=w1695003
-That's about $84 for membership plus the Master plan. Mark it done in the form.
+That's about $84 for membership plus the Master plan. Mark it done in the sheet.
 
 *6. 📚 Beginners: PADI eLearning*
-Make sure your email and date of birth are in the trip form. I'll order everyone's codes in one go through Blue Note. Your medical form and waiver come with the eLearning.
+Make sure your email and date of birth are in the trip sheet. I'll order everyone's codes in one go through Blue Note. Your medical form and waiver come with the eLearning.
 If you answer YES to anything on the medical form, you need a doctor's sign-off *before* the trip.
 Finish the eLearning by *Sun 6 Dec*. It takes 8–12 hours, so start early.
 
@@ -41,7 +41,7 @@ Finish the eLearning by *Sun 6 Dec*. It takes 8–12 hours, so start early.
 Send me a photo of your cert card (front and back) and the date of your last dive by *Fri 27 Nov*. Blue Note will send your forms with the boat confirmations.
 
 *8. 🤿 Gear*
-All gear is included. Add your height, weight and shoe size in the trip form. Certified divers: say if you want a dive computer ($10 a day). Beginners get one free during the course. The form also asks about the optional night dive and shore dive.
+All gear is included. Add your height, weight and shoe size in the trip sheet. Certified divers: say if you want a dive computer ($10 a day). Beginners get one free during the course.
 If you have a mask that fits you well, bring it.
 
 *9. 💸 Payments*
