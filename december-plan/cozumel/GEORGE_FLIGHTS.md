@@ -36,3 +36,6 @@ Recommendation: United via Houston, booked on united.com.
 - Back: UA1867 CZM Fri 18 Dec 13:25 → IAH 15:57, then UA1341 IAH 18:05 → SFO 20:23.
 - About $400–600 round trip in Basic Economy plus $45 each way for a checked bag; standard Economy if she wants a full-size carry-on.
 - Alternative: UA1145 SFO 23:01 Sat → CUN 06:13 Sun, bus and ferry; back UA1118 CUN Fri 16:50 → SFO 20:53. About $440–650 plus about $80 bus and ferry.
+
+## BOOKED 11 Nov 2026 (George): outbound
+SHGLUD: AA1898 DCA 07:49 → MIA 10:58, then AA3530 MIA 12:55 → CZM 15:02, Sun 13 Dec. Economy (Q), 1 checked bag paid. Return to London not yet booked (a separate hold, MLQPBF, expires 12 Nov 23:59 EST).
