@@ -1,11 +1,12 @@
-# Cozumel FINAL LIST, 13–19 Dec 2026 (George, 9 Nov)
+# Cozumel FINAL LIST, 13–19 Dec 2026 (George, 9 Nov; updated 15 Nov)
 
-23 divers plus George: 20 Open Water beginners and 3 certified.
-Source: CampusGroups export (1 Nov) less Tim Zhao (dropped out 9 Nov), plus 3 off-list beginners named by George on 9 Nov.
+23 divers plus George: 20 Open Water beginners and 3 certified (Brett still undecided).
+Source: CampusGroups export (1 Nov) less Tim Zhao (dropped out 9 Nov), plus off-list beginners named by George.
+15 Nov (George): Natalie Kahn and Rachel are OUT; Emma Ohanian is IN. Justin Halper (added himself 13 Nov) is on the list.
 
 | # | Name | Track | Source |
 |---|---|---|---|
-| 1 | Natalie Kahn | Open Water | CampusGroups |
+| 1 | ~~Natalie Kahn~~ | Open Water | OUT (George, 15 Nov) |
 | 2 | Meghal Dubey | Open Water | CampusGroups |
 | 3 | Spencer Hanson (MBA partner) | Open Water | CampusGroups |
 | 4 | Mallika Jain | Open Water | CampusGroups |
@@ -24,14 +25,18 @@ Source: CampusGroups export (1 Nov) less Tim Zhao (dropped out 9 Nov), plus 3 of
 | 17 | Joe Kahnke | Open Water | CampusGroups |
 | 18 | Lucia Yang | Open Water | off-list |
 | 19 | Erin Angell | Open Water | off-list |
-| 20 | Rachel (surname TBC) | Open Water | off-list |
+| 20 | ~~Rachel~~ | Open Water | OUT (George, 15 Nov) |
+| 20a | Justin Halper | Open Water | off-list (Wharton) |
+| 20b | Emma Ohanian | Open Water | off-list (George, 15 Nov) |
 | 21 | Josh Dinardo | Certified | CampusGroups |
 | 22 | Brett Graham | Certified | CampusGroups; UNDECIDED, George asked for a decision by 9 Nov |
 | 23 | Juan Solera | Certified | CampusGroups |
 | – | George Jeffreys | organiser / instructor TBC | – |
 
+Deposit invoice B-GO-121326 (Doug, 6 Nov): USD 5,290.50 = 25 divers x 150 + hotel deposit 1,540.50 for 13 rooms. Unpaid as of 15 Nov. Reply to Doug drafted for George (Gmail draft r5452886809288126809): final count, 13 rooms, pay the invoice as issued with the difference credited, first 14 eLearning names, AOW code for Josh.
+
 Rooms: one participant has asked for a non-shared room and will pay the supplement (name and price TBC). With 24 people including George, that means 1 single, 11 doubles and 1 more person rooming alone (George?), so 13 rooms, which matches the count already given to Doug.
-Groups: 20 beginners at 4 per instructor is 5 groups. George's group comes out of those (Doug to plan). The 3 certified divers are below Doug's guided-group size, so ask Doug how they fit on the boats.
+Groups: 20 beginners at 4 per instructor is 5 groups (unchanged after the 15 Nov swaps). George's group comes out of those (Doug to plan). The 3 certified divers are below Doug's guided-group size, so ask Doug how they fit on the boats.
 
 ---
 
