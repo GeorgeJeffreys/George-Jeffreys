@@ -49,5 +49,5 @@ UPDATE 25 Sep 16:10 UTC: Maher answered the course questions (january/replies/rs
 
 ## Daily eLearning chaser (George, 16 Nov 2026)
 Once a day, on the first run after 16:00 UTC: re-read the DIVER LIST sheet (Drive 16FsW0pgq8JOhtxvFzS2FrujgKrka9Gd-). For every Open Water diver still missing a date of birth or email, make a short reminder in George's name, signed as Claude. Use a joke subject line and say the reminder comes daily until the row is filled in. Stop for each person once their row is complete, and add them to the Doug eLearning draft.
-Wharton addresses stay drafts for George to send (standing rule), unless George lifts that for these reminders.
-Outstanding 16 Nov: Kedar Reddy (+ Theeba, no address of her own; ask via Kedar) and Lucia Yang. Alec's address was completed from the CampusGroups record (aeg13@wharton.upenn.edu).
+George lifted the Wharton rule for these reminders only (16 Nov): send them directly, including to wharton.upenn.edu addresses. The rule still holds for everything else. Reply in each person's existing reminder thread (Kedar 1a1e57c16bdc16be, Lucia 1a1e57c1bf4fa32c), with a fresh joke in the opening line each day.
+Day 1 sent 16 Nov ~16:30 UTC. Outstanding 16 Nov: Kedar Reddy (+ Theeba, no address of her own; ask via Kedar) and Lucia Yang. Alec's address was completed from the CampusGroups record (aeg13@wharton.upenn.edu).
