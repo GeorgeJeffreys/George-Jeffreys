@@ -39,3 +39,10 @@ Recommendation: United via Houston, booked on united.com.
 
 ## BOOKED 11 Nov 2026 (George): outbound
 SHGLUD: AA1898 DCA 07:49 → MIA 10:58, then AA3530 MIA 12:55 → CZM 15:02, Sun 13 Dec. Economy (Q), 1 checked bag paid. Return to London not yet booked (a separate hold, MLQPBF, expires 12 Nov 23:59 EST).
+
+## BOOKED 15 Nov 2026 (George): return to London
+G4P2B3 (Virgin Atlantic ticket, Delta-operated, Main Cabin U), USD 1,113.40:
+- Sat 19 Dec: VS2945 (DL) CZM 15:28 → ATL 18:08.
+- Sat 19 Dec: VS4010 (DL) ATL 19:55 → LHR 09:00 Sun 20 Dec.
+Seats 21A / 51B. The ATL connection is 1 h 47 with US immigration, customs and bag re-check. Last dive is out by 13:00 Fri, so it's well clear of the 18 h fly-after-diving rule.
+Flight pot was USD 700 + ~180 commission. DC outbound plus this return is over that; George to settle the overage.
