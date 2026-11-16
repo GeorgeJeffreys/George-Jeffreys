@@ -1,4 +1,4 @@
-# ChatGPT image prompt: Egypt trip flyer (16 Nov 2026; fees 1,100 / 1,050 with RSDC + Tao Beach)
+# ChatGPT image prompt: Egypt trip flyer (16 Nov 2026; fees 1,200 / 1,050 with RSDC + Tao Beach)
 
 Paste everything below the line into ChatGPT. If it garbles the schedule, re-paste just the week grid and say "copy this grid exactly".
 
@@ -14,7 +14,7 @@ Facts to include:
 - Staying at the Tao Beach Hotel on the Naama Bay promenade, breakfast included, two sharing. Diving with Red Sea Diving College, a PADI 5 Star centre inside the hotel.
 - Led by George Jeffreys, second-year MBA and former PADI Master Scuba Diver Trainer.
 - Price box with two columns:
-  - INCLUDED: trip fee $1,100 beginners / $1,050 certified, covering the course or boat days, all gear incl. computer, boat lunches, park fees, eLearning, 5 nights hotel with breakfast.
+  - INCLUDED: trip fee $1,200 beginners / $1,050 certified, covering the course or boat days, all gear incl. computer, boat lunches, park fees, eLearning, 5 nights hotel with breakfast.
   - NOT INCLUDED: flights to Sharm el-Sheikh (SSH), DAN dive insurance, Egypt visa, airport transfers, dinners, drinks, tips.
 - Sign up: on CampusGroups, $400 deposit by Sunday 29 November, balance by Friday 11 December. Places go in order of deposit.
 

@@ -5,7 +5,7 @@
 Start 2027 underwater in Sharm el-Sheikh. Never dived? Get certified on the trip. Already certified? Three days on the boat at Ras Mohammed and the Straits of Tiran.
 
 📅 *Sat Jan 2 – Fri Jan 8* (arrive Sun 3)
-💸 *$1,100 beginners / $1,050 certified*
+💸 *$1,200 beginners / $1,050 certified*
 🏦 *$400 deposit to lock your spot*
 
 🤿 Beginners: PADI Open Water Mon–Wed, then out on the boat with everyone Thursday

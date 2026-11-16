@@ -35,6 +35,7 @@ h2("Pricing basis")
 inp('n_price', "Pricing headcount: people including George at which the fee is set", 20, "people", "policy (same as Marsa Shagra cut)")
 inp('n_min', "Minimum headcount the contingency must cover", 12, "people", "policy")
 inp('beg_share', "Share of participants who are Open Water students", 0.5, "share", "brief", PCT)
+inp('beg_gap', "Minimum beginner premium over the certified fee", 150, "USD", "George, 16 Nov: same gap as Cozumel (1,400 / 1,250)", MONEY)
 inp('contingency', "Contingency inside the fee", 0.055, "share", "policy (6% Marsa Shagra basis, trimmed to 5.5% on 16 Nov so George's Thistlegorm fits without moving the fees)", PCT)
 h2("Red Sea Diving College, Naama Bay (QUOTED 3 Oct 2026, Alain Sobol, per person)")
 inp('room_pp', "Tao Beach Hotel, Naama Bay, two sharing, breakfast, per person per night", 70, "USD/night", "QUOTED (cheaper hotels offered on request)", MONEY)
@@ -79,7 +80,7 @@ rows = [
  ("Subtotal", "=SUM(B3:B6)", "=SUM(C3:C6)"),
  ("Contingency", f"=ROUND(B7*{R['contingency']},0)", f"=ROUND(C7*{R['contingency']},0)"),
  ("Fee before rounding", "=B7+B8", "=C7+C8"),
- ("TRIP FEE, USD (rounded up to the nearest 50)", "=CEILING(B9,50)", "=CEILING(C9,50)"),
+ ("TRIP FEE, USD (rounded up to the nearest 50; beginner at least the premium above certified)", f"=MAX(CEILING(B9,50),C10+{R['beg_gap']})", "=CEILING(C9,50)"),
  ("", None, None),
  ("Optional add-ons at cost", None, None),
  ("Advanced Open Water", "n/a", f"={R['aow']}"),

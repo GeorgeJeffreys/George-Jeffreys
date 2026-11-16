@@ -1,6 +1,6 @@
 # Egypt CampusGroups sign-up page (drafted 16 Nov 2026)
 
-Basis: Red Sea Diving College (RSDC) + Tao Beach Hotel, Naama Bay. Fees $1,100 / $1,050 (pricing/sharm_group_budget.xlsx).
+Basis: Red Sea Diving College (RSDC) + Tao Beach Hotel, Naama Bay. Fees $1,200 / $1,050 (pricing/sharm_group_budget.xlsx).
 RSDC is holding space until Tue 1 Dec, so deposits have to close before then.
 Dates and capacity agreed by George, 16 Nov. Still in [brackets]: start time, refund wording, WhatsApp link.
 
@@ -9,7 +9,7 @@ Dates and capacity agreed by George, 16 Nov. Still in [brackets]: start time, re
 **Event name:** Red Sea Dive Week: Sharm el-Sheikh, Egypt (Jan 2–8)
 
 **Ticket types**
-- Beginner (PADI Open Water course): $1,100. Deposit $400 at sign-up.
+- Beginner (PADI Open Water course): $1,200. Deposit $400 at sign-up.
 - Certified diver: $1,050. Deposit $400 at sign-up.
 - Capacity 25. Max 2 tickets per person.
 
@@ -18,7 +18,7 @@ Dates and capacity agreed by George, 16 Nov. Still in [brackets]: start time, re
 Start 2027 underwater. Join WOC for five nights in Sharm el-Sheikh on Egypt's Red Sea: coral walls at Ras Mohammed, the Straits of Tiran, turtles and reef sharks, and the famous SS Thistlegorm wreck. Never dived? Get PADI Open Water certified on the trip. Already certified? Three days on the boat plus a group dive day.
 
 📅 Dates: Sat Jan 2 – Fri Jan 8, 2027 (arrive Sun Jan 3, fly home Fri Jan 8)
-💸 Cost: $1,100 beginners / $1,050 certified divers
+💸 Cost: $1,200 beginners / $1,050 certified divers
 🏦 Deposit at sign-up: $400 (balance due Fri Dec 11)
 
 Trip overview:
@@ -28,7 +28,7 @@ Trip overview:
 🏜 Thursday afternoon off, certification dinner Wednesday, farewell night Thursday in Naama Bay
 🏨 Five nights at the Tao Beach Hotel on the Naama Bay promenade, breakfast included, two sharing. Diving with Red Sea Diving College, a PADI 5 Star centre inside the hotel. All gear incl. computer, boat lunches, park fees and eLearning are included.
 
-✈️ Not included: flights (fly into Sharm el-Sheikh, SSH; about $900 return from PHL, one stop), DAN dive insurance, Egypt visa, airport transfers (about $15), dinners, drinks, tips. Budget about $1,550 beginners / $1,500 certified on top of flights.
+✈️ Not included: flights (fly into Sharm el-Sheikh, SSH; about $900 return from PHL, one stop), DAN dive insurance, Egypt visa, airport transfers (about $15), dinners, drinks, tips. Budget about $1,650 beginners / $1,500 certified on top of flights.
 
 How booking works:
 1. Sign-ups open at [time] on Wed Nov 18. Choose the beginner or certified ticket.
