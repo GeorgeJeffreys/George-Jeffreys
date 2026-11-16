@@ -35,7 +35,7 @@ h2("Pricing basis")
 inp('n_price', "Pricing headcount: people including George at which the fee is set", 20, "people", "policy (same as Marsa Shagra cut)")
 inp('n_min', "Minimum headcount the contingency must cover", 12, "people", "policy")
 inp('beg_share', "Share of participants who are Open Water students", 0.5, "share", "brief", PCT)
-inp('contingency', "Contingency inside the fee", 0.06, "share", "policy (Marsa Shagra basis)", PCT)
+inp('contingency', "Contingency inside the fee", 0.055, "share", "policy (6% Marsa Shagra basis, trimmed to 5.5% on 16 Nov so George's Thistlegorm fits without moving the fees)", PCT)
 h2("Red Sea Diving College, Naama Bay (QUOTED 3 Oct 2026, Alain Sobol, per person)")
 inp('room_pp', "Tao Beach Hotel, Naama Bay, two sharing, breakfast, per person per night", 70, "USD/night", "QUOTED (cheaper hotels offered on request)", MONEY)
 inp('nights', "Nights, Sun 3 - Fri 8 Jan", 5, "nights", "programme")
@@ -53,6 +53,7 @@ h2("Leader costs carried by the group (George's hotel and diving come from the f
 inp('g_flight', "George's flight allowance", 1000, "USD", "policy; PHL-SSH advertised from about 908 return (sources.csv)", MONEY)
 inp('odd_room', "Odd-headcount room risk (half a place)", f"={R['room_pp']}*{R['nights']}*0.5", "USD", "ASSUMED", MONEY)
 inp('g_rent', "George's gear rental, 4 days", f"={R['rental']}*4", "USD", "formula", MONEY)
+inp('g_thistle', "George's Thistlegorm supplement (he leads the divers who choose it)", f"={R['thistle']}", "USD", "George, 16 Nov: inside the fee", MONEY)
 h2("Own spending guidance, not in the fee (no flights)")
 inp('xfer', "Airport transfers both ways, SSH to Naama Bay", 15, "USD", "QUOTED 3 Oct (approx., arranged by RSDC)", MONEY)
 inp('dan_own', "Dive-accident cover, required", 84, "USD", "ADVERTISED (DAN)", MONEY)
@@ -69,12 +70,12 @@ fee['A1'] = "Trip fee per person at the pricing headcount (USD; two sharing, bre
 fee.append(["", "Open Water student", "Certified diver"])
 for c in fee[2]: c.font = BOLD; c.fill = FILL
 paying = f"({R['n_price']}-1)"
-leader = f"({R['g_flight']}+{R['odd_room']}+{R['g_rent']})"
+leader = f"({R['g_flight']}+{R['odd_room']}+{R['g_rent']}+{R['g_thistle']})"
 rows = [
  ("Diving (Open Water + Thursday boat, or 3 boat days + Thursday boat)", f"={R['ow']}+{R['thu_boat']}", f"={R['boat3']}+{R['thu_boat']}"),
  ("Gear rental incl. computer", f"={R['rental']}*{R['rent_days_beg']}", f"={R['rental']}*{R['rent_days_cert']}"),
  ("Tao Beach Hotel, 5 nights, breakfast, two sharing", f"={R['room_pp']}*{R['nights']}", f"={R['room_pp']}*{R['nights']}"),
- ("Leader's costs shared (flight allowance, gear, odd-room risk)", f"={leader}/{paying}", f"={leader}/{paying}"),
+ ("Leader's costs shared (flight allowance, gear, Thistlegorm, odd-room risk)", f"={leader}/{paying}", f"={leader}/{paying}"),
  ("Subtotal", "=SUM(B3:B6)", "=SUM(C3:C6)"),
  ("Contingency", f"=ROUND(B7*{R['contingency']},0)", f"=ROUND(C7*{R['contingency']},0)"),
  ("Fee before rounding", "=B7+B8", "=C7+C8"),
@@ -124,10 +125,11 @@ r_spare = grow("Spare free places credited (hotel + boat package)", lambda c, n:
 r_rent = grow("Gear rental (certified incl. George 4 days; students 1 day)", lambda c, n: f"=({c}{r_cert}+1)*{R['rental']}*{R['rent_days_cert']}+{c}{r_beg}*{R['rental']}*{R['rent_days_beg']}")
 r_odd = grow("Odd-headcount room risk", lambda c, n: f"=IF(MOD({c}{r_n},2)=1,{R['odd_room']},0)")
 r_gfl = grow("George's flight allowance", lambda c, n: f"={R['g_flight']}")
-r_costs = grow("TOTAL COSTS", lambda c, n: f"={c}{r_hotel}+{c}{r_ow}+{c}{r_bt}+{c}{r_gpl}+{c}{r_spare}+{c}{r_rent}+{c}{r_odd}+{c}{r_gfl}", bold=True)
+r_gth = grow("George's Thistlegorm supplement", lambda c, n: f"={R['g_thistle']}")
+r_costs = grow("TOTAL COSTS", lambda c, n: f"={c}{r_hotel}+{c}{r_ow}+{c}{r_bt}+{c}{r_gpl}+{c}{r_spare}+{c}{r_rent}+{c}{r_odd}+{c}{r_gfl}+{c}{r_gth}", bold=True)
 r_sur = grow("Surplus (refunded pro rata or held)", lambda c, n: f"={c}{r_rev}-{c}{r_costs}", bold=True)
 grow("Covered?", lambda c, n: f'=IF({c}{r_sur}>=0,"yes","NO")', '@', bold=True)
-g.append(["Deposit and cancellation terms: RSDC will set them once the group size is known (QUOTED 3 Oct). Space held to the end of October (QUOTED 3 Oct). RSDC is inside the Tao hotel on the Naama Bay promenade."])
+g.append(["Deposit and cancellation terms: RSDC will set them once the group size is known (QUOTED 3 Oct). Space held to Tue 1 Dec (Alain, 27 Oct). RSDC is inside the Tao hotel on the Naama Bay promenade."])
 
 for sh in wb.worksheets:
     for row in sh.iter_rows():

@@ -14,6 +14,6 @@ Start 2027 underwater in Sharm el-Sheikh. Never dived? Get certified on the trip
 ✈️ Not included: flights to Sharm (SSH), DAN insurance, visa, transfers, dinners, drinks
 
 👉 *Sign up here:* [CampusGroups link]
-⏰ Deposit by *[Sun Nov 29]*. Spots go in order of deposit. Please don't book flights until we confirm the trip.
+⏰ Deposit by *Sun Nov 29*. Spots go in order of deposit. Please don't book flights until we confirm the trip.
 
 Questions? Message me 🙌

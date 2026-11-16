@@ -16,7 +16,7 @@ Facts to include:
 - Price box with two columns:
   - INCLUDED: trip fee $1,100 beginners / $1,050 certified, covering the course or boat days, all gear incl. computer, boat lunches, park fees, eLearning, 5 nights hotel with breakfast.
   - NOT INCLUDED: flights to Sharm el-Sheikh (SSH), DAN dive insurance, Egypt visa, airport transfers, dinners, drinks, tips.
-- Sign up: on CampusGroups, $400 deposit by [Sunday 29 November], balance by [Friday 11 December]. Places go in order of deposit.
+- Sign up: on CampusGroups, $400 deposit by Sunday 29 November, balance by Friday 11 December. Places go in order of deposit.
 
 Week grid, copy exactly. Colours: blue = Beginners, green = Certified, yellow = Everyone together, white with a thin grey outline = Free time, grey = Travel. A split cell has Beginners on top and Certified below. Keep each cell to the words given.
 

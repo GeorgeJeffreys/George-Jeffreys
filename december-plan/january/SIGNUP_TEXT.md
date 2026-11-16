@@ -2,7 +2,7 @@
 
 Basis: Red Sea Diving College (RSDC) + Tao Beach Hotel, Naama Bay. Fees $1,100 / $1,050 (pricing/sharm_group_budget.xlsx).
 RSDC is holding space until Tue 1 Dec, so deposits have to close before then.
-Items in [brackets] are George's to confirm. The dates and refund wording are suggestions.
+Dates and capacity agreed by George, 16 Nov. Still in [brackets]: start time, refund wording, WhatsApp link.
 
 ---
 
@@ -11,7 +11,7 @@ Items in [brackets] are George's to confirm. The dates and refund wording are su
 **Ticket types**
 - Beginner (PADI Open Water course): $1,100. Deposit $400 at sign-up.
 - Certified diver: $1,050. Deposit $400 at sign-up.
-- Capacity [25]. Max 2 tickets per person.
+- Capacity 25. Max 2 tickets per person.
 
 **Description**
 
@@ -19,7 +19,7 @@ Start 2027 underwater. Join WOC for five nights in Sharm el-Sheikh on Egypt's Re
 
 📅 Dates: Sat Jan 2 – Fri Jan 8, 2027 (arrive Sun Jan 3, fly home Fri Jan 8)
 💸 Cost: $1,100 beginners / $1,050 certified divers
-🏦 Deposit at sign-up: $400 (balance due [Fri Dec 11])
+🏦 Deposit at sign-up: $400 (balance due Fri Dec 11)
 
 Trip overview:
 🤿 Beginners: PADI Open Water course Mon–Wed (eLearning at home before the trip, included), certified by Wednesday, then the Thursday boat with everyone
@@ -31,10 +31,10 @@ Trip overview:
 ✈️ Not included: flights (fly into Sharm el-Sheikh, SSH; about $900 return from PHL, one stop), DAN dive insurance, Egypt visa, airport transfers (about $15), dinners, drinks, tips. Budget about $1,550 beginners / $1,500 certified on top of flights.
 
 How booking works:
-1. Sign-ups open at [time] on [Wed Nov 18]. Choose the beginner or certified ticket.
-2. Pay the $400 deposit on CampusGroups by end of [Sun Nov 29] to confirm your spot. Places go in order of deposit.
+1. Sign-ups open at [time] on Wed Nov 18. Choose the beginner or certified ticket.
+2. Pay the $400 deposit on CampusGroups by end of Sun Nov 29 to confirm your spot. Places go in order of deposit.
 3. If you haven't paid by then, your spot goes to the next person on the waitlist.
-4. The balance is due by [Fri Dec 11].
+4. The balance is due by Fri Dec 11.
 5. Refunds: [the deposit is non-refundable unless we fill your place from the waitlist].
 6. Please wait for the trip-confirmed message before booking flights.
 
