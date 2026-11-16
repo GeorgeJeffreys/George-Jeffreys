@@ -33,7 +33,7 @@ Source: CampusGroups export (1 Nov) less Tim Zhao (dropped out 9 Nov), plus off-
 | 23 | Juan Solera | Certified | CampusGroups |
 | – | George Jeffreys | organiser / instructor TBC | – |
 
-Deposit invoice B-GO-121326 (Doug, 6 Nov): USD 5,290.50 = 25 divers x 150 + hotel deposit 1,540.50 for 13 rooms. PAID (George, 15 Nov); Doug told the same day (message 1a1e146cefac271c) and asked to confirm receipt and the room guarantee. Fuller reply redrafted for 22 divers and [12] rooms (Gmail draft r-1991259174782208235, 17 eLearning names): final count, 13 rooms, pay the invoice as issued with the difference credited, first 14 eLearning names, AOW code for Josh.
+Deposit invoice B-GO-121326 (Doug, 6 Nov): USD 5,290.50 = 25 divers x 150 + hotel deposit 1,540.50 for 13 rooms. PAID (George, 15 Nov); Doug told the same day (message 1a1e146cefac271c) and asked to confirm receipt and the room guarantee. 16 Nov: SENT Doug the count (22 + George: 20 OW, 2 certified), first 15 eLearning names (message 1a1e58dd266b4241), invoice requested for 20 codes, AOW code for Josh, single-room supplement asked. Still to send: Kedar, Theeba, Lucia, plus Joe and Nicholas once their DOBs are confirmed: final count, 13 rooms, pay the invoice as issued with the difference credited, first 14 eLearning names, AOW code for Josh.
 
 Rooms (15 Nov): 23 people including George = 1 single + 11 doubles = 12 rooms, one fewer than the 13 held. George to decide whether to release the 13th.
 
