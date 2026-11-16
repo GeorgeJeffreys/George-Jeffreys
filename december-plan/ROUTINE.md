@@ -46,3 +46,8 @@ UPDATE 25 Sep 16:10 UTC: Maher answered the course questions (january/replies/rs
 6. Drive: refresh TRACKER.md, DECISION_MEMO.md and the summary sheet in folder 17fUirPHQ088oQJiB6dRJZFqk7hFAWATm (upload new, trash old).
 7. Update TRACKER.md (last_action, next_action, Week plan, Needs George, Log), commit, push (`git pull --rebase` once if rejected).
 8. Report in the session: if nothing arrived, nothing was sent and nothing needs George, the whole message is one line, "No change." Otherwise lead with Needs George items (recommendation and draft link), then one line per trip on distance from viable, then what was sent, chased or changed in the numbers.
+
+## Daily eLearning chaser (George, 16 Nov 2026)
+Once a day, on the first run after 16:00 UTC: re-read the DIVER LIST sheet (Drive 16FsW0pgq8JOhtxvFzS2FrujgKrka9Gd-). For every Open Water diver still missing a date of birth or email, make a short reminder in George's name, signed as Claude. Use a joke subject line and say the reminder comes daily until the row is filled in. Stop for each person once their row is complete, and add them to the Doug eLearning draft.
+Wharton addresses stay drafts for George to send (standing rule), unless George lifts that for these reminders.
+Outstanding 16 Nov: Kedar Reddy (+ Theeba, no address of her own; ask via Kedar) and Lucia Yang. Alec's address was completed from the CampusGroups record (aeg13@wharton.upenn.edu).
