@@ -34,3 +34,12 @@ Replied 12:15 UTC (reply-all): received, all clear; comparing with the club's co
 - 14:08 UTC sent: Red Sea Diving College chosen with Tao Beach; numbers to follow; keep the space held; deposit and cancellation terms to agree later (message 1a17db15bc478f97).
 - 14:57 UTC Alain (message 1a17ddde9e694c6a): "This is indeed good news!" He will hold the space and confirm the reservations until 1 December, which gives time to clarify numbers and activities, and he is very flexible on changes to numbers after that date.
 - 16:10 UTC sent: short thanks, will be in touch as sign-ups come in. No numbers or money committed.
+
+## 2026-11-17: trip launched (George), Alain told
+George launched Egypt sign-ups on CampusGroups on 17 Nov. SENT to Alain, reply-all (message 1a1eaf9aa4ffb8c6):
+- the trip is going ahead and sign-ups are open;
+- dates: arrive Sun 3 Jan, leave Fri 8 Jan, five nights (corrects the 3–9 Jan in the first email);
+- capped at 25 including George, roughly half Open Water;
+- firm numbers and split by Mon 30 Nov, ahead of his 1 Dec hold;
+- asked for the group deposit and cancellation terms.
+No money or numbers committed.

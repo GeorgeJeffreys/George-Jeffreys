@@ -65,3 +65,4 @@
 - 2026-10-28 (George): Thanksgiving (Puerto Rico, 25–29 Nov) is cancelled: "Forget Thanksgiving. We're not doing it." Paradise Scuba and the Nautilus had already been released; nothing further sent.
 - 2026-10-28 (George): the 800 USD Wise payment from Kedar Kumar Bathina Reddy (reference "Trek Deposit Kedar and Theeba") is Cozumel: two deposits, Kedar and Theeba.
 - 2026-11-16 (George): Egypt fees USD 1,200 beginner / 1,050 certified. The beginner premium is at least USD 150, the same gap as Cozumel (rule built into pricing/build_sharm_budget.py). George's Thistlegorm supplement goes inside the fee as a leader cost, and contingency is trimmed to 5.5% so the certified fee stays at 1,050. Sign-ups open Wed 18 Nov, USD 400 deposit by Sun 29 Nov, balance by Fri 11 Dec, capacity 25.
+- 2026-11-17 (George): Egypt launched on CampusGroups. Cozumel eLearning invoice paid (USD 4,410). Doug and Alain told the same day.
