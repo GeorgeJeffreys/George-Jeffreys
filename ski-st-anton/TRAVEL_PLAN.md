@@ -8,7 +8,7 @@
 ## George's route (one-way tickets)
 | Date | Leg | Option | Note |
 |---|---|---|---|
-| Sat 2 Jan | London to Sharm (SSH) | easyJet Gatwick (Jan fares from about £125 shown; days to check). Fallback: via Istanbul (Turkish/Pegasus) or Cairo (EgyptAir). The easyJet Southend route starts 4 Jan, too late | Land before the group (Sun 3) |
+| **Sun 3 Jan** (George's choice) | London to Sharm (SSH) | Wizz Air or easyJet from Gatwick/Luton, about £80–120 one way plus a bag. Check that the airline flies on a Sunday; if not, fly Sat 2 or via Istanbul (Pegasus/AJet) | Arrives with the group |
 | Fri 8 Jan | Sharm to Zurich | Edelweiss nonstop, about 3 a week in winter; Fridays seen as WK141 SSH 19:10 to ZRH 22:55. Confirm it runs on 8 Jan before booking. Fallback: Sat 9 morning via Istanbul | Last dive Thu midday gives about 30 h before flying |
 | Fri 8 night | Zurich airport hotel | | |
 | Sat 9 Jan | Train Zurich Airport to St Anton am Arlberg | About 2 h 45, usually one change; book on SBB/ÖBB | Then taxi or ski bus to Stadleweg 26 |
@@ -23,3 +23,18 @@
 - **Money:**
   - Chesa takes **no cards on site**.
   - Balance €3,275 + tourist tax. Pay it by bank transfer before arrival, or bring cash.
+
+## Cost-sensible fare guide (aggregator snapshots, 18 Nov 2026; check live before booking)
+| Leg | Best value | Rough one-way fare |
+|---|---|---|
+| London to Sharm, Sun 3 Jan | Wizz Air / easyJet (Gatwick or Luton) | £80–120 + bag |
+| Sharm to Zurich, Fri 8 Jan | Edelweiss/Swiss nonstop; cheaper but slower via Istanbul (AJet/Pegasus) | £150–250 |
+| Zurich to St Anton, return | SBB/ÖBB train, booked early | £60–100 return |
+| Zurich to London, Sat 16 Jan | easyJet to Gatwick/Luton, or Swiss/BA to Heathrow | £60–120 |
+| London to Philadelphia, Mon 18 Jan | AA/BA nonstop from Heathrow; check Norse from Gatwick | £300–450 |
+| **Total** | | **about £650–1,050** |
+
+## Capacity at Chesa Platina
+- The owners rate each flat for 4 adults, and their first quote was "for 12 people, all 3 flats". 12 is their stated maximum.
+- **Our booking email said "between 8 and 12".** They haven't been told a final number. Tourist tax is charged per person actually staying.
+- **Beds at 12:** 8 in bedrooms (Portillo 2 rooms with separate beds; a double in Bari-Loche; a double in Thredbo) and **4 on pull-out sofas** in the Bari-Loche and Thredbo living rooms. 10 is the comfortable number: one sofa bed used.
