@@ -25,3 +25,8 @@ Sources: momondo / Kayak / Hotels.com / MakeMyTrip (Naama Bay Hotel & Resort); P
 
 ## Fallback mix if nothing beats it
 7 twins at Tao Beach (USD 80 pp) + the remaining 6 rooms at Camel or Naama Bay Hotel, all within a few minutes of RSDC. Couples take any doubles.
+
+## 18 Nov, later (George: "one hotel and a good price"; be generous to Alain, don't be annoying)
+- Camel, to Aga (message 1a1efd03612bc11c): re-quote the full Dive & Stay package for 3–8 Jan, 22–25 people, half beginners, everyone in twins with breakfast and transfers. Confirm twin availability for the whole group and whether the October prices (EUR 504 / 647) still apply.
+- Alain (message 1a1efd03d9e1e1ed): short, warm note. It doesn't need to be the Tao Beach; ideally one walkable hotel for the whole group, twin rooms, near the original price, and we'd happily take his recommendation.
+- Decision rule (agent's recommendation to George): if Camel confirms twins for everyone at or near the October prices, switch to Camel (about USD 150 pp cheaper, one hotel, leader's free place includes the room; costs: SSI not PADI, sites not fixed, harsher deposit terms). Otherwise stay with RSDC in whichever single hotel Alain finds. Tell Alain nothing about Camel until Camel answers.
