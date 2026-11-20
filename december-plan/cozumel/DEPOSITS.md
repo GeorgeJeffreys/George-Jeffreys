@@ -1,0 +1,23 @@
+# Cozumel payments received via Wise (started 27 Oct 2026)
+
+Rule (George, 27 Oct): each deposit must be USD 400 NET of Wise fees. Any shortfall (usually the 6.11 Wise fee) is added to that person's balance for the later payment.
+UPDATE (George, 1 Nov): Wise fees are paid to George in CASH (small amounts), not added to balances. The "Owed on balance" column below is now the cash each person owes George for fees. The exception is William/Jack Mitchell's 50 price gap, which is part of the fee, not a Wise fee; George is telling him. The same applies to full payments: the net received is set against the fee.
+Posted fees: USD 1,400 beginner / 1,250 certified (CampusGroups still shows 1,350 / 1,200). Balance due Fri 6 Nov.
+Source data: cozumel/deposits.csv (one row per Wise "Money received" email). The routine adds a row for every new one.
+
+## So far (9 transfers covering 10 people, USD 7,950 sent, 48.88 in Wise fees, 7,901.12 received net)
+| Date | Participant | Sent | Net | Type | Owed on balance | Note |
+|---|---|---|---|---|---|---|
+| 13 Oct | Alec Ethan Greenwald Joshua | 400 | 393.89 | deposit | 6.11 | track TBC |
+| 19 Oct | Nicholas L Wade | 400 | 393.89 | deposit | 6.11 | track TBC |
+| 27 Oct | Lucia Lu Yang | 400 | 393.89 | deposit | 6.11 | Cozumel (George, 27 Oct); track TBC |
+| 27 Oct | William Mitchell (probably Jack Mitchell on CampusGroups) | 1,350 | 1,343.89 | full, beginner (probably) | 56.11 | paid the CampusGroups price; George tells him the extra |
+| 27 Oct | Alexander J Helms | 1,400 | 1,393.89 | full, beginner | 6.11 | |
+| 27 Oct | Teddy Carnes (Theodore J Carnes) | 1,400 | 1,393.89 | full, beginner | 6.11 | matched to CampusGroups 1 Nov |
+| 27 Oct | Kedar Kumar Bathina Reddy | 400 | 400.00 | deposit | 0 | one transfer of 800 for two; reference "Trek Deposit Kedar and Theeba"; Cozumel (George, 28 Oct); no Wise fee shown |
+| 27 Oct | Theeba (surname TBC) | 400 | 400.00 | deposit | 0 | paid by Kedar in the same transfer |
+| 29 Oct | John Kibler | 400 | 393.89 | deposit | 6.11 | no trip reference on the transfer; counted as Cozumel (400 = the deposit) |
+| 29 Oct | Joseph Lyle Kahnke | 1,400 | 1,393.89 | full, beginner (1,400 = beginner fee) | 6.11 | no trip reference on the transfer |
+
+Totals owed on balances so far: 4 x 6.11 on deposits (Kedar and Theeba owe nothing); 6.11 + 6.11 + 6.11 + 56.11 on the full payments; 98.88 in all.
+Not counted: Riley Emerson Solter, 20 Oct, 366.38 USD net, reference "Euroski" (George: Euroski).
