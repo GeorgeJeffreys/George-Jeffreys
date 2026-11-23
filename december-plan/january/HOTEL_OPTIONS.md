@@ -52,3 +52,4 @@ Next: compare when Alain replies. Naama Bay Hotel at or under about 140 a room k
 - Sent to Aga 23 Nov (message 1a2095466d72dcbf): booking rooms only; diving stays with the centre we committed to in October (thanked her for the extra-dives offer); hold up to 13 twins to Mon 30 Nov; asked for deposit and cancellation terms for a booking confirmed on 30 Nov.
 - Sent to Alain 23 Nov (message 1a209546d7654794): twin rooms found near the college, so no hotel needed from him; diving as planned; final numbers and split on Mon 30 Nov.
 - Economics vs the posted fees (USD 1,200 / 1,050), hand check with George's room paid: surplus about +1,545 / +3,765 / +5,372 at 12 / 20 / 25 people. Fees could be trimmed later, or extras added.
+- Alain, 23 Nov 18:26 (message 1a209a8952fe3787): glad we found twins; looks forward to the rest of the reservation. No reply needed; next contact is final numbers on 30 Nov.

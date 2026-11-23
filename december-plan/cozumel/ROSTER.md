@@ -82,3 +82,4 @@ Totals: 23–24 participants after Tim Zhao dropped out (9 Nov), made up of 19�
 - Boats: 25–26 divers puts us at Doug's 25-diver threshold for a third boat.
 
 23 Nov: SENT Doug (message 1a209610972204e1) asking him to confirm the $4,410 eLearning payment arrived and the codes have gone to students, and for the final-total invoice. Nothing from Doug since 17 Nov ("first deposit arrived"). Sheet "eLearning finished?" column empty for all.
+23 Nov 19:46: Doug confirmed eLearning payment received and codes sent to all; 5 of 21 registered (see replies/blue-note-2026-11-23.md). Final invoice coming soon. Nudge to the 16 not yet registered is with George (WhatsApp group suggested).
