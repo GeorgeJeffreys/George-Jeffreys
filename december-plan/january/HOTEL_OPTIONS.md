@@ -46,3 +46,9 @@ Sources: momondo / Kayak / Hotels.com / MakeMyTrip (Naama Bay Hotel & Resort); P
 - The Naama Blue is fine and kept as an option, but the Tao Beach was a little more premium.
 - Asked him to price the Naama Bay Hotel & Resort, or an equivalent more premium walkable hotel, with twins and breakfast for 12–13 rooms.
 Next: compare when Alain replies. Naama Bay Hotel at or under about 140 a room keeps the posted fees; Naama Blue lets the fees drop about USD 150.
+
+## DECIDED 23 Nov 2026 (George): Camel rooms, RSDC diving
+- Camel (Aga, 19 Nov): rooms only EUR 240 pp for 5 nights, twin, continental breakfast, taxes and airport transfers both ways; up to 13 twins (some back view); availability not guaranteed until confirmed. Same payment and cancellation terms as for the dive package.
+- Sent to Aga 23 Nov (message 1a2095466d72dcbf): booking rooms only; diving stays with the centre we committed to in October (thanked her for the extra-dives offer); hold up to 13 twins to Mon 30 Nov; asked for deposit and cancellation terms for a booking confirmed on 30 Nov.
+- Sent to Alain 23 Nov (message 1a209546d7654794): twin rooms found near the college, so no hotel needed from him; diving as planned; final numbers and split on Mon 30 Nov.
+- Economics vs the posted fees (USD 1,200 / 1,050), hand check with George's room paid: surplus about +1,545 / +3,765 / +5,372 at 12 / 20 / 25 people. Fees could be trimmed later, or extras added.
