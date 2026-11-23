@@ -80,3 +80,5 @@ Totals: 23–24 participants after Tim Zhao dropped out (9 Nov), made up of 19�
 - Open Water, at 4 students per instructor: 5 groups. George teaches one group of 3–4 friends (at least confined water and OW 1–2). Blue Note instructors take 4 groups of 4.
 - Certified: 5 divers in one guided group Mon–Wed (Doug asked how this works with the 10-diver boat minimum). Everyone joins the shared boats Thu–Fri.
 - Boats: 25–26 divers puts us at Doug's 25-diver threshold for a third boat.
+
+23 Nov: SENT Doug (message 1a209610972204e1) asking him to confirm the $4,410 eLearning payment arrived and the codes have gone to students, and for the final-total invoice. Nothing from Doug since 17 Nov ("first deposit arrived"). Sheet "eLearning finished?" column empty for all.
